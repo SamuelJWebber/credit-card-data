@@ -81447,6 +81447,7 @@ prime_rate,COMBANKS_ALL,aggregate,all,2026-06-30,M,6.75,fred,2026-09-08T07:30:11
 prime_rate,COMBANKS_ALL,aggregate,all,2026-07-31,M,6.75,fred,2026-09-08T07:30:11Z
 prime_rate,COMBANKS_ALL,aggregate,all,2026-08-31,M,6.75,fred,2026-09-08T07:30:11Z
 prime_rate,COMBANKS_ALL,aggregate,all,2026-09-30,M,6.87,fred,2026-10-02T01:34:13Z
+prime_rate,COMBANKS_ALL,aggregate,all,2026-10-31,M,7,fred,2026-11-03T03:27:54Z
 retail_sales_nsa,NAICS:445,naics,all,1992-01-31,M,28.986,census,2026-09-08T19:42:42Z
 retail_sales_nsa,NAICS:445,naics,all,1992-02-29,M,27.978,census,2026-09-08T19:42:42Z
 retail_sales_nsa,NAICS:445,naics,all,1992-03-31,M,29.062,census,2026-09-08T19:42:42Z
@@ -98205,6 +98206,7 @@ sloos_card_demand_net_stronger,SLOOS_DOMESTIC,aggregate,all,2025-09-30,Q,4.3,fre
 sloos_card_demand_net_stronger,SLOOS_DOMESTIC,aggregate,all,2025-12-31,Q,-4.5,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_DOMESTIC,aggregate,all,2026-03-31,Q,-6,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_DOMESTIC,aggregate,all,2026-06-30,Q,2.2,fred,2026-09-08T18:42:01Z
+sloos_card_demand_net_stronger,SLOOS_DOMESTIC,aggregate,all,2026-09-30,Q,10.2,fred,2026-11-03T03:27:54Z
 sloos_card_demand_net_stronger,SLOOS_LARGE,aggregate,all,2011-03-31,Q,4.5,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_LARGE,aggregate,all,2011-06-30,Q,17.4,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_LARGE,aggregate,all,2011-09-30,Q,4.3,fred,2026-09-08T18:42:01Z
@@ -98267,6 +98269,7 @@ sloos_card_demand_net_stronger,SLOOS_LARGE,aggregate,all,2025-09-30,Q,16.7,fred,
 sloos_card_demand_net_stronger,SLOOS_LARGE,aggregate,all,2025-12-31,Q,-5.6,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_LARGE,aggregate,all,2026-03-31,Q,-5.3,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_LARGE,aggregate,all,2026-06-30,Q,0,fred,2026-09-08T18:42:01Z
+sloos_card_demand_net_stronger,SLOOS_LARGE,aggregate,all,2026-09-30,Q,5.3,fred,2026-11-03T03:27:54Z
 sloos_card_demand_net_stronger,SLOOS_OTHER,aggregate,all,2011-03-31,Q,-14.3,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_OTHER,aggregate,all,2011-06-30,Q,-16.7,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_OTHER,aggregate,all,2011-09-30,Q,16.7,fred,2026-09-08T18:42:01Z
@@ -98329,6 +98332,7 @@ sloos_card_demand_net_stronger,SLOOS_OTHER,aggregate,all,2025-09-30,Q,-3.4,fred,
 sloos_card_demand_net_stronger,SLOOS_OTHER,aggregate,all,2025-12-31,Q,-3.8,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_OTHER,aggregate,all,2026-03-31,Q,-6.5,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_OTHER,aggregate,all,2026-06-30,Q,3.8,fred,2026-09-08T18:42:01Z
+sloos_card_demand_net_stronger,SLOOS_OTHER,aggregate,all,2026-09-30,Q,13.3,fred,2026-11-03T03:27:54Z
 sloos_card_standards_net_tightening,SLOOS_DOMESTIC,aggregate,all,1995-12-31,Q,25,fred,2026-09-08T05:44:39Z
 sloos_card_standards_net_tightening,SLOOS_DOMESTIC,aggregate,all,1996-03-31,Q,23.4,fred,2026-09-08T05:44:39Z
 sloos_card_standards_net_tightening,SLOOS_DOMESTIC,aggregate,all,1996-06-30,Q,48.9,fred,2026-09-08T05:44:39Z
@@ -98452,6 +98456,7 @@ sloos_card_standards_net_tightening,SLOOS_DOMESTIC,aggregate,all,2025-09-30,Q,4.
 sloos_card_standards_net_tightening,SLOOS_DOMESTIC,aggregate,all,2025-12-31,Q,0,fred,2026-09-08T05:44:39Z
 sloos_card_standards_net_tightening,SLOOS_DOMESTIC,aggregate,all,2026-03-31,Q,2,fred,2026-09-08T05:44:39Z
 sloos_card_standards_net_tightening,SLOOS_DOMESTIC,aggregate,all,2026-06-30,Q,6.7,fred,2026-09-08T05:44:39Z
+sloos_card_standards_net_tightening,SLOOS_DOMESTIC,aggregate,all,2026-09-30,Q,4,fred,2026-11-03T03:27:54Z
 state_card_debt_per_capita,CCP_ALL,aggregate,all,2003-12-31,A,2960,nyfed_state,2026-09-11T05:20:44Z
 state_card_debt_per_capita,CCP_ALL,aggregate,all,2004-12-31,A,3040,nyfed_state,2026-09-11T05:20:44Z
 state_card_debt_per_capita,CCP_ALL,aggregate,all,2005-12-31,A,3060,nyfed_state,2026-09-11T05:20:44Z

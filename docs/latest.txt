@@ -1,6 +1,6 @@
-US credit card data, latest readings (2026-11-06)
+US credit card data, latest readings (2026-11-07)
 
-- Revolving consumer credit, all lenders (Fed G.19, SA): $1,352bn in Aug 2026, +3.4% on the year
+- Revolving consumer credit, all lenders (Fed G.19, SA): $1,368bn in Sep 2026, +4.2% on the year, highest on record (since Jan 1968)
 - Card balances on credit reports (NY Fed): $1,263bn in 2026 Q2, +4.5% on the year
 - APR paid by revolvers at commercial banks (Fed G.19): 22.36% in 2026 Q3, -0.47 pp on the year, 2015-2019 average 14.93%
 - Card delinquency, 30+ days past due, commercial banks (Fed, SA): 2.85% in 2026 Q2, -0.19 pp on the year, 2015-2019 average 2.39%, lowest since 2023 Q2
@@ -10,7 +10,7 @@ US credit card data, latest readings (2026-11-06)
 - Card applications refused, of those who applied (NY Fed survey): 15.39% in Jun 2026, -6.82 pp on the year, 2015-2019 average 17.44%
 - Had an account closed by a lender (NY Fed survey): 7.03% in Jun 2026, -0.99 pp on the year, 2015-2019 average 5.29%
 - Consumer debt payments as a share of disposable income (Fed): 5.28% in 2026 Q2, -0.02 pp on the year, 2015-2019 average 5.71%
-- Unemployment rate (BLS): 4.20% in Sep 2026, -0.20 pp on the year, 2015-2019 average 4.42%
+- Unemployment rate (BLS): 4.10% in Oct 2026, 2015-2019 average 4.42%
 - Banks tightening card standards, net (SLOOS): 4.00% in 2026 Q3, -0.20 pp on the year
 - Households' stated chance of missing a debt payment in the next 3 months (NY Fed survey): 12.20% in Sep 2026, -0.45 pp on the year, 2015-2019 average 12.31%
 - Consumer credit owed by the bottom half of households by wealth (Fed DFA): $2,644bn in 2026 Q2, +2.6% on the year, highest on record (since 1989 Q3)

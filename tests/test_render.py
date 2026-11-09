@@ -545,9 +545,9 @@ def test_spend_panel(page):
     html, payload = page
     ids = {c["id"]: c for c in payload["charts"]}
     growth = ids["spend_growth"]
-    assert growth["series"][0]["last_period"] == "Jul 2026" and 0 < growth["data"][1][-1] < 10
+    assert growth["series"][0]["last_period"] == "Aug 2026" and 0 < growth["data"][1][-1] < 10
     retail = ids["retail_growth"]
-    assert retail["series"][0]["last_period"] == "Jun 2026"
+    assert retail["series"][0]["last_period"] == "Aug 2026"
     share = ids["online_share"]
     assert 15 < share["data"][1][-1] < 22  # nonstore about 18% of retail and food services sales in 2026
     cross = ids["card_volume_vs_retail"]

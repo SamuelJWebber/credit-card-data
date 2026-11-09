@@ -104,13 +104,13 @@ CENSUS_FIXTURE = FIXTURES / "census" / census.RAW_NAME
 
 @pytest.fixture(scope="session")
 def bea_facts(meta) -> pd.DataFrame:
-    """Facts from the checked-in NIPA subset (eight PCE series to July 2026), parsed once per session."""
+    """Facts from the checked-in NIPA subset (PCE, income and interest series to September 2026), parsed once per session."""
     return coerce_facts(bea.parse_subset(BEA_FIXTURE.read_text(encoding="utf-8"), series_for_source(meta, bea.SOURCE), PULLED_AT))
 
 
 @pytest.fixture(scope="session")
 def census_facts() -> pd.DataFrame:
-    """Facts from the checked-in retail trade workbook (months to June 2026), parsed once per session."""
+    """Facts from the checked-in retail trade workbook (months to August 2026), parsed once per session."""
     return coerce_facts(census.parse_release(CENSUS_FIXTURE, PULLED_AT))
 
 

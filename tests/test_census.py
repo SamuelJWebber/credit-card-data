@@ -12,15 +12,17 @@ from conftest import CENSUS_FIXTURE, PULLED_AT
 
 
 def test_advance_release_table_reproduces(census_facts):
-    """Advance Monthly Sales, July 2026 (2026-08-14), Table 1, not adjusted: 454 May 134,767, Jun 138,020; 722 May 110,590."""
+    """Advance Monthly Sales, September 2026 (2026-10-15), Table 1, not adjusted: 454 Jul (r) 119,800, Aug (p) 118,120;
+    722 Jul (r) 93,281; adjusted total Aug (p) 739,322. Fixture refreshed 2026-11-09 after the 2026-09-28 annual
+    revision (2023 and 2024 Annual Integrated Economic Survey) lowered 2025-26 levels by 4-13 percent."""
     nsa = census_facts[census_facts["metric"] == "retail_sales_nsa"]
     nonstore = nsa[nsa["entity"] == "NAICS:454"].set_index("period_end")["value"]
-    assert abs(nonstore[pd.Timestamp("2026-05-31")] - 134.767) < 1e-6
-    assert abs(nonstore[pd.Timestamp("2026-06-30")] - 138.020) < 1e-6
+    assert abs(nonstore[pd.Timestamp("2026-07-31")] - 119.800) < 1e-6
+    assert abs(nonstore[pd.Timestamp("2026-08-31")] - 118.120) < 1e-6
     food = nsa[nsa["entity"] == "NAICS:722"].set_index("period_end")["value"]
-    assert abs(food[pd.Timestamp("2026-05-31")] - 110.590) < 1e-6
+    assert abs(food[pd.Timestamp("2026-07-31")] - 93.281) < 1e-6
     sa_total = census_facts[(census_facts["metric"] == "retail_sales_sa") & (census_facts["entity"] == "NAICS:44X72")]
-    assert abs(sa_total["value"].iloc[-1] - 768.072) < 1e-6 and sa_total["period_end"].max() == pd.Timestamp("2026-06-30")
+    assert abs(sa_total["value"].iloc[-1] - 739.322) < 1e-6 and sa_total["period_end"].max() == pd.Timestamp("2026-08-31")
 
 
 def test_series_shape(census_facts, meta):
@@ -30,7 +32,7 @@ def test_series_shape(census_facts, meta):
     assert loaded == listed and len(loaded) == 12
     assert census_facts["entity_type"].unique().tolist() == ["naics"]
     counts = census_facts.groupby(["metric", "entity"])["period_end"].count()
-    assert (counts == counts.iloc[0]).all() and counts.iloc[0] == 12 * 34 + 6  # Jan 1992 to Jun 2026
+    assert (counts == counts.iloc[0]).all() and counts.iloc[0] == 12 * 34 + 8  # Jan 1992 to Aug 2026
     assert census_facts["period_end"].min() == pd.Timestamp("1992-01-31")
     assert (census_facts["period_end"] == census_facts["period_end"] + pd.offsets.MonthEnd(0)).all()
     assert census_facts["pulled_at"].unique().tolist() == [PULLED_AT]

@@ -79,9 +79,10 @@ def test_issuers_csv_lists_the_handoff_charters_with_their_mergers():
         23702: ("2019-05-18", 628),
         35328: ("2018-04-01", 27471),
         34351: ("2024-06-01", 32188),
+        27499: ("2026-10-01", 57570),
     }
     active = set(issuers.loc[issuers["valid_to"].isna(), "fdic_cert"])
-    assert len(active) == 30 and set(merged["merged_into"].astype(int)) <= active
+    assert len(active) == 29 and set(merged["merged_into"].astype(int)) <= active
     by_cert = issuers.set_index("fdic_cert")
     assert by_cert.loc[5649, "issuer_id"] == "DISCOVER" and by_cert.loc[33954, "issuer_id"] == "CAPITAL_ONE"
     assert by_cert.loc[34404, "issuer_id"] == "WEBBANK" and by_cert.loc[34404, "kind"] == "sponsor"
@@ -486,6 +487,22 @@ def test_active_charter_that_stops_filing_fails(tmp_path, fdic_issuers):
 def test_merged_charter_must_end_the_quarter_before_its_merger(tmp_path, fdic_issuers):
     with pytest.raises(ValueError, match="cert 5649 .* merged 2025-05-18 should end with the 2025-03-31 call report, last row is 2024-12-31"):
         fdic.parse_release(_release_dir(tmp_path, drop_last_of=5649), fdic_issuers, PULLED_AT)
+
+
+def test_charter_merged_after_the_newest_quarter_must_still_be_current(tmp_path, fdic_issuers, monkeypatch):
+    """Comenity Bank merged 2026-10-01 while the industry ran to 2026-06-30, so its final (2026-09-30) report was not
+    out yet. Until it is, the charter must be as current as an active one. Played here by WebBank (34404), the
+    fixture charter with no merger of its own; the FDIC-record cross-check is a separate test."""
+    monkeypatch.setattr(fdic, "check_crosswalk", lambda institutions, issuers: None)
+    issuers = fdic_issuers.copy()
+    row = issuers["fdic_cert"] == 34404
+    issuers.loc[row, "valid_to"] = pd.Timestamp("2026-10-01")
+    issuers.loc[row, "merged_into"] = 628
+    assert fdic.quarter_end_before(dt.date(2026, 10, 1)) == dt.date(2026, 9, 30)
+    fdic.parse_release(_release_dir(tmp_path), issuers, PULLED_AT)  # ends 2026-06-30 like everyone: passes
+    (tmp_path / "behind").mkdir()
+    with pytest.raises(ValueError, match="cert 34404 .* merged 2026-10-01 should still report through the 2026-06-30 call report, last row is 2026-03-31"):
+        fdic.parse_release(_release_dir(tmp_path / "behind", drop_last_of=34404), issuers, PULLED_AT)
 
 
 def test_industry_total_behind_the_charters_fails(tmp_path, fdic_issuers):

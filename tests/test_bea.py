@@ -11,14 +11,17 @@ from conftest import BEA_FIXTURE, PULLED_AT
 
 
 def test_subset_reproduces_the_release_changes(bea_facts):
-    """Personal Income and Outlays, July 2026: PCE +36.3bn, goods -49.9bn, services +86.2bn; June +77.4bn."""
+    """Personal Income and Outlays, September 2026 (2026-10-29): PCE +113.1bn, goods +35.1bn, services +78.1bn; its
+    historical comparisons workbook (pi0926-hist.xlsx): August +193.6bn, July +50.6bn. The fixture was refreshed
+    2026-11-09 after the 2026 annual update (August release) revised everything from January 2021."""
     def change(metric, month):
         s = bea_facts[bea_facts["metric"] == metric].set_index("period_end")["value"]
         return s[pd.Timestamp(month)] - s[pd.Timestamp(month) - pd.offsets.MonthEnd(1)]
-    assert abs(change("pce_total_saar", "2026-07-31") - 36.3) < 0.06
-    assert abs(change("pce_goods_saar", "2026-07-31") + 49.9) < 0.06
-    assert abs(change("pce_services_saar", "2026-07-31") - 86.2) < 0.06
-    assert abs(change("pce_total_saar", "2026-06-30") - 77.4) < 0.06
+    assert abs(change("pce_total_saar", "2026-09-30") - 113.1) < 0.06
+    assert abs(change("pce_goods_saar", "2026-09-30") - 35.1) < 0.06
+    assert abs(change("pce_services_saar", "2026-09-30") - 78.1) < 0.06
+    assert abs(change("pce_total_saar", "2026-08-31") - 193.6) < 0.06
+    assert abs(change("pce_total_saar", "2026-07-31") - 50.6) < 0.06
 
 
 def test_series_shape(bea_facts, meta):
@@ -27,12 +30,12 @@ def test_series_shape(bea_facts, meta):
     loaded = {tuple(r) for r in bea_facts[cols].drop_duplicates().itertuples(index=False)}
     assert loaded == listed and len(loaded) == 10
     interest = bea_facts[bea_facts["metric"] == "hh_interest_payments_saar"].set_index("period_end")["value"]
-    assert abs(interest[pd.Timestamp("2026-07-31")] - 604.339) < 0.001  # billions, from '604,339' millions
+    assert abs(interest[pd.Timestamp("2026-09-30")] - 617.925) < 0.001  # billions, from '617,925' millions
     dpi = bea_facts[bea_facts["metric"] == "disposable_income_monthly_saar"].set_index("period_end")["value"]
-    assert abs(dpi[pd.Timestamp("2026-07-31")] - dpi[pd.Timestamp("2026-06-30")] - 125.9) < 0.06  # the release: DPI +$125.9bn
+    assert abs(dpi[pd.Timestamp("2026-09-30")] - dpi[pd.Timestamp("2026-08-31")] - 52.7) < 0.06  # the release: DPI +$52.7bn
     total = bea_facts[bea_facts["metric"] == "pce_total_saar"]
-    assert total["period_end"].min() == pd.Timestamp("1959-01-31") and total["period_end"].max() == pd.Timestamp("2026-07-31")
-    assert abs(total["value"].iloc[-1] - 22250.42) < 0.001  # billions, from '22,250,420' millions
+    assert total["period_end"].min() == pd.Timestamp("1959-01-31") and total["period_end"].max() == pd.Timestamp("2026-09-30")
+    assert abs(total["value"].iloc[-1] - 22452.78) < 0.001  # billions, from '22,452,780' millions
     assert (bea_facts["period_end"] == bea_facts["period_end"] + pd.offsets.MonthEnd(0)).all()
     assert bea_facts["pulled_at"].unique().tolist() == [PULLED_AT]
     # goods plus services is total

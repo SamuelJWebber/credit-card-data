@@ -189,7 +189,14 @@ def download_release(session, year: int, q: int, latest_dir: Path, balances: byt
 
 
 def _norm(s: str) -> str:
-    return re.sub(r"\s+", " ", s.strip()).lower()
+    """Whitespace collapsed, case folded, and no space after a comparison sign.
+
+    The 2026Q2 release (first seen 2026-10-08) rewrote every score-bucket header from '<660' / '>=720' to
+    '< 660' / '>= 720', and the fetcher failed every night for a month on the spacing alone. The sign and the number
+    are the content; the space between them is not.
+    """
+    s = re.sub(r"\s+", " ", s.strip()).lower()
+    return re.sub(r"([<>]=?) (?=\d)", r"\1", s)
 
 
 def parse_cell(raw: str, header: str, label: str) -> float | None:

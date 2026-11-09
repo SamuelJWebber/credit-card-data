@@ -387,10 +387,15 @@ def parse_release(latest_dir: Path, issuers: pd.DataFrame, pulled_at: str) -> pd
                 )
         else:
             want = quarter_end_before(row.valid_to.date())
+            # A charter that merged after the newest published quarter still files that quarter's report, but its
+            # final one is not out yet (Comenity Bank merged 2026-10-01 while the industry ran to 2026-06-30). Until
+            # then it must be as current as any active charter.
+            pending = want > last_all
+            want = min(want, last_all)
             if last != want:
                 raise ValueError(
-                    f"cert {cert} ({row.bank_name}) merged {row.valid_to.date()} should end with the {want} call report, "
-                    f"last row is {last}"
+                    f"cert {cert} ({row.bank_name}) merged {row.valid_to.date()} should "
+                    f"{'still report through' if pending else 'end with'} the {want} call report, last row is {last}"
                 )
         frames.append(cert_facts(df, cert, pulled_at))
     return pd.concat(frames, ignore_index=True)

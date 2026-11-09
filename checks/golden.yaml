@@ -35,6 +35,15 @@
 #               Credit Card Market Report counts from issuer data (89 million new accounts in 2024 against 83 million in
 #               the panel files). The fetcher checks the score and age files sum to within 6 percent of the total file
 #               instead, and the fixture test pins the January 2026 dashboard readings (8.2 million cards, $54.2bn).
+#   2026-11-09  phillyfed: the Q2 2026 Insights Report (published 2026-10-07) reproduces exactly from the 26Q2 CSVs:
+#               sub-660 share of new accounts 16.1% (Q2 2025, 16.08) and 18.5% (Q2 2026, 18.52); median new line by
+#               score $7,000 / $2,600 -> $2,700 / $500 -> $600; average new line $6,216 -> $6,066; full-payment share 37
+#               (36.90); balances +3.4% y/y, revolving +1.5%, originations +1.5%, new accounts nearly +4%. Pinned in
+#               tests/test_phillyfed.py rather than here, because the golden fixture is the 26Q1 release.
+#   2026-11-09  bea and census re-based after their annual revisions (see each block). Both new releases reproduce
+#               exactly from the live raw files, which are now the fixtures: BEA September PCE +113.1 / goods +35.1 /
+#               services +78.1, DPI +52.7, August +193.6, July +50.6; Census Table 1 (October release) 454 Jul 119,800
+#               and Aug 118,120, 722 Jul 93,281, adjusted total Aug 739,322.
 
 #   2026-09-11  issuer_8k: the golden entries ARE the release. Capital One's Exhibit 99.1 is its own primary
 #               disclosure, not a feed derived from one, so every number can be checked against the filed document
@@ -179,6 +188,9 @@
 # Philly Fed: the quarterly Insights Report narrative states the headline numbers for the newest quarter, rounded to
 # one decimal. The CSV carries two decimals, so the tolerance is 0.06. The panel can be restated when a bank crosses
 # the Y-14 threshold; a mismatch here is the amber signal for that.
+# The 26Q2 release (2026-10-07) restated 2026Q1: balances 948.67 -> 955.52, general-purpose APR 24.0 -> 24.19,
+# originations 105.53 -> 105.14. Those three Q1 entries are fixture-only now (the 26Q1 fixture still reproduces them);
+# the other five held within tolerance and stay live.
 - id: phillyfed_balances_2026_q1
   metric: y14_card_balances
   entity: Y14_CARD_FILERS
@@ -188,7 +200,7 @@
   source: phillyfed
   expected: 948.7
   tolerance: 0.06
-  check_live: true
+  check_live: false
   origin: "Philadelphia Fed Q1 2026 Insights Report (2026-07-13): 'Total credit card balances at the large banks stood at $948.7 billion as of the first quarter of 2026'"
   origin_url: https://www.philadelphiafed.org/surveys-and-data/2026-q1-large-bank
 
@@ -227,7 +239,7 @@
   source: phillyfed
   expected: 24.0
   tolerance: 0.06
-  check_live: true
+  check_live: false
   origin: "Philadelphia Fed Q1 2026 Insights Report: 'the average interest rate on general-purpose cards currently at 24.0 percent'"
   origin_url: https://www.philadelphiafed.org/surveys-and-data/2026-q1-large-bank
 
@@ -240,7 +252,7 @@
   source: phillyfed
   expected: 105.5
   tolerance: 0.06
-  check_live: true
+  check_live: false
   origin: "Philadelphia Fed Q1 2026 Insights Report: 'The dollar volume of credit card originations rose by a robust 8.7 percent year over year in the first quarter of 2026 to $105.5 billion'"
   origin_url: https://www.philadelphiafed.org/surveys-and-data/2026-q1-large-bank
 
@@ -567,8 +579,66 @@
   origin_url: https://www.newyorkfed.org/medialibrary/interactives/householdcredit/data/pdf/HHDC_2026Q2.pdf
 
 # BEA Personal Income and Outlays: the release text and its 'historical comparisons' workbook state monthly dollar
-# changes, so these check the change from the prior month (change_from_prior). July is the newest month and will be
-# revised; June's change is also stated (77.4, the 'last period with larger value') and is the live entry.
+# changes, so these check the change from the prior month (change_from_prior). September is the newest month and will be
+# revised, so its three entries are fixture-only; the workbook states August's and July's changes as revised, and those
+# two are the live entries. Re-based 2026-11-09: the 2026 annual update (August release) revised every month from
+# January 2021, which moved June's +77.4 to +68.3 and left bea amber from 2026-10-03.
+- id: bea_pce_change_2026_09
+  metric: pce_total_saar
+  entity: US_HOUSEHOLDS
+  tier: all
+  period_type: M
+  period_end: 2026-09-30
+  source: bea
+  expected: 113.1
+  tolerance: 0.06
+  change_from_prior: true
+  check_live: false
+  origin: "BEA Personal Income and Outlays, September 2026 (released 2026-10-29): 'personal consumption expenditures (PCE) increased $113.1 billion (0.5 percent)'"
+  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
+
+- id: bea_pce_goods_change_2026_09
+  metric: pce_goods_saar
+  entity: US_HOUSEHOLDS
+  tier: all
+  period_type: M
+  period_end: 2026-09-30
+  source: bea
+  expected: 35.1
+  tolerance: 0.06
+  change_from_prior: true
+  check_live: false
+  origin: "Same release: 'increases of $35.1 billion in spending on goods and $78.1 billion in spending on services'"
+  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
+
+- id: bea_pce_services_change_2026_09
+  metric: pce_services_saar
+  entity: US_HOUSEHOLDS
+  tier: all
+  period_type: M
+  period_end: 2026-09-30
+  source: bea
+  expected: 78.1
+  tolerance: 0.06
+  change_from_prior: true
+  check_live: false
+  origin: "Same sentence, services: $78.1 billion"
+  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
+
+- id: bea_pce_change_2026_08
+  metric: pce_total_saar
+  entity: US_HOUSEHOLDS
+  tier: all
+  period_type: M
+  period_end: 2026-08-31
+  source: bea
+  expected: 193.6
+  tolerance: 0.06
+  change_from_prior: true
+  check_live: true
+  origin: "Same release, 'Historical Comparisons' workbook (pi0926-hist.xlsx), PCE dollar change: last period with a larger value than September's 113.1 was 2026M08 at 193.6"
+  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
+
 - id: bea_pce_change_2026_07
   metric: pce_total_saar
   entity: US_HOUSEHOLDS
@@ -576,94 +646,55 @@
   period_type: M
   period_end: 2026-07-31
   source: bea
-  expected: 36.3
-  tolerance: 0.06
-  change_from_prior: true
-  check_live: false
-  origin: "BEA Personal Income and Outlays, July 2026 (released 2026-08-26): 'Personal consumption expenditures (PCE) increased $36.3 billion (0.2 percent)'"
-  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026
-
-- id: bea_pce_goods_change_2026_07
-  metric: pce_goods_saar
-  entity: US_HOUSEHOLDS
-  tier: all
-  period_type: M
-  period_end: 2026-07-31
-  source: bea
-  expected: -49.9
-  tolerance: 0.06
-  change_from_prior: true
-  check_live: false
-  origin: "Same release, page 2: 'an increase of $86.2 billion in spending on services that was partly offset by a decrease of $49.9 billion in spending on goods'"
-  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026
-
-- id: bea_pce_services_change_2026_07
-  metric: pce_services_saar
-  entity: US_HOUSEHOLDS
-  tier: all
-  period_type: M
-  period_end: 2026-07-31
-  source: bea
-  expected: 86.2
-  tolerance: 0.06
-  change_from_prior: true
-  check_live: false
-  origin: "Same sentence, services: $86.2 billion"
-  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026
-
-- id: bea_pce_change_2026_06
-  metric: pce_total_saar
-  entity: US_HOUSEHOLDS
-  tier: all
-  period_type: M
-  period_end: 2026-06-30
-  source: bea
-  expected: 77.4
+  expected: 50.6
   tolerance: 0.06
   change_from_prior: true
   check_live: true
-  origin: "Same release, 'Historical Comparisons' workbook (pi0726-hist.xlsx), PCE dollar change: last period with a larger value than July's 36.3 was 2026M06 at 77.4"
-  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026
+  origin: "Same workbook, same row: last period with a smaller value than September's 113.1 was 2026M07 at 50.6"
+  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
 
-# Census retail trade: the advance release PDF's Table 1 prints the not-adjusted levels of the two prior months as
-# revised, in millions. May is the live entry; June is preliminary in the workbook and fixture-only.
-- id: census_nonstore_nsa_2026_05
+# Census retail trade: the advance release PDF's Table 1 prints the not-adjusted levels of the two prior months, the
+# older one revised ('r'), in millions. July (r) is the live entry; August is preliminary in the workbook and
+# fixture-only. Re-based 2026-11-09: Census revised all monthly estimates on 2026-09-28 (historical corrections and the
+# 2023 and 2024 Annual Integrated Economic Survey, per the 'Notice of Revision' in the October release), which lowered
+# May 2026 nonstore from 134,767 to 118,486 and left census amber from 2026-09-30.
+- id: census_nonstore_nsa_2026_07
   metric: retail_sales_nsa
   entity: NAICS:454
   tier: all
   period_type: M
-  period_end: 2026-05-31
+  period_end: 2026-07-31
   source: census
-  expected: 134.767
+  expected: 119.800
   tolerance: 0.0006
   check_live: true
-  origin: "Advance Monthly Sales for Retail and Food Services, July 2026 (released 2026-08-14), Table 1, not adjusted, 454 Nonstore retailers, May 2026 (r): 134,767 ($ millions)"
+  origin: "Advance Monthly Sales for Retail and Food Services, September 2026 (released 2026-10-15), Table 1, not adjusted, 454 Nonstore retailers, Jul. 2026 (r): 119,800 ($ millions)"
   origin_url: https://www.census.gov/retail/marts/www/marts_current.pdf
 
-- id: census_food_services_nsa_2026_05
+- id: census_food_services_nsa_2026_07
   metric: retail_sales_nsa
   entity: NAICS:722
   tier: all
   period_type: M
-  period_end: 2026-05-31
+  period_end: 2026-07-31
   source: census
-  expected: 110.590
+  expected: 93.281
   tolerance: 0.0006
   check_live: true
-  origin: "Same table, 722 Food services & drinking places, May 2026 (r): 110,590"
+  origin: "Same table, 722 Food services & drinking places, Jul. 2026 (r): 93,281"
   origin_url: https://www.census.gov/retail/marts/www/marts_current.pdf
 
-- id: census_nonstore_nsa_2026_06
+- id: census_nonstore_nsa_2026_08
   metric: retail_sales_nsa
   entity: NAICS:454
   tier: all
   period_type: M
-  period_end: 2026-06-30
+  period_end: 2026-08-31
   source: census
-  expected: 138.020
+  expected: 118.120
   tolerance: 0.0006
   check_live: false
-  origin: "Same table, 454 Nonstore retailers, Jun. 2026 (p): 138,020. Preliminary, fixture-only."
+  origin: "Same table, 454 Nonstore retailers, Aug. 2026 (p): 118,120. Preliminary, fixture-only."
   origin_url: https://www.census.gov/retail/marts/www/marts_current.pdf
 
 # NCUA Quarterly Credit Union Data Summary, 2026 Q1 (PDF): 'Credit card balances expanded by $2.2 billion, or 2.6

@@ -57,6 +57,7 @@ def test_every_charter_has_the_fdic_established_date_and_merger_facts(issuers):
         23702: ("2019-05-18", 628),
         35328: ("2018-04-01", 27471),
         34351: ("2024-06-01", 32188),
+        27499: ("2026-10-01", 57570),
     }
     assert (merged["valid_to"] > merged["valid_from"]).all()
 

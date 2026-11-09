@@ -209,3 +209,41 @@ def test_duplicate_quarter_fails(tmp_path):
     dup = text.replace(line, line + "\n" + line, 1).encode("utf-8")
     with pytest.raises(ValueError, match="quarter 2026Q1 appears twice"):
         phillyfed.parse_release_csv(dup, "dup.csv")
+
+
+# ---------- the 2026Q2 release: score-bucket headers gained a space ----------
+
+
+BAL_Q2 = FIX / "26Q2-CreditCardBalances.csv"
+ORIG_Q2 = FIX / "26Q2-CreditCardOriginations.csv"
+
+
+def test_norm_ignores_the_space_after_a_comparison_sign():
+    assert phillyfed._norm("Average Purchase Volume by Credit Score Group: < 660 Credit Score") == phillyfed._norm(
+        "Average Purchase Volume by Credit Score Group: <660 Credit Score"
+    )
+    assert phillyfed._norm(">= 720") == phillyfed._norm(">=720") == ">=720"
+    assert phillyfed._norm("660-719") == "660-719"  # a hyphen is not a sign
+    assert phillyfed._norm("<660") != phillyfed._norm(">660")
+
+
+def test_2026_q2_release_parses_with_spaced_score_headers(meta):
+    """First seen 2026-10-08: '<660' became '< 660' and '>=720' became '>= 720' in six headers across both files.
+    The fetcher failed every night for a month on that alone."""
+    assert '"Average Purchase Volume by Credit Score Group: < 660 Credit Score"' in BAL_Q2.read_text(encoding="utf-8-sig")
+    assert '"Percentage of New Accounts with < 660 Credit Score"' in ORIG_Q2.read_text(encoding="utf-8-sig")
+    f = phillyfed.parse_release(
+        {"CreditCardBalances": BAL_Q2, "CreditCardOriginations": ORIG_Q2}, PULLED_AT, expected_quarter=(2026, 2)
+    )
+    errors, _ = validate(f, meta[meta["source"] == "phillyfed"])
+    assert errors == []
+    assert f.groupby(["metric", "tier"]).ngroups == 51
+    assert len(f) == 51 * 56 - 1  # 2012Q3 .. 2026Q2, line-decrease share 'null' at 2012Q3
+    assert value(f, "y14_card_balances", "2026Q2") == 978.09
+    assert value(f, "y14_card_commitments", "2026Q2") == 5065.24
+    assert value(f, "y14_card_purchase_volume_avg", "2026Q2", "lt660") == 576.98
+    assert value(f, "y14_card_purchase_volume_avg", "2026Q2", "superprime") == 2549.07
+    assert value(f, "y14_card_orig_credit_limit_median", "2026Q2", "superprime") == 7000.0
+    assert value(f, "y14_card_new_accounts_share", "2026Q2", "lt660") == 18.52
+    assert value(f, "y14_card_new_commitments_share", "2026Q2", "lt660") == 4.19
+    assert value(f, "y14_card_balances", "2026Q1") == 955.52  # restated from 948.67 in the 26Q1 file

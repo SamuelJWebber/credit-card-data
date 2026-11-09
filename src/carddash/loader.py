@@ -61,6 +61,9 @@ class SourceHealth:
     rows: int = 0
     n_series: int = 0
     n_revisions: int = 0
+    # When the source entered its current status (a run's pulled_at), carried over from health.json while the status
+    # holds. It is what lets the job say a source has been amber for a week (alerts.py, REVIEW.md R1-3).
+    status_since: str | None = None
 
     def worsen(self, status: str, message: str) -> None:
         if STATUS_RANK[status] > STATUS_RANK[self.status]:
@@ -265,23 +268,32 @@ def refresh_source(
     old = facts[facts["source"] == source]
     no_revisions = pd.DataFrame(columns=REVISION_COLUMNS)
 
+    def keep_prior() -> tuple[pd.DataFrame, SourceHealth, pd.DataFrame]:
+        """A red source keeps its prior rows, so its health reports the rows still served, not the empty failed
+        load: during the October 2026 outage the strip read 'FDIC ... 0 series, 0 rows' over 28,942 FDIC rows."""
+        if not old.empty:
+            health.rows = int(len(old))
+            health.n_series = int(old.groupby(SERIES_KEY).ngroups)
+            health.last_period_end = old["period_end"].max().date().isoformat()
+        return facts, health, no_revisions
+
     if meta.empty:
         health.worsen("failed", "no series defined for this source in series.csv")
-        return facts, health, no_revisions
+        return keep_prior()
 
     try:
         new = coerce_facts(fetch_fn(meta, raw_dir, session, pulled_at))
     except Exception as exc:  # noqa: BLE001 - any failure keeps prior rows and goes red
         # redacted: requests writes the whole URL, query string included, into its exception text
         health.worsen("failed", f"fetch error: {type(exc).__name__}: {redact(str(exc))}")
-        return facts, health, no_revisions
+        return keep_prior()
 
     errors, warnings = validate(new, meta)
     for w in warnings:
         health.messages.append(f"warning: {w}")
     if errors:
         health.worsen("failed", "validation failed: " + "; ".join(errors[:6]))
-        return facts, health, no_revisions
+        return keep_prior()
 
     revisions, stats = compare(old, new, pulled_at)
     if (
@@ -295,7 +307,7 @@ def refresh_source(
             f"{int(REL_BIG * 100)}%. Not loaded. To accept, add '{source}' under accept_restatement "
             "in checks/restatement_ack.yaml.",
         )
-        return facts, health, no_revisions
+        return keep_prior()
 
     if stats["n_overlap"] >= MIN_OVERLAP_FOR_DETECTOR and stats["frac_big"] > SUSPECT_FRACTION:
         health.worsen("restated", f"restatement accepted: {stats['n_big']} of {stats['n_overlap']} values changed >5%")

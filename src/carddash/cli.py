@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from .alerts import ATTENTION_DAYS, needing_attention, stamp_status_since
 from .fetchers import FETCHERS
 from .golden import check_golden, load_golden
 from .http import make_session
@@ -63,6 +64,7 @@ def cmd_refresh(paths: Paths, sources: list[str] | None, do_render: bool) -> int
     today = now.date()
     acked = load_acks(paths.ack_yaml)
     health = read_health(paths)
+    before = {name: (h.status, h.status_since) for name, h in health.items()}
     all_revisions = [pd.DataFrame(columns=REVISION_COLUMNS)]
 
     for source in sources:
@@ -91,6 +93,7 @@ def cmd_refresh(paths: Paths, sources: list[str] | None, do_render: bool) -> int
             h.worsen("golden_mismatch", "golden check failed: " + r["message"])
             print(f"[{r['source']}] GOLDEN MISMATCH {r['message']}")
 
+    stamp_status_since(health, before, pulled_at)
     write_facts(facts, paths.facts_csv)
     append_revisions(pd.concat(all_revisions, ignore_index=True), paths.revisions_csv)
     write_health(paths, health, pulled_at)
@@ -139,6 +142,16 @@ def cmd_health(paths: Paths, fail_on_red: bool) -> int:
             print(f"    - {redact(m)}")
         red += 1 if h.status in RED else 0
     return 1 if (fail_on_red and red) else 0
+
+
+def cmd_attention(paths: Paths, days: int) -> int:
+    """Print the sources that have been amber for at least `days`, one markdown line each, or nothing.
+
+    The workflow turns this into one open issue while the list is not empty (REVIEW.md R1-3). Always exits 0: an
+    amber source is not a failed job, it is a source someone should look at."""
+    for line in needing_attention(read_health(paths), dt.datetime.now(dt.timezone.utc), days):
+        print(line)
+    return 0
 
 
 def cmd_scan_secrets(targets: list[str]) -> int:
@@ -200,6 +213,8 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("issuers", help="print dim_issuer and the unmatched-name report")
     h = sub.add_parser("health", help="print source health")
     h.add_argument("--fail-on-red", action="store_true")
+    a = sub.add_parser("attention", help="list sources amber for at least --days (markdown, empty when none)")
+    a.add_argument("--days", type=int, default=ATTENTION_DAYS)
     s = sub.add_parser("scan-secrets", help="exit 1 if a secret value or credential parameter is under the paths")
     s.add_argument("paths", nargs="+")
     args = p.parse_args(argv)
@@ -216,6 +231,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_issuers(paths)
     if args.cmd == "health":
         return cmd_health(paths, args.fail_on_red)
+    if args.cmd == "attention":
+        return cmd_attention(paths, args.days)
     if args.cmd == "scan-secrets":
         return cmd_scan_secrets(args.paths)
     return 2

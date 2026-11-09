@@ -5,6 +5,11 @@ on:
     # 22:00 UTC = 18:00 ET in summer, 17:00 ET in winter. After the day's Fed/BEA/Census releases.
     - cron: "0 22 * * *"
   workflow_dispatch:
+    inputs:
+      fail_on_purpose:
+        description: "Fail before the refresh, to test the failure issue (REVIEW.md R1-3). Fetches nothing."
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths-ignore:
@@ -14,6 +19,7 @@ on:
 
 permissions:
   contents: write
+  issues: write  # the failure and attention issues at the end of the job
 
 concurrency:
   group: refresh
@@ -30,10 +36,17 @@ jobs:
           enable-cache: true
 
       - name: Install
+        id: install
         run: uv sync --frozen
 
       - name: Tests
         run: uv run pytest
+
+      - name: Fail on purpose
+        if: github.event_name == 'workflow_dispatch' && inputs.fail_on_purpose
+        run: |
+          echo "fail_on_purpose is set on this manual run: stopping before the refresh so the failure issue step runs"
+          exit 1
 
       - name: Refresh data and render
         env:
@@ -82,3 +95,82 @@ jobs:
 
       - name: Fail the job if any source is red
         run: uv run carddash health --fail-on-red
+
+      # Saying it out loud (REVIEW.md R1-3). From 2026-10-08 to 2026-11-09 every scheduled run failed, 33 in a row,
+      # bea and census sat amber, and nothing said so: amber shows as success in this UI and nobody reads the page
+      # for pipeline health. A failed run opens one issue that @mentions the owner, or adds itself to the open one
+      # without a new notification, and the next successful run closes it. A second issue stays open while a source
+      # has been amber for a week. GitHub's mobile app shows both. None of these steps can fail the job.
+      - name: Open or close the attention issue
+        if: always() && steps.install.outcome == 'success'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          label=source-attention
+          uv run carddash attention --days 7 > "$RUNNER_TEMP/attention.md"
+          num=$(gh issue list --label "$label" --state open --limit 1 --json number --jq '.[0].number // empty' || true)
+          if [ -s "$RUNNER_TEMP/attention.md" ]; then
+            {
+              echo "These sources have been amber for a week or more. Amber does not fail the job, so this issue is the"
+              echo "only signal. It is rewritten each night and closed once every source is back to ok."
+              echo
+              cat "$RUNNER_TEMP/attention.md"
+            } > "$RUNNER_TEMP/body.md"
+            if [ -n "$num" ]; then
+              gh issue edit "$num" --body-file "$RUNNER_TEMP/body.md"
+            else
+              gh label create "$label" --color FBCA04 --description "A source has been amber for a week" --force
+              { echo "@${OWNER}"; echo; cat "$RUNNER_TEMP/body.md"; } > "$RUNNER_TEMP/first.md"
+              gh issue create --title "A source has needed attention for a week" --label "$label" --body-file "$RUNNER_TEMP/first.md"
+            fi
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "No source has been amber for a week as of $(date -u '+%Y-%m-%d %H:%M UTC')."
+          fi
+
+      - name: Open or update the failure issue
+        if: failure()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          EVENT: ${{ github.event_name }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ON_PURPOSE: ${{ inputs.fail_on_purpose && 'yes' || '' }}
+        run: |
+          label=refresh-failure
+          line="- $(date -u '+%Y-%m-%d %H:%M UTC'), ${EVENT} run: ${RUN_URL}${ON_PURPOSE:+ (failed on purpose, to test this issue)}"
+          num=$(gh issue list --label "$label" --state open --limit 1 --json number --jq '.[0].number // empty' || true)
+          if [ -n "$num" ]; then
+            gh issue view "$num" --json body --jq .body > "$RUNNER_TEMP/body.md"
+            echo "$line" >> "$RUNNER_TEMP/body.md"
+            gh issue edit "$num" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh label create "$label" --color B60205 --description "A refresh run failed; the next good run closes it" --force
+            {
+              echo "@${OWNER} the refresh workflow failed. The page keeps the last good data and marks what failed, but"
+              echo "nothing else will tell you. Each further failed run is added below without a new notification, and"
+              echo "the next successful run closes this issue."
+              echo
+              echo "Failed runs:"
+              echo "$line"
+            } > "$RUNNER_TEMP/body.md"
+            gh issue create --title "The refresh is failing" --label "$label" --body-file "$RUNNER_TEMP/body.md"
+          fi
+
+      - name: Close the failure issue
+        if: success()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          num=$(gh issue list --label refresh-failure --state open --limit 1 --json number --jq '.[0].number // empty' || true)
+          if [ -n "$num" ]; then
+            gh issue close "$num" --comment "Recovered: the ${EVENT} run of $(date -u '+%Y-%m-%d %H:%M UTC') succeeded, ${RUN_URL}"
+          fi

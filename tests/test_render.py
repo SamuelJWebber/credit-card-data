@@ -27,6 +27,7 @@ from carddash.render import (
     _missing_periods,
     _new_periods,
     _recessions,
+    _health_rows,
     _rel_display,
     headlines,
     pair_texts,
@@ -282,6 +283,27 @@ def test_numbers_on_the_page_are_never_in_scientific_notation_and_show_the_diffe
     assert pair_texts(1347.7, 1347.84) == ("1,347.7", "1,347.8")  # '%.4g' printed 1348 -> 1348
     assert pair_texts(0, 13) == ("0", "13") and pair_texts(1252, 1242) == ("1,252", "1,242")
     assert pair_texts(20.93, 20.94) == ("20.93", "20.94") and pair_texts(5.0001, 5.0002) == ("5.0001", "5.0002")
+
+
+def test_the_health_strip_tells_a_failed_parse_from_a_late_release(fixture_facts):
+    """REVIEW.md R1-10, from the page during the October 2026 outage: 'FDIC ... Failed ... 0 series, 0 rows' over
+    28,942 rows still served, and 'Philly Fed ... 2026 Q2 data was expected around 2026-10-13 and has not appeared'
+    when the files had been out since 2026-10-07 and it was the parser that failed."""
+    late = dt.date(2026, 11, 9)  # the fixtures' Philly Fed release is 2026 Q1, so Q2 is overdue by then
+    health = {
+        "phillyfed": {"source": "phillyfed", "status": "failed", "rows": 0, "n_series": 0,
+                      "status_since": "2026-10-08T01:39:00Z", "messages": ["fetch error: ValueError: header"]},
+        "nyfed_hhdc": {"source": "nyfed_hhdc", "status": "ok", "rows": 5, "n_series": 2},
+    }
+    rows = {r["source"]: r for r in _health_rows(health, {}, fixture_facts, late)}
+    ph = rows["phillyfed"]
+    served = fixture_facts[fixture_facts["source"] == "phillyfed"]
+    assert ph["rows"] == len(served) > 0 and ph["n_series"] == served.groupby(SERIES_KEY).ngroups and ph["kept"]
+    assert ph["status_label"] == "Failed since 2026-10-08"
+    assert ph["next"]["overdue"] and "has not appeared" not in ph["next"]["text"]
+    assert ph["next"]["text"].endswith("the source failed to load, so a newer release could not be read")
+    ok = rows["nyfed_hhdc"]
+    assert (ok["rows"], ok["kept"], ok["status_label"]) == (5, False, "OK")  # an ok source keeps its own counts
 
 
 def test_recessions_are_month_ranges():

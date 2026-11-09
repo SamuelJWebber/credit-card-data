@@ -137,6 +137,20 @@ def test_fetch_exception_fails_and_keeps_prior_rows():
     assert len(facts) == 8
 
 
+@pytest.mark.parametrize("result", ["fetch_error", "validation", "suspect"])
+def test_a_red_source_reports_the_rows_it_still_serves(result):
+    """REVIEW.md R1-10: during the October 2026 outage the health strip read 'FDIC ... Failed ... 0 series, 0 rows'
+    while 28,942 FDIC rows were still served, because a red load reported its own empty result."""
+    prev = _facts(TWELVE)
+    fetched = {"fetch_error": RuntimeError("boom"),
+               "validation": _facts({**TWELVE, "2026-08-28": 500.0}, PULL2),
+               "suspect": _facts({k: v * 2 for k, v in TWELVE.items()}, PULL2)}[result]
+    facts, h, _ = _run(prev, fetched)
+    assert h.status in loader.RED
+    assert (h.rows, h.n_series, h.last_period_end) == (12, 1, "2026-08-28")
+    assert len(facts) == 12
+
+
 def test_stale_when_latest_period_is_old():
     facts, h, _ = _run(empty_facts(), _facts(BASE), today=dt.date(2027, 3, 1))
     assert h.status == "stale"

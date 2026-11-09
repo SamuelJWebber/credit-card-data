@@ -366,7 +366,7 @@ read the scope note before comparing it with anything.</p>
 {% for s in health %}
   <li class="st-{{ s.status }}">
     <span class="status"><span class="dot" aria-hidden="true"></span>{{ s.label }} · {{ s.status_label }}</span>
-    <small>latest period {{ s.last_period_end }} · last fetch {{ s.pulled_at }} · {{ s.n_series }} series, {{ s.rows }} rows</small>
+    <small>latest period {{ s.last_period_end }} · last fetch {{ s.pulled_at }} · {{ s.n_series }} series, {{ '{:,}'.format(s.rows) }} rows{% if s.kept %} kept from the last good load{% endif %}</small>
     {% if s.next %}<small class="next{% if s.next.overdue %} overdue{% endif %}">{{ s.next.text }}</small>{% endif %}
     {% if s.messages %}
     <details><summary>{{ s.messages | length }} note{{ 's' if s.messages | length != 1 else '' }}</summary>

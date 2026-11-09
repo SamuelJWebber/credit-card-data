@@ -22,7 +22,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from .fetchers import tccp
 from .golden import check_golden, load_golden, number_text
 from .issuers import ISSUER_TYPES
-from .loader import STATUS_RANK, read_facts, read_revisions
+from .loader import RED, STATUS_RANK, read_facts, read_revisions
 from .paths import Paths
 from .png import write_png
 from .redact import redact
@@ -2321,19 +2321,35 @@ def _health_rows(health: dict, latest_by_source: dict[str, str], facts: pd.DataF
                  today: dt.date | None = None) -> list[dict]:
     rows = []
     for source, h in sorted(health.items()):
+        status = h.get("status", "failed")
+        red = status in RED
+        n_rows, n_series = h.get("rows", 0), h.get("n_series", 0)
+        if red and not n_rows and facts is not None and not facts.empty:
+            # A red source keeps serving its previous rows. The loader now reports those; a health.json written
+            # before it did said '0 series, 0 rows' over 28,942 FDIC rows (REVIEW.md R1-10).
+            mine = facts[facts["source"] == source]
+            n_rows, n_series = int(len(mine)), int(mine.groupby(SERIES_KEY).ngroups) if not mine.empty else 0
+        nxt = next_expected(facts, source, today) if facts is not None and today else None
+        if nxt and red and nxt["overdue"]:
+            # the parser or the download failed: the release may well be out, it just could not be loaded
+            nxt = {**nxt, "text": f"{nxt['period']} data was expected around {nxt['due']}; the source failed to load, "
+                                  "so a newer release could not be read"}
+        since = h.get("status_since")
         rows.append(
             {
                 "source": source,
                 "label": SOURCE_LABELS.get(source, source),
-                "status": h.get("status", "failed"),
-                "status_label": STATUS_LABELS.get(h.get("status", "failed"), h.get("status")),
+                "status": status,
+                "status_label": STATUS_LABELS.get(status, status)
+                + (f" since {since[:10]}" if since and status != "ok" else ""),
                 "last_period_end": latest_by_source.get(source) or h.get("last_period_end") or "none",
                 "pulled_at": (h.get("pulled_at") or "never")[:16].replace("T", " "),
-                "rows": h.get("rows", 0),
-                "n_series": h.get("n_series", 0),
+                "rows": n_rows,
+                "n_series": n_series,
+                "kept": red,  # the counts are of the rows kept from the last good load
                 # health.json is redacted when written; this is the page's own guard against an older file
                 "messages": [redact(m) for m in h.get("messages", [])],
-                "next": next_expected(facts, source, today) if facts is not None and today else None,
+                "next": nxt,
             }
         )
     return rows

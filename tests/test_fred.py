@@ -237,3 +237,20 @@ def test_api_json_parse():
     obs = fred.parse_api_json(text)
     assert obs["value"].tolist() == [1.5]
     assert obs["date"].iloc[0] == pd.Timestamp("2020-01-01")
+
+
+def test_every_fred_series_names_its_publisher(meta):
+    """FRED redistributes other publishers' series. series.csv names each one so the page credits the right body
+    (REVIEW.md R1-8), and carries the copyright line FRED's series notes give for Michigan and Bankrate."""
+    fr = meta[meta["source"] == "fred"].set_index("source_id")
+    assert (fr["publisher"] != "").all(), fr.index[fr["publisher"] == ""].tolist()
+    expected = {"UMCSENT": "University of Michigan", "BRMCC01": "Bankrate", "UNRATE": "Bureau of Labor Statistics",
+                "CPIAUCSL": "Bureau of Labor Statistics", "DPI": "Bureau of Economic Analysis",
+                "PSAVERT": "Bureau of Economic Analysis", "ICSA": "Department of Labor", "CCSA": "Department of Labor"}
+    for sid, publisher in expected.items():
+        assert fr.loc[sid, "publisher"] == publisher, sid
+    others = fr.drop(index=list(expected))
+    assert set(others["publisher"]) == {"Federal Reserve Board"}
+    assert fr.loc["UMCSENT", "rights"].startswith("Copyright, 2016, Surveys of Consumers, University of Michigan")
+    assert fr.loc["BRMCC01", "rights"] == "Copyright Bankrate, LLC."
+    assert set(fr.drop(index=["UMCSENT", "BRMCC01"])["rights"]) == {""}

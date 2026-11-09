@@ -26,6 +26,10 @@ SERIES_COLUMNS = [
     "vmax",
     "max_age_days",
     "period_offset",  # periods to shift the source's own dating by (SLOOS: -1, the July survey asks about Q2)
+    # Who publishes the series, when that is not who the source label names: FRED carries BLS, BEA, Labor
+    # Department, University of Michigan and Bankrate series, and the page credits each to its publisher.
+    "publisher",
+    "rights",  # the copyright line the publisher asks for (FRED's series notes), printed with the chart and its PNG
 ]
 
 

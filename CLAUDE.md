@@ -29,8 +29,10 @@ Suggest them in the handoff instead. Definition of done for v1: five fetchers gr
   Key: (metric, entity, tier, period_end, period_type, source). See src/carddash/schema.py.
 - period_end is the LAST day of the period. Quarterly survey taken in May is dated June 30.
 - Seasonal adjustment is in the metric name (`_sa` / `_nsa`) whenever the source offers both.
-- unit, cadence, display name, scope note, value range, staleness limit, and period offset live in crosswalks/series.csv,
-  one row per series. A fetcher may only emit series that exist there; validation rejects the rest. period_offset shifts a
+- unit, cadence, display name, scope note, value range, staleness limit, period offset, publisher and rights live in
+  crosswalks/series.csv, one row per series. publisher names who publishes a series FRED only redistributes (BLS,
+  BEA, the Labor Department, Michigan, Bankrate); the page credits it, never the Fed. rights is the copyright line
+  the publisher asks for (Michigan, Bankrate), printed in the chart notes and on its PNG. A fetcher may only emit series that exist there; validation rejects the rest. period_offset shifts a
   source's own dating by whole periods (SLOOS -1: the July survey asks about the quarter that just ended), applied in the fetcher.
 - Entities: prefixed ids (`ALL_HOLDERS`, `COMBANKS_TOP100`, `CERT:4297`, `FDIC_ALL_INSURED`, `STATE:ME`,
   `ISSUER:SYNCHRONY`), with entity_type set. Views never parse prefixes. An issuer is an ENTITY, never part of a

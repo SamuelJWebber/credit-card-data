@@ -83,7 +83,7 @@ def test_page_is_self_contained_and_carries_every_chart(page):
     # the health strip sits below the charts, a one-line summary sits at the top
     assert html.index('<h2 id="health">Source health</h2>') > html.index("<h2>Context</h2>")
     assert "14 sources OK" in html.split('<h2 id="readings">Latest readings</h2>')[0]
-    assert "Sources: Federal Reserve Board, via FRED; CFPB Terms of Credit Card Plans survey" in html
+    assert "Sources: FRED, Federal Reserve Bank of St. Louis; CFPB Terms of Credit Card Plans survey" in html
 
 
 def test_fred_charts(page):
@@ -306,6 +306,32 @@ def test_the_health_strip_tells_a_failed_parse_from_a_late_release(fixture_facts
     assert (ok["rows"], ok["kept"], ok["status_label"]) == (5, False, "OK")  # an ok source keeps its own counts
 
 
+def test_every_series_is_credited_to_its_publisher_not_to_the_fed(page):
+    """REVIEW.md R1-8: every FRED series was captioned 'Federal Reserve Board, via FRED', on the page and on the PNGs
+    made to be pasted into posts, Michigan's copyrighted sentiment index and Bankrate's survey included."""
+    html, payload = page
+    by_id = {c["id"]: c for c in payload["charts"]}
+    sentiment = by_id["sentiment"]
+    assert sentiment["caption"].startswith("Source: University of Michigan, via FRED · monthly")
+    assert "Copyright, 2016, Surveys of Consumers, University of Michigan. Reprinted with permission." in sentiment["caption"]
+    assert "Federal Reserve Board" not in sentiment["caption"]  # the caption is what the PNG prints
+    apr = by_id["card_apr"]  # Fed G.19 and Bankrate on one chart: both named, and the separator keeps them apart
+    assert apr["caption"].startswith("Source: Bankrate, via FRED; Federal Reserve Board, via FRED · ")
+    assert "Copyright Bankrate, LLC." in apr["caption"]
+    labor = by_id["losses_vs_labor"]
+    assert "Bureau of Labor Statistics, via FRED" in labor["caption"]
+    assert "Department of Labor, via FRED" in by_id["jobless_claims"]["caption"]
+    for c in payload["charts"]:  # no chart drawn only from other publishers' series credits the Fed
+        if all(s["source"] == "fred" and not s["source_label"].startswith("Federal Reserve Board")
+               for s in c["series"] if not s["benchmark"]):
+            assert "Federal Reserve Board" not in c["caption"], c["id"]
+    # the series browser names the publisher too, and its source filter still has one option per source
+    browse = {s["metric"]: s for s in payload["browse"]["series"]}
+    assert browse["consumer_sentiment"]["source_label"] == "University of Michigan, via FRED"
+    options = re.findall(r'<option value="([a-z_0-9]+)">', html)
+    assert len(options) == len(set(options))
+
+
 def test_recessions_are_month_ranges():
     rec = _recessions()
     assert len(rec) == 8
@@ -395,7 +421,7 @@ def test_what_changed_lists_only_the_latest_run(tmp_paths, fixture_facts):
     assert 'href="data/revisions.csv"' in html and (tmp_paths.docs / "data" / "revisions.csv").exists()
     # every fixture row carries RUN2, so every source is a first load: new periods are summarized per cadence
     assert "New periods loaded in this run:" in html
-    assert "Federal Reserve Board, via FRED: " in html and " monthly periods through Aug 2026" in html
+    assert "FRED, Federal Reserve Bank of St. Louis: " in html and " monthly periods through Aug 2026" in html
     # keyed on the run: pointing health at run 1 lists run 1, even though run 2's rows are newer in the file
     tmp_paths.health_json.write_text(json.dumps(_health(RUN1)), encoding="utf-8")
     html = render(tmp_paths, today=TODAY).read_text(encoding="utf-8")

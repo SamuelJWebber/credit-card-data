@@ -61,7 +61,7 @@ RELEASE_RHYTHM = {
 }
 
 SOURCE_LABELS = {
-    "fred": "Federal Reserve Board, via FRED",
+    "fred": "FRED, Federal Reserve Bank of St. Louis",  # each series is credited to its publisher (series.csv)
     "tccp": "CFPB Terms of Credit Card Plans survey",
     "phillyfed": "Federal Reserve Bank of Philadelphia, Large Bank Credit Card and Mortgage Data (FR Y-14M)",
     "nyfed_hhdc": "Federal Reserve Bank of New York, Quarterly Report on Household Debt and Credit (Consumer Credit Panel/Equifax)",
@@ -76,6 +76,17 @@ SOURCE_LABELS = {
     "issuer_8k": "Capital One, Synchrony, Bread Financial and American Express, each issuer's own monthly charge-off and delinquency metrics (8-K filings, SEC EDGAR)",
     "nyfed_state": "Federal Reserve Bank of New York, State Level Household Debt Statistics (Consumer Credit Panel/Equifax)",
 }
+
+
+def series_source_label(source: str, m) -> str:
+    """Who to credit for one series. FRED redistributes other publishers' series, and each is credited to its own
+    publisher ('University of Michigan, via FRED'), never to the Fed (REVIEW.md R1-8)."""
+    publisher = str(m.get("publisher", "") or "") if m is not None else ""
+    if publisher:
+        return f"{publisher}, via FRED" if source == "fred" else publisher
+    return SOURCE_LABELS.get(source, source)
+
+
 STATUS_LABELS = {
     "ok": "OK",
     "stale": "Stale",
@@ -1980,9 +1991,10 @@ def _chart_payload(con, spec: dict, meta_idx: dict, health: dict, golden: dict, 
                 "cadence": PERIOD_WORDS.get(s["period_type"], s["period_type"]),
                 "last_period": period_label(ended[-1][0], s["period_type"]) if ended else None,
                 "last_period_iso": ended[-1][0].isoformat() if ended else None,
-                "source_label": SOURCE_LABELS.get(s["source"], s["source"]),
+                "source_label": series_source_label(s["source"], m),
                 "source_url": (m["source_url"] if m is not None else ""),
                 "scope_note": (m["scope_note"] if m is not None else ""),
+                "rights": (str(m.get("rights", "") or "") if m is not None else ""),
                 "data_as_of": _series_pulled_at(con, s) or src_health.get("pulled_at"),
                 "status": src_health.get("status", "failed") if src_health else "failed",
             }
@@ -2031,15 +2043,20 @@ def _chart_payload(con, spec: dict, meta_idx: dict, health: dict, golden: dict, 
     data_as_of = max((p["data_as_of"] for p in real if p["data_as_of"]), default=None)
     status = max((p["status"] for p in real), key=lambda st: STATUS_RANK.get(st, 2), default="ok")
     attempted = max((health.get(p["source"], {}).get("pulled_at") or "" for p in real), default="") or None
-    caption = f"Source: {', '.join(sources)} · {', '.join(cadences)}"
+    # '; ' between sources: a label can itself hold a comma ('Bankrate, via FRED; Federal Reserve Board, via FRED')
+    caption = f"Source: {'; '.join(sources)} · {', '.join(cadences)}"
     if last:
         caption += f" · latest period {last}"
+    rights = list(dict.fromkeys(p["rights"] for p in real if p.get("rights")))
     footer = caption
     if data_as_of:
         footer += f" · data as of {data_as_of[:10]}"
     if since:
         caption += f" · shown from {since[:4]}"
         footer += f" · shown from {since[:4]}"
+    if rights:  # the copyright line the publisher asks for, on the page and on the PNG made to be pasted elsewhere
+        caption += " · " + " ".join(rights)
+        footer += " · " + " ".join(rights)
     mixed = len(sources) > 1 or len(cadences) > 1
     footer_lines = (
         [f"{p['label']}: {p['source_label']}, {p['cadence']}, latest period {p['last_period'] or 'none'}" for p in real]
@@ -2052,7 +2069,8 @@ def _chart_payload(con, spec: dict, meta_idx: dict, health: dict, golden: dict, 
     for p in real:
         if p["scope_note"] and p["scope_note"] not in seen:
             seen.add(p["scope_note"])
-            about.append({"label": p["label"], "source_label": p["source_label"], "source_url": p["source_url"], "note": p["scope_note"]})
+            note = p["scope_note"] + (f" {p['rights']}" if p.get("rights") else "")
+            about.append({"label": p["label"], "source_label": p["source_label"], "source_url": p["source_url"], "note": note})
     period_types = {p["period_type"] for p in real}
     return {
         "id": spec["id"],
@@ -2252,7 +2270,7 @@ def browse_payload(facts: pd.DataFrame, meta_idx: dict, today: dt.date) -> dict:
                 "entity": entity,
                 "tier": tier,
                 "source": source,
-                "source_label": SOURCE_LABELS.get(source, source),
+                "source_label": series_source_label(source, m),
                 "source_url": (m["source_url"] if m is not None else ""),
                 "note": (m["scope_note"] if m is not None else ""),
                 "unit": unit,
@@ -2418,7 +2436,7 @@ def _run_revisions(revisions: pd.DataFrame, meta_idx: dict, run: str | None) -> 
         listed.append(
             {
                 "name": m["display_name"] if m is not None else f"{r['metric']} {r['entity']}",
-                "source_label": SOURCE_LABELS.get(r["source"], r["source"]),
+                "source_label": series_source_label(r["source"], m),
                 "period": period_label(pd.Timestamp(r["period_end"]).date(), r["period_type"]),
                 "old": r["old_value"],
                 "new": r["new_value"],
@@ -2540,7 +2558,9 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
         n_facts=len(facts),
         n_browse=len(browse["series"]),
         n_uncharted=sum(1 for s in browse["series"] if not s["charted"]),
-        browse_sources=sorted({(s["source"], s["source_label"]) for s in browse["series"]}, key=lambda x: x[1]),
+        # the filter is by source (one option per fetcher); each series still names its own publisher
+        browse_sources=sorted({(s["source"], SOURCE_LABELS.get(s["source"], s["source"])) for s in browse["series"]},
+                              key=lambda x: x[1]),
         n_series=int(facts.groupby(SERIES_KEY).ngroups) if not facts.empty else 0,
         payload_json=payload_json,
         uplot_js=(VENDOR / "uPlot.iife.min.js").read_text(encoding="utf-8"),

@@ -20,7 +20,7 @@ import json
 import subprocess
 import sys
 
-OWNER_REPO = "User5017/credit-card-data"
+OWNER_REPO = "SamuelJWebber/credit-card-data"
 WORKFLOW = "refresh.yml"
 GREEN = "ok"
 

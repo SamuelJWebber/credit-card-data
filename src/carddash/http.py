@@ -32,7 +32,7 @@ def make_session() -> requests.Session:
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     contact = os.environ.get("CARDDASH_CONTACT", "")
-    ua = f"carddash/{__version__} (+https://github.com/User5017/credit-card-data)"
+    ua = f"carddash/{__version__} (+https://github.com/SamuelJWebber/credit-card-data)"
     if contact:
         ua += f" {contact}"
     session.headers["User-Agent"] = ua

@@ -30,8 +30,8 @@ from .schema import PERIOD_WORDS, SERIES_KEY, last_day, shift_period
 from .series import load_series, series_index
 
 VENDOR = Path(__file__).parent / "vendor"
-SITE_URL = "https://user5017.github.io/credit-card-data/"
-REPO_URL = "https://github.com/User5017/credit-card-data"
+SITE_URL = "https://samueljwebber.github.io/credit-card-data/"
+REPO_URL = "https://github.com/SamuelJWebber/credit-card-data"
 SITE_TITLE = "US credit card data"
 SITE_TAGLINE = (
     "Balances, pricing, performance and borrower behavior from public sources, refreshed daily and checked against "

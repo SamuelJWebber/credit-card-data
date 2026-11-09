@@ -40,8 +40,7 @@ rule is what stops the drift.
 
 ## GitHub
 
-The remote is `User5017/credit-card-data`, but the active `gh` account is **SamuelJWebber**, which is the only
-one holding the `workflow` scope. Editing anything under `.github/workflows/` needs that account. A move of the
-repo to SamuelJWebber is planned but deferred — check with the user before attempting it.
+The repo is `SamuelJWebber/credit-card-data` (moved from `User5017` on 2026-11-09; the old URLs redirect). Push as
+**SamuelJWebber**, the account with the `workflow` scope, ideally via `GH_TOKEN=$(gh auth token --user SamuelJWebber)`.
 
 After CLAUDE.md, read `HANDOFF.md` for what is true right now — and **rewrite HANDOFF.md before the session ends**, never append to it. It is the only channel Codex and Claude Code share.

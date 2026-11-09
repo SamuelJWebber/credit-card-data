@@ -4,7 +4,7 @@ A static page that refreshes itself daily from public sources and shows where ca
 what borrowers are charged, and how card credit is performing. Every number traces to a government release
 and the pipeline checks a set of hand-copied headline figures on every run.
 
-Live page: https://user5017.github.io/credit-card-data/
+Live page: https://samueljwebber.github.io/credit-card-data/
 
 ## How it works
 

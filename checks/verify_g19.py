@@ -132,7 +132,7 @@ def columns_for(period_end: dt.date, period_type: str) -> list[str]:
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     entries = yaml.safe_load((root / "checks" / "golden.yaml").read_text(encoding="utf-8")) or []
-    page = requests.get(G19_URL, headers={"User-Agent": "carddash/0.1 (+https://github.com/User5017/credit-card-data)"}, timeout=60).text
+    page = requests.get(G19_URL, headers={"User-Agent": "carddash/0.1 (+https://github.com/SamuelJWebber/credit-card-data)"}, timeout=60).text
     tables = parse_tables(page)
     bad = 0
     for e in entries:

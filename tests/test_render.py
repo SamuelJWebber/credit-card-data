@@ -492,7 +492,7 @@ def test_holder_and_sloos_demand_charts(page):
 def test_page_carries_link_previews_nav_and_next_release(page, session_paths, fixture_facts):
     html, payload = page
     head = html.split("</head>")[0]
-    assert '<meta property="og:image" content="https://user5017.github.io/credit-card-data/img/revolving_level.png">' in head
+    assert '<meta property="og:image" content="https://samueljwebber.github.io/credit-card-data/img/revolving_level.png">' in head
     assert '<meta name="description" content="Revolving consumer credit, all lenders: $1,357bn in Jul 2026; ' in head
     assert '<meta name="twitter:card" content="summary_large_image">' in head
     assert '<link rel="icon" href="data:image/svg+xml,' in head

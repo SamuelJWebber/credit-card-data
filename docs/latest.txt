@@ -22,4 +22,4 @@ Thesis of 2026-09-08 (holds): US card credit is re-segmenting, not cycling: the 
 - [ok ] Card charge-off rate stays below 4.2% -> 3.82% in 2026 Q2
 - [ok ] Card APR margin over prime stays above 14 points -> 15.49 pp in 2026 Q3
 
-Source: https://user5017.github.io/credit-card-data/ (public data, checked against the releases)
+Source: https://samueljwebber.github.io/credit-card-data/ (public data, checked against the releases)

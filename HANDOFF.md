@@ -7,7 +7,7 @@ Rewritten **2026-09-14**. Read `CLAUDE.md` first for the rules, then this for wh
 
 **v1 is done.** Task 8 passed on 2026-09-14: two consecutive green *scheduled* runs with all fourteen sources
 ok (runs 34726612722 and the 2026-09-14 00:02 run). 383 tests green. 78 charts in 8 panels plus a state tile
-map, 68 goldens, live at https://user5017.github.io/credit-card-data/ .
+map, 68 goldens, live at https://samueljwebber.github.io/credit-card-data/ .
 
 `TASKS.md` is the board and is 725 lines — it is the archive as much as the plan. **Read this file first and
 open TASKS.md only for the task you are actually doing.** Do not read it end to end at session start.
@@ -22,13 +22,11 @@ parentheses**, which the SEC refuses. `fetchers/issuer_8k.py` carries a private 
 around it, so nothing is broken today — but the next fetcher that touches sec.gov inherits the bug. Fix the
 shared default, delete the workaround.
 
-## Blocked, on the user
+## Moved to SamuelJWebber (2026-11-09)
 
-The **transfer to SamuelJWebber** needs one click. A 2026-09-07 request still reserves the name, so a retry
-returns HTTP 422 "Repository has already been taken", and GitHub exposes no API to accept or cancel a transfer.
-Open `https://github.com/User5017/credit-card-data/settings`, cancel the stale request, then transfer.
-**Do not update the six owner references first** (`src/carddash/http.py`, `src/carddash/render.py`,
-`checks/verify_g19.py`, `README.md`, the CLAUDE.md accounts section, the git remote) — that breaks live URLs.
+The repo is now `SamuelJWebber/credit-card-data` and the site https://samueljwebber.github.io/credit-card-data/.
+Every owner reference (http.py, render.py, verify_g19.py, verify_releases.py, README, tests, docs/, CLAUDE.md,
+AGENTS.md) and the git remote were updated the same day. Old repo and site URLs redirect (see CLAUDE.md, GitHub account).
 
 ## Traps that have already cost a day each
 
@@ -40,4 +38,5 @@ Open `https://github.com/User5017/credit-card-data/settings`, cancel the stale r
   gradable until about 01:00 UTC. Only `schedule` events count. Amber shows as "success" in the Actions UI.
 - A local `carddash render` rewrites all 77 PNGs (a Windows/Ubuntu freetype difference). `git status` showing
   every image modified is noise — leave `docs/` to the runner.
-- Pushing needs `gh auth switch --user User5017`; SamuelJWebber cannot edit this repo's workflows.
+- Push as SamuelJWebber (`GH_TOKEN=$(gh auth token --user SamuelJWebber)`); never `gh auth switch`, which changes
+  the account for every session on the machine.

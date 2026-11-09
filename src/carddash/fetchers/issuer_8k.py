@@ -5,8 +5,9 @@ single lender is quarterly and late: the FDIC call report lands 55 to 58 days af
 about 3.5 months, so the freshest issuer-level loss reading on the page can be four and a half months old.
 These issuers publish their own numbers about two weeks after each month ends.
 
-THREE ISSUERS LOADED, A FOURTH PARSED AND HELD BACK, AND NO TWO OF THEM FILE THE SAME SHAPE. Verified
-2026-09-11 by reading every filing index in each issuer's `recent` block.
+FOUR ISSUERS LOADED, AND NO TWO OF THEM FILE THE SAME SHAPE. Verified 2026-09-11 by reading every filing index
+in each issuer's `recent` block. (American Express was parsed and held back until task 46 decided how to carry
+its population break, below; HELD_BACK has been empty since.)
 
 - Capital One Financial Corp, CIK 0000927628, entity ISSUER:CAPITAL_ONE. An 8-K under Item 7.01 around the
   15th to the 22nd of each month carrying Exhibit 99.1, "Monthly Charge-Off and Delinquency Metrics", for the
@@ -23,9 +24,10 @@ THREE ISSUERS LOADED, A FOURTH PARSED AND HELD BACK, AND NO TWO OF THEM FILE THE
   Synchrony's. Only 36 of its 307 Item 7.01 filings carry one and the earliest is 2023-07-27: before that the
   numbers were not filed this way, so Bread's history starts mid-2023 and that is a property of the source.
   TWO months per exhibit, the month and the same month a year earlier. Dollars in MILLIONS.
-- American Express Co, CIK 0000004962. PARSED BUT NOT LOADED, see AXP_POPULATION_BREAK below: Amex changed
-  the population it reports in May 2026 without restating the history, so its readings cannot be made into one
-  series yet. There is NO separate exhibit: the statistics sit in the body of the 8-K itself
+- American Express Co, CIK 0000004962. LOADED AS FOUR ENTITIES, see AXP_POPULATION_BREAK below: Amex changed
+  the population it reports in May 2026 without restating the history, so each basis is its own series ('Card
+  Member loans', retired after March 2026, and 'Card balances', from February 2026), for each of its U.S.
+  Consumer and U.S. Small Business segments, and the two are never spliced. There is NO separate exhibit: the statistics sit in the body of the 8-K itself
   (`axp-<filing date>.htm`), so a filing cannot be identified by a document name and is identified by its
   content instead, with the verdict cached so an earnings 8-K is downloaded at most once. THREE months per
   filing, each split into U.S. Consumer and U.S. Small Business. Dollars in BILLIONS.

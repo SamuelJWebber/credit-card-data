@@ -85,7 +85,7 @@ Suggest them in the handoff instead. Definition of done for v1: five fetchers gr
   come from sql/<source>_facts.sql, which the fetcher runs in memory: aggregation choices stay in SQL.
 - Keep this repo out of OneDrive.
 
-## Sources (fourteen as of 2026-09-11; issuer_8k carries three issuers)
+## Sources (fourteen as of 2026-09-11; issuer_8k carries four issuers)
 fred, tccp, phillyfed, nyfed_hhdc, fdic, nyfed_sce (credit access, four-monthly), nyfed_sce_monthly (core survey),
 bea (PCE by type of product plus household interest payments and monthly DPI, keyless flat file), census (Monthly Retail
 Trade workbook), ncua (5300 call report quarterly zips, per-quarter extracts), dfa (Fed Distributional Financial Accounts
@@ -116,7 +116,7 @@ allows an empty cell before a column's first reading, never after.
 
 ## Rendering
 - docs/index.html is fully self-contained: vendored uPlot (src/carddash/vendor), data embedded as JSON. That now
-  includes every series, for the browser at the foot of the page, so the file is about 1.4 MB.
+  includes every series, for the browser at the foot of the page, so the file is about 3.7 MB (2026-11).
   No CDN, no runtime fetches. Must render identically from file:// and GitHub Pages.
 - Chart specs live in PANELS in src/carddash/render.py. Every chart shows source, cadence, latest period,
   data-as-of, a status badge when its source is not OK, the scope notes from series.csv with source links, and the

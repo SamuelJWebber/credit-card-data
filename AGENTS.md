@@ -29,14 +29,16 @@ rule is what stops the drift.
 - **`checks/verify_releases.py` reads the LOCAL clone.** A clone even one commit behind reports
   "no bot commit found", so a green release looks like a failure. This has misled a reading twice.
   Run `git fetch` first, every time.
-- **The cron is `0 22 * * *` but GitHub runs scheduled jobs late** — recent ones landed 23:54, 23:57 and 00:08.
-  A run is usually not gradable until about 01:00 UTC. Only `schedule` events count; a `workflow_dispatch`
-  run cannot substitute. Amber shows as "success" in the Actions UI.
-- **A local `carddash render` rewrites all 77 PNGs** because of a Windows/Ubuntu freetype difference that
+- **The cron is `0 22 * * *` but GitHub runs scheduled jobs late** — from late October to 2026-11-09 they
+  started between 00:55 and 03:25 UTC, most between 01:15 and 02:11. A run is usually not gradable until about
+  03:30 UTC. Only `schedule` events count; a `workflow_dispatch` run cannot substitute. Amber shows as
+  "success" in the Actions UI, which is why the job keeps a `source-attention` issue open while a source has
+  been amber for a week, and a `refresh-failure` issue open while runs fail.
+- **A local `carddash render` rewrites all 78 PNGs** because of a Windows/Ubuntu freetype difference that
   ping-pongs. `git status` showing every image modified is noise — leave `docs/` to the runner.
-- **The SEC refuses any User-Agent containing a URL in parentheses.** `fetchers/issuer_8k.py` carries its own
-  `_sec_headers()` for this reason; the shared `make_session()` default still has the URL form. Any new
-  fetcher touching sec.gov must use the URL-free User-Agent.
+- **The SEC refuses any User-Agent containing a URL in parentheses.** Since 2026-11-09 every request sends
+  `carddash/<version> <CARDDASH_CONTACT>` from `http.user_agent()`, and a test refuses any other User-Agent
+  string in the code. Never add a second one.
 
 ## GitHub
 

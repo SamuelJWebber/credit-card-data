@@ -6,6 +6,7 @@ import argparse
 import datetime as dt
 import json
 import sys
+from pathlib import Path
 
 import pandas as pd
 
@@ -25,6 +26,7 @@ from .loader import (
     write_facts,
 )
 from .paths import REPO_ROOT, Paths
+from .redact import redact, scan_paths, secret_values
 from .render import render
 from .series import load_series
 
@@ -73,7 +75,7 @@ def cmd_refresh(paths: Paths, sources: list[str] | None, do_render: bool) -> int
         all_revisions.append(revisions)
         print(f"[{source}] {h.status}: {h.rows} rows, {h.n_series} series, latest {h.last_period_end}")
         for m in h.messages:
-            print(f"    - {m}")
+            print(f"    - {redact(m)}")
 
     # the unmatched-name report: crosswalk drift is a maintenance item shown in health, never a status change
     for source, lines in crosswalk_report(paths).items():
@@ -118,9 +120,28 @@ def cmd_health(paths: Paths, fail_on_red: bool) -> int:
     for name, h in sorted(health.items()):
         print(f"{name:12s} {h.status:16s} latest {h.last_period_end} pulled {h.pulled_at}")
         for m in h.messages:
-            print(f"    - {m}")
+            print(f"    - {redact(m)}")
         red += 1 if h.status in RED else 0
     return 1 if (fail_on_red and red) else 0
+
+
+def cmd_scan_secrets(targets: list[str]) -> int:
+    """Fail closed if anything under `targets` carries a secret value or a credential parameter (redact.py).
+
+    The workflow runs this as the last thing before `git add`, with the secrets in its environment, so a key that
+    slipped past every redaction still never reaches the public repository. Prints where, never what."""
+    paths = [Path(t) for t in targets]
+    missing = [str(p) for p in paths if not p.exists()]
+    if missing:
+        print(f"scan-secrets: no such path {missing}", file=sys.stderr)
+        return 2
+    found = scan_paths(paths)
+    for f in found:
+        print(f"SECRET {f}", file=sys.stderr)
+    n_secrets = len(secret_values())
+    print(f"scan-secrets: {len(found)} finding(s) under {', '.join(targets)} "
+          f"(checked {n_secrets} secret value(s) and credential-shaped parameters)")
+    return 1 if found else 0
 
 
 def cmd_issuers(paths: Paths) -> int:
@@ -162,6 +183,8 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("issuers", help="print dim_issuer and the unmatched-name report")
     h = sub.add_parser("health", help="print source health")
     h.add_argument("--fail-on-red", action="store_true")
+    s = sub.add_parser("scan-secrets", help="exit 1 if a secret value or credential parameter is under the paths")
+    s.add_argument("paths", nargs="+")
     args = p.parse_args(argv)
 
     paths = Paths.from_root(REPO_ROOT)
@@ -176,6 +199,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_issuers(paths)
     if args.cmd == "health":
         return cmd_health(paths, args.fail_on_red)
+    if args.cmd == "scan-secrets":
+        return cmd_scan_secrets(args.paths)
     return 2
 
 

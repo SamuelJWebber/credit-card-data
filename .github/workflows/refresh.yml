@@ -45,7 +45,15 @@ jobs:
 
       - name: Commit data and site
         if: always()
+        env:
+          # Only so the scan below can look for these exact values. GitHub masks secrets in this log, not in
+          # committed files, and this repository is public.
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          CARDDASH_CONTACT: ${{ secrets.CARDDASH_CONTACT }}
         run: |
+          # Fail closed: refuse to commit if anything about to be added carries a secret value or a credential-shaped
+          # parameter (src/carddash/redact.py). Every health message is already redacted; this is the last door.
+          uv run carddash scan-secrets data docs checks/restatement_ack.yaml
           git config user.name "carddash-bot"
           git config user.email "carddash-bot@users.noreply.github.com"
           git add data docs checks/restatement_ack.yaml

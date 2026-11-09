@@ -25,6 +25,7 @@ from .issuers import ISSUER_TYPES
 from .loader import STATUS_RANK, read_facts, read_revisions
 from .paths import Paths
 from .png import write_png
+from .redact import redact
 from .schema import PERIOD_WORDS, SERIES_KEY, last_day, shift_period
 from .series import load_series, series_index
 
@@ -2314,7 +2315,8 @@ def _health_rows(health: dict, latest_by_source: dict[str, str], facts: pd.DataF
                 "pulled_at": (h.get("pulled_at") or "never")[:16].replace("T", " "),
                 "rows": h.get("rows", 0),
                 "n_series": h.get("n_series", 0),
-                "messages": h.get("messages", []),
+                # health.json is redacted when written; this is the page's own guard against an older file
+                "messages": [redact(m) for m in h.get("messages", [])],
                 "next": next_expected(facts, source, today) if facts is not None and today else None,
             }
         )

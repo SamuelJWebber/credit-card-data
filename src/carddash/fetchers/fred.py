@@ -16,7 +16,9 @@ from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 import pandas as pd
+import requests
 
+from ..redact import redact
 from ..schema import FACT_COLUMNS, period_end, shift_period
 
 SOURCE = "fred"
@@ -105,9 +107,24 @@ def to_facts(obs: pd.DataFrame, meta: pd.Series, pulled_at: str) -> pd.DataFrame
     return df[FACT_COLUMNS]
 
 
-def _download(session, sid: str, raw_dir: Path, api_key: str | None) -> pd.DataFrame:
-    raw_dir.mkdir(parents=True, exist_ok=True)
-    if api_key:
+def _api_error_detail(resp) -> str:
+    """FRED's own error_message when it sent one (it names the problem, never the key), else ''."""
+    try:
+        msg = str(resp.json().get("error_message", "")).strip()
+    except ValueError:
+        return ""
+    return f": {' '.join(redact(msg).split())[:200]}" if msg else ""
+
+
+def _api_get(session, sid: str, api_key: str):
+    """The observations request, with every failure re-raised WITHOUT the URL.
+
+    The key travels in the query string, and requests writes the full URL into the text of an HTTPError
+    ('400 Client Error: Bad Request for url: ...&api_key=...') and of a ConnectionError ('Max retries exceeded with
+    url: ...'). The loader stores exception text in health.json, which the job commits to this public repository and
+    the page prints, so never call raise_for_status() here and never chain the original exception.
+    """
+    try:
         resp = session.get(
             API_URL,
             params={
@@ -117,7 +134,17 @@ def _download(session, sid: str, raw_dir: Path, api_key: str | None) -> pd.DataF
                 "observation_start": "1900-01-01",
             },
         )
-        resp.raise_for_status()
+    except requests.RequestException as exc:
+        raise RuntimeError(f"{sid}: FRED API request failed ({type(exc).__name__})") from None
+    if not resp.ok:
+        raise RuntimeError(f"{sid}: FRED API returned HTTP {resp.status_code}{_api_error_detail(resp)}")
+    return resp
+
+
+def _download(session, sid: str, raw_dir: Path, api_key: str | None) -> pd.DataFrame:
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    if api_key:
+        resp = _api_get(session, sid, api_key)
         (raw_dir / f"{sid}.csv").unlink(missing_ok=True)  # one snapshot per series, whichever transport
         (raw_dir / f"{sid}.json").write_text(normalize_api_json(resp.text), encoding="utf-8", newline="\n")
         return parse_api_json(resp.text)

@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 import yaml
 
+from .redact import redact
 from .schema import (
     ENTITY_TYPES,
     FACT_COLUMNS,
@@ -64,10 +65,14 @@ class SourceHealth:
     def worsen(self, status: str, message: str) -> None:
         if STATUS_RANK[status] > STATUS_RANK[self.status]:
             self.status = status
-        self.messages.append(message)
+        self.messages.append(redact(message))
 
     def to_dict(self) -> dict:
-        return asdict(self)
+        """What health.json stores. Every message is redacted here as well, the one door to disk, because
+        messages are also appended directly and health.json is committed to a public repository."""
+        d = asdict(self)
+        d["messages"] = [redact(m) for m in self.messages]
+        return d
 
 
 # ---------- facts I/O ----------
@@ -267,7 +272,8 @@ def refresh_source(
     try:
         new = coerce_facts(fetch_fn(meta, raw_dir, session, pulled_at))
     except Exception as exc:  # noqa: BLE001 - any failure keeps prior rows and goes red
-        health.worsen("failed", f"fetch error: {type(exc).__name__}: {exc}")
+        # redacted: requests writes the whole URL, query string included, into its exception text
+        health.worsen("failed", f"fetch error: {type(exc).__name__}: {redact(str(exc))}")
         return facts, health, no_revisions
 
     errors, warnings = validate(new, meta)

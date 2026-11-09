@@ -2,8 +2,42 @@
 
 from __future__ import annotations
 
-from carddash.golden import check_golden, load_golden
+import pandas as pd
+
+from carddash.golden import MIN_LIVE_AGE_MONTHS, check_golden, load_golden, months_between
 from conftest import REPO
+
+
+def test_live_entries_sit_outside_their_sources_revision_window(fixture_facts):
+    """A live entry on a period the next routine release revises turns its source amber for no reason (REVIEW.md
+    R1-4: the two BEA entries for July and August 2026 would have gone amber with the October release). The fixture
+    is the release each entry was copied from, so its newest period is the reference."""
+    newest = fixture_facts.groupby(["metric", "entity", "tier", "period_type", "source"])["period_end"].max()
+    too_young = []
+    for e in load_golden(REPO / "checks" / "golden.yaml"):
+        if not e.get("check_live", True):
+            continue
+        need = MIN_LIVE_AGE_MONTHS.get((e["source"], e["period_type"]), 0)
+        last = newest.get((e["metric"], e["entity"], e.get("tier", "all"), e["period_type"], e["source"]))
+        assert last is not None, f"{e['id']}: its series is not in the fixtures"
+        age = months_between(pd.Timestamp(str(e["period_end"])), last)
+        if age < need:
+            too_young.append(f"{e['id']}: {age} month(s) behind {last.date()}, needs {need}")
+    assert not too_young, "\n".join(too_young)
+
+
+def test_the_revision_window_rule_rejects_a_bea_month_of_the_newest_quarter():
+    assert MIN_LIVE_AGE_MONTHS[("bea", "M")] >= 4  # September newest: July and August are inside, April is not
+    assert months_between(pd.Timestamp("2026-07-31"), pd.Timestamp("2026-09-30")) == 2
+    assert months_between(pd.Timestamp("2026-04-30"), pd.Timestamp("2026-09-30")) == 5
+
+
+def test_every_source_with_a_golden_keeps_a_live_one():
+    """Retiring revised entries must not leave a source with nothing checked on the nightly run."""
+    entries = load_golden(REPO / "checks" / "golden.yaml")
+    sources = {e["source"] for e in entries}
+    live = {e["source"] for e in entries if e.get("check_live", True)}
+    assert sources == live, f"no live entry left for {sorted(sources - live)}"
 
 
 def test_all_golden_entries_pass_on_fixtures(fixture_facts):

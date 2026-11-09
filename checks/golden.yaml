@@ -579,10 +579,13 @@
   origin_url: https://www.newyorkfed.org/medialibrary/interactives/householdcredit/data/pdf/HHDC_2026Q2.pdf
 
 # BEA Personal Income and Outlays: the release text and its 'historical comparisons' workbook state monthly dollar
-# changes, so these check the change from the prior month (change_from_prior). September is the newest month and will be
-# revised, so its three entries are fixture-only; the workbook states August's and July's changes as revised, and those
-# two are the live entries. Re-based 2026-11-09: the 2026 annual update (August release) revised every month from
-# January 2021, which moved June's +77.4 to +68.3 and left bea amber from 2026-10-03.
+# changes, so these check the change from the prior month (change_from_prior). Every month of the newest quarter is
+# revised by the next monthly releases (July 2026 moved on 2026-10-01 and again on 2026-10-30), so September, August and
+# July are fixture-only, and the live entry is April, five months behind the newest month: a month of an earlier quarter
+# holds until the next annual update. tests/test_golden.py enforces that age (MIN_LIVE_AGE_MONTHS in golden.py).
+# Re-based 2026-11-09: the 2026 annual update (August release) revised every month from January 2021, which moved
+# June's +77.4 to +68.3 and left bea amber from 2026-10-03. August and July were live until R1-4 (REVIEW.md): the
+# October release, due 2026-11-25, revises them again.
 - id: bea_pce_change_2026_09
   metric: pce_total_saar
   entity: US_HOUSEHOLDS
@@ -635,7 +638,7 @@
   expected: 193.6
   tolerance: 0.06
   change_from_prior: true
-  check_live: true
+  check_live: false
   origin: "Same release, 'Historical Comparisons' workbook (pi0926-hist.xlsx), PCE dollar change: last period with a larger value than September's 113.1 was 2026M08 at 193.6"
   origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
 
@@ -649,9 +652,23 @@
   expected: 50.6
   tolerance: 0.06
   change_from_prior: true
-  check_live: true
+  check_live: false
   origin: "Same workbook, same row: last period with a smaller value than September's 113.1 was 2026M07 at 50.6"
   origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
+
+- id: bea_dpi_change_2026_04
+  metric: disposable_income_monthly_saar
+  entity: US_HOUSEHOLDS
+  tier: all
+  period_type: M
+  period_end: 2026-04-30
+  source: bea
+  expected: 12.7
+  tolerance: 0.06
+  change_from_prior: true
+  check_live: true
+  origin: "Same release, 'Historical Comparisons' workbook (pi0926-hist.xlsx), DPI dollar change from preceding month: last period with a smaller value than September's 52.7 was 2026M04 at 12.7"
+  origin_url: https://www.bea.gov/sites/default/files/2026-10/pi0926-hist.xlsx
 
 # Census retail trade: the advance release PDF's Table 1 prints the not-adjusted levels of the two prior months, the
 # older one revised ('r'), in millions. July (r) is the live entry; August is preliminary in the workbook and

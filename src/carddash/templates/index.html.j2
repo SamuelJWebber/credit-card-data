@@ -265,7 +265,7 @@ They are checked here on every refresh.</p>
       {% if c.checks %}
       <details><summary>Checked against the release ({{ c.checks | length }})</summary>
         <ul>
-        {% for k in c.checks %}<li>{{ '✓' if k.ok else '✗' }} {{ k.series_label }}, {{ k.period }}: {{ '%.4g' | format(k.expected) }} per <a href="{{ k.origin_url }}">the release</a>{% if not k.ok %} (got {{ '%.4g' | format(k.actual) if k.actual is not none else 'nothing' }}){% endif %}</li>{% endfor %}
+        {% for k in c.checks %}{% if k.state == 'revised' %}<li class="check-revised">{{ k.series_label }}, {{ k.period }}: {{ k.expected_text }} as first published in <a href="{{ k.origin_url }}">the release</a>, {% if k.actual_text is not none %}since revised to {{ k.actual_text }}{% else %}no longer in the data{% endif %}</li>{% else %}<li class="check-{{ k.state }}">{{ '✓' if k.ok else '✗' }} {{ k.series_label }}, {{ k.period }}: {{ k.expected_text }} per <a href="{{ k.origin_url }}">the release</a>{% if not k.ok %} (got {{ k.actual_text if k.actual_text is not none else 'nothing' }}){% endif %}</li>{% endif %}{% endfor %}
         </ul>
       </details>
       {% endif %}
@@ -343,7 +343,7 @@ read the scope note before comparing it with anything.</p>
   {% if revisions.listed %}
   <ul>
   {% for r in revisions.listed %}
-    <li>{{ r.name }}, {{ r.period }}: {{ '%.4g' | format(r.old) }} → {{ '%.4g' | format(r.new) }} ({{ r.rel }})</li>
+    <li>{{ r.name }}, {{ r.period }}: {{ r.old_text }} → {{ r.new_text }} ({{ r.rel }})</li>
   {% endfor %}
   </ul>
   {% endif %}
@@ -387,7 +387,7 @@ read the scope note before comparing it with anything.</p>
   <li>Shaded bands are NBER recessions (peak month to trough month). Dashed grey lines are the {{ benchmark_label }} of the first series on the chart, the last full expansion before the pandemic.</li>
   <li>SA means seasonally adjusted. Series are labeled SA or NSA and are never compared across that line.</li>
   <li>Different sources measure different populations. G.19 covers all lenders; the H.8, charge-off and APR series cover commercial banks only; the Y-14 series cover the largest banks; the NY Fed series are credit reports, all lenders; the FDIC series are bank charters. Notes under each chart say which, with a link to the source.</li>
-  <li>"Data as of" on a chart is when its newest value was loaded. A card carries a status badge when its source is not OK; "last fetch attempt" is then the run that failed. "Checked against the release" lists the numbers the pipeline reproduces from the source's own release page on every run.</li>
+  <li>"Data as of" on a chart is when its newest value was loaded. A card carries a status badge when its source is not OK; "last fetch attempt" is then the run that failed. "Checked against the release" lists numbers copied by hand from each source's own release page. ✓ means the data on the page reproduces it. The ones old enough not to be revised routinely are also checked on every run, and a mismatch there (✗) turns the source amber. A number the source has revised since that release is shown as first published and as revised, without a mark.</li>
   <li>The latest readings are computed from the series on the page: latest value, change against the same period a year earlier, the {{ benchmark_label }} for rates, and whether the value is the highest or lowest in at least three years. No model writes any of it.</li>
   <li>Sources: {{ sources | join('; ') }}. The Federal Reserve Board series (G.19 Consumer Credit, H.8 Assets and Liabilities of Commercial Banks, Charge-Off and Delinquency Rates, Senior Loan Officer Opinion Survey) are retrieved from FRED, Federal Reserve Bank of St. Louis.</li>
   <li>A dated analysis note reading the whole page together, with the numbers behind it and the test that would prove it wrong, is at <a href="{{ thesis_href }}">{{ thesis_note }}</a> (also in the repository). The page above is mechanical; that note is editorial and dated.</li>

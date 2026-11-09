@@ -20,7 +20,7 @@ import pandas as pd
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from .fetchers import tccp
-from .golden import check_golden, load_golden
+from .golden import check_golden, load_golden, number_text
 from .issuers import ISSUER_TYPES
 from .loader import STATUS_RANK, read_facts, read_revisions
 from .paths import Paths
@@ -1890,7 +1890,12 @@ def period_label(d: dt.date, period_type: str) -> str:
 
 
 def _golden_index(facts: pd.DataFrame, golden_path: Path) -> dict[tuple, list[dict]]:
-    """series key -> the golden checks on it, with the result against these facts, newest period first."""
+    """series key -> the golden checks on it, with the result against these facts, newest period first.
+
+    Each carries a state: 'ok' (matches), 'mismatch' (a LIVE entry that does not match: the nightly run turned the
+    source amber for it) or 'revised' (a fixture-only entry the source has revised since the number was copied, which
+    was never meant to hold and is drawn neutrally with both numbers, not as a failure). Numbers are printed to the
+    decimals the entry is stated to, and the current value to one more, so a revision is never hidden by rounding."""
     entries = load_golden(golden_path)
     results = {r["id"]: r for r in check_golden(facts, entries, live_only=False)} if entries else {}
     out: dict[tuple, list[dict]] = {}
@@ -1898,14 +1903,22 @@ def _golden_index(facts: pd.DataFrame, golden_path: Path) -> dict[tuple, list[di
         key = (e["metric"], e["entity"], e.get("tier", "all"), e["period_type"], e["source"])
         r = results.get(e["id"], {})
         pe = pd.Timestamp(str(e["period_end"])).date()
+        ok = bool(r.get("ok"))
+        live = bool(e.get("check_live", True))
+        dec = int(r.get("decimals", 1))
+        actual = r.get("actual")
         out.setdefault(key, []).append(
             {
                 "id": e["id"],
                 "period": period_label(pe, e["period_type"]),
                 "period_end": pe.isoformat(),
                 "expected": float(e["expected"]),
-                "actual": r.get("actual"),
-                "ok": bool(r.get("ok")),
+                "actual": actual,
+                "ok": ok,
+                "live": live,
+                "state": "ok" if ok else ("mismatch" if live else "revised"),
+                "expected_text": number_text(float(e["expected"]), dec),
+                "actual_text": number_text(actual, dec + 1) if actual is not None else None,
                 "origin": e.get("origin", ""),
                 "origin_url": e.get("origin_url", ""),
             }
@@ -2352,6 +2365,20 @@ def _rel_display(old: float, rel: float) -> str:
     return f"{rel * 100:.2f}%"
 
 
+def pair_texts(old: float, new: float) -> tuple[str, str]:
+    """An old and a new value at the fewest decimals (from four significant figures, at most four decimals) that
+    tell them apart, with thousands separators and never in scientific notation ('%.4g' printed DFA revisions in
+    the tens of thousands of billions as 1.4e+04, and 1347.7 -> 1347.84 as 1348 -> 1348)."""
+    big = max(abs(old), abs(new))
+    if float(old).is_integer() and float(new).is_integer():
+        d = 0  # counts, and values the source states in whole units: 0 -> 13 issuers, 1252 -> 1242
+    else:
+        d = 0 if big >= 1000 else 1 if big >= 100 else 2 if big >= 10 else 3
+    while d < 4 and number_text(old, d) == number_text(new, d):
+        d += 1
+    return number_text(old, d), number_text(new, d)
+
+
 def _run_revisions(revisions: pd.DataFrame, meta_idx: dict, run: str | None) -> dict:
     """The revisions logged by the run stamped `run` (the health file's generated_at), largest first.
 
@@ -2379,6 +2406,8 @@ def _run_revisions(revisions: pd.DataFrame, meta_idx: dict, run: str | None) -> 
                 "period": period_label(pd.Timestamp(r["period_end"]).date(), r["period_type"]),
                 "old": r["old_value"],
                 "new": r["new_value"],
+                "old_text": pair_texts(r["old_value"], r["new_value"])[0],
+                "new_text": pair_texts(r["old_value"], r["new_value"])[1],
                 "rel": _rel_display(r["old_value"], r["rel_change"]),
             }
         )

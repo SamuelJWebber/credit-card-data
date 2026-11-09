@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import re
 from pathlib import Path
 import shutil
 
@@ -28,6 +29,7 @@ from carddash.render import (
     _recessions,
     _rel_display,
     headlines,
+    pair_texts,
     render,
 )
 from carddash.schema import SERIES_KEY, coerce_facts
@@ -246,6 +248,42 @@ def test_checks_list_the_golden_numbers_of_the_chart(page):
     assert by_id["bank_card_loans_weekly"]["checks"] == []
 
 
+def _set_value(facts: pd.DataFrame, metric: str, entity: str, period_end: str, value: float) -> None:
+    hit = (facts["metric"] == metric) & (facts["entity"] == entity) & (facts["period_end"] == pd.Timestamp(period_end))
+    assert hit.sum() == 1, (metric, entity, period_end)
+    facts.loc[hit, "value"] = value
+
+
+def test_a_revised_fixture_only_golden_is_drawn_neutrally_with_both_numbers(tmp_paths, fixture_facts):
+    """REVIEW.md R1-5: the live page printed '✗ Revolving credit, SA, May 2026: 1348 per the release (got 1348)' for
+    g19_revolving_sa_2026_05, which is fixture-only because the G.19 revised May from 1347.7 to 1347.84. A source
+    revising a number it was never expected to hold is not a failure, and the format must not hide the difference.
+    A LIVE entry that stops matching is still a failure, drawn as one."""
+    facts = fixture_facts.copy()
+    _set_value(facts, "revolving_credit_sa", "ALL_HOLDERS", "2026-05-31", 1347.8447)  # fixture-only entry, revised
+    _set_value(facts, "revolving_credit_sa", "ALL_HOLDERS", "2025-12-31", 1325.0)  # live entry (1324.3), mismatched
+    write_facts(facts, tmp_paths.facts_csv)
+    tmp_paths.health_json.write_text(json.dumps(_health(RUN2, ALL_SOURCES)), encoding="utf-8")
+    html = render(tmp_paths, today=TODAY).read_text(encoding="utf-8")
+    charts = {c["id"]: c for c in _payload(html)["charts"]}
+    checks = {k["id"]: k for k in charts["revolving_level"]["checks"]}
+    may, dec = checks["g19_revolving_sa_2026_05"], checks["g19_revolving_sa_2025_12"]
+    assert (may["state"], may["live"], may["expected_text"], may["actual_text"]) == ("revised", False, "1,347.7", "1,347.84")
+    assert (dec["state"], dec["live"], dec["expected_text"], dec["actual_text"]) == ("mismatch", True, "1,324.3", "1,325.00")
+    label = may["series_label"]
+    assert f"{label}, May 2026: 1,347.7 as first published in" in html and "since revised to 1,347.84" in html
+    assert not re.search(r"✗[^<]*May 2026", html)  # on neither chart that carries the entry
+    assert f"✗ {dec['series_label']}, Dec 2025: 1,324.3 per" in html and "(got 1,325.00)" in html
+    assert "e+0" not in html.split('<h2 id="changed">')[0].split("window.CARDDASH")[0]  # no %g notation in the cards
+
+
+def test_numbers_on_the_page_are_never_in_scientific_notation_and_show_the_difference():
+    assert pair_texts(14131.9, 13998.959) == ("14,132", "13,999")  # '%.4g' printed 1.413e+04 -> 1.4e+04
+    assert pair_texts(1347.7, 1347.84) == ("1,347.7", "1,347.8")  # '%.4g' printed 1348 -> 1348
+    assert pair_texts(0, 13) == ("0", "13") and pair_texts(1252, 1242) == ("1,252", "1,242")
+    assert pair_texts(20.93, 20.94) == ("20.93", "20.94") and pair_texts(5.0001, 5.0002) == ("5.0001", "5.0002")
+
+
 def test_recessions_are_month_ranges():
     rec = _recessions()
     assert len(rec) == 8
@@ -327,7 +365,7 @@ def test_what_changed_lists_only_the_latest_run(tmp_paths, fixture_facts):
     html = render(tmp_paths, today=TODAY).read_text(encoding="utf-8")
     assert "Latest run 2026-09-07 00:00 UTC" in html
     assert "3 values revised by the source, largest first (2 listed; revisions under 0.1% are only counted)" in html
-    assert "Card balances (NY Fed CCP), 2026 Q1: 1252 → 1242 (0.80%)" in html
+    assert "Card balances (NY Fed CCP), 2026 Q1: 1,252 → 1,242 (0.80%)" in html
     assert "Issuers with a card above 30% purchase APR, 2025 H2: 0 → 13 (from 0)" in html  # old value 0: no percentage
     changed = html.split('<h2 id="changed">What changed</h2>')[1].split('<h2 id="health">')[0]
     assert "Card APR, all accounts" not in changed  # the 0.05% revision is counted, not listed
@@ -341,7 +379,7 @@ def test_what_changed_lists_only_the_latest_run(tmp_paths, fixture_facts):
     html = render(tmp_paths, today=TODAY).read_text(encoding="utf-8")
     assert "Latest run 2026-09-06 00:00 UTC" in html
     assert "3 values revised by the source, largest first (1 listed" in html
-    assert "Card balances (Y-14 large banks), 2026 Q1: 940 → 948.7 (0.93%)" in html
+    assert "Card balances (Y-14 large banks), 2026 Q1: 940.0 → 948.7 (0.93%)" in html
     assert "No new periods in this run." in html  # no fixture row carries run 1's stamp
     # no health file yet: the block says so instead of guessing
     tmp_paths.health_json.unlink()

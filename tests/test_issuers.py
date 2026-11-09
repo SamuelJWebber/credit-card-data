@@ -159,6 +159,23 @@ def test_tccp_report_lists_the_top25_names_the_crosswalk_does_not_know(issuers, 
     }
 
 
+def test_tccp_report_accounts_for_the_credit_unions_the_ncua_source_tracks(issuers, h2_2025_products):
+    """REVIEW.md R1-15: issuers.csv is keyed on FDIC certificates and can never hold a credit union, so every run
+    reported Navy Federal, PenFed, BECU and America First as missing, while the ncua source tracks all four."""
+    from carddash.fetchers import ncua
+
+    assert set(ncua.CREDIT_UNION_NAMES) == set(ncua.CREDIT_UNIONS.values())  # names for exactly the tracked four
+    (line,) = iss.tccp_report(h2_2025_products, issuers, ncua.CREDIT_UNION_NAMES)
+    assert "(24 bank names, 4 credit union names)" in line and "not in" not in line
+    # a name neither list knows is still reported, and only that one
+    extra = h2_2025_products.copy()
+    row = extra[extra["top25"].astype(str) == "True"].iloc[[0]].copy()
+    row["institution"] = "Some New Credit Union"
+    (line,) = iss.tccp_report(pd.concat([extra, row]), issuers, ncua.CREDIT_UNION_NAMES)
+    assert line.endswith("are not in issuers.csv or the NCUA credit unions the ncua source tracks: Some New Credit Union")
+    assert line.startswith(f"{iss.REPORT_PREFIX} 1 of 29 top-25")
+
+
 def test_tccp_report_when_everything_matches(issuers):
     products = pd.DataFrame(
         {"period_end": ["2025-12-31", "2025-12-31", "2025-06-30"], "institution": ["Citibank, N.A.", "Discover Bank", "Ally Bank"],
@@ -193,7 +210,9 @@ def test_crosswalk_report_reads_the_raw_files(tmp_path, h2_2025_products):
     (latest / fdic.INSTITUTIONS_FILE).write_bytes((FDIC_FIXTURE_DIR / fdic.INSTITUTIONS_FILE).read_bytes())
     report = iss.crosswalk_report(paths)
     assert set(report) == {"tccp", "fdic"}
-    assert "4 of 28 top-25 institution names" in report["tccp"][0]
+    # the four credit unions are the ones the ncua source tracks: no longer a permanent false alarm (R1-15)
+    assert report["tccp"] == [f"{iss.REPORT_PREFIX} all 28 top-25 institution names in the {H2_2025} TCCP file match "
+                              "issuers.csv or the NCUA credit unions the ncua source tracks (24 bank names, 4 credit union names)"]
     # the institutions file covers five charters, the crosswalk 35: the other 30 have no record in it
     assert len(report["fdic"]) == 30 and all("has no FDIC institution record" in line for line in report["fdic"])
 

@@ -160,17 +160,27 @@ def tccp_top_names(products: pd.DataFrame) -> tuple[str, list[str]]:
     return latest.date().isoformat(), sorted(sel["institution"].astype(str).unique(), key=str.lower)
 
 
-def tccp_report(products: pd.DataFrame, issuers: pd.DataFrame) -> list[str]:
+def tccp_report(products: pd.DataFrame, issuers: pd.DataFrame,
+                credit_unions: dict[str, tuple[str, ...]] | None = None) -> list[str]:
+    """The top-25 TCCP names that neither issuers.csv nor the credit unions the ncua source tracks
+    (ncua.CREDIT_UNION_NAMES, id -> spellings) account for. issuers.csv is keyed on FDIC certificates and can never
+    hold a credit union, so without the second list Navy Federal, PenFed, BECU and America First were reported as
+    missing on every run, a permanent false alarm (REVIEW.md R1-15)."""
     period, names = tccp_top_names(products)
     if not names:
         return [f"{REPORT_PREFIX} the {period} TCCP file flags no top-25 institutions (flag missing?)"]
     matched, unmatched = match_names(issuers, names)
-    if unmatched:
+    by_spelling = {normalize_name(s): cu for cu, spellings in (credit_unions or {}).items() for s in spellings}
+    cu_matched = {n: by_spelling[normalize_name(n)] for n in unmatched if normalize_name(n) in by_spelling}
+    missing = [n for n in unmatched if n not in cu_matched]
+    where = "issuers.csv" + (" or the NCUA credit unions the ncua source tracks" if credit_unions is not None else "")
+    if missing:
         return [
-            f"{REPORT_PREFIX} {len(unmatched)} of {len(names)} top-25 institution names in the {period} TCCP file are not "
-            f"in issuers.csv: {', '.join(unmatched)}"
+            f"{REPORT_PREFIX} {len(missing)} of {len(names)} top-25 institution names in the {period} TCCP file are not "
+            f"in {where}: {', '.join(missing)}"
         ]
-    return [f"{REPORT_PREFIX} all {len(names)} top-25 institution names in the {period} TCCP file match issuers.csv"]
+    split = f" ({len(matched)} bank names, {len(cu_matched)} credit union names)" if cu_matched else ""
+    return [f"{REPORT_PREFIX} all {len(names)} top-25 institution names in the {period} TCCP file match {where}{split}"]
 
 
 def fdic_name_report(institutions: pd.DataFrame, issuers: pd.DataFrame) -> list[str]:
@@ -189,13 +199,13 @@ def fdic_name_report(institutions: pd.DataFrame, issuers: pd.DataFrame) -> list[
 
 def crosswalk_report(paths) -> dict[str, list[str]]:
     """source -> report lines, from the raw files on disk. Sources whose raw files are absent are left out."""
-    from .fetchers import fdic  # local import: fdic imports this module for load_issuers
+    from .fetchers import fdic, ncua  # local import: fdic imports this module for load_issuers
 
     issuers = load_issuers(paths.issuers_csv)
     out: dict[str, list[str]] = {}
     if paths.tccp_products_csv.exists():
         products = pd.read_csv(paths.tccp_products_csv, dtype=str, keep_default_na=False)
-        out["tccp"] = tccp_report(products, issuers)
+        out["tccp"] = tccp_report(products, issuers, ncua.CREDIT_UNION_NAMES)
     institutions = paths.raw / fdic.SOURCE / "latest" / fdic.INSTITUTIONS_FILE
     if institutions.exists():
         out["fdic"] = fdic_name_report(fdic.parse_institutions_json(institutions), issuers)

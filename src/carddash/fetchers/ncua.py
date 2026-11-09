@@ -58,6 +58,16 @@ CREDIT_UNIONS = {
     "62604": "BECU",
     "24694": "AMERICA_FIRST",
 }
+# How the CFPB's TCCP survey names these four in its top-25 list. issuers.crosswalk_report matches the survey's names
+# against these as well as issuers.csv, which is keyed on FDIC certificates and can never hold a credit union, so the
+# four are reported as tracked here instead of as missing on every run (REVIEW.md R1-15). FOICU.txt truncates its own
+# names (PENTAGON, BOEING EMPLOYEES, AMERICA FIRST, NAVY FEDERAL CREDIT UNION; checked in the 2026 Q2 file).
+CREDIT_UNION_NAMES = {
+    "NAVY_FEDERAL": ("Navy Federal Credit Union",),
+    "PENFED": ("Pentagon Federal Credit Union", "PenFed Credit Union"),
+    "BECU": ("Boeing Employees' Credit Union", "BECU"),
+    "AMERICA_FIRST": ("America First Federal Credit Union", "America First Credit Union"),
+}
 # (schedule file, account column, metric, summed for the industry?)
 FIELDS = [
     ("FS220A", "ACCT_396", "ncua_card_loans", True),

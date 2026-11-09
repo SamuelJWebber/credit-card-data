@@ -45,7 +45,9 @@ Suggest them in the handoff instead. Definition of done for v1: five fetchers gr
 - `SOURCE` and `fetch(meta, raw_dir, session, pulled_at) -> DataFrame` in the facts schema.
 - Pull the full history every run. Idempotent. Save the raw download under `raw_dir/latest/` before parsing.
   Two documented exceptions: the BEA NIPA flat file is 36.7 MB, so `fetchers/bea.py` saves only the lines of the series in
-  series.csv (header included, the file's own format) and parses the full file in memory; the NCUA call-report zips are
+  series.csv (header included, the file's own format) and parses the full file in memory, and it keeps the file's ETag
+  and Last-Modified beside that subset and asks with them, so on a night BEA has not changed the file the server answers
+  304 and the saved subset is parsed instead (since 2026-11-09); the NCUA call-report zips are
   about 8 MB for each of 41 quarters, so `fetchers/ncua.py` writes a per-quarter extract (the tracked credit unions plus
   the industry sums) under `raw_dir/quarters/` and downloads only quarters without an extract plus the newest two.
   The third is issuer_8k, which keeps one document per FILING under `raw_dir/<issuer>/<newest month it states>.htm`

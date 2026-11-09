@@ -15,11 +15,18 @@ Publication facts, verified 2026-09-08:
 Raw-snapshot deviation, documented in CLAUDE.md: committing 36.7 MB a day would swamp the repository, so the file
 under raw_dir/latest/ is the subset of lines for the series in crosswalks/series.csv (source bea), header included,
 in the file's own format. The full file is parsed in memory and never written.
+
+Conditional GET (REVIEW.md bigger improvement 5): the full file was downloaded every night, 36.9 MB, although BEA
+changes it a few times a month. The server sends an ETag and a Last-Modified, so the fetcher keeps them next to the
+subset (raw_dir/latest/NipaDataM-validators.json, with the series codes the subset was cut for) and asks again with
+If-None-Match and If-Modified-Since. A 304 means the file is unchanged since that subset was cut, and the subset is
+parsed as it stands. A change to the series list, or a missing subset or validator file, downloads in full.
 """
 
 from __future__ import annotations
 
 import io
+import json
 import re
 from pathlib import Path
 
@@ -31,6 +38,7 @@ SOURCE = "bea"
 FILE_URL = "https://apps.bea.gov/national/Release/TXT/NipaDataM.txt"
 LANDING_URL = "https://www.bea.gov/data/consumer-spending/main"
 RAW_NAME = "NipaDataM-subset.txt"
+VALIDATORS_NAME = "NipaDataM-validators.json"  # ETag and Last-Modified of the file the subset was cut from
 HEADER = "%SeriesCode,Period,Value"
 ENTITY = "US_HOUSEHOLDS"
 
@@ -112,13 +120,48 @@ def parse_subset(text: str, meta: pd.DataFrame, pulled_at: str) -> pd.DataFrame:
     return pd.concat(frames, ignore_index=True)
 
 
+def _conditional_headers(latest: Path, codes: set[str]) -> dict[str, str]:
+    """If-None-Match / If-Modified-Since for the file the subset on disk was cut from, or {} to download in full."""
+    path = latest / VALIDATORS_NAME
+    if not (path.exists() and (latest / RAW_NAME).exists()):
+        return {}
+    try:
+        saved = json.loads(path.read_text(encoding="utf-8"))
+    except ValueError:
+        return {}
+    if set(saved.get("codes", [])) != codes:
+        return {}  # the series list changed: the subset on disk lacks a series, so cut a new one
+    headers = {}
+    if saved.get("etag"):
+        headers["If-None-Match"] = saved["etag"]
+    if saved.get("last_modified"):
+        headers["If-Modified-Since"] = saved["last_modified"]
+    return headers
+
+
 def fetch(meta: pd.DataFrame, raw_dir: Path, session, pulled_at: str) -> pd.DataFrame:
-    resp = session.get(FILE_URL)
-    resp.raise_for_status()
     codes = set(meta["source_id"])
-    lines = subset_lines(resp.text, codes)  # also checks the header, so an HTML error page fails here
     latest = raw_dir / "latest"
     latest.mkdir(parents=True, exist_ok=True)
+    conditional = _conditional_headers(latest, codes)
+    resp = session.get(FILE_URL, headers=conditional) if conditional else session.get(FILE_URL)
+    if resp.status_code == 304 and conditional:
+        # unchanged since the subset on disk was cut from it: about 37 MB not downloaded
+        return parse_subset((latest / RAW_NAME).read_text(encoding="utf-8"), meta, pulled_at)
+    resp.raise_for_status()
+    lines = subset_lines(resp.text, codes)  # also checks the header, so an HTML error page fails here
     text = "\n".join(lines) + "\n"
-    (latest / RAW_NAME).write_text(text, encoding="utf-8", newline="\n")
-    return parse_subset(text, meta, pulled_at)
+    (latest / RAW_NAME).write_text(text, encoding="utf-8", newline="\n")  # saved before parsing, like every fetcher
+    facts = parse_subset(text, meta, pulled_at)
+    # The validators are written only after the subset parsed: a subset that failed keeps the old validators, which
+    # no longer match the server's file, so the next run downloads in full instead of trusting a bad cut.
+    validators = {"etag": resp.headers.get("ETag"), "last_modified": resp.headers.get("Last-Modified"),
+                  "codes": sorted(codes)}
+    path = latest / VALIDATORS_NAME
+    if validators["etag"] or validators["last_modified"]:
+        body = json.dumps(validators, indent=1) + "\n"
+        if not path.exists() or path.read_text(encoding="utf-8") != body:
+            path.write_text(body, encoding="utf-8", newline="\n")
+    else:
+        path.unlink(missing_ok=True)  # nothing to ask with next time
+    return facts

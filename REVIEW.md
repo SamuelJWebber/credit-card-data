@@ -318,7 +318,7 @@ Status: Fixed in 9124f1a. Both actions are pinned to the commits of v5.1.0 and v
    observed revision window (BEA 3 months, G.19 2 months, Census 2 months, and so on). Use dated provenance URLs
    (R1-11). Add a `checks/rebase_goldens.py` helper that prints candidate new entries from the release page for
    a person to confirm. The three re-basings in `de676d3` were done by hand after a month of amber.
-   Status: Mostly done: MIN_LIVE_AGE_MONTHS and its test (03daf33), dated provenance links and `verify_g19.py --provenance` (9ce46fb). Not done: a rebase_goldens.py helper; re-basing still needs a person to read the new release, which is the point of a golden.
+   Status: Done for G.19: MIN_LIVE_AGE_MONTHS and its test (03daf33), dated provenance links and `verify_g19.py --provenance` (9ce46fb), and `verify_g19.py --rebase` (087635e), which prints each re-based entry with the current value and its dated page for a person to confirm. BEA and Census re-basing is still by hand: their releases state numbers in prose and PDF tables that no helper here reads.
 4. **Make derived spreads date-correct by construction.** Store each quarterly survey's observation month next
    to its quarter-end `period_end`, so a view can never pair readings taken a month apart (R1-2). The same issue
    would hit any future join of a mid-quarter survey to a monthly series.

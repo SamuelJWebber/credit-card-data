@@ -653,6 +653,25 @@ over a real problem.
 Not chosen, and worth knowing why: `workflow_dispatch` cannot be used to make up the lost run, because
 `verify_releases.py` counts only runs whose event is `schedule`. There is no way to shortcut the wait.
 
+## v1.18: review round 1 (2026-11-09, REVIEW.md)
+
+Sixteen findings from the adversarial review, each fixed with a test that fails on the old code; REVIEW.md carries a
+status line under each, with its commit. The pass condition for the round: the suite green, every main command
+exits 0, and the first scheduled run after it green with all fourteen sources ok.
+
+| # | Task | Pass condition | Status |
+|---|------|----------------|--------|
+| 49 | No credential reaches health.json, the page or the repo (R1-1) | A FRED HTTP or connection error with a fake key writes no key; the commit step scans before `git add` | done 2026-11-09 |
+| 50 | The APR spread pairs each survey with its own month's prime (R1-2) | 15.61 for 2026 Q3, 11.86 for 2020 Q1 | done 2026-11-09, seen live |
+| 51 | Failure is loud (R1-3, improvement 2) | A failed run opens an issue and a good run closes it, seen live; amber for a week keeps an issue open; page banners | done 2026-11-09 |
+| 52 | Golden policy (R1-4, R1-5, R1-6, R1-11, improvement 3) | Live entries outside each source's revision window; dated provenance; `check` exits 0 on a healthy pipeline; `verify_g19.py --provenance` and `--rebase` | done 2026-11-09 |
+| 53 | Credit, User-Agent, churn, docs (R1-8, R1-9, R1-10, R1-12 to R1-16) | See REVIEW.md | done 2026-11-09 |
+| 54 | BEA conditional GET (improvement 5) | An unchanged NipaDataM.txt is answered 304 and not downloaded | done 2026-11-09 |
+
+Not done, and why: improvement 6 (one copy of the CSVs, a separate JSON) changes the published download URLs and
+breaks the page from file://; improvement 7 (credit unions on the FDIC issuer charts) mixes NCUA and call-report
+definitions and is a new chart under the scope rule. Both are suggestions for the user, in HANDOFF.md.
+
 ## v1.5 (after two green releases)
 - Order (from the 2026-09-07 scouting): NY Fed SCE Credit Access first (direct xlsx, no gate, about half a session), then CFPB complaints via the trends endpoint (one session), then BEA PCE detail via the keyless NipaDataM.txt flat file (the API needs a key; half to one session), then Census Monthly Retail Trade via the keyless mrtssales92-present.xlsx (the API needs a key even at low volume; one session). Details, URLs and risks in design/handoff-2026-09-07.html §3.
 - Spend panel.

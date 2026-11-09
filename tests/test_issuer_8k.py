@@ -393,3 +393,81 @@ def test_every_loaded_issuer_declares_its_series_in_the_crosswalk(meta):
     for issuer in issuer_8k.HELD_BACK:
         for entity in issuer.entities:
             assert not any(e == entity for e, _ in declared), f"{entity} is held back but has series rows"
+
+
+# --- a night with no new filings changes nothing (REVIEW.md R1-9) -------------------------------------------
+
+class _FakeSec:
+    """The SEC as the nightly run sees it, with the edge's bot-manager script appended to every document under a
+    new random path each time, which is what rewrote the newest raw files every night."""
+
+    def __init__(self, issuer, filings: list[tuple[str, str, str, str]]):
+        # filings: (filing date, accession, document name, document html), newest first
+        self.issuer, self.filings, self.calls, self.n = issuer, filings, [], 0
+
+    def get(self, url, headers=None):
+        import json as _json
+
+        self.calls.append(url)
+        self.n += 1
+
+        class R:
+            def __init__(self, content: bytes):
+                self.content = content
+
+            def raise_for_status(self):
+                pass
+
+        if url == self.issuer.submissions:
+            recent = {"form": ["8-K"] * len(self.filings), "filingDate": [f[0] for f in self.filings],
+                      "accessionNumber": [f[1] for f in self.filings]}
+            return R(_json.dumps({"filings": {"recent": recent}}).encode())
+        for filed, acc, name, html in self.filings:
+            base = f"{self.issuer.archive}/{acc.replace('-', '')}/"
+            if url == base + "index.json":
+                return R(_json.dumps({"directory": {"item": [{"name": name}]}}).encode())
+            if url == base + name:
+                injected = f'<script type="text/javascript"  src="/x{self.n}Rnd/{self.n * 7919}/q"></script></body>'
+                return R(html.replace("</body>", injected, 1).encode())
+        raise AssertionError(f"unexpected request {url}")
+
+
+def _snapshot(folder) -> dict[str, bytes]:
+    return {str(p.relative_to(folder)): p.read_bytes() for p in sorted(folder.rglob("*")) if p.is_file()}
+
+
+def test_a_second_night_with_no_new_filing_leaves_the_raw_files_byte_identical(tmp_path):
+    cof = issuer_8k.BY_KEY["cof"]
+    html = _html("months", "2026-07")
+    filings = [("2026-08-17", "0000927628-26-000101", "ex991july2026creditmetrics.htm", html)]
+    session = _FakeSec(cof, filings)
+    no_metrics: dict[str, list[str]] = {}
+    issuer_8k._fetch_issuer(session, cof, tmp_path, {}, no_metrics)
+    saved = (tmp_path / "months" / "2026-07.htm").read_text(encoding="utf-8")
+    assert "<script" not in saved and "Rnd" not in saved  # the edge's script is not part of the filing
+    assert issuer_8k.parse_cof(saved) == issuer_8k.parse_cof(html)
+    first = _snapshot(tmp_path)
+    issuer_8k._fetch_issuer(session, cof, tmp_path, {}, no_metrics)  # re-checked: inside RECHECK_NEWEST
+    assert sum(u.endswith("ex991july2026creditmetrics.htm") for u in session.calls) == 2
+    assert _snapshot(tmp_path) == first
+
+
+def test_a_known_earnings_8k_is_never_downloaded_again_and_is_listed_once(tmp_path, monkeypatch, meta):
+    """no_metrics.json held 56 Amex entries but 8 distinct: the re-check window bypassed the skip list, so the two
+    newest earnings 8-Ks were downloaded every night and appended again."""
+    axp = issuer_8k.BY_KEY["axp"]
+    earnings = "<html><body><p>Fourth-quarter results</p></body></html>"
+    filings = [("2026-10-17", "0000004962-26-000500", "axp-20261017.htm", earnings),
+               ("2026-08-14", "0000004962-26-000405", "axp-20260814.htm", _html("axp", "2026-07"))]
+    session = _FakeSec(axp, filings)
+    monkeypatch.setattr(issuer_8k, "ISSUERS", (axp,))
+    monkeypatch.setenv("CARDDASH_CONTACT", "someone@example.com")
+    issuer_8k.fetch(series_for_source(meta, issuer_8k.SOURCE), tmp_path, session, PULLED_AT)
+    verdicts = tmp_path / "index" / "no_metrics.json"
+    assert verdicts.read_text(encoding="utf-8").count("0000004962-26-000500") == 1
+    downloads = [u for u in session.calls if u.endswith("axp-20261017.htm")]
+    first = _snapshot(tmp_path)
+    issuer_8k.fetch(series_for_source(meta, issuer_8k.SOURCE), tmp_path, session, PULLED_AT)
+    assert [u for u in session.calls if u.endswith("axp-20261017.htm")] == downloads  # not fetched again
+    assert _snapshot(tmp_path) == first  # verdicts, raw document and latest/ copy all unchanged
+    assert "<script" not in (tmp_path / "latest" / "axp_monthly_credit_metrics.htm").read_text(encoding="utf-8")

@@ -686,6 +686,26 @@ def _sec_headers() -> dict[str, str]:
     return {"User-Agent": user_agent(require_contact()), "Accept-Encoding": "gzip, deflate"}
 
 
+# The SEC's Akamai edge appends a bot-manager <script src="/<random path>"></script> before </body> of some
+# responses, with a new random path every time. Saved as it came, the newest filings were rewritten every night
+# with no new data, a raw-file commit a day (REVIEW.md R1-9). EDGAR documents carry no scripts of their own (the
+# filer manual forbids active content), so every script element goes before a document is parsed or saved.
+_SCRIPT_RE = re.compile(r"<script\b[^>]*>.*?</script\s*>|<script\b[^>]*/>", re.I | re.S)
+
+
+def strip_scripts(html: str) -> str:
+    return _SCRIPT_RE.sub("", html)
+
+
+def _write_if_changed(path: Path, text: str) -> bool:
+    """Write only when the bytes differ, so an unchanged document never shows up as a change in git."""
+    data = text.encode("utf-8")
+    if path.exists() and path.read_bytes() == data:
+        return False
+    path.write_bytes(data)
+    return True
+
+
 def _get(session, url: str, headers: dict[str, str]) -> bytes:
     r = session.get(url, headers=headers)
     r.raise_for_status()
@@ -795,24 +815,28 @@ def _fetch_issuer(session, issuer: Issuer, raw_dir: Path, headers: dict[str, str
             break                                   # the floor: older filings are never fetched
         if target in covered and n >= RECHECK_NEWEST:
             continue
-        if acc in skip and n >= RECHECK_NEWEST:
-            continue                                # known to carry no metrics; checked once, never again
+        if acc in skip:
+            # Known to carry no metrics (an earnings 8-K). A filed document never changes, so it is not fetched
+            # again, not even inside the re-check window: that window re-downloaded two known earnings 8-Ks a
+            # night and appended them to no_metrics.json again each time (56 entries, 8 distinct; R1-9).
+            continue
         names = _index(session, issuer, acc, index_dir, headers, refresh=n < RECHECK_NEWEST)
         document = issuer.pick(names)
         if document is None:
             continue                                # an Item 7.01 filing with no metrics document
         nodash = acc.replace("-", "")
         url = f"{issuer.archive}/{nodash}/{document}"
-        html = _get(session, url, headers).decode("utf-8", "replace")
+        html = strip_scripts(_get(session, url, headers).decode("utf-8", "replace"))
         if issuer.confirm is not None and not issuer.confirm(html):
             no_metrics.setdefault(issuer.key, []).append(acc)
+            skip.add(acc)
             continue                                # an earnings 8-K: remembered, so it is downloaded once
         try:
             parsed = issuer.parse(html)             # fail here rather than writing a file we cannot read
         except ValueError as exc:                   # say WHICH document, or the next person reads 97 of them
             raise ValueError(f"{issuer.name} filing of {filed}: {exc} ({url})") from exc
         newest = max(parsed)
-        (folder / f"{newest:%Y-%m}.htm").write_text(html, encoding="utf-8")
+        _write_if_changed(folder / f"{newest:%Y-%m}.htm", html)
         covered |= _contiguous_tail(list(parsed))
         fetched += 1
     return fetched
@@ -829,7 +853,9 @@ def fetch(meta: pd.DataFrame, raw_dir: Path, session, pulled_at: str) -> pd.Data
 
     for issuer in ISSUERS:
         _fetch_issuer(session, issuer, raw_dir, headers, no_metrics)
-    verdict_path.write_text(json.dumps(no_metrics, indent=1, sort_keys=True), encoding="utf-8")
+    # a set per issuer, sorted, so the file only changes when a new earnings 8-K is recognised
+    no_metrics = {k: sorted(set(v)) for k, v in no_metrics.items()}
+    _write_if_changed(verdict_path, json.dumps(no_metrics, indent=1, sort_keys=True))
 
     df = facts_from_raw(raw_dir, meta, pulled_at)
     # the newest document of each issuer is copied to raw_dir/latest/ so a run leaves one like every other source
@@ -837,8 +863,8 @@ def fetch(meta: pd.DataFrame, raw_dir: Path, session, pulled_at: str) -> pd.Data
         folder = raw_dir / issuer.raw_subdir
         newest = max(folder.glob("*.htm"), key=lambda p: p.stem, default=None)
         if newest is not None:
-            (raw_dir / "latest" / f"{issuer.key}_monthly_credit_metrics.htm").write_text(
-                newest.read_text(encoding="utf-8"), encoding="utf-8")
+            _write_if_changed(raw_dir / "latest" / f"{issuer.key}_monthly_credit_metrics.htm",
+                              strip_scripts(newest.read_text(encoding="utf-8")))
     return df
 
 

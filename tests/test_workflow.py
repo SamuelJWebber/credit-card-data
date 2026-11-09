@@ -65,3 +65,25 @@ def test_the_failure_issue_can_be_tested_without_fetching_anything():
     assert step["if"] == "github.event_name == 'workflow_dispatch' && inputs.fail_on_purpose"
     assert names.index("Fail on purpose") < names.index("Refresh data and render")
     assert "exit 1" in step["run"]
+
+
+def test_actions_are_pinned_to_commits():
+    """REVIEW.md R1-16: tags can be moved, and this job holds contents: write and both secrets."""
+    import re
+
+    text = WORKFLOW.read_text(encoding="utf-8")
+    uses = re.findall(r"^\s*-?\s*uses:\s*(\S+)(.*)$", text, flags=re.M)
+    assert uses, "no actions found"
+    for ref, comment in uses:
+        name, _, version = ref.partition("@")
+        assert re.fullmatch(r"[0-9a-f]{40}", version), f"{name} is pinned to {version!r}, not a commit"
+        assert re.search(r"#\s*v\d", comment), f"{name}: say which release the commit is"
+
+
+def test_a_queued_run_starts_from_the_newest_main():
+    """REVIEW.md R1-16: a run queued behind another checked out the commit it was triggered on, a refresh behind."""
+    steps = yaml.safe_load(WORKFLOW.read_text(encoding="utf-8"))["jobs"]["refresh"]["steps"]
+    names = [s.get("name") or s.get("uses", "") for s in steps]
+    assert names[0].startswith("actions/checkout@")
+    assert names[1] == "Start from the newest main" and steps[1]["run"] == "git pull --ff-only origin main"
+    assert names.index("Start from the newest main") < names.index("Install") < names.index("Refresh data and render")

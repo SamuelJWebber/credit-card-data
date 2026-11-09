@@ -29,9 +29,17 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      # Actions are pinned to commits, not tags: a tag can be moved, and this job holds contents: write and both
+      # secrets (REVIEW.md R1-16). To update, look up the commit behind the new tag and change both together.
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5.1.0
 
-      - uses: astral-sh/setup-uv@v6
+      # A run that queued behind another (the concurrency group) checks out the commit it was triggered on, which
+      # can be a refresh behind main: on 2026-11-09 a dispatch run recomputed 2,446 revisions the run before it had
+      # already committed. Start from the newest main instead.
+      - name: Start from the newest main
+        run: git pull --ff-only origin main
+
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e  # v6.8.0
         with:
           enable-cache: true
 

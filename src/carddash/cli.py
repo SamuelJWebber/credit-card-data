@@ -100,14 +100,30 @@ def cmd_refresh(paths: Paths, sources: list[str] | None, do_render: bool) -> int
     return 0
 
 
-def cmd_check(paths: Paths) -> int:
+def cmd_check(paths: Paths, include_all: bool = False) -> int:
+    """The golden checks against data/facts.csv: the live entries, which the nightly run checks too.
+
+    Exit 1 only when a live entry fails. With --all the fixture-only entries are listed as well: one that still
+    matches is a PASS, and one the source has revised since it was copied prints as REVISED and is not a failure,
+    because it was never meant to hold (it is checked against its fixture, tests/test_golden.py)."""
     facts = read_facts(paths.facts_csv)
-    results = check_golden(facts, load_golden(paths.golden_yaml), live_only=False)
-    bad = 0
+    results = check_golden(facts, load_golden(paths.golden_yaml), live_only=not include_all)
+    bad = revised = 0
     for r in results:
-        print(("PASS " if r["ok"] else "FAIL ") + r["message"])
-        bad += 0 if r["ok"] else 1
-    print(f"{len(results) - bad} passed, {bad} failed")
+        if r["ok"]:
+            print("PASS    " + r["message"])
+        elif r["live"]:
+            print("FAIL    " + r["message"])
+            bad += 1
+        else:
+            print("REVISED " + r["message"])
+            revised += 1
+    line = f"{len(results) - bad - revised} passed, {bad} failed"
+    if include_all:
+        line += f", {revised} revised since first published (fixture-only, not counted as failures)"
+    else:
+        line += " (live entries; --all lists the fixture-only ones too)"
+    print(line)
     return 1 if bad else 0
 
 
@@ -179,7 +195,8 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--source", action="append", help="limit to one source (repeatable)")
     r.add_argument("--no-render", action="store_true")
     sub.add_parser("render", help="rebuild docs/index.html from data/")
-    sub.add_parser("check", help="run every golden check against data/facts.csv")
+    c = sub.add_parser("check", help="run the live golden checks against data/facts.csv")
+    c.add_argument("--all", action="store_true", help="also list fixture-only entries; revised ones print as REVISED")
     sub.add_parser("issuers", help="print dim_issuer and the unmatched-name report")
     h = sub.add_parser("health", help="print source health")
     h.add_argument("--fail-on-red", action="store_true")
@@ -194,7 +211,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"rendered {render(paths)}")
         return 0
     if args.cmd == "check":
-        return cmd_check(paths)
+        return cmd_check(paths, args.all)
     if args.cmd == "issuers":
         return cmd_issuers(paths)
     if args.cmd == "health":

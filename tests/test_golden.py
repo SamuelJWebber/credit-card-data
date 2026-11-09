@@ -32,6 +32,22 @@ def test_the_revision_window_rule_rejects_a_bea_month_of_the_newest_quarter():
     assert months_between(pd.Timestamp("2026-04-30"), pd.Timestamp("2026-09-30")) == 5
 
 
+def test_numbers_are_stated_to_the_decimals_they_were_copied_with():
+    from carddash.golden import golden_decimals, number_text
+
+    cases = {(1347.7, 0.06): "1,347.7", (1297.0, 0.06): "1,297.0", (119.8, 0.0006): "119.800", (137.0, 0.6): "137",
+             (15.0, 0.0): "15", (14131.9, 0.11): "14,131.9", (1189601.0, 0.5): "1,189,601"}
+    for (value, tol), text in cases.items():
+        assert number_text(value, golden_decimals(value, tol)) == text
+
+
+def test_every_result_says_whether_it_is_live(fixture_facts):
+    entries = load_golden(REPO / "checks" / "golden.yaml")
+    results = check_golden(fixture_facts, entries)
+    assert [r["live"] for r in results] == [bool(e.get("check_live", True)) for e in entries]
+    assert len(check_golden(fixture_facts, entries, live_only=True)) == sum(r["live"] for r in results)
+
+
 def test_every_source_with_a_golden_keeps_a_live_one():
     """Retiring revised entries must not leave a source with nothing checked on the nightly run."""
     entries = load_golden(REPO / "checks" / "golden.yaml")

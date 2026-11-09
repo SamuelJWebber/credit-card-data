@@ -10,6 +10,7 @@ releases that state changes and not levels (the BEA Personal Income and Outlays 
 
 from __future__ import annotations
 
+import math
 from pathlib import Path
 
 import pandas as pd
@@ -47,10 +48,31 @@ def load_golden(path: Path) -> list[dict]:
     return list(doc)
 
 
+def golden_decimals(expected: float, tolerance: float) -> int:
+    """The decimals a golden number is stated to: those of the hand-copied value, or more when its tolerance is finer.
+
+    YAML reads 119.800 as 119.8, but its tolerance of 0.0006 says three decimals were copied (Census prints
+    119,800 in millions). 1347.7 with 0.06 is one decimal; 137.0 with 0.6 is a whole number."""
+    text = repr(float(expected))
+    shown = 0 if ("e" in text or text.endswith(".0") or "." not in text) else len(text.split(".")[1])
+    from_tol = 0 if tolerance <= 0 or tolerance >= 0.5 else math.ceil(-math.log10(2 * tolerance) - 1e-9)
+    return max(shown, from_tol)
+
+
+def number_text(value: float, decimals: int) -> str:
+    """Fixed point with thousands separators. Never %g: '%.4g' printed 1347.84 as 1348 and 13998.96 as 1.4e+04."""
+    return f"{value:,.{max(decimals, 0)}f}"
+
+
 def check_golden(facts: pd.DataFrame, entries: list[dict], live_only: bool = False) -> list[dict]:
+    """One result per entry: ok, actual, expected, live (check_live), the decimals it is stated to, and a message.
+
+    `live` matters to every reader of a failure: a live entry that fails is a real mismatch (the source goes amber),
+    while a fixture-only one that no longer matches has been revised by the source since it was copied."""
     results = []
     for e in entries:
-        if live_only and not e.get("check_live", True):
+        live = bool(e.get("check_live", True))
+        if live_only and not live:
             continue
         series = facts[
             (facts["metric"] == e["metric"])
@@ -63,25 +85,21 @@ def check_golden(facts: pd.DataFrame, entries: list[dict], live_only: bool = Fal
         sel = series[series["period_end"] == period_end]
         expected = float(e["expected"])
         tol = float(e.get("tolerance", 0.0))
+        dec = golden_decimals(expected, tol)
+        base = {"id": e["id"], "source": e["source"], "live": live, "expected": expected, "decimals": dec}
         if sel.empty:
-            results.append(
-                {"id": e["id"], "source": e["source"], "ok": False, "actual": None, "expected": expected,
-                 "message": f"{e['id']}: no value for {e['period_end']}"}
-            )
+            results.append({**base, "ok": False, "actual": None, "message": f"{e['id']}: no value for {e['period_end']}"})
             continue
         actual = float(sel["value"].iloc[0])
         if e.get("change_from_prior"):
             prior = series[series["period_end"] < period_end]
             if prior.empty:
-                results.append(
-                    {"id": e["id"], "source": e["source"], "ok": False, "actual": None, "expected": expected,
-                     "message": f"{e['id']}: no period before {e['period_end']} to take the change from"}
-                )
+                results.append({**base, "ok": False, "actual": None,
+                                "message": f"{e['id']}: no period before {e['period_end']} to take the change from"})
                 continue
             actual = actual - float(prior["value"].iloc[-1])
         ok = abs(actual - expected) <= tol
-        msg = f"{e['id']}: got {actual:.6g}, expected {expected:.6g} +/-{tol:g} ({e.get('origin', '')})"
-        results.append(
-            {"id": e["id"], "source": e["source"], "ok": ok, "actual": actual, "expected": expected, "message": msg}
-        )
+        msg = (f"{e['id']}: got {number_text(actual, dec + 1)}, expected {number_text(expected, dec)} +/-{tol:g} "
+               f"({e.get('origin', '')})")
+        results.append({**base, "ok": ok, "actual": actual, "message": msg})
     return results

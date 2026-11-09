@@ -1,9 +1,16 @@
-"""Spot-check golden entries against the Fed's own G.19 release page, parsed directly (no FRED, no LLM).
+"""Spot-check golden entries against the Fed's own G.19 release pages, parsed directly (no FRED, no LLM).
 
-    uv run python checks/verify_g19.py
+    uv run python checks/verify_g19.py                # every G.19 entry against the CURRENT release
+    uv run python checks/verify_g19.py --provenance   # every G.19 entry against the dated release it cites
 
-Reads checks/golden.yaml, fetches https://www.federalreserve.gov/releases/g19/current/default.htm, parses the
-HTML tables, maps each golden period to a table column, and prints PASS/FAIL. Exit code 1 on any failure.
+Reads checks/golden.yaml, parses the HTML tables of the page, maps each golden period to a table column, and prints
+PASS/FAIL. Exit code 1 on any failure.
+
+The two modes answer different questions. The default asks whether a golden still holds in the newest release
+(after each G.19 release: a revision that moves a LIVE entry turns fred amber until it is re-based). --provenance
+asks whether the release each entry cites (its origin_url, a dated archive page such as /releases/g19/20260908/,
+which never changes) states that number, so it must pass for fixture-only entries too, forever (REVIEW.md R1-11:
+origin_url used to be the 'current' page, which stops showing a number one release later).
 """
 
 from __future__ import annotations
@@ -131,20 +138,29 @@ def columns_for(period_end: dt.date, period_type: str) -> list[str]:
     raise ValueError(period_type)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    provenance = "--provenance" in (sys.argv[1:] if argv is None else argv)
     root = Path(__file__).resolve().parents[1]
     entries = yaml.safe_load((root / "checks" / "golden.yaml").read_text(encoding="utf-8")) or []
     load_dotenv(root / ".env")  # CARDDASH_CONTACT, for the pipeline's own User-Agent
-    page = make_session().get(G19_URL).text
-    tables = parse_tables(page)
+    session = make_session()
+    pages: dict[str, list] = {}
+
+    def tables_for(url: str) -> list:
+        if url not in pages:
+            pages[url] = parse_tables(session.get(url).text)
+        return pages[url]
+
     bad = 0
     for e in entries:
-        if "g19" not in e.get("origin_url", ""):
+        if "/releases/g19/" not in e.get("origin_url", ""):
             continue
         key = (e["metric"], e["entity"]) if (e["metric"], e["entity"]) in ROW_FOR_METRIC else e["metric"]
         if key not in ROW_FOR_METRIC:
             print(f"SKIP {e['id']}: no page row mapped for {key}")
             continue
+        url = e["origin_url"] if provenance else G19_URL
+        tables = tables_for(url)
         label, kind = ROW_FOR_METRIC[key]
         row = find_row(tables, label, kind)
         cands = columns_for(dt.date.fromisoformat(str(e["period_end"])), e["period_type"])
@@ -155,13 +171,19 @@ def main() -> int:
                 col = c
                 break
         if got is None:
+            if provenance:  # the cited release must show the cited period: not finding it is a broken citation
+                bad += 1
+                print(f"FAIL {e['id']}: none of {cands} on {url}")
+                continue
             # the page only shows the last three months and quarter/year ends; older months are not checkable here
             print(f"SKIP {e['id']}: none of {cands} on the current page")
             continue
         ok = abs(got - float(e["expected"])) <= float(e.get("tolerance", 0))
         bad += 0 if ok else 1
-        print(f"{'PASS' if ok else 'FAIL'} {e['id']}: page {got} vs golden {e['expected']} (column {col})")
-    print("all checked entries match the release page" if not bad else f"{bad} mismatch(es)")
+        where = url.split("/releases/g19/")[1].split("/")[0]
+        print(f"{'PASS' if ok else 'FAIL'} {e['id']}: page {got} vs golden {e['expected']} (column {col}, {where})")
+    what = "the release each entry cites" if provenance else "the current release page"
+    print(f"all checked entries match {what}" if not bad else f"{bad} mismatch(es)")
     return 1 if bad else 0
 
 

@@ -48,6 +48,28 @@ def test_every_result_says_whether_it_is_live(fixture_facts):
     assert len(check_golden(fixture_facts, entries, live_only=True)) == sum(r["live"] for r in results)
 
 
+def test_every_golden_cites_a_dated_page_not_one_that_moves():
+    """REVIEW.md R1-11: thirteen G.19 entries linked /releases/g19/current/ and the census entries marts_current.pdf,
+    pages that stop showing the cited number one release later. Each now links the dated copy of the release it
+    names (checks/verify_g19.py --provenance re-reads the G.19 ones). The NY Fed keeps no dated copy of the SCE
+    credit access page and no archive has one, so its two entries are the one known exception."""
+    import re
+
+    moving = re.compile(r"/current/|_current\.|/latest\b")
+    undated_ok = {"https://www.newyorkfed.org/microeconomics/sce/credit-access"}
+    bad = []
+    for e in load_golden(REPO / "checks" / "golden.yaml"):
+        url = e.get("origin_url", "")
+        if url.startswith("https://web.archive.org/web/"):
+            if not re.match(r"https://web\.archive\.org/web/\d{14}/https?://", url):
+                bad.append(f"{e['id']}: an archive link must name its snapshot time")
+        elif moving.search(url):
+            bad.append(f"{e['id']}: {url}")
+        elif url in undated_ok:
+            assert e["source"] == "nyfed_sce", e["id"]
+    assert not bad, "\n".join(bad)
+
+
 def test_every_source_with_a_golden_keeps_a_live_one():
     """Retiring revised entries must not leave a source with nothing checked on the nightly run."""
     entries = load_golden(REPO / "checks" / "golden.yaml")

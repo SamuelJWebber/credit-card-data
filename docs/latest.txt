@@ -20,6 +20,6 @@ US credit card data, latest readings (2026-11-09)
 Thesis of 2026-09-08 (holds): US card credit is re-segmenting, not cycling: the 2022-24 loss surge was a vintage event, and the repricing that came with it is structural.
 - [ok ] Flow into 90+ day delinquency stays below 7.5% -> 6.97% in 2026 Q2
 - [ok ] Card charge-off rate stays below 4.2% -> 3.82% in 2026 Q2
-- [ok ] Card APR margin over prime stays above 14 points -> 15.49 pp in 2026 Q3
+- [ok ] Card APR margin over prime stays above 14 points -> 15.61 pp in 2026 Q3
 
 Source: https://samueljwebber.github.io/credit-card-data/ (public data, checked against the releases)

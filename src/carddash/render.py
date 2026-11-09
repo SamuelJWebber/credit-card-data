@@ -263,7 +263,10 @@ REAL_NOTE = (
 PRIME_NOTE = (
     "Most variable card APRs are set as the prime rate plus a margin. The prime rate follows the federal funds target, "
     "so the spread over prime is the part of the price the issuer chooses and the level is mostly the part it does not. "
-    "A widening spread while prime is flat is issuers repricing risk or rebuilding margin."
+    "A widening spread while prime is flat is issuers repricing risk or rebuilding margin. "
+    "The Fed surveys card rates in the middle month of each quarter (February, May, August, November), so each "
+    "quarter's spread uses the prime rate of that same month, not the quarter-end month: a prime move after the survey "
+    "shows up in the next quarter's reading, not as a change in margin."
 )
 CONSUMER_NOTE = (
     "Card losses and delinquencies against the same measures for all consumer loans at commercial banks (cards, auto, "
@@ -1625,7 +1628,7 @@ THESIS_TESTS = [
         "label": "Card APR margin over prime stays above 14 points",
         "series": S("card_apr_assessed_interest", "COMBANKS_ALL", "", period_type="Q", view="v_apr_spread", field="spread_over_prime"),
         "op": ">", "threshold": 14.0, "unit": "pp", "chart": "apr_over_prime",
-        "why": "The margin falling back toward its 2015-19 level of 10.7 points would mean the repricing was cyclical, not structural.",
+        "why": "The margin falling back toward its 2015-19 average of 10.75 points would mean the repricing was cyclical, not structural.",
     },
 ]
 

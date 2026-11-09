@@ -105,6 +105,19 @@ def test_quarterly_survey_month_maps_to_quarter_end(meta):
     assert not facts.duplicated(["period_end"]).any()
 
 
+def test_rate_surveys_must_sit_in_the_middle_month_of_the_quarter():
+    """v_apr_spread pairs the card rate with the prime rate of its survey month, so a reading FRED dated to another
+    month must stop the fetch instead of shifting that pairing silently."""
+    for sid in fred.MID_QUARTER_SURVEYS:
+        obs = fred.parse_fredgraph((FIXTURES / "fred" / f"{sid}.csv").read_text())
+        assert set(obs["date"].dt.month) == fred.MID_QUARTER_MONTHS, sid
+        fred.check_survey_months(sid, obs)  # the whole history passes
+    moved = pd.DataFrame({"date": pd.to_datetime(["2026-05-01", "2026-09-01"]), "value": [22.15, 22.36]})
+    with pytest.raises(ValueError, match="2026-09"):
+        fred.check_survey_months("TERMCBCCINTNS", moved)
+    fred.check_survey_months("REVOLSL", moved)  # a monthly series is not a survey: no constraint
+
+
 def test_sloos_is_dated_to_the_quarter_it_asks_about(meta):
     """FRED dates the July 2026 survey to 2026-07-01 (Q3); it asks about April to June, so it lands on 2026-06-30."""
     obs = fred.parse_fredgraph((FIXTURES / "fred" / "DRTSCLCC.csv").read_text())

@@ -241,7 +241,11 @@ LEFT JOIN cpi c ON c.period_end = r.period_end
 LEFT JOIN dpi d ON d.period_end = r.period_end;
 
 -- Card APR against the prime rate. Most variable card APRs are prime plus a margin, so the spread is the part the
--- issuer sets and the level is not. Prime is monthly and the G.19 card rate is quarterly, so they meet at quarter ends.
+-- issuer sets and the level is not. The G.19 card rate is a survey taken in the MIDDLE month of each quarter (FRED
+-- dates the Q3 reading 2026-08-01) and loaded at the quarter end, so it is compared with the prime rate of the month
+-- before the quarter end, the month it was surveyed in. Joining on the quarter end instead paired the August survey
+-- with September's prime: in 2020 Q1 that drew a 0.97 point margin jump from a rate cut made after the survey. The
+-- fred fetcher refuses a survey month other than the middle one (MID_QUARTER_SURVEYS), so this cannot drift.
 CREATE OR REPLACE VIEW v_apr_spread AS
 WITH apr AS (
   SELECT CAST(period_end AS DATE) AS period_end, value AS apr
@@ -255,7 +259,7 @@ SELECT 'card_apr_assessed_interest' AS metric, 'COMBANKS_ALL' AS entity, 'aggreg
        'Q' AS period_type, 'fred' AS source, a.period_end,
        a.apr, p.prime, a.apr - p.prime AS spread_over_prime
 FROM apr a
-JOIN prime p ON p.period_end = a.period_end;
+JOIN prime p ON p.period_end = last_day(CAST(a.period_end - INTERVAL 1 MONTH AS DATE));
 
 -- Holder share: each G.19 holder's revolving credit as a share of the sum of the three published holders plus the
 -- rest (the NSA total). Keyed on the holder's own series so render.py can select share_pct per entity.

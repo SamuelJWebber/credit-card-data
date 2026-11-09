@@ -592,6 +592,41 @@ def test_ncua_rates_view(tmp_paths, meta):
     assert rows[1][3] == pytest.approx(3.0)
 
 
+def _apr_spread_rows(con) -> dict:
+    return {r[0]: r[1:] for r in con.execute(
+        "SELECT period_end, apr, prime, spread_over_prime FROM v_apr_spread ORDER BY period_end").fetchall()}
+
+
+def test_apr_spread_takes_the_prime_rate_of_the_month_the_apr_was_surveyed(fixture_facts, tmp_paths):
+    """The G.19 card rate is surveyed in the middle month of the quarter (FRED dates Q3 to 2026-08-01) and loaded at
+    the quarter end, so the prime rate it is compared with is the month BEFORE the quarter end, not the quarter-end
+    month. March 2020 is the case that shows it: prime fell from 4.75 to 3.78 that month, a fortnight after the
+    February survey, and pairing the two drew a 0.97 point jump in issuer margin that never happened."""
+    con = _connect(fixture_facts, tmp_paths.views_sql, tmp_paths.tccp_products_csv, tmp_paths.issuers_csv)
+    rows = _apr_spread_rows(con)
+    con.close()
+    apr, prime, spread = rows[dt.date(2020, 3, 31)]
+    assert (apr, prime) == (16.61, 4.75) and spread == pytest.approx(11.86)  # 12.83 when March's prime was used
+    assert rows[dt.date(2026, 6, 30)][2] == pytest.approx(15.40)  # May 2026: 22.15 - 6.75
+    assert len(rows) > 120  # every quarter since 1994 still finds its prime rate
+    # the reading the page draws, the 2015-2019 benchmark, uses the corrected pairing too
+    bench = [s for d, (_, _, s) in rows.items() if dt.date(2015, 1, 1) <= d <= dt.date(2019, 12, 31)]
+    assert len(bench) == 20 and sum(bench) / 20 == pytest.approx(10.75, abs=0.005)
+
+
+def test_apr_spread_does_not_move_when_prime_changes_after_the_survey(tmp_paths):
+    """2026 Q3 as published: the August survey reads 22.36, prime was 6.75 in August and 6.87 in September."""
+    rows = [("card_apr_assessed_interest", "2026-09-30", "Q", 22.36), ("prime_rate", "2026-08-31", "M", 6.75),
+            ("prime_rate", "2026-09-30", "M", 6.87)]
+    facts = coerce_facts(pd.DataFrame([
+        {"metric": m, "entity": "COMBANKS_ALL", "entity_type": "aggregate", "tier": "all", "period_end": d,
+         "period_type": pt, "value": v, "source": "fred", "pulled_at": RUN2} for m, d, pt, v in rows]))
+    con = _connect(facts, tmp_paths.views_sql, tmp_paths.tccp_products_csv, tmp_paths.issuers_csv)
+    (apr, prime, spread), = _apr_spread_rows(con).values()
+    con.close()
+    assert prime == 6.75 and spread == pytest.approx(15.61)  # not 15.49: the September increase came after August
+
+
 def test_distribution_panel_draws_the_dfa(page):
     html, payload = page
     ids = {c["id"]: c for c in payload["charts"]}

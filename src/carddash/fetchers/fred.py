@@ -25,6 +25,23 @@ SOURCE = "fred"
 FREDGRAPH_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}"
 API_URL = "https://api.stlouisfed.org/fred/series/observations"
 
+# The G.19 interest-rate surveys are taken in the middle month of each quarter, and FRED dates each reading to that
+# month (2026-08-01 for Q3). to_facts moves them to the quarter end like any quarterly series, and v_apr_spread
+# (sql/views.sql) compares the card rate with the prime rate of the month BEFORE the quarter end, its survey month.
+# Every reading since 1972 sits in February, May, August or November; if FRED ever dated one differently, that
+# pairing would drift by a month without a sound, so the fetch fails instead.
+MID_QUARTER_SURVEYS = ("TERMCBCCALLNS", "TERMCBCCINTNS", "TERMCBAUTO48NS", "TERMCBPER24NS")
+MID_QUARTER_MONTHS = {2, 5, 8, 11}
+
+
+def check_survey_months(sid: str, obs: pd.DataFrame) -> None:
+    if sid not in MID_QUARTER_SURVEYS or obs.empty:
+        return
+    odd = sorted({d.strftime("%Y-%m") for d in obs["date"] if d.month not in MID_QUARTER_MONTHS})
+    if odd:
+        raise ValueError(f"{sid}: survey readings dated outside the middle month of the quarter ({odd[:4]}); "
+                         "v_apr_spread pairs each with the prime rate of that middle month")
+
 
 def parse_fredgraph(text: str) -> pd.DataFrame:
     """fredgraph.csv -> DataFrame[date, value]. Missing values are '.', dropped."""
@@ -164,5 +181,6 @@ def fetch(meta: pd.DataFrame, raw_dir: Path, session, pulled_at: str) -> pd.Data
         obs = _download(session, row["source_id"], raw_dir / "latest", api_key)
         if obs.empty:
             raise ValueError(f"{row['source_id']}: no observations")
+        check_survey_months(row["source_id"], obs)
         frames.append(to_facts(obs, row, pulled_at))
     return pd.concat(frames, ignore_index=True)

@@ -100,3 +100,30 @@ def test_the_committed_tree_carries_no_query_credentials(monkeypatch):
     monkeypatch.delenv("CARDDASH_CONTACT", raising=False)
     found = scan_paths([REPO / "data", REPO / "docs", REPO / "checks"])
     assert found == [], "\n".join(str(f) for f in found)
+
+
+def test_no_tracked_file_names_a_local_user_profile_path():
+    """REVIEW.md R1-13: TASKS.md gave the full Windows path, user name included, of the file holding the FRED account
+    credentials, and a design note carried another. This repository is public; such notes say 'kept outside the
+    repo' instead. REVIEW.md is skipped because it quotes the finding."""
+    import re
+    import subprocess
+
+    try:
+        files = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True, text=True, check=True).stdout.split("\n")
+    except (OSError, subprocess.CalledProcessError):
+        pytest.skip("not a git checkout")
+    profile = re.compile(r"(?i)\b[a-z]:[\\/]+users[\\/]+[a-z0-9._-]+[\\/]|/c/users/[a-z0-9._-]+/|appdata[\\/]")
+    hits = []
+    for name in files:
+        if not name or name.startswith("data/raw/") or name in ("uv.lock", "REVIEW.md"):
+            continue
+        path = REPO / name
+        if path.suffix.lower() not in {".md", ".py", ".html", ".yaml", ".yml", ".toml", ".txt", ".csv", ".j2", ".json"}:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        hits += [f"{name}:{i}" for i, line in enumerate(text.splitlines(), 1) if profile.search(line)]
+    assert not hits, hits

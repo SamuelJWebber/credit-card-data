@@ -46,6 +46,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
   `refresh_source` and `write_health`. Assert that the key is absent from the messages and from the written
   `health.json`, then repeat the test with a refused connection.
 
+Status: Fixed in 7b05d86. Its two leak tests (a local 400 server and a refused port, through refresh_source and write_health) fail on a6bae15 and pass now; every health message is redacted; the commit step runs `carddash scan-secrets data docs checks/restatement_ack.yaml` before `git add` and fails closed.
+
 ### R1-2 HIGH: the APR-over-prime spread subtracts the prime rate from the month after the APR was measured
 
 - **Evidence.** FRED dates `TERMCBCCINTNS` to the middle month of each quarter. The raw JSON reads
@@ -71,6 +73,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Verify.** Add a view test pinning the spread at 15.61 for 2026 Q3 and about 11.86 for 2020 Q1. Re-render and
   read the `apr_over_prime` chart and the thesis line.
 
+Status: Fixed in 2e682fd. v_apr_spread joins the prime rate of the survey month; the view tests (11.86 for 2020 Q1, 15.61 for 2026 Q3, 2015-19 average 10.75) fail on the old join; the fred fetcher refuses a survey reading outside February, May, August or November.
+
 ### R1-3 MEDIUM: 33 scheduled runs failed in a row and nothing told anyone
 
 - **Evidence.** `gh run list --workflow refresh.yml --event schedule` shows every scheduled run from 2026-10-08
@@ -85,6 +89,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Verify.** Run `workflow_dispatch` with a deliberately failing input, for example a `FAIL_ON_PURPOSE` env
   switch read by a test, and see the issue appear.
 
+Status: Fixed in 9ee8310. A failed run opens one `refresh-failure` issue that @mentions the owner and a good run closes it; a `source-attention` issue stays open while a source is amber for a week (`carddash attention`, health.json `status_since`). Seen live: dispatch run 42716371879 (fail_on_purpose) opened issue #1, and push run 42717110744 closed it with a 'Recovered' comment.
+
 ### R1-4 MEDIUM: two live BEA goldens sit inside BEA's routine revision window and will turn bea amber at the next release
 
 - **Evidence.** `checks/golden.yaml:628-653` sets `bea_pce_change_2026_08` (193.6) and `bea_pce_change_2026_07`
@@ -98,6 +104,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
   `change_from_prior` live entry, assert it is at least 3 months older than the newest period in its source's
   fixture.
 - **Verify.** `pytest` passes, and bea stays `ok` after the October PIO lands.
+
+Status: Fixed in 03daf33. Both entries are fixture-only; bea keeps a live check on April 2026's DPI change (+12.7, pi0926-hist.xlsx); golden.MIN_LIVE_AGE_MONTHS (bea 4) is enforced by a test that fails on the old golden.yaml for exactly these two entries.
 
 ### R1-5 MEDIUM: the page marks revised fixture-only goldens with a red ✗, and the number format hides the difference
 
@@ -119,6 +127,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Verify.** A render test asserts that no ✗ appears for a `check_live: false` entry and that 1347.7 and
   1347.84 are both printed.
 
+Status: Fixed in 7290f78. A revised fixture-only entry is drawn without a mark as '1,347.7 as first published ..., since revised to 1,347.84'; numbers print to the decimals they were copied with and never with %g; the render test checks both, and that a live mismatch still shows ✗.
+
 ### R1-6 MEDIUM: `carddash check` exits 1 on a healthy pipeline
 
 - **Evidence.** `cli.py:103` passes `live_only=False`. `python -m uv run carddash check` gives
@@ -129,6 +139,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Fix.** By default, check live entries only. Add `--all`, which prints superseded fixture-only entries as
   `REVISED` without counting them as failures.
 - **Verify.** `carddash check` exits 0 with 46 live passes. `carddash check --all` lists the seven as `REVISED`.
+
+Status: Fixed in aabfb42. `carddash check` checks the live entries (45 pass, exit 0); `--all` lists the seven revised fixture-only entries as REVISED, not failures (63 pass, exit 0); a live mismatch exits 1.
 
 ### R1-7 MEDIUM: HANDOFF.md is two months stale and tells the next agent to run `gh auth switch`
 
@@ -150,6 +162,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
   - The correct push form: `GH_TOKEN=$(gh auth token --user SamuelJWebber)`, never `gh auth switch`.
 - **Verify.** Read it, and run `git log -1 -- HANDOFF.md`.
 
+Status: Fixed in the HANDOFF.md rewrite that closes this round (`git log -1 -- HANDOFF.md`). HANDOFF.md is rewritten for 2026-11-09 (the outage, the fixes, the pending scheduled run, the Comenity and BEA dates) and gives the push form `GH_TOKEN=$(gh auth token --user SamuelJWebber)`, never `gh auth switch`.
+
 ### R1-8 MEDIUM: third-party series are credited to the "Federal Reserve Board" on charts and PNGs
 
 - **Evidence.** `render.py:62-63` maps every FRED series to "Federal Reserve Board, via FRED", and that label
@@ -164,6 +178,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
   Michigan, via FRED". Carry the copyright lines that FRED's series pages give for `UMCSENT` and `BRMCC01`.
 - **Verify.** Re-render. No chart drawn only from non-Fed series says "Federal Reserve Board", and the
   `sentiment.png` caption names Michigan.
+
+Status: Fixed in 7a12bf9. series.csv names a publisher for every FRED series and the copyright lines for UMCSENT and BRMCC01; captions read 'University of Michigan, via FRED' and carry the line, which the PNG prints; a render test refuses 'Federal Reserve Board' on a chart drawn only from other publishers' series.
 
 ### R1-9 LOW: the issuer_8k raw cache changes every night with no new data
 
@@ -183,6 +199,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
   metrics.
 - **Verify.** Two runs with no new filings leave `data/raw/issuer_8k` unchanged.
 
+Status: Fixed in 07d66a3. The edge's injected <script> is stripped before parsing and saving, files are written only when their bytes change, and a known no-metrics accession is never fetched again; two tests with a fake SEC (a new script per response) fail on the old fetcher and pass now.
+
 ### R1-10 LOW: the health strip misreports a failed source
 
 - **Evidence** from `git show cde7866:docs/index.html`, during the outage:
@@ -196,6 +214,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
   newer release could not be loaded" rather than "has not appeared".
 - **Verify.** Add a render test with a `failed` source in `health.json`.
 
+Status: Fixed in 9ee8310. A red source's health reports the rows it still serves, the strip says they are kept from the last good load, and an overdue release of a source that failed reads 'could not be read'.
+
 ### R1-11 LOW: golden provenance links point at pages that change every release
 
 - **Evidence.** Ten entries in `checks/golden.yaml` (for example lines 67 and 80) use
@@ -206,6 +226,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Fix.** Link the dated archive copy of each release, for example
   `https://www.federalreserve.gov/releases/g19/20260908/`. Keep the "current" URL only for `verify_g19.py`.
 - **Verify.** Opening each `origin_url` shows the cited number.
+
+Status: Fixed in 9ce46fb. G.19 entries link the dated release they cite (`verify_g19.py --provenance`: 13 of 13 PASS live); the census entries link the Internet Archive's 2026-10-22 copy of the 2026-10-15 release, whose Table 1 reproduces all three (Census posts its own adv2609.pdf about 2026-11-16).
 
 ### R1-12 LOW: stale or contradictory docs
 
@@ -226,6 +248,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Fix.** Update each of these.
 - **Verify.** Read them.
 
+Status: Fixed in cece271 (README, .env.example, CLAUDE.md, AGENTS.md, the issuer_8k docstring); AGENTS.md's transfer line was already corrected in 3c7603f.
+
 ### R1-13 LOW: public TASKS.md names the local path of the FRED account credentials file
 
 - **Evidence.** `TASKS.md:668` gives the full Windows path, including the user name, of the file holding the
@@ -235,6 +259,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Fix.** Replace both with "kept outside the repo". Moving the file itself is outside this repo and is a
   decision for the user.
 - **Verify.** `git grep -n "fred-account\|AppData"` finds nothing.
+
+Status: Fixed in 7519a31. Both lines now say 'kept outside the repo', and a test refuses any user-profile or AppData path in a tracked text file (it finds exactly these two lines on the old tree).
 
 ### R1-14 LOW: `make_session()` still sends the URL-form User-Agent (known open item, confirmed)
 
@@ -246,6 +272,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Verify.** A test asserts that no session User-Agent contains `(` or `://`. Then run one fetch per host
   family.
 
+Status: Fixed in 2998aa5. `http.user_agent()` is the one form, 'carddash/<version> <contact>'; issuer_8k only requires the contact and verify_g19.py uses make_session(). Seen live: 15 host families answered 200 to the new User-Agent from this machine, and push run 42717110744 loaded all 14 sources with it.
+
 ### R1-15 LOW: the credit-union crosswalk note is a permanent false alarm (known open item)
 
 - **Evidence.** Every run adds this note to tccp: "4 of 28 top-25 institution names ... not in issuers.csv:
@@ -255,6 +283,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
 - **Fix.** Let `issuers.crosswalk_report` match TCCP names against the NCUA tracked list as well, or add an
   `ncua_charter` column with `kind=credit_union` rows.
 - **Verify.** `carddash issuers` prints no unmatched names.
+
+Status: Fixed in 1eb85ce. The crosswalk report matches the TCCP names against the credit unions the ncua source tracks; `carddash issuers` now reports all 28 names matched (24 bank names, 4 credit union names).
 
 ### R1-16 LOW: workflow actions are pinned by tag under `contents: write`, and a queued run starts from a stale checkout
 
@@ -269,6 +299,8 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
   queued run starts from the newest data.
 - **Verify.** Review the workflow file. Two back-to-back dispatch runs should log each revision once.
 
+Status: Fixed in 9124f1a. Both actions are pinned to the commits of v5.1.0 and v6.8.0, and the job pulls main (fast-forward only) right after the checkout; a workflow test checks both. Run 42715716387 ran green with it.
+
 ---
 
 ## Bigger improvements (ranked)
@@ -277,25 +309,32 @@ Counts: **2 HIGH, 6 MEDIUM, 8 LOW.**
    exception text should pass through one redactor in the loader (R1-1). The workflow should refuse to commit if
    `data/` or `docs/` matches a key or token pattern. This turns a one-fetcher fix into a guarantee for every
    future source.
+   Status: Done in 7b05d86 (one redactor for every source's messages, and the fail-closed scan before `git add`).
 2. **Make failure loud (R1-3).** Open or update one pinned issue when a scheduled run fails or any source has
    been amber for more than 7 days. Show a red banner at the top of the page when the newest scheduled run
    failed. Add a status badge to the README.
+   Status: Done in 9ee8310 (the failure and attention issues) and 37fb078 (a banner naming any red source, a stale-page banner after 36 hours by the reader's clock, and the README badge).
 3. **Turn the golden policy into tests.** Set a minimum age per source for live entries, from each source's
    observed revision window (BEA 3 months, G.19 2 months, Census 2 months, and so on). Use dated provenance URLs
    (R1-11). Add a `checks/rebase_goldens.py` helper that prints candidate new entries from the release page for
    a person to confirm. The three re-basings in `de676d3` were done by hand after a month of amber.
+   Status: Mostly done: MIN_LIVE_AGE_MONTHS and its test (03daf33), dated provenance links and `verify_g19.py --provenance` (9ce46fb). Not done: a rebase_goldens.py helper; re-basing still needs a person to read the new release, which is the point of a golden.
 4. **Make derived spreads date-correct by construction.** Store each quarterly survey's observation month next
    to its quarter-end `period_end`, so a view can never pair readings taken a month apart (R1-2). The same issue
    would hit any future join of a mid-quarter survey to a monthly series.
+   Status: Done for the one derived spread there is (2e682fd): the fred fetcher refuses a survey reading outside the middle month, so v_apr_spread's month pairing cannot drift.
 5. **Be polite with bandwidth.** Use conditional GETs (`If-Modified-Since`/`ETag`) for the large files: the
    BEA flat file is 36.7 MB every night, plus the NCUA zips, the DFA zip and the Census workbook. Today every
    night re-downloads them in full even when nothing changed.
+   Status: Done for the largest file in d166e30: BEA answers a conditional GET with 304, seen live, so its 36.9 MB is downloaded only when BEA changes it. The NCUA, DFA (0.9 MB) and Census files are left as they are.
 6. **Slow the repo's growth.** `facts.csv` (9.7 MB) and `revisions.csv` (3.4 MB) are committed twice, under
    `data/` and `docs/data/`, and `docs/index.html` (3.7 MB, all data embedded) changes on every data day.
    `.git` is already about 104 MiB after two months. Publish one copy, gzip `revisions.csv`, and consider
    serving the series-browser JSON as a separate file (still static, no CDN).
+   Status: Not done. Dropping docs/data/ would break the page's download links and anyone who links to them, and a separate JSON file would break the page from file://; both need a decision about the published URLs.
 7. **Put credit unions into the issuer dimension (R1-15).** Then Navy Federal and PenFed can sit on the issuer
    charts beside the banks, which is what the TCCP top-25 list says they are.
+   Status: Not done. The crosswalk false alarm is fixed (R1-15), but drawing credit unions on the FDIC issuer charts mixes NCUA and call-report definitions; that is a new chart design under the scope rule, suggested in HANDOFF.
 
 ---
 

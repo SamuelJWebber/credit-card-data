@@ -14,8 +14,10 @@ import re
 import sys
 from pathlib import Path
 
-import requests
 import yaml
+
+from carddash.cli import load_dotenv
+from carddash.http import make_session
 
 G19_URL = "https://www.federalreserve.gov/releases/g19/current/default.htm"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -132,7 +134,8 @@ def columns_for(period_end: dt.date, period_type: str) -> list[str]:
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     entries = yaml.safe_load((root / "checks" / "golden.yaml").read_text(encoding="utf-8")) or []
-    page = requests.get(G19_URL, headers={"User-Agent": "carddash/0.1 (+https://github.com/SamuelJWebber/credit-card-data)"}, timeout=60).text
+    load_dotenv(root / ".env")  # CARDDASH_CONTACT, for the pipeline's own User-Agent
+    page = make_session().get(G19_URL).text
     tables = parse_tables(page)
     bad = 0
     for e in entries:

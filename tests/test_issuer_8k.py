@@ -358,18 +358,29 @@ def test_a_parse_failure_says_which_document_it_was(tmp_path):
 
 
 def test_the_sec_user_agent_declares_a_contact_and_carries_no_url(monkeypatch):
-    """The SEC's edge 403s any User-Agent containing a URL, which is the shape of this pipeline's normal one."""
+    """The SEC's edge 403s any User-Agent containing a URL, and the SEC asks for a declared contact."""
     monkeypatch.setenv("CARDDASH_CONTACT", "someone@example.com")
     ua = issuer_8k._sec_headers()["User-Agent"]
-    assert "someone@example.com" in ua and "http" not in ua
+    assert ua.endswith(" someone@example.com") and ua.startswith("carddash/") and "http" not in ua
 
     monkeypatch.setenv("CARDDASH_CONTACT", "https://example.com")
-    with pytest.raises(RuntimeError, match="not a URL"):
+    with pytest.raises(ValueError, match="not a URL"):
         issuer_8k._sec_headers()
 
     monkeypatch.delenv("CARDDASH_CONTACT")
     with pytest.raises(RuntimeError, match="CARDDASH_CONTACT must be set"):
         issuer_8k._sec_headers()
+
+
+def test_without_a_contact_the_fetch_fails_before_any_request(monkeypatch, meta, tmp_path):
+    monkeypatch.delenv("CARDDASH_CONTACT", raising=False)
+
+    class NoNetwork:
+        def get(self, *a, **k):
+            raise AssertionError("no request may be sent without a contact")
+
+    with pytest.raises(RuntimeError, match="CARDDASH_CONTACT must be set"):
+        issuer_8k.fetch(series_for_source(meta, issuer_8k.SOURCE), tmp_path, NoNetwork(), "2026-11-09T00:00:00Z")
 
 
 def test_every_loaded_issuer_declares_its_series_in_the_crosswalk(meta):

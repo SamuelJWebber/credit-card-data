@@ -56,11 +56,12 @@ while every other month of the same exhibit went out under 7.01. Filtering on 7.
 leaves a source that looks permanently one month behind instead of failing, so every 8-K is considered and the
 document itself decides.
 
-User-Agent: the SEC's Akamai edge answers 403 to any User-Agent containing a URL in parentheses, which is the
+User-Agent: the SEC's Akamai edge answers 403 to any User-Agent containing a URL in parentheses, which was the
 shape of this pipeline's own ("carddash/0.1.0 (+https://github.com/...)"), with or without a contact address
-appended. Verified 2026-09-11: the URL form is 403 on every SEC host and "carddash/0.1.0 <contact>" is 200. The
-SEC asks callers to declare a contact address, so that is what this sends, from CARDDASH_CONTACT. It is still
-this pipeline identifying itself honestly; it is not a browser string.
+appended. Verified 2026-09-11: the URL form is 403 on every SEC host and "carddash/0.1.0 <contact>" is 200. Since
+REVIEW.md R1-14 that URL-free form is every fetcher's User-Agent (http.user_agent); this fetcher only insists that
+the contact the SEC asks callers to declare is set, from CARDDASH_CONTACT, and fails loudly without it. It is the
+pipeline identifying itself honestly; it is not a browser string.
 
 Raw storage: one document per FILING under raw_dir/<issuer>/<primary month>.htm, named for the newest month it
 states. Capital One's stay at raw_dir/months/ where they already are. Finding a filing's document costs one
@@ -75,7 +76,6 @@ from __future__ import annotations
 
 import datetime as dt
 import json
-import os
 import re
 from dataclasses import dataclass
 from html.parser import HTMLParser
@@ -84,6 +84,7 @@ from typing import Callable
 
 import pandas as pd
 
+from ..http import require_contact, user_agent
 from ..schema import FACT_COLUMNS, last_day
 
 SOURCE = "issuer_8k"
@@ -679,17 +680,8 @@ LANDING_URL = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=00
 # ---------------------------------------------------------------------------------------------------------
 
 def _sec_headers() -> dict[str, str]:
-    contact = os.environ.get("CARDDASH_CONTACT", "").strip()
-    if not contact:
-        raise RuntimeError(
-            "CARDDASH_CONTACT must be set to a contact address for SEC requests. The SEC requires a declaring "
-            "contact and refuses this pipeline's normal User-Agent because it contains a URL."
-        )
-    if "://" in contact:
-        raise RuntimeError("CARDDASH_CONTACT must be a contact address, not a URL: the SEC edge 403s URLs.")
-    from .. import __version__
-
-    return {"User-Agent": f"carddash/{__version__} {contact}", "Accept-Encoding": "gzip, deflate"}
+    """The shared User-Agent (http.user_agent), with the contact the SEC requires made mandatory."""
+    return {"User-Agent": user_agent(require_contact()), "Accept-Encoding": "gzip, deflate"}
 
 
 def _get(session, url: str, headers: dict[str, str]) -> bytes:

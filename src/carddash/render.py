@@ -2516,6 +2516,7 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
     payload_json = json.dumps(payload, separators=(",", ":")).replace("</", "<\\/")
     health_rows = _health_rows(health, _latest_by_source(facts, meta_idx, today), facts, today)
     summary = _health_summary(health)
+    red_sources = [r["label"].split(",")[0] for r in health_rows if r["status"] in RED]
     # The thesis notes are served next to the page so the links render on Pages (the repository blob view shows
     # source). EVERY note is copied, not just the current one: each note links to the one it revises, and those
     # back-links are the record of what changed, so a superseded note must stay reachable.
@@ -2541,6 +2542,7 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
         preview_image=f"{SITE_URL}img/{PREVIEW_CHART}.png",
         thesis_href=thesis_href,
         health_generated=(run or "never")[:16].replace("T", " "),
+        red_sources=red_sources,
         panels=panels,
         headlines=latest,
         thesis=thesis,

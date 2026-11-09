@@ -332,6 +332,18 @@ def test_every_series_is_credited_to_its_publisher_not_to_the_fed(page):
     assert len(options) == len(set(options))
 
 
+def test_the_page_says_when_it_has_gone_stale(page):
+    """A run that fails before it renders leaves yesterday's page up, and the page cannot know that when it is built,
+    so the reader's own clock decides: the banner is shown once the run stamp is more than 36 hours old."""
+    html, _ = page
+    top = html.split("</header>")[0]
+    assert 'id="red-banner"' not in top  # every source is OK in the fixture health file
+    assert f'id="stale-banner" role="status" hidden data-generated="{RUN2}"' in top
+    script = top.split("<script>(function(){var b=document.getElementById('stale-banner')")[1].split("</script>")[0]
+    assert "h<36" in script and "b.hidden=false" in script
+    assert "/actions/workflows/refresh.yml" in top
+
+
 def test_recessions_are_month_ranges():
     rec = _recessions()
     assert len(rec) == 8
@@ -384,6 +396,9 @@ def test_card_badge_and_last_attempt_when_a_source_is_not_ok(tmp_paths, fixture_
     assert "data as of 2026-09-07" in by_id["nco_by_issuer"]["footer"]  # the data on the chart is still the last good load
     assert '<span class="badge st-failed"' in html and "last fetch attempt 2026-09-08" in html
     assert "2 of 14 sources need attention (Failed)" in html
+    # a red source puts a banner at the top of the page, naming it (REVIEW.md bigger improvement 2)
+    top = html.split("</header>")[0]
+    assert '<p class="banner" id="red-banner" role="alert"><strong>1 source failed to load in the latest run</strong> (FDIC).' in top
 
 
 def test_png_export_is_byte_stable_and_carries_no_pull_date(tmp_paths, fixture_facts):

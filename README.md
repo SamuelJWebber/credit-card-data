@@ -1,5 +1,7 @@
 # US credit card data dashboard
 
+[![Nightly refresh](https://github.com/SamuelJWebber/credit-card-data/actions/workflows/refresh.yml/badge.svg?event=schedule)](https://github.com/SamuelJWebber/credit-card-data/actions/workflows/refresh.yml?query=event%3Aschedule)
+
 A static page that refreshes itself daily from public sources and shows where card balances are growing,
 what borrowers are charged, and how card credit is performing. Every number traces to a government release
 and the pipeline checks a set of hand-copied headline figures on every run.

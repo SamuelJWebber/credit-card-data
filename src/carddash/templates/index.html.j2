@@ -150,6 +150,9 @@ th:first-child, td:first-child { text-align: left; }
 #browse-detail { border:1px solid var(--border); border-radius:8px; padding:12px; margin-bottom:12px; }
 .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
 .stamp { color: var(--muted); font-size: 12px; }
+.banner { border: 1px solid var(--border); border-left: 4px solid var(--critical); border-radius: 6px; padding: 8px 12px;
+  margin: 10px 0 0; background: var(--surface); color: var(--ink); font-size: 14px; }
+.banner[hidden] { display: none; }
 .nav { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--border);
   margin: 14px -20px 0; padding: 6px 20px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; font-size: 13px; }
 .nav a { color: var(--ink2); text-decoration: none; padding: 2px 0; }
@@ -193,6 +196,11 @@ figure.card:target, #browse-detail:target { outline: 2px solid var(--series-1); 
   <p class="stamp">Generated {{ generated_at }} · {{ n_series }} series · {{ n_facts }} observations · <a href="{{ repo_url }}">code and data</a> ·
     <span class="status st-{{ health_summary.worst }}"><span class="dot" aria-hidden="true"></span>{% if health_summary.n == 0 %}no sources loaded{% elif health_summary.n_ok == health_summary.n %}{{ health_summary.n }} source{{ 's' if health_summary.n != 1 else '' }} OK{% else %}{{ health_summary.n - health_summary.n_ok }} of {{ health_summary.n }} sources need attention ({{ health_summary.worst_label }}){% endif %}</span>
     as of {{ health_generated }} UTC · <a href="#health">source health</a></p>
+  {% if red_sources %}<p class="banner" id="red-banner" role="alert"><strong>{{ red_sources | length }} source{{ 's' if red_sources | length != 1 else '' }} failed to load in the latest run</strong> ({{ red_sources | join('; ') }}). Their charts keep the last good data and say so; <a href="#health">source health</a> has the reason.</p>{% endif %}
+  {# Shown by the script below when this page is more than 36 hours old: a run that fails before it renders leaves
+     the previous page up, and only the reader's clock can tell (REVIEW.md R1-3). #}
+  <p class="banner" id="stale-banner" role="status" hidden data-generated="{{ run or '' }}"><strong>This page has not been refreshed for <span id="stale-age">a while</span>.</strong> It is rebuilt every night, so the refresh is probably failing: <a href="{{ repo_url }}/actions/workflows/refresh.yml">see the runs</a>. The data below is as of {{ health_generated }} UTC.</p>
+  <script>(function(){var b=document.getElementById('stale-banner');var t=Date.parse(b.getAttribute('data-generated'));if(!t)return;var h=(Date.now()-t)/36e5;if(h<36)return;document.getElementById('stale-age').textContent=h<72?Math.round(h)+' hours':Math.floor(h/24)+' days';b.hidden=false;})();</script>
   {% if upcoming %}<p class="due">Due in the next two weeks: {% for r in upcoming %}{{ r.label.split(',')[0] }} {{ r.next.period }} around {{ r.next.due }}{{ '; ' if not loop.last else '.' }}{% endfor %}</p>{% endif %}
 </header>
 <nav class="nav" aria-label="Sections">

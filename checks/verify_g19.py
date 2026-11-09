@@ -2,9 +2,13 @@
 
     uv run python checks/verify_g19.py                # every G.19 entry against the CURRENT release
     uv run python checks/verify_g19.py --provenance   # every G.19 entry against the dated release it cites
+    uv run python checks/verify_g19.py --rebase       # as the default, and print a re-based entry for each FAIL
 
 Reads checks/golden.yaml, parses the HTML tables of the page, maps each golden period to a table column, and prints
-PASS/FAIL. Exit code 1 on any failure.
+PASS/FAIL. Exit code 1 on any failure. --rebase writes nothing: it prints, for each entry the current release no
+longer matches, the same entry with the current value, the current release's date and its dated page, ready to
+replace the old one in golden.yaml once a person has read the number on that page (REVIEW.md bigger improvement 3:
+the re-basings after the 2026 annual revisions were done by hand after a month of amber).
 
 The two modes answer different questions. The default asks whether a golden still holds in the newest release
 (after each G.19 release: a revision that moves a LIVE entry turns fred amber until it is re-based). --provenance
@@ -138,17 +142,41 @@ def columns_for(period_end: dt.date, period_type: str) -> list[str]:
     raise ValueError(period_type)
 
 
+def release_date(page: str) -> dt.date | None:
+    """The 'Release Date: September 8, 2026' line every G.19 page carries."""
+    m = re.search(r"Release Date.*?:\s*([A-Z][a-z]+ \d{1,2}, \d{4})", page, flags=re.S)
+    return dt.datetime.strptime(m.group(1), "%B %d, %Y").date() if m else None
+
+
+def rebased_entry(e: dict, value: float, column: str, released: dt.date) -> dict:
+    """The entry with the value the current release prints, citing that release's dated page."""
+    out = dict(e)
+    old_release = re.search(r"release of (\d{4}-\d\d-\d\d)", str(e.get("origin", "")))
+    was = f"{e['expected']} in the {old_release.group(1)} release" if old_release else f"was {e['expected']}"
+    out["expected"] = value
+    out["origin"] = f"Fed G.19 release of {released.isoformat()}, '{column}' column ({was}; re-based by verify_g19.py --rebase)"
+    out["origin_url"] = f"https://www.federalreserve.gov/releases/g19/{released:%Y%m%d}/default.htm"
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
-    provenance = "--provenance" in (sys.argv[1:] if argv is None else argv)
+    args = sys.argv[1:] if argv is None else argv
+    provenance = "--provenance" in args
+    rebase = "--rebase" in args and not provenance
+    candidates: list[dict] = []
     root = Path(__file__).resolve().parents[1]
     entries = yaml.safe_load((root / "checks" / "golden.yaml").read_text(encoding="utf-8")) or []
     load_dotenv(root / ".env")  # CARDDASH_CONTACT, for the pipeline's own User-Agent
     session = make_session()
     pages: dict[str, list] = {}
 
+    released: dict[str, dt.date | None] = {}
+
     def tables_for(url: str) -> list:
         if url not in pages:
-            pages[url] = parse_tables(session.get(url).text)
+            page = session.get(url).text
+            pages[url] = parse_tables(page)
+            released[url] = release_date(page)
         return pages[url]
 
     bad = 0
@@ -182,8 +210,14 @@ def main(argv: list[str] | None = None) -> int:
         bad += 0 if ok else 1
         where = url.split("/releases/g19/")[1].split("/")[0]
         print(f"{'PASS' if ok else 'FAIL'} {e['id']}: page {got} vs golden {e['expected']} (column {col}, {where})")
+        if rebase and not ok and released.get(url):
+            candidates.append(rebased_entry(e, got, col, released[url]))
     what = "the release each entry cites" if provenance else "the current release page"
     print(f"all checked entries match {what}" if not bad else f"{bad} mismatch(es)")
+    if candidates:
+        print("\n# Re-based entries for checks/golden.yaml. Read each number on the page first; if a LIVE entry sits")
+        print("# inside the revision window (golden.MIN_LIVE_AGE_MONTHS), make it fixture-only instead.")
+        print(yaml.safe_dump(candidates, sort_keys=False, allow_unicode=True, width=200))
     return 1 if bad else 0
 
 

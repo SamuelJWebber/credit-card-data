@@ -9,6 +9,11 @@ on:
   schedule:
     - cron: "17 12 * * 1"  # Mondays 12:17 UTC, hours clear of the nightly refresh
   workflow_dispatch:
+    inputs:
+      open_issue:
+        description: "Open or close the provenance issue (off: just run the checks, for trying the workflow out)"
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -44,8 +49,10 @@ jobs:
           cat "$RUNNER_TEMP/provenance.txt"
           exit $status
 
+      # A scheduled run has no inputs, and GitHub compares null and false as equal numbers (0), so the event is
+      # tested first: `inputs.open_issue != false` would have skipped these steps on every scheduled run.
       - name: Open or update the provenance issue
-        if: failure() && steps.install.outcome == 'success'
+        if: failure() && steps.install.outcome == 'success' && (github.event_name != 'workflow_dispatch' || inputs.open_issue)
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -76,7 +83,7 @@ jobs:
           fi
 
       - name: Close the provenance issue
-        if: success()
+        if: success() && (github.event_name != 'workflow_dispatch' || inputs.open_issue)
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}

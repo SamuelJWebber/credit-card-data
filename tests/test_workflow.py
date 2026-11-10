@@ -95,7 +95,12 @@ def test_a_weekly_run_checks_every_golden_against_its_document():
     assert "checks/verify_provenance.py" in check and "checks/verify_g19.py --provenance" in check
     assert "exit $status" in check
     opener, closer = steps["Open or update the provenance issue"], steps["Close the provenance issue"]
-    assert opener["if"].startswith("failure()") and closer["if"] == "success()"
+    # a manual run can switch the issue off; a scheduled run has no inputs, and GitHub compares null with false as
+    # 0 == 0, so the condition must test the event, never `inputs.open_issue != false`
+    manual = "(github.event_name != 'workflow_dispatch' || inputs.open_issue)"
+    assert opener["if"] == f"failure() && steps.install.outcome == 'success' && {manual}"
+    assert closer["if"] == f"success() && {manual}"
+    assert doc[True]["workflow_dispatch"]["inputs"]["open_issue"]["default"] is True
     assert opener["continue-on-error"] is True and closer["continue-on-error"] is True
     assert "gh issue create" in opener["run"] and "gh issue edit" in opener["run"] and "gh issue close" in closer["run"]
     # the owner is mentioned once, when the issue opens, not on every weekly rewrite

@@ -201,7 +201,7 @@ figure.card:target, #browse-detail:target { outline: 2px solid var(--series-1); 
      the previous page up, and only the reader's clock can tell (REVIEW.md R1-3). #}
   <p class="banner" id="stale-banner" role="status" hidden data-generated="{{ run or '' }}"><strong>This page has not been refreshed for <span id="stale-age">a while</span>.</strong> It is rebuilt every night, so the refresh is probably failing: <a href="{{ repo_url }}/actions/workflows/refresh.yml">see the runs</a>. The data below is as of {{ health_generated }} UTC.</p>
   <script>(function(){var b=document.getElementById('stale-banner');var t=Date.parse(b.getAttribute('data-generated'));if(!t)return;var h=(Date.now()-t)/36e5;if(h<36)return;document.getElementById('stale-age').textContent=h<72?Math.round(h)+' hours':Math.floor(h/24)+' days';b.hidden=false;})();</script>
-  {% if upcoming %}<p class="due">Due in the next two weeks: {% for r in upcoming %}{{ r.label.split(',')[0] }} {{ r.next.period }} around {{ r.next.due }}{{ '; ' if not loop.last else '.' }}{% endfor %}</p>{% endif %}
+  {% if upcoming %}<p class="due">Due in the next two weeks: {% for r in upcoming %}{{ r.short }} {{ r.next.period }} around {{ r.next.due }}{{ '; ' if not loop.last else '.' }}{% endfor %}</p>{% endif %}
 </header>
 <nav class="nav" aria-label="Sections">
   <a href="#readings">Readings</a>

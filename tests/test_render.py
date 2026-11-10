@@ -387,6 +387,8 @@ def test_card_badge_and_last_attempt_when_a_source_is_not_ok(tmp_paths, fixture_
     health["sources"]["tccp"]["status"] = "stale"
     health["sources"]["fdic"]["status"] = "failed"
     health["sources"]["fdic"]["pulled_at"] = "2026-09-08T00:00:00Z"
+    for source in ("issuer_8k", "nyfed_sce"):  # labels that begin 'Capital One,' and 'Federal Reserve Bank of New York,'
+        health["sources"][source]["status"] = "failed"
     tmp_paths.health_json.write_text(json.dumps(health), encoding="utf-8")
     html = render(tmp_paths, today=TODAY).read_text(encoding="utf-8")
     by_id = {c["id"]: c for c in _payload(html)["charts"]}
@@ -395,10 +397,14 @@ def test_card_badge_and_last_attempt_when_a_source_is_not_ok(tmp_paths, fixture_
     assert by_id["nco_by_issuer"]["status"] == "failed" and by_id["nco_by_issuer"]["attempted"] == "2026-09-08"
     assert "data as of 2026-09-07" in by_id["nco_by_issuer"]["footer"]  # the data on the chart is still the last good load
     assert '<span class="badge st-failed"' in html and "last fetch attempt 2026-09-08" in html
-    assert "2 of 14 sources need attention (Failed)" in html
-    # a red source puts a banner at the top of the page, naming it (REVIEW.md bigger improvement 2)
+    assert "4 of 14 sources need attention (Failed)" in html
+    # a red source puts a banner at the top of the page, naming it (REVIEW.md bigger improvement 2) by a name that
+    # says which source it is: the label cut at its first comma read 'Capital One' for all four issuers' filings and
+    # 'Federal Reserve Bank of New York' for three sources (REVIEW.md R2-6)
     top = html.split("</header>")[0]
-    assert '<p class="banner" id="red-banner" role="alert"><strong>1 source failed to load in the latest run</strong> (FDIC).' in top
+    assert ('<p class="banner" id="red-banner" role="alert"><strong>3 sources failed to load in the latest run</strong> '
+            '(FDIC call reports; Issuer 8-K filings (Capital One, Synchrony, Bread, Amex); NY Fed SCE credit access '
+            'survey).') in top
 
 
 def test_png_export_is_byte_stable_and_carries_no_pull_date(tmp_paths, fixture_facts):
@@ -1134,3 +1140,16 @@ def test_a_png_carries_its_sources_notices_in_a_caption_area_that_fits_them(page
     assert caption_area(plain) == CAPTION_MIN  # an unchanged two-line caption keeps its layout, and its PNG its bytes
     long = caption_text(by_id["dq_triangulation"], window)  # four sources: it wraps to four lines
     assert len(long.splitlines()) >= 3 and caption_area(long) > CAPTION_MIN
+
+
+def test_every_source_has_a_distinct_short_name_and_the_due_line_uses_it(page):
+    """REVIEW.md R2-6: the 'Due in the next two weeks' line cut each label at its first comma, and the live page read
+    'Federal Reserve Bank of New York 2026 Q3 around 2026-11-11', which is any of three sources."""
+    from carddash.sources import SOURCE_LABELS, SOURCE_SHORT
+
+    assert set(SOURCE_SHORT) == set(SOURCE_LABELS)
+    assert len(set(SOURCE_SHORT.values())) == len(SOURCE_SHORT)
+    html, _ = page
+    due = html.split('<p class="due">Due in the next two weeks: ')[1].split("</p>")[0]
+    assert any(due.startswith(short) or f"; {short} " in due for short in SOURCE_SHORT.values()), due
+    assert "Federal Reserve Bank" not in due and "Capital One " not in due

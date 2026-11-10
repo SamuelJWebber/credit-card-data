@@ -45,8 +45,8 @@ def test_only_amber_sources_older_than_a_week_need_attention():
     }
     lines = needing_attention(health, NOW, days=7)
     assert len(lines) == 2
-    assert lines[0].startswith("- **census** has been `golden_mismatch` since 2026-09-30 (40 days)")
-    assert lines[1].startswith("- **bea** has been `golden_mismatch` since 2026-10-03 (37 days): golden check failed")
+    assert lines[0].startswith("- **Census monthly retail trade** (`census`) has been `golden_mismatch` since 2026-09-30 (40 days)")
+    assert lines[1].startswith("- **BEA personal income and spending** (`bea`) has been `golden_mismatch` since 2026-10-03 (37 days): golden check failed")
     assert needing_attention({"fred": health["fred"]}, NOW) == []
 
 
@@ -72,7 +72,7 @@ def test_health_json_round_trips_status_since_and_attention_reads_it(tmp_paths, 
     assert json.loads(tmp_paths.health_json.read_text(encoding="utf-8"))["sources"]["bea"]["status_since"] == "2026-10-03T01:39:00Z"
     assert cli.cmd_attention(tmp_paths, 7) == 0
     out = capsys.readouterr().out.strip().splitlines()
-    assert len(out) == 1 and out[0].startswith("- **bea** has been `golden_mismatch` since 2026-10-03")
+    assert len(out) == 1 and out[0].startswith("- **BEA personal income and spending** (`bea`) has been `golden_mismatch` since 2026-10-03")
 
 
 def test_a_refresh_run_starts_and_keeps_the_clock(tmp_paths, monkeypatch, capsys):

@@ -29,6 +29,7 @@ from .paths import Paths
 from .png import write_png
 from .redact import redact
 from .schema import PERIOD_WORDS, SERIES_KEY, last_day, shift_period
+from .sources import SOURCE_LABELS, SOURCE_SHORT, short_name  # noqa: F401  (SOURCE_LABELS is re-exported)
 from .series import load_series, series_index
 
 VENDOR = Path(__file__).parent / "vendor"
@@ -60,23 +61,6 @@ RELEASE_RHYTHM = {
     "cfpb_cct": ("cct_card_inquiry_index_sa", "CFPB_CCP_ALL", "M", 105),  # the inquiry index runs about three months behind (originations seven)
     "issuer_8k": ("issuer_card_nco_rate", "ISSUER:CAPITAL_ONE", "M", 22),  # filed the 15th to the 22nd of the next month
     "nyfed_state": ("state_card_dq90_rate_balances", "CCP_ALL", "A", 60),  # the 2025 file was published February 2026
-}
-
-SOURCE_LABELS = {
-    "fred": "FRED, Federal Reserve Bank of St. Louis",  # each series is credited to its publisher (series.csv)
-    "tccp": "CFPB Terms of Credit Card Plans survey",
-    "phillyfed": "Federal Reserve Bank of Philadelphia, Large Bank Credit Card and Mortgage Data (FR Y-14M)",
-    "nyfed_hhdc": "Federal Reserve Bank of New York, Quarterly Report on Household Debt and Credit (Consumer Credit Panel/Equifax)",
-    "fdic": "FDIC, Call Report data via the BankFind Suite API",
-    "nyfed_sce": "Federal Reserve Bank of New York, Survey of Consumer Expectations Credit Access Survey",
-    "nyfed_sce_monthly": "Federal Reserve Bank of New York, Survey of Consumer Expectations (monthly)",
-    "bea": "Bureau of Economic Analysis, personal consumption expenditures by type of product (NIPA monthly)",
-    "census": "Census Bureau, Monthly Retail Trade Survey",
-    "ncua": "NCUA, 5300 Call Report quarterly data (credit unions)",
-    "dfa": "Federal Reserve Board, Distributional Financial Accounts",
-    "cfpb_cct": "CFPB Consumer Credit Trends (Consumer Credit Panel)",
-    "issuer_8k": "Capital One, Synchrony, Bread Financial and American Express, each issuer's own monthly charge-off and delinquency metrics (8-K filings, SEC EDGAR)",
-    "nyfed_state": "Federal Reserve Bank of New York, State Level Household Debt Statistics (Consumer Credit Panel/Equifax)",
 }
 
 
@@ -2373,6 +2357,7 @@ def _health_rows(health: dict, latest_by_source: dict[str, str], facts: pd.DataF
             {
                 "source": source,
                 "label": SOURCE_LABELS.get(source, source),
+                "short": short_name(source),
                 "status": status,
                 "status_label": STATUS_LABELS.get(status, status)
                 + (f" since {since[:10]}" if since and status != "ok" else ""),
@@ -2532,7 +2517,7 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
     payload_json = json.dumps(payload, separators=(",", ":")).replace("</", "<\\/")
     health_rows = _health_rows(health, _latest_by_source(facts, meta_idx, today), facts, today)
     summary = _health_summary(health)
-    red_sources = [r["label"].split(",")[0] for r in health_rows if r["status"] in RED]
+    red_sources = [r["short"] for r in health_rows if r["status"] in RED]  # never the label cut at a comma (R2-6)
     # the year of each source's newest period: the {year} of its copyright notice moves with the data, so a PNG's
     # bytes still change only when its data does
     shown = sorted(set(health) | (set(facts["source"].unique()) if not facts.empty else set()))

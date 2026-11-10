@@ -15,6 +15,7 @@ import datetime as dt
 
 from .loader import AMBER, SourceHealth
 from .redact import redact
+from .sources import short_name
 
 ATTENTION_DAYS = 7
 MAX_MESSAGE = 300
@@ -43,6 +44,7 @@ def needing_attention(health: dict[str, SourceHealth], now: dt.datetime, days: i
         if age < days:
             continue
         first = " ".join(redact(h.messages[0]).split())[:MAX_MESSAGE] if h.messages else ""
-        line = f"- **{name}** has been `{h.status}` since {h.status_since[:10]} ({age} days)"
+        # the source's short name, then its id: 'bea' alone said little on a phone (REVIEW.md R2-6)
+        line = f"- **{short_name(name)}** (`{name}`) has been `{h.status}` since {h.status_since[:10]} ({age} days)"
         rows.append((age, name, line + (f": {first}" if first else "")))
     return [line for _, _, line in sorted(rows, key=lambda r: (-r[0], r[1]))]

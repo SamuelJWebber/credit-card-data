@@ -5,7 +5,7 @@ Snapshot `3584f52f2bbaa50c0f396b1331e1251aa8d8efbb` (bot refresh of 2026-11-10 0
 https://samueljwebber.github.io/credit-card-data/ were fetched with curl and are byte-identical to `docs/` in the
 snapshot (`cmp`), so every `file:line` below is also what the public reads.
 
-What was run. Work folder `C:\Users\samwe\code\.codex-temp\adversarial-2026-11-10\work\credit-A\`: `scripts\` holds
+What was run. Work folder `<review-scratch>/work\credit-A\`: `scripts\` holds
 every script named below, `src-dl\` every primary-source download, `repo\` a clone of the snapshot used for the test
 and pipeline runs (nothing was changed in the snapshot or the real project).
 

@@ -22,6 +22,7 @@ commit found'), and fails closed: no runs, or no bot commits on the ref, is exit
     uv run python checks/verify_releases.py            # the last 5 scheduled runs, verdict on the newest 2
     uv run python checks/verify_releases.py --event push --limit 8
     uv run python checks/verify_releases.py --limit 1 --need 1 --max-age-hours 30   # last night's run, if any
+    python3 checks/verify_releases.py --watch 30     # the daily watch workflow: did a scheduled run happen at all?
 """
 
 from __future__ import annotations
@@ -127,6 +128,37 @@ def _now() -> dt.datetime:
     return dt.datetime.now(dt.timezone.utc)
 
 
+# conclusions of a run that ended without running its steps, so its own failure step never opened an issue
+STOPPED = {"cancelled", "skipped", "timed_out", "startup_failure", "stale"}
+
+
+def watch(hours: float) -> int:
+    """For .github/workflows/watch.yml: did a scheduled refresh run in the last `hours`, and run its steps?
+
+    Only one run can wait in the 'refresh' concurrency group, and a newer one cancels the one waiting; a cancelled
+    run executes no step, so it opens no failure issue, and GitHub can skip a schedule outright. Either way the v1
+    count would simply stop with nothing said (REVIEW.md bigger improvement 1). A run that FAILED is not reported
+    here: it opened the failure issue itself. An amber run is the attention issue's business."""
+    newest = runs("schedule", 1)
+    if not newest:
+        print(f"MISSING: no scheduled run of {WORKFLOW} at all")
+        return 1
+    run = newest[0]
+    created = run["created_at"][:16].replace("T", " ")
+    age = (_now() - _ts(run["created_at"])).total_seconds() / 3600
+    if age > hours:
+        print(f"MISSING: the newest scheduled run, {run['id']}, was created {created} UTC, {age:.1f} hours ago "
+              f"(more than {hours:g}). Last night's run did not happen. {run.get('html_url', '')}".rstrip())
+        return 1
+    if run.get("conclusion") in STOPPED:
+        print(f"STOPPED: the newest scheduled run, {run['id']} ({created} UTC), ended '{run['conclusion']}' without "
+              f"running its steps, so it opened no failure issue. {run.get('html_url', '')}".rstrip())
+        return 1
+    print(f"OK: scheduled run {run['id']} created {created} UTC, {age:.1f} hours ago: "
+          f"{run.get('conclusion') or run.get('status')}")
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     p.add_argument("--event", default="schedule", help="workflow trigger to inspect (schedule, push, workflow_dispatch)")
@@ -136,8 +168,13 @@ def main(argv=None) -> int:
     p.add_argument("--no-fetch", action="store_true", help="do not run `git fetch origin main` first")
     p.add_argument("--max-age-hours", type=float, default=None,
                    help="also fail when the newest run is older than this (a night with no scheduled run at all)")
+    p.add_argument("--watch", type=float, metavar="HOURS", default=None,
+                   help="only say whether a scheduled run was created in the last HOURS and ran its steps (exit 1 if "
+                        "not); reads no commits. For .github/workflows/watch.yml")
     args = p.parse_args(argv)
 
+    if args.watch is not None:
+        return watch(args.watch)
     if not args.no_fetch:
         sh("git", "fetch", "--quiet", "origin", "main")
     commits = bot_commits(args.ref)

@@ -148,3 +148,21 @@ def test_a_queued_run_starts_from_the_newest_main():
     assert names[0].startswith("actions/checkout@")
     assert names[1] == "Start from the newest main" and steps[1]["run"] == "git pull --ff-only origin main"
     assert names.index("Start from the newest main") < names.index("Install") < names.index("Refresh data and render")
+
+
+def test_a_daily_watch_notices_a_night_with_no_scheduled_run():
+    """REVIEW.md bigger improvement 1: a cancelled waiting run executes no step and opens no failure issue."""
+    doc = yaml.safe_load((WORKFLOW.parent / "watch.yml").read_text(encoding="utf-8"))
+    assert doc[True]["schedule"][0]["cron"].endswith("* * *") and "workflow_dispatch" in doc[True]
+    assert doc["permissions"] == {"actions": "read", "contents": "read", "issues": "write"}
+    steps = {s.get("name", s.get("uses", "")): s for s in doc["jobs"]["watch"]["steps"]}
+    check = steps["Did the nightly refresh run?"]["run"]
+    assert "python3 checks/verify_releases.py --watch 30" in check and "exit $status" in check
+    opener, closer = steps["Open or update the missing-run issue"], steps["Close the missing-run issue"]
+    assert opener["if"] == "failure()" and closer["if"] == "success()"
+    assert opener["continue-on-error"] is True and closer["continue-on-error"] is True
+    assert opener["run"].count("@${OWNER}") == 1 and "gh issue close" in closer["run"]
+    # the script it runs needs nothing but the standard library: there is no install step
+    source = (REPO / "checks" / "verify_releases.py").read_text(encoding="utf-8")
+    imports = {line.split()[1].split(".")[0] for line in source.splitlines() if line.startswith(("import ", "from "))}
+    assert imports <= {"__future__", "argparse", "datetime", "json", "re", "subprocess", "sys"}, imports

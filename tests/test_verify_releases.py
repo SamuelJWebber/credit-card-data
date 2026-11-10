@@ -197,3 +197,30 @@ def test_it_fetches_first_and_fails_closed(vr, monkeypatch, capsys):
     monkeypatch.setattr(vr, "sh", FakeShell(commits=[]))
     assert vr.main(["--event", "push"]) == 1
     assert "no bot commits" in capsys.readouterr().out
+
+
+def test_the_daily_watch_reports_a_night_with_no_run_or_a_run_that_never_ran(vr, monkeypatch, capsys):
+    """REVIEW.md bigger improvement 1: a scheduled run that waited in the concurrency group and was cancelled by a
+    newer run executes no step, so it opens no failure issue, and GitHub can skip a schedule. A FAILED run is not
+    reported here: it opened the failure issue itself."""
+    import datetime as dt
+
+    monkeypatch.setattr(vr, "_now", lambda: dt.datetime(2026, 11, 11, 12, 41, tzinfo=dt.timezone.utc))
+    shell = FakeShell(runs=[_run(50000000001, "schedule", "2026-11-11T01:30:00Z", "2026-11-11T01:40:00Z")])
+    monkeypatch.setattr(vr, "sh", shell)
+    assert vr.main(["--watch", "30"]) == 0
+    assert capsys.readouterr().out.startswith("OK: scheduled run 50000000001 created 2026-11-11 01:30 UTC")
+    assert not any(c[:2] in (("git", "fetch"), ("git", "log")) for c in shell.calls)  # the runs API only
+    for conclusion, code in (("failure", 0), ("cancelled", 1), ("skipped", 1), ("timed_out", 1)):
+        run = _run(50000000001, "schedule", "2026-11-11T01:30:00Z", "2026-11-11T01:40:00Z", conclusion=conclusion)
+        monkeypatch.setattr(vr, "sh", FakeShell(runs=[run]))
+        assert vr.main(["--watch", "30"]) == code, conclusion
+        out = capsys.readouterr().out
+        assert (f"ended '{conclusion}' without running its steps" in out) == bool(code)
+    old = _run(50000000000, "schedule", "2026-11-10T01:30:00Z", "2026-11-10T01:40:00Z")
+    monkeypatch.setattr(vr, "sh", FakeShell(runs=[old]))
+    assert vr.main(["--watch", "30"]) == 1
+    assert "MISSING: the newest scheduled run, 50000000000, was created 2026-11-10 01:30 UTC, 35.2 hours ago" in \
+        capsys.readouterr().out
+    monkeypatch.setattr(vr, "sh", FakeShell(runs=[]))
+    assert vr.main(["--watch", "30"]) == 1 and "MISSING: no scheduled run" in capsys.readouterr().out

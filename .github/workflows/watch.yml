@@ -1,0 +1,77 @@
+name: watch
+
+# Daily: did last night's scheduled refresh run at all? Only one run can wait in the 'refresh' concurrency group, and
+# a newer one cancels the one waiting; a cancelled run executes no step, so it opens no failure issue, and GitHub can
+# skip a schedule outright. The v1 count (two consecutive green scheduled runs) would then stop with nothing said
+# (REVIEW.md bigger improvement 1). A run that failed is not this workflow's business: it opened the failure issue.
+# Scheduled refresh runs have started as late as 03:25 UTC; 30 hours covers the latest of them with room to spare.
+
+on:
+  schedule:
+    - cron: "41 12 * * *"  # 12:41 UTC daily
+  workflow_dispatch:
+
+permissions:
+  actions: read   # the runs API
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      # Pinned to a commit, like the refresh workflow (REVIEW.md R1-16).
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5.1.0
+
+      # The script needs only the standard library and gh, both on the runner: no install step.
+      - name: Did the nightly refresh run?
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          status=0
+          python3 checks/verify_releases.py --watch 30 > "$RUNNER_TEMP/watch.txt" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/watch.txt"
+          exit $status
+
+      - name: Open or update the missing-run issue
+        if: failure()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          label=refresh-missing
+          {
+            echo "The nightly refresh did not run, or ended without running its steps, so it could not report itself."
+            echo "Nothing is wrong with the data yet, but the night does not count towards the v1 measure (two"
+            echo "consecutive green scheduled runs). This issue is rewritten daily and closed once a scheduled run"
+            echo "happens again."
+            echo
+            echo '```'
+            head -20 "$RUNNER_TEMP/watch.txt" || true
+            echo '```'
+            echo
+            echo "Watch run: ${RUN_URL}"
+          } > "$RUNNER_TEMP/body.md"
+          num=$(gh issue list --label "$label" --state open --limit 1 --json number --jq '.[0].number // empty' || true)
+          if [ -n "$num" ]; then
+            gh issue edit "$num" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh label create "$label" --color D93F0B --description "A night with no scheduled refresh run" --force
+            { echo "@${OWNER}"; echo; cat "$RUNNER_TEMP/body.md"; } > "$RUNNER_TEMP/first.md"
+            gh issue create --title "The nightly refresh did not run" --label "$label" --body-file "$RUNNER_TEMP/first.md"
+          fi
+
+      - name: Close the missing-run issue
+        if: success()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          num=$(gh issue list --label refresh-missing --state open --limit 1 --json number --jq '.[0].number // empty' || true)
+          if [ -n "$num" ]; then
+            gh issue close "$num" --comment "$(head -1 "$RUNNER_TEMP/watch.txt")"
+          fi

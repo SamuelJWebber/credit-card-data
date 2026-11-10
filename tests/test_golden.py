@@ -70,6 +70,52 @@ def test_every_golden_cites_a_dated_page_not_one_that_moves():
     assert not bad, "\n".join(bad)
 
 
+def test_every_sec_link_names_a_document_its_filing_holds():
+    """REVIEW.md R2-3: the entry that pins Capital One's Discover-merger month linked accession 0000927628-25-000212,
+    a 404; the exhibit is in 0000927628-25-000241, filed 2025-07-22. issuer_8k caches every filing index it reads
+    under data/raw/issuer_8k/index/ (a filed document list never changes), so this needs no network."""
+    import json
+    import re
+
+    from carddash.fetchers.issuer_8k import ISSUERS
+
+    archives = {i.archive.rstrip("/") for i in ISSUERS}
+    index_dir = REPO / "data" / "raw" / "issuer_8k" / "index"
+    bad, seen = [], 0
+    for e in load_golden(REPO / "checks" / "golden.yaml"):
+        url = e.get("origin_url", "")
+        if "sec.gov/Archives" not in url:
+            continue
+        seen += 1
+        m = re.fullmatch(r"(https://www\.sec\.gov/Archives/edgar/data/\d+)/(\d{18})/([^/]+)", url)
+        if not m:
+            bad.append(f"{e['id']}: not an EDGAR document link: {url}")
+            continue
+        archive, accession, document = m.groups()
+        if archive not in archives:
+            bad.append(f"{e['id']}: {archive} is none of the issuers' archives")
+        index = index_dir / f"{accession}.json"
+        if not index.exists():
+            bad.append(f"{e['id']}: no filing {accession} among the {len(list(index_dir.glob('*.json')))} indexes issuer_8k has read")
+        elif document not in json.loads(index.read_text(encoding="utf-8")):
+            bad.append(f"{e['id']}: filing {accession} holds no {document}")
+    assert seen >= 13, "the SEC entries went missing"
+    assert not bad, "\n".join(bad)
+
+
+def test_an_entry_that_names_a_file_links_that_file():
+    """REVIEW.md R2-3: two BEA entries quoted the release's Historical Comparisons workbook (pi0926-hist.xlsx) but
+    linked the news page, which states neither number."""
+    import re
+
+    bad = []
+    for e in load_golden(REPO / "checks" / "golden.yaml"):
+        for name in re.findall(r"\b[\w.-]+\.(?:xlsx|xls|pdf|csv|zip|txt)\b", str(e.get("origin", ""))):
+            if not e.get("origin_url", "").endswith("/" + name):
+                bad.append(f"{e['id']}: cites {name} but links {e.get('origin_url')}")
+    assert not bad, "\n".join(bad)
+
+
 def test_every_source_with_a_golden_keeps_a_live_one():
     """Retiring revised entries must not leave a source with nothing checked on the nightly run."""
     entries = load_golden(REPO / "checks" / "golden.yaml")

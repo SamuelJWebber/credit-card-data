@@ -647,7 +647,7 @@
   change_from_prior: true
   check_live: false
   origin: "Same release, 'Historical Comparisons' workbook (pi0926-hist.xlsx), PCE dollar change: last period with a larger value than September's 113.1 was 2026M08 at 193.6"
-  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
+  origin_url: https://www.bea.gov/sites/default/files/2026-10/pi0926-hist.xlsx
 
 - id: bea_pce_change_2026_07
   metric: pce_total_saar
@@ -660,8 +660,8 @@
   tolerance: 0.06
   change_from_prior: true
   check_live: false
-  origin: "Same workbook, same row: last period with a smaller value than September's 113.1 was 2026M07 at 50.6"
-  origin_url: https://www.bea.gov/news/2026/personal-income-and-outlays-september-2026
+  origin: "Same release, 'Historical Comparisons' workbook (pi0926-hist.xlsx), PCE dollar change, same row: last period with a smaller value than September's 113.1 was 2026M07 at 50.6"
+  origin_url: https://www.bea.gov/sites/default/files/2026-10/pi0926-hist.xlsx
 
 - id: bea_dpi_change_2026_04
   metric: disposable_income_monthly_saar
@@ -891,7 +891,7 @@
   tolerance: 0.001
   check_live: true
   origin: "Capital One Financial Corporation, 8-K filed 2025-07-22, Exhibit 99.1 for the month ended June 30, 2025, the one month the exhibit splits the section: 'Domestic Card' TOTAL row, Net Charge-Offs Rate 4.96 percent. The components that month are 'Capital One Domestic' 5.29 and 'Discover Domestic' 4.47; this entry pins the total, so a regression to a component fails"
-  origin_url: https://www.sec.gov/Archives/edgar/data/927628/000092762825000212/ex991june2025creditmetrics.htm
+  origin_url: https://www.sec.gov/Archives/edgar/data/927628/000092762825000241/ex991june2025creditmetrics.htm
 
 - id: syf_8k_nco_rate_2026_07
   metric: issuer_card_nco_rate

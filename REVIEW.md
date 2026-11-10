@@ -1,3 +1,50 @@
+# Independent Fable review, 2026-11-10 (not a pipeline round)
+
+An outside check of what was pushed on 2026-11-09, by a different model from the one that built and
+reviewed it: first-line reviewers attacked the work and compared it with other people's, then a
+second reviewer tried to refute each HIGH and MEDIUM finding. Only the verified result is below.
+Full reports, with commands and sources: `reviews/fable-2026-11-10/` (`credit-V.md` is the verification;
+the others are the first-line reports, including claims the verifier narrowed or rejected).
+**Nothing here has been implemented.** Mark each row Fixed / Rejected / Deferred as it is handled.
+
+## Verdict table
+
+| Finding | Their severity | Verdict | My severity | Corrected one-line statement |
+| --- | --- | --- | --- | --- |
+| credit-A-1 contact address in commit history | HIGH | UPHELD as fact, WEAKENED on grade | MEDIUM | The guarded contact is the author and committer address on 73 public commits; it is an ordinary commit e-mail, not a credential, and the same address is public in two other repos. |
+| credit-A-2 offered APR fall is new respondents | MEDIUM | UPHELD | MEDIUM | Same institutions: 28.24 to 27.74 (620 to 719) against the drawn 28.24 to 26.74; the first thesis note also builds an argument on the drawn fall. |
+| credit-A-3 HTML escaping off | MEDIUM | UPHELD | MEDIUM | Autoescape is off; a source answering HTTP 200 with a body that starts with a 38-byte script tag would run script on the public page. |
+| credit-A-4 charge-off peaks and unemployment | MEDIUM | UPHELD | MEDIUM | Of six charge-off peaks, none followed an unemployment peak: three had none nearby, two came first, one (2009) coincided. |
+| credit-A-5 "same survey of the same banks" | MEDIUM | UPHELD | MEDIUM | Two Fed forms, two panels, two definitions (FR 2835 and FR 2835a); the sentence is also in the second thesis note. |
+| credit-A-6 SA never compared with NSA | MEDIUM | UPHELD | MEDIUM | The promise is false for at least the three charts I read; the Fed's two tables differ by up to 0.32 points. |
+| credit-B-1 "interest households actually pay" | HIGH | UPHELD | HIGH | BEA builds the series as Fed consumer credit times a blended Fed rate, for all consumer credit, at every frequency; the chart returns that rate. |
+| credit-B-2 stock delinquency read as distress | HIGH | WEAKENED | MEDIUM | The NY Fed post says it, about cards, nationally; it says nothing on states. "National" survives; the 2024 to 2025 leg, most of the "range widened" and two thesis-note sentences do not. |
+| credit-B-3 "highest on record" without "nominal" | MEDIUM | UPHELD | MEDIUM | True in dollars, 14.7% below the 2008 peak in today's dollars; the project's own thesis note calls this headline misleading. Same as credit-A-8, which was under-graded. |
+| credit-B-4 $1,263bn includes about $163bn 90+ | MEDIUM | WEAKENED | LOW | Arithmetic right (+4.47% with the pool, +3.69% without); the label "on credit reports" is correct and it is the NY Fed's own headline. |
+| credit-B-5 "cards the only improving debt" | MEDIUM | UPHELD | MEDIUM | The thesis note's own table has "Other" improving twice as much; on flows cards are not even the worst (student loans 7.83). Thesis note only, not the main page. |
+| credit-B-6 thesis tests cannot fail | MEDIUM | WEAKENED | MEDIUM | True of test 1 only; test 2 (4.2%) sits below five quarters of the surge. The NY Fed (2026-11-10) does put macro conditions first, against the note's "not a macroeconomic one". |
+| credit-B-7 the repricing is misdated | MEDIUM | UPHELD | MEDIUM | 2.44 of the 4.86 points of extra margin were in place by 2021 Q4; CFPB dates the widening from 2016. |
+| credit-B-8 only balance-weighted measures | MEDIUM | WEAKENED | LOW | TransUnion's borrower rate did rise; the page's own account-weighted Y-14 rate fell (0.74 to 0.70), so the proposed fix would not show the pattern. |
+| credit-B-9 five "About" notes describe another quantity | MEDIUM | UPHELD | MEDIUM | Four of the five read in the live JSON; each derived line carries its first input's note. |
+| credit-A-12 (LOW, PLAUSIBLE) wider numerator | LOW | UPHELD, now CONFIRMED | folds into credit-B-1 | BEA's line also holds margin interest, policy-loan interest and interest paid to government. |
+
+Counts: 11 UPHELD (one re-graded down), 4 WEAKENED, 0 REFUTED, 0 UNVERIFIABLE, plus one LOW upgraded from PLAUSIBLE.
+After re-grading: 1 HIGH, 12 MEDIUM, 2 LOW among the 15 HIGH and MEDIUM findings.
+
+## Fix first
+
+1. Retitle the "Interest households actually pay" chart as BEA's modelled nonmortgage interest over consumer credit,
+   and delete the two sentences about interest-free balances and "fewer dollars".
+2. Put the NY Fed's charged-off caveat on the state map, both state charts and the stock loan-type chart, and
+   correct the three sentences that compare stock levels across years or loan types ("range widened", "worse than
+   the median state was in 2019", "thirteen times").
+3. Set `autoescape=True` at `render.py:2531` and add a render test with a script tag in a health message.
+
+Next in line: draw the top-25 or matched-panel offered APR; say "in dollars" on the record flag; rewrite the
+charge-off and unemployment sentence; decide the commit e-mail question once for all three public repos.
+
+---
+
 # Review round 2 (2026-11-09)
 
 Adversarial review of carddash at `188ad9f` (origin/main, the 00:16 UTC bot refresh after the end of review round 1),

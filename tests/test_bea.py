@@ -111,7 +111,7 @@ def _full_file() -> str:
     return BEA_FIXTURE.read_text(encoding="utf-8") + 'A001RC,2026M01,"1"\n'
 
 
-def test_an_unchanged_file_is_not_downloaded_again(meta, tmp_path):
+def test_an_unchanged_file_is_not_downloaded_again(meta, tmp_path, capsys):
     mine = series_for_source(meta, bea.SOURCE)
     server = _FakeBea(_full_file())
     first = bea.fetch(mine, tmp_path, server, PULLED_AT)
@@ -124,6 +124,7 @@ def test_an_unchanged_file_is_not_downloaded_again(meta, tmp_path):
     second = bea.fetch(mine, tmp_path, server, PULLED_AT)
     assert server.requests[1] == {"If-None-Match": '"50ff270686cdd1:0"', "If-Modified-Since": "Wed, 04 Nov 2026 14:23:02 GMT"}
     pd.testing.assert_frame_equal(first, second)  # the 304 path parses the subset on disk to the same facts
+    assert "unchanged since Wed, 04 Nov 2026 14:23:02 GMT (HTTP 304)" in capsys.readouterr().out
     assert (tmp_path / "latest" / bea.RAW_NAME).read_bytes() == subset
 
     server.etag, server.modified = '"new:0"', "Wed, 25 Nov 2026 13:30:00 GMT"  # BEA publishes

@@ -146,7 +146,10 @@ def fetch(meta: pd.DataFrame, raw_dir: Path, session, pulled_at: str) -> pd.Data
     conditional = _conditional_headers(latest, codes)
     resp = session.get(FILE_URL, headers=conditional) if conditional else session.get(FILE_URL)
     if resp.status_code == 304 and conditional:
-        # unchanged since the subset on disk was cut from it: about 37 MB not downloaded
+        # unchanged since the subset on disk was cut from it: about 37 MB not downloaded. Said in the run's log, so
+        # the saving can be seen and a 304 is never mistaken for a fresh download.
+        print(f"[bea] NipaDataM.txt unchanged since {conditional.get('If-Modified-Since', 'the last download')} "
+              "(HTTP 304): parsed the subset on disk")
         return parse_subset((latest / RAW_NAME).read_text(encoding="utf-8"), meta, pulled_at)
     resp.raise_for_status()
     lines = subset_lines(resp.text, codes)  # also checks the header, so an HTML error page fails here

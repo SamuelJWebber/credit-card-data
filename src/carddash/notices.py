@@ -78,7 +78,8 @@ NOTICES: dict[str, Notice] = {
         read="2026-11-10",
         basis="Under 'Requirements: You must': 'Place the following notice prominently on your application'. Rights "
               "'terminate automatically' on a violation. Copyrighted series carry their owner's line (series.csv "
-              "`rights`).",
+              "`rights`). The page links the terms beside the notice; its readers never call the API (the nightly "
+              "job does), so the clauses for an application 'for use by other users' are not read as applying.",
         text=FRED_API,
     ),
     "nyfed_sce": _SCE,

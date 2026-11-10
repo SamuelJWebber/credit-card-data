@@ -5,9 +5,12 @@ from __future__ import annotations
 import datetime as dt
 import json
 
+import yaml
+
 from carddash import cli
 from carddash.alerts import needing_attention, stamp_status_since
 from carddash.loader import SourceHealth
+from conftest import REPO
 
 NOW = dt.datetime(2026, 11, 9, 22, 0, tzinfo=dt.timezone.utc)
 
@@ -101,3 +104,22 @@ def test_a_refresh_run_starts_and_keeps_the_clock(tmp_paths, monkeypatch, capsys
     assert cli.cmd_refresh(tmp_paths, ["fakesrc"], do_render=False) == 0
     second = json.loads(tmp_paths.health_json.read_text(encoding="utf-8"))["sources"]["fakesrc"]
     assert second["status"] == "failed" and second["status_since"] == "2026-11-01T00:00:00Z"
+
+
+def test_the_failure_issue_names_the_red_sources_so_they_can_be_told_apart(tmp_paths, capsys):
+    """REVIEW.md R2-6 and bigger improvement 5: the line a failed run adds to the failure issue names the sources that
+    failed to load by their short names, the three NY Fed sources told apart."""
+    tmp_paths.data.mkdir(parents=True)
+    doc = {"generated_at": "2026-11-09T22:00:00Z", "sources": {
+        name: {"source": name, "status": status, "messages": []}
+        for name, status in (("nyfed_hhdc", "failed"), ("nyfed_sce", "ok"), ("issuer_8k", "suspect"), ("bea", "stale"))}}
+    tmp_paths.health_json.write_text(json.dumps(doc), encoding="utf-8")
+    assert cli.cmd_red(tmp_paths) == 0
+    assert capsys.readouterr().out.strip() == (
+        "Issuer 8-K filings (Capital One, Synchrony, Bread, Amex); NY Fed Household Debt and Credit")
+    doc["sources"]["nyfed_hhdc"]["status"] = doc["sources"]["issuer_8k"]["status"] = "ok"
+    tmp_paths.health_json.write_text(json.dumps(doc), encoding="utf-8")
+    assert cli.cmd_red(tmp_paths) == 0 and capsys.readouterr().out == ""
+    step = yaml.safe_load((REPO / ".github" / "workflows" / "refresh.yml").read_text(encoding="utf-8"))
+    opener = next(s for s in step["jobs"]["refresh"]["steps"] if s.get("name") == "Open or update the failure issue")
+    assert "uv run carddash health --red" in opener["run"] and "${red:+ (failed to load: ${red})}" in opener["run"]

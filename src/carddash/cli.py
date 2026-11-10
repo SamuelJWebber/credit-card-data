@@ -31,6 +31,7 @@ from .paths import REPO_ROOT, Paths
 from .redact import redact, scan_paths, secret_values
 from .render import render
 from .series import load_series
+from .sources import short_name
 
 
 def read_health(paths: Paths) -> dict[str, SourceHealth]:
@@ -161,6 +162,17 @@ def cmd_health(paths: Paths, fail_on_red: bool) -> int:
     return 1 if (fail_on_red and red) else 0
 
 
+def cmd_red(paths: Paths) -> int:
+    """Print the short names of the red sources, '; '-joined, or nothing. Always exits 0.
+
+    The failure issue's line for a run says which sources failed to load, by names that tell them apart
+    (sources.SOURCE_SHORT, REVIEW.md R2-6 and bigger improvement 5)."""
+    names = [short_name(name) for name, h in sorted(read_health(paths).items()) if h.status in RED]
+    if names:
+        print("; ".join(names))
+    return 0
+
+
 def cmd_attention(paths: Paths, days: int) -> int:
     """Print the sources that have been amber for at least `days`, one markdown line each, or nothing.
 
@@ -230,6 +242,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("issuers", help="print dim_issuer and the unmatched-name report")
     h = sub.add_parser("health", help="print source health")
     h.add_argument("--fail-on-red", action="store_true")
+    h.add_argument("--red", action="store_true", help="print only the short names of the red sources, '; '-joined")
     a = sub.add_parser("attention", help="list sources amber for at least --days (markdown, empty when none)")
     a.add_argument("--days", type=int, default=ATTENTION_DAYS)
     s = sub.add_parser("scan-secrets", help="exit 1 if a secret value or credential parameter is under the paths")
@@ -247,7 +260,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "issuers":
         return cmd_issuers(paths)
     if args.cmd == "health":
-        return cmd_health(paths, args.fail_on_red)
+        return cmd_red(paths) if args.red else cmd_health(paths, args.fail_on_red)
     if args.cmd == "attention":
         return cmd_attention(paths, args.days)
     if args.cmd == "scan-secrets":

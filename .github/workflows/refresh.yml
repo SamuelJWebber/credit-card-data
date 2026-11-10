@@ -153,7 +153,9 @@ jobs:
           ON_PURPOSE: ${{ inputs.fail_on_purpose && 'yes' || '' }}
         run: |
           label=refresh-failure
-          line="- $(date -u '+%Y-%m-%d %H:%M UTC'), ${EVENT} run: ${RUN_URL}${ON_PURPOSE:+ (failed on purpose, to test this issue)}"
+          # which sources failed to load, by names that tell them apart (empty when the run failed elsewhere)
+          red=$(uv run carddash health --red 2>/dev/null || true)
+          line="- $(date -u '+%Y-%m-%d %H:%M UTC'), ${EVENT} run: ${RUN_URL}${red:+ (failed to load: ${red})}${ON_PURPOSE:+ (failed on purpose, to test this issue)}"
           num=$(gh issue list --label "$label" --state open --limit 1 --json number --jq '.[0].number // empty' || true)
           if [ -n "$num" ]; then
             gh issue view "$num" --json body --jq .body > "$RUNNER_TEMP/body.md"

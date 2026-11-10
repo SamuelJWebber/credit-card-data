@@ -136,7 +136,14 @@ until listed in `checks/restatement_ack.yaml`. This catches swapped columns that
 ### 5.4 Golden checks
 `checks/golden.yaml` holds numbers copied by hand from release pages. The fixture test runs all of them;
 the live run checks the ones marked `check_live` (periods old enough not to be revised). A live mismatch
-turns the source amber.
+turns the source amber. Each entry's `origin_url` is a dated copy of the document that states the number; an entry
+the document only implies carries `derived` (the arithmetic, '100 - 4.7') and `stated` (the numbers the document
+does state). `checks/verify_provenance.py` re-reads every entry in its document, weekly in Actions (2026-11-10).
+
+### 5.4a Run identity
+Each bot commit names the Actions run that made it (`Run-Id`, `Run-Attempt` and `Event` trailers), and health.json
+carries the same in `run` beside `generated_at`. `checks/verify_releases.py` grades each run by the commit that run
+made; matching on time alone credited a run with the next run's commit (REVIEW.md R2-1).
 
 ### 5.5 Failure behaviour
 A source that fails fetch or validation keeps its prior rows and goes red. The build continues, the page

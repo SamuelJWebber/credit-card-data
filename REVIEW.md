@@ -162,7 +162,7 @@ Status: Fixed in aabfb42. `carddash check` checks the live entries (45 pass, exi
   - The correct push form: `GH_TOKEN=$(gh auth token --user SamuelJWebber)`, never `gh auth switch`.
 - **Verify.** Read it, and run `git log -1 -- HANDOFF.md`.
 
-Status: Fixed in the HANDOFF.md rewrite that closes this round (`git log -1 -- HANDOFF.md`). HANDOFF.md is rewritten for 2026-11-09 (the outage, the fixes, the pending scheduled run, the Comenity and BEA dates) and gives the push form `GH_TOKEN=$(gh auth token --user SamuelJWebber)`, never `gh auth switch`.
+Status: Fixed in 1b634dc. HANDOFF.md is rewritten for 2026-11-09 (the outage, the fixes, the pending scheduled run, the Comenity and BEA dates) and gives the push form `GH_TOKEN=$(gh auth token --user SamuelJWebber)`, never `gh auth switch`.
 
 ### R1-8 MEDIUM: third-party series are credited to the "Federal Reserve Board" on charts and PNGs
 

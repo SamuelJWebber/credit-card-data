@@ -36,25 +36,27 @@ def test_the_page_parses_to_the_numbers_the_goldens_cite(vg):
 
 
 class _Pages:
-    """make_session() stand-in: serves the checked-in page for the dated URL and for 'current'."""
+    """make_session() stand-in: serves one page, by default the checked-in release, for every URL."""
 
-    def __init__(self):
-        self.urls = []
+    def __init__(self, text=PAGE, status=200):
+        self.urls, self.text, self.status = [], text, status
 
     def get(self, url):
         self.urls.append(url)
 
         class R:
-            text = PAGE
+            text = self.text
+            content = self.text.encode("utf-8")
+            status_code = self.status
 
         return R()
 
 
-def _run(vg, monkeypatch, tmp_path, entries, *args):
+def _run(vg, monkeypatch, tmp_path, entries, *args, pages=None):
     root = tmp_path / "repo"
     (root / "checks").mkdir(parents=True, exist_ok=True)
     (root / "checks" / "golden.yaml").write_text(yaml.safe_dump(entries, sort_keys=False), encoding="utf-8")
-    pages = _Pages()
+    pages = pages or _Pages()
     monkeypatch.setattr(vg, "make_session", lambda: pages)
     monkeypatch.setattr(vg, "load_dotenv", lambda path: None)
     monkeypatch.setattr(vg, "__file__", str(root / "checks" / "verify_g19.py"))
@@ -89,3 +91,47 @@ def test_rebase_prints_the_entry_with_the_current_value_and_its_dated_page(vg, m
     # nothing to re-base when everything matches
     code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY], "--rebase")
     assert code == 0 and "Re-based entries" not in capsys.readouterr().out
+
+
+DENIED = "<html><head><title>Access Denied</title></head><body><h1>Access Denied</h1></body></html>"
+
+
+@pytest.mark.parametrize("mode", [[], ["--rebase"], ["--provenance"]])
+def test_a_page_that_did_not_load_is_an_error_in_every_mode(vg, monkeypatch, tmp_path, capsys, mode):
+    """REVIEW.md R2-4: a 403 'Access Denied' page parsed to no tables, every entry was skipped, and the default and
+    --rebase modes printed "all checked entries match the current release page" and exited 0."""
+    code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY], *mode, pages=_Pages(DENIED, status=403))
+    out = capsys.readouterr().out
+    assert code == 1 and "all checked entries match" not in out
+    assert "answered HTTP 403, not 200" in out
+
+
+@pytest.mark.parametrize("mode", [[], ["--rebase"], ["--provenance"]])
+def test_a_200_page_that_is_not_a_release_is_an_error(vg, monkeypatch, tmp_path, capsys, mode):
+    code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY], *mode, pages=_Pages(DENIED.replace("Access Denied", "Maintenance")))
+    out = capsys.readouterr().out
+    assert code == 1 and "carries no 'Release Date'" in out and "all checked entries match" not in out
+
+
+def test_a_release_whose_tables_did_not_parse_checks_nothing_and_says_so(vg, monkeypatch, tmp_path, capsys):
+    bare = "<p>Release Date: September 8, 2026</p>"  # a release page whose layout this parser no longer reads
+    code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY], pages=_Pages(bare))
+    out = capsys.readouterr().out
+    assert code == 1 and "MISSING g19_revolving_sa_2026_05: no 'Revolving' row on the current page" in out
+    assert "0 checked (0 PASS, 0 FAIL), 0 aged off the page, 1 missing" in out
+    assert "0 entries checked: nothing was compared" in out
+
+
+def test_a_month_that_aged_off_the_page_is_skipped_and_a_column_that_vanished_is_not(vg, monkeypatch, tmp_path, capsys):
+    """The page prints only its last three months; an older month is expected to be gone. A month the page should
+    print and does not is a layout problem, and fails."""
+    older = {**ENTRY, "id": "g19_revolving_sa_2026_02", "period_end": "2026-02-28", "expected": 1320.0}
+    code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY, older])
+    out = capsys.readouterr().out
+    assert code == 0 and "SKIP g19_revolving_sa_2026_02: Feb 2026 is older than the page's oldest month (May 2026)" in out
+    assert "1 checked (1 PASS, 0 FAIL), 1 aged off the page, 0 missing" in out
+    no_july = PAGE.replace(">Jul<", ">Xyz<")  # the July column is gone though May and June are there
+    july = {**ENTRY, "id": "g19_revolving_sa_2026_07", "period_end": "2026-07-31", "expected": 1352.6}
+    code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY, july], pages=_Pages(no_july))
+    out = capsys.readouterr().out
+    assert code == 1 and "MISSING g19_revolving_sa_2026_07: none of ['Jul 2026'], though the page runs from May 2026" in out

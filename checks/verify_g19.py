@@ -15,6 +15,11 @@ The two modes answer different questions. The default asks whether a golden stil
 asks whether the release each entry cites (its origin_url, a dated archive page such as /releases/g19/20260908/,
 which never changes) states that number, so it must pass for fixture-only entries too, forever (REVIEW.md R1-11:
 origin_url used to be the 'current' page, which stops showing a number one release later).
+
+It fails closed (REVIEW.md R2-4). A page that does not answer 200, or carries no 'Release Date', is an error, not
+a release with nothing in it: that once turned an 'Access Denied' page into 13 SKIPs, "all checked entries match"
+and exit 0. The last line counts what was compared, and the exit code is 1 when nothing was, or when more entries
+were skipped than checked (the page's layout has probably changed).
 """
 
 from __future__ import annotations
@@ -28,7 +33,7 @@ from pathlib import Path
 import yaml
 
 from carddash.cli import load_dotenv
-from carddash.http import make_session
+from carddash.http import CheckFailed, fetch_or_die, make_session
 
 G19_URL = "https://www.federalreserve.gov/releases/g19/current/default.htm"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -142,6 +147,17 @@ def columns_for(period_end: dt.date, period_type: str) -> list[str]:
     raise ValueError(period_type)
 
 
+def oldest_month(row: dict[str, str]) -> dt.date | None:
+    """The end of the oldest month column ('Jul 2026') a page row prints, or None if it prints no month."""
+    months = []
+    for key in row:
+        m = re.fullmatch(r"([A-Z][a-z]{2}) (20\d\d)", key)
+        if m and m.group(1) in MONTHS:
+            y, mo = int(m.group(2)), MONTHS.index(m.group(1)) + 1
+            months.append(dt.date(y + mo // 12, mo % 12 + 1, 1) - dt.timedelta(days=1))
+    return min(months) if months else None
+
+
 def release_date(page: str) -> dt.date | None:
     """The 'Release Date: September 8, 2026' line every G.19 page carries."""
     m = re.search(r"Release Date.*?:\s*([A-Z][a-z]+ \d{1,2}, \d{4})", page, flags=re.S)
@@ -170,49 +186,76 @@ def main(argv: list[str] | None = None) -> int:
     session = make_session()
     pages: dict[str, list] = {}
 
-    released: dict[str, dt.date | None] = {}
+    released: dict[str, dt.date] = {}
 
     def tables_for(url: str) -> list:
         if url not in pages:
-            page = session.get(url).text
+            page = fetch_or_die(session, url).text
+            when = release_date(page)
+            if when is None:
+                raise CheckFailed(f"{url} carries no 'Release Date': not a G.19 release page")
             pages[url] = parse_tables(page)
-            released[url] = release_date(page)
+            released[url] = when
         return pages[url]
 
-    bad = 0
-    for e in entries:
-        if "/releases/g19/" not in e.get("origin_url", ""):
-            continue
-        key = (e["metric"], e["entity"]) if (e["metric"], e["entity"]) in ROW_FOR_METRIC else e["metric"]
-        if key not in ROW_FOR_METRIC:
-            print(f"SKIP {e['id']}: no page row mapped for {key}")
-            continue
-        url = e["origin_url"] if provenance else G19_URL
-        tables = tables_for(url)
-        label, kind = ROW_FOR_METRIC[key]
-        row = find_row(tables, label, kind)
-        cands = columns_for(dt.date.fromisoformat(str(e["period_end"])), e["period_type"])
-        col, got = None, None
-        for c in cands:
-            got = _num(row.get(c, "")) if row else None
-            if got is not None:
-                col = c
-                break
-        if got is None:
-            if provenance:  # the cited release must show the cited period: not finding it is a broken citation
-                bad += 1
-                print(f"FAIL {e['id']}: none of {cands} on {url}")
+    bad = passed = aged = missing = 0
+    try:
+        for e in entries:
+            if "/releases/g19/" not in e.get("origin_url", ""):
                 continue
-            # the page only shows the last three months and quarter/year ends; older months are not checkable here
-            print(f"SKIP {e['id']}: none of {cands} on the current page")
-            continue
-        ok = abs(got - float(e["expected"])) <= float(e.get("tolerance", 0))
-        bad += 0 if ok else 1
-        where = url.split("/releases/g19/")[1].split("/")[0]
-        print(f"{'PASS' if ok else 'FAIL'} {e['id']}: page {got} vs golden {e['expected']} (column {col}, {where})")
-        if rebase and not ok and released.get(url):
-            candidates.append(rebased_entry(e, got, col, released[url]))
+            key = (e["metric"], e["entity"]) if (e["metric"], e["entity"]) in ROW_FOR_METRIC else e["metric"]
+            if key not in ROW_FOR_METRIC:
+                missing += 1
+                print(f"MISSING {e['id']}: no page row mapped for {key} in ROW_FOR_METRIC")
+                continue
+            url = e["origin_url"] if provenance else G19_URL
+            tables = tables_for(url)
+            label, kind = ROW_FOR_METRIC[key]
+            row = find_row(tables, label, kind)
+            period_end = dt.date.fromisoformat(str(e["period_end"]))
+            cands = columns_for(period_end, e["period_type"])
+            col, got = None, None
+            for c in cands:
+                got = _num(row.get(c, "")) if row else None
+                if got is not None:
+                    col = c
+                    break
+            if got is None:
+                if provenance:  # the cited release must show the cited period: not finding it is a broken citation
+                    bad += 1
+                    print(f"FAIL {e['id']}: none of {cands} on {url}")
+                    continue
+                oldest = oldest_month(row) if row else None
+                if oldest and period_end < oldest:
+                    # the page prints only its last few months (and quarter and year ends): an older month has aged
+                    # off it, which is expected, and --provenance still checks it against the release it cites
+                    aged += 1
+                    print(f"SKIP {e['id']}: {cands[0]} is older than the page's oldest month ({oldest:%b %Y})")
+                    continue
+                missing += 1  # the row or the column should be there and is not: the layout may have changed
+                where = f"no '{label}' row" if not row else f"none of {cands}, though the page runs from {oldest:%b %Y}" \
+                    if oldest else f"none of {cands}"
+                print(f"MISSING {e['id']}: {where} on the current page")
+                continue
+            ok = abs(got - float(e["expected"])) <= float(e.get("tolerance", 0))
+            bad += 0 if ok else 1
+            passed += 1 if ok else 0
+            where = url.split("/releases/g19/")[1].split("/")[0]
+            print(f"{'PASS' if ok else 'FAIL'} {e['id']}: page {got} vs golden {e['expected']} (column {col}, {where})")
+            if rebase and not ok:
+                candidates.append(rebased_entry(e, got, col, released[url]))
+    except CheckFailed as exc:
+        print(f"ERROR {exc}. Nothing after this was checked.")
+        return 1
     what = "the release each entry cites" if provenance else "the current release page"
+    checked = passed + bad
+    print(f"{checked} checked ({passed} PASS, {bad} FAIL), {aged} aged off the page, {missing} missing")
+    if checked == 0:
+        print("0 entries checked: nothing was compared, so nothing is known to match")
+        return 1
+    if missing:
+        print(f"{missing} entr{'y' if missing == 1 else 'ies'} could not be found on {what}: has its layout changed?")
+        return 1
     print(f"all checked entries match {what}" if not bad else f"{bad} mismatch(es)")
     if candidates:
         print("\n# Re-based entries for checks/golden.yaml. Read each number on the page first; if a LIVE entry sits")

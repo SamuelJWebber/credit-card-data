@@ -44,6 +44,27 @@ def require_contact() -> str:
     return contact
 
 
+class CheckFailed(RuntimeError):
+    """A manual checker (checks/) could not read what it was asked to check. Never a pass."""
+
+
+def fetch_or_die(session, url: str) -> requests.Response:
+    """GET `url` for a manual checker, refusing anything but an HTTP 200 with a body.
+
+    The checkers in checks/ fail closed: checks/verify_g19.py once read the Fed's error page as a release with no
+    tables, skipped every entry, printed that all of them matched and exited 0 (REVIEW.md R2-4)."""
+    try:
+        resp = session.get(url)
+    except requests.RequestException as exc:
+        raise CheckFailed(f"could not fetch {url}: {type(exc).__name__}") from exc
+    status = getattr(resp, "status_code", None)
+    if status != 200:
+        raise CheckFailed(f"{url} answered HTTP {status}, not 200")
+    if not resp.content:
+        raise CheckFailed(f"{url} answered 200 with an empty body")
+    return resp
+
+
 def make_session() -> requests.Session:
     session = requests.Session()
     retry = Retry(

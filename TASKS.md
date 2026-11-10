@@ -672,6 +672,24 @@ Not done, and why: improvement 6 (one copy of the CSVs, a separate JSON) changes
 breaks the page from file://; improvement 7 (credit unions on the FDIC issuer charts) mixes NCUA and call-report
 definitions and is a new chart under the scope rule. Both are suggestions for the user, in HANDOFF.md.
 
+## v1.19: review round 2 (2026-11-10, REVIEW.md)
+
+Six findings (4 MEDIUM, 2 LOW) and five of the review's bigger improvements, each with a test that fails on the old
+code; REVIEW.md carries a status line under each. Pass condition for the round: the suite green, every main command
+exits 0, every golden found in the document it cites (live), and the first scheduled run after the push green.
+
+| # | Task | Pass condition | Status |
+|---|------|----------------|--------|
+| 55 | verify_releases.py grades each run by its own commit (R2-1, improvement 1) | Run-Id trailers and health.json "run"; job-window fallback; the two real pairs of runs from 2026-11-09 graded right; `--watch` and a daily watch workflow for a night with no run | done 2026-11-10 |
+| 56 | The notices the publishers require (R2-2, improvement 3) | FRED API notice, SCE attribution and disclaimer word for word, NY Fed Terms of Use attribution, on the page, the README and the PNGs; an entry per source in notices.py | done 2026-11-10 |
+| 57 | Golden provenance (R2-3, improvement 2) | The 404 and the two wrong-document links fixed; offline SEC index test; `verify_provenance.py` 70 of 70 live; weekly workflow; the SCE entries on a dated archive copy | done 2026-11-10, seen live |
+| 58 | Fail-closed checkers (R2-4, improvement 4) | `verify_g19.py` exits 1 on a 403 in all three modes and counts what it checked; `fetch_or_die` | done 2026-11-10, seen live |
+| 59 | Docs and names (R2-5, R2-6, improvement 5) | The stale lines gone and guarded by a test; the banner, due line, attention and failure issues name sources in full | done 2026-11-10 |
+
+Not done, and why: round 1's improvement 6 (one copy of the CSVs) buys nothing, because data/facts.csv and
+docs/data/facts.csv are one git blob (so are the revisions files); improvement 7 (credit unions on the issuer charts)
+is still a scope call for the user.
+
 ## v1.5 (after two green releases)
 - Order (from the 2026-09-07 scouting): NY Fed SCE Credit Access first (direct xlsx, no gate, about half a session), then CFPB complaints via the trends endpoint (one session), then BEA PCE detail via the keyless NipaDataM.txt flat file (the API needs a key; half to one session), then Census Monthly Retail Trade via the keyless mrtssales92-present.xlsx (the API needs a key even at low volume; one session). Details, URLs and risks in design/handoff-2026-09-07.html §3.
 - Spend panel.

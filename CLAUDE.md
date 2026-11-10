@@ -5,7 +5,7 @@ Design: PLAN.md. Reasoning behind the design: design/PLAN-review.md. Task board:
 
 ## Start and end of every session
 - Start: read `HANDOFF.md`, run `python -m uv run pytest`, report status before doing anything.
-  Open `TASKS.md` only for the task you are actually doing — it is 725 lines and is the archive as much
+  Open `TASKS.md` only for the task you are actually doing — it is over 750 lines and is the archive as much
   as the board, so reading it end to end costs about 29,000 tokens before any work starts.
 - One bounded task per session, with the pass condition written in TASKS.md before work starts.
 - End: tests green, `git commit` with a plain message, TASKS.md updated, one-paragraph handoff.

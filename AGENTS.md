@@ -47,4 +47,9 @@ rule is what stops the drift.
 The repo is `SamuelJWebber/credit-card-data` (moved from `User5017` on 2026-11-09; the old URLs redirect). Push as
 **SamuelJWebber**, the account with the `workflow` scope, ideally via `GH_TOKEN=$(gh auth token --user SamuelJWebber)`.
 
+Three workflows. `refresh.yml` (nightly, and on every push that touches code) is the only one that writes to the
+repository. `provenance.yml` (Mondays 12:17 UTC) checks every golden against the document it cites, and `watch.yml`
+(daily 12:41 UTC) notices a night with no scheduled refresh run; both only open or close an issue. Each issue
+mentions the owner once, when it opens.
+
 After CLAUDE.md, read `HANDOFF.md` for what is true right now — and **rewrite HANDOFF.md before the session ends**, never append to it. It is the only channel Codex and Claude Code share.

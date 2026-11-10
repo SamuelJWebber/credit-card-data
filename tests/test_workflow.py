@@ -68,16 +68,38 @@ def test_the_failure_issue_can_be_tested_without_fetching_anything():
 
 
 def test_actions_are_pinned_to_commits():
-    """REVIEW.md R1-16: tags can be moved, and this job holds contents: write and both secrets."""
+    """REVIEW.md R1-16: tags can be moved, and the refresh job holds contents: write and both secrets. Every workflow
+    pins, and one action is pinned to the same commit everywhere."""
     import re
 
-    text = WORKFLOW.read_text(encoding="utf-8")
-    uses = re.findall(r"^\s*-?\s*uses:\s*(\S+)(.*)$", text, flags=re.M)
-    assert uses, "no actions found"
-    for ref, comment in uses:
-        name, _, version = ref.partition("@")
-        assert re.fullmatch(r"[0-9a-f]{40}", version), f"{name} is pinned to {version!r}, not a commit"
-        assert re.search(r"#\s*v\d", comment), f"{name}: say which release the commit is"
+    pins: dict[str, set[str]] = {}
+    for path in sorted(WORKFLOW.parent.glob("*.yml")):
+        text = path.read_text(encoding="utf-8")
+        uses = re.findall(r"^\s*-?\s*uses:\s*(\S+)(.*)$", text, flags=re.M)
+        assert uses, f"{path.name}: no actions found"
+        for ref, comment in uses:
+            name, _, version = ref.partition("@")
+            assert re.fullmatch(r"[0-9a-f]{40}", version), f"{path.name}: {name} is pinned to {version!r}, not a commit"
+            assert re.search(r"#\s*v\d", comment), f"{path.name}: {name}: say which release the commit is"
+            pins.setdefault(name, set()).add(version)
+    assert all(len(v) == 1 for v in pins.values()), pins
+
+
+def test_a_weekly_run_checks_every_golden_against_its_document():
+    """REVIEW.md R2-3 and bigger improvement 2: a golden link answered 404 for two months and nothing noticed."""
+    doc = yaml.safe_load((WORKFLOW.parent / "provenance.yml").read_text(encoding="utf-8"))
+    assert doc[True]["schedule"][0]["cron"].endswith("* * 1") and "workflow_dispatch" in doc[True]
+    assert doc["permissions"] == {"contents": "read", "issues": "write"}  # it never writes to the repository
+    steps = {s.get("name", s.get("uses", "")): s for s in doc["jobs"]["provenance"]["steps"]}
+    check = steps["Every golden against the document it cites"]["run"]
+    assert "checks/verify_provenance.py" in check and "checks/verify_g19.py --provenance" in check
+    assert "exit $status" in check
+    opener, closer = steps["Open or update the provenance issue"], steps["Close the provenance issue"]
+    assert opener["if"].startswith("failure()") and closer["if"] == "success()"
+    assert opener["continue-on-error"] is True and closer["continue-on-error"] is True
+    assert "gh issue create" in opener["run"] and "gh issue edit" in opener["run"] and "gh issue close" in closer["run"]
+    # the owner is mentioned once, when the issue opens, not on every weekly rewrite
+    assert opener["run"].count("@${OWNER}") == 1 and "first.md" in opener["run"]
 
 
 def test_each_bot_commit_names_the_run_that_made_it(tmp_path, monkeypatch):

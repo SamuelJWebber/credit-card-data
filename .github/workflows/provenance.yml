@@ -1,0 +1,89 @@
+name: provenance
+
+# Weekly: every golden number against the document it cites (checks/verify_provenance.py) and the G.19 entries cell
+# by cell (checks/verify_g19.py --provenance). A link that 404s or a number its document no longer states keeps one
+# issue open until a run passes. REVIEW.md R2-3 found a golden link that had answered 404 for two months and two that
+# linked a page without their numbers; nothing ran this check. It writes nothing to the repository.
+
+on:
+  schedule:
+    - cron: "17 12 * * 1"  # Mondays 12:17 UTC, hours clear of the nightly refresh
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: provenance
+  cancel-in-progress: false
+
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    steps:
+      # Pinned to commits, like the refresh workflow (REVIEW.md R1-16).
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5.1.0
+
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e  # v6.8.0
+        with:
+          enable-cache: true
+
+      - name: Install
+        id: install
+        run: uv sync --frozen
+
+      - name: Every golden against the document it cites
+        env:
+          # The pipeline's own User-Agent, 'carddash/<version> <contact>'; the SEC refuses requests without a contact.
+          CARDDASH_CONTACT: ${{ secrets.CARDDASH_CONTACT }}
+        run: |
+          status=0
+          uv run python checks/verify_provenance.py > "$RUNNER_TEMP/provenance.txt" 2>&1 || status=1
+          uv run python checks/verify_g19.py --provenance >> "$RUNNER_TEMP/provenance.txt" 2>&1 || status=1
+          cat "$RUNNER_TEMP/provenance.txt"
+          exit $status
+
+      - name: Open or update the provenance issue
+        if: failure() && steps.install.outcome == 'success'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          label=provenance
+          {
+            echo "A golden number no longer traces to the document it cites: the link is dead, or the document no"
+            echo "longer states the number. checks/golden.yaml is what the nightly run checks the data against, so"
+            echo "fix the entry's origin_url (or re-base it) before trusting its check. This issue is rewritten each"
+            echo "week and closed by the first run that passes."
+            echo
+            echo "Run: ${RUN_URL}"
+            echo
+            echo '```'
+            grep -E "^(FAIL|ERROR|MISSING)|checked" "$RUNNER_TEMP/provenance.txt" | head -60 || true
+            echo '```'
+          } > "$RUNNER_TEMP/body.md"
+          num=$(gh issue list --label "$label" --state open --limit 1 --json number --jq '.[0].number // empty' || true)
+          if [ -n "$num" ]; then
+            gh issue edit "$num" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh label create "$label" --color 5319E7 --description "A golden number no longer traces to its release" --force
+            { echo "@${OWNER}"; echo; cat "$RUNNER_TEMP/body.md"; } > "$RUNNER_TEMP/first.md"
+            gh issue create --title "A golden number no longer traces to its release" --label "$label" --body-file "$RUNNER_TEMP/first.md"
+          fi
+
+      - name: Close the provenance issue
+        if: success()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          num=$(gh issue list --label provenance --state open --limit 1 --json number --jq '.[0].number // empty' || true)
+          if [ -n "$num" ]; then
+            gh issue close "$num" --comment "Every golden traces to its document again: ${RUN_URL}"
+          fi

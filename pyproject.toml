@@ -19,7 +19,10 @@ dependencies = [
 carddash = "carddash.cli:main"
 
 [dependency-groups]
-dev = ["pytest>=8.3"]
+dev = [
+    "pypdf>=6,<6.21",
+    "pytest>=8.3",
+]
 
 [build-system]
 requires = ["hatchling"]

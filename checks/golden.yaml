@@ -403,8 +403,8 @@
   expected: 23.1
   tolerance: 0.05
   check_live: true
-  origin: "NY Fed Survey of Consumer Expectations Credit Access Survey page, June 2026 wave: 'The overall rejection rate for any kind of credit over the past twelve months increased slightly to 16.1 percent in June, but remains well below the June 2025 reading of 23.1 percent.'"
-  origin_url: https://www.newyorkfed.org/microeconomics/sce/credit-access
+  origin: "NY Fed Survey of Consumer Expectations Credit Access Survey page, June 2026 wave, as the Internet Archive saved it on 2026-10-08 (the NY Fed keeps no dated copy): 'The overall rejection rate for any kind of credit over the past twelve months increased slightly to 16.1 percent in June, but remains well below the June 2025 reading of 23.1 percent.'"
+  origin_url: https://web.archive.org/web/20261008142500/https://www.newyorkfed.org/microeconomics/sce/credit-access
 
 - id: sce_any_rejection_2026_06
   metric: sce_any_rejection_rate
@@ -417,7 +417,7 @@
   tolerance: 0.05
   check_live: false
   origin: "Same page and sentence, the June 2026 reading: 16.1 percent. Newest wave, fixture-only."
-  origin_url: https://www.newyorkfed.org/microeconomics/sce/credit-access
+  origin_url: https://web.archive.org/web/20261008142500/https://www.newyorkfed.org/microeconomics/sce/credit-access
 
 # G.19 by major holder (not seasonally adjusted). The release page's holder table prints year-end and monthly
 # levels in billions; the 2025 year-end column is checked live, June 2026 is preliminary ('p') and fixture-only.

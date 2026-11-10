@@ -1,15 +1,27 @@
 """Task 8 check: were the last scheduled refresh runs green for every source?
 
 For each recent run of the refresh workflow (scheduled by default; --event push for the push-triggered ones) this
-finds the bot commit the run pushed (the 'refresh: <stamp>' commit whose health.json generated_at falls inside the
-run's window), reads every source's status from that health.json, and says whether the newest N consecutive
-scheduled runs were all green. A run that committed nothing, failed before committing, or has a source that is not
-'ok' breaks the streak.
+finds the bot commit THAT run pushed, reads every source's status from that commit's health.json, and says whether
+the newest N consecutive runs were all green. A run that committed nothing, failed before committing, or has a
+source that is not 'ok' breaks the streak.
 
-Needs `gh` (authenticated) and the repo's git history (fetch first: the bot commits live on origin/main).
+How a run is matched to its commit (REVIEW.md R2-1):
+1. By name. Since 2026-11-10 every bot commit says which run made it, in 'Run-Id:' and 'Run-Attempt:' trailers
+   (and health.json carries the same in "run"). A rerun makes a second commit for the same run id; the attempt the
+   API reports as the run's latest decides.
+2. For older commits, which name no run, by the JOB's window: from when a runner started the refresh job to when it
+   finished (the jobs API), with no slack. Runs in the 'refresh' concurrency group never execute at the same time,
+   so one stamp at most falls inside. Without the jobs API, the run's own window (run_started_at to updated_at, no
+   slack) and the newest stamp inside it. The window used to run from created_at to 5 minutes past updated_at and
+   take the newest stamp, which credited a run with the NEXT run's commit; and a run that queued behind another
+   reports created_at and run_started_at as the time it was queued, not the time it ran.
+
+It runs `git fetch origin main` first (a clone even one commit behind used to report a green run as 'no bot
+commit found'), and fails closed: no runs, or no bot commits on the ref, is exit 1. Needs `gh`, authenticated.
 
     uv run python checks/verify_releases.py            # the last 5 scheduled runs, verdict on the newest 2
     uv run python checks/verify_releases.py --event push --limit 8
+    uv run python checks/verify_releases.py --limit 1 --need 1 --max-age-hours 30   # last night's run, if any
 """
 
 from __future__ import annotations
@@ -17,11 +29,13 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import subprocess
 import sys
 
 OWNER_REPO = "SamuelJWebber/credit-card-data"
 WORKFLOW = "refresh.yml"
+JOB = "refresh"
 GREEN = "ok"
 
 
@@ -37,19 +51,43 @@ def runs(event: str, limit: int) -> list[dict]:
     return json.loads(out)["workflow_runs"]
 
 
-def bot_commits(ref: str) -> list[tuple[str, dt.datetime, dict | None]]:
-    """(sha, committer time, health.json at that commit) for every 'refresh:' commit on `ref`, newest first."""
-    log = sh("git", "log", ref, "--format=%H %cI %s", "--committer=carddash-bot", "-n", "200")
+def job_window(run_id: int) -> tuple[dt.datetime, dt.datetime | None] | None:
+    """When a runner started and finished the refresh job of this run, or None if the jobs API cannot say."""
+    try:
+        jobs = json.loads(sh("gh", "api", f"repos/{OWNER_REPO}/actions/runs/{run_id}/jobs"))["jobs"]
+    except (subprocess.CalledProcessError, KeyError, ValueError):
+        return None
+    job = next((j for j in jobs if j.get("name") == JOB), jobs[0] if len(jobs) == 1 else None)
+    if not job or not job.get("started_at"):
+        return None
+    return _ts(job["started_at"]), (_ts(job["completed_at"]) if job.get("completed_at") else None)
+
+
+def _trailer(body: str, key: str) -> int | None:
+    m = re.search(rf"^{key}:\s*(\d+)\s*$", body, flags=re.M)
+    return int(m.group(1)) if m else None
+
+
+def bot_commits(ref: str) -> list[dict]:
+    """Every 'refresh:' commit on `ref`, newest first: sha, health.json at that commit, the stamp it carries and the
+    run that made it (from the commit's trailers, else from health.json; None for commits older than both)."""
+    log = sh("git", "log", ref, "--format=%H%x1f%cI%x1f%s%x1f%b%x1e", "--committer=carddash-bot", "-n", "200")
     out = []
-    for line in log.splitlines():
-        sha, when, *msg = line.split(" ", 2)
-        if not msg or not msg[0].startswith("refresh:"):
+    for record in log.split("\x1e"):
+        fields = record.strip("\n").split("\x1f")
+        if len(fields) < 4 or not fields[2].startswith("refresh:"):
             continue
+        sha, _when, _subject, body = fields[:4]
         try:
             health = json.loads(sh("git", "show", f"{sha}:data/health.json"))
-        except subprocess.CalledProcessError:
+        except (subprocess.CalledProcessError, ValueError):
             health = None
-        out.append((sha, dt.datetime.fromisoformat(when), health))
+        named = (health or {}).get("run") or {}
+        run_id = _trailer(body, "Run-Id") or named.get("id")
+        attempt = _trailer(body, "Run-Attempt") or named.get("attempt")
+        stamp = _ts(health["generated_at"]) if health and health.get("generated_at") else None
+        out.append({"sha": sha, "health": health, "stamp": stamp,
+                    "run_id": int(run_id) if run_id else None, "attempt": int(attempt) if attempt else None})
     return out
 
 
@@ -57,16 +95,36 @@ def _ts(s: str) -> dt.datetime:
     return dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
 
 
-def match(run: dict, commits) -> tuple[str | None, dict | None]:
-    """The bot commit whose health.json generated_at lies inside the run's window, if any."""
-    start, end = _ts(run["created_at"]), _ts(run["updated_at"]) + dt.timedelta(minutes=5)
-    for sha, _when, health in commits:
-        if not health or not health.get("generated_at"):
-            continue
-        stamp = _ts(health["generated_at"])
-        if start <= stamp <= end:
-            return sha, health
-    return None, None
+def by_run_id(run: dict, commits: list[dict]) -> dict | None:
+    """The commit that names this run; of a rerun's commits, the one of the attempt the API calls the latest."""
+    mine = [c for c in commits if c["run_id"] == run["id"]]
+    latest = [c for c in mine if c["attempt"] == run.get("run_attempt")]
+    return (latest or mine or [None])[0]
+
+
+def by_window(run: dict, commits: list[dict], window) -> tuple[dict | None, str]:
+    """For commits older than run names: the newest stamp inside the job window, else inside the run window."""
+    how = "job window"
+    if window is None:
+        how = "run window"
+        window = (_ts(run.get("run_started_at") or run["created_at"]), _ts(run["updated_at"]))
+    start, end = window[0], window[1] or _ts(run["updated_at"])
+    # a commit that names a run is never another run's
+    inside = [c for c in commits if c["run_id"] is None and c["stamp"] and start <= c["stamp"] <= end]
+    return (inside[0], how) if inside else (None, "none")
+
+
+def match(run: dict, commits: list[dict], window=None) -> tuple[dict | None, str]:
+    """The bot commit `run` pushed, and how it was found ('run id', 'job window', 'run window' or 'none').
+    `window` is the job's (started, completed), or a function returning it, called only when no commit names the run."""
+    commit = by_run_id(run, commits)
+    if commit:
+        return commit, "run id"
+    return by_window(run, commits, window() if callable(window) else window)
+
+
+def _now() -> dt.datetime:
+    return dt.datetime.now(dt.timezone.utc)
 
 
 def main(argv=None) -> int:
@@ -75,22 +133,39 @@ def main(argv=None) -> int:
     p.add_argument("--limit", type=int, default=5, help="how many recent runs to list")
     p.add_argument("--need", type=int, default=2, help="how many consecutive newest runs must be all green")
     p.add_argument("--ref", default="origin/main", help="git ref carrying the bot commits")
+    p.add_argument("--no-fetch", action="store_true", help="do not run `git fetch origin main` first")
+    p.add_argument("--max-age-hours", type=float, default=None,
+                   help="also fail when the newest run is older than this (a night with no scheduled run at all)")
     args = p.parse_args(argv)
 
+    if not args.no_fetch:
+        sh("git", "fetch", "--quiet", "origin", "main")
     commits = bot_commits(args.ref)
+    if not commits:
+        print(f"no bot commits on {args.ref}: is this a clone of {OWNER_REPO}, and did the fetch work?")
+        return 1
     rows = []
     for run in runs(args.event, args.limit):
-        sha, health = match(run, commits)
-        statuses = {s: d.get("status") for s, d in (health or {}).get("sources", {}).items()}
+        commit, how = match(run, commits, lambda rid=run["id"]: job_window(rid))
+        health = (commit or {}).get("health") or {}
+        statuses = {s: d.get("status") for s, d in health.get("sources", {}).items()}
         all_green = bool(statuses) and all(v == GREEN for v in statuses.values()) and run["conclusion"] == "success"
-        rows.append((run, sha, statuses, all_green))
+        rows.append((run, commit, statuses, all_green))
         stamp = run["created_at"][:16].replace("T", " ")
         summary = ", ".join(f"{s}={v}" for s, v in sorted(statuses.items())) or "no bot commit found"
+        sha = (commit or {}).get("sha") or ""
         print(f"{run['id']}  {stamp} UTC  {run['event']:9s} {run['conclusion'] or run['status']:9s} "
-              f"{(sha or '')[:7]:7s} {'GREEN' if all_green else 'not green'}  {summary}")
+              f"{sha[:7]:7s} {'GREEN' if all_green else 'not green'}  {summary}"
+              + (f"  (matched by {how})" if commit else ""))
     if not rows:
         print(f"no {args.event} runs of {WORKFLOW} yet")
         return 1
+    if args.max_age_hours is not None:
+        age = _now() - _ts(rows[0][0]["created_at"])
+        if age > dt.timedelta(hours=args.max_age_hours):
+            print(f"\nMISSING: the newest {args.event} run was created {age.total_seconds() / 3600:.1f} hours ago, "
+                  f"more than {args.max_age_hours:g}")
+            return 1
     newest = rows[: args.need]
     ok = len(newest) == args.need and all(r[3] for r in newest)
     print(

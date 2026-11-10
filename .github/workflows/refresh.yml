@@ -82,7 +82,10 @@ jobs:
             echo "nothing to commit"
             exit 0
           fi
-          git commit -m "refresh: $(date -u +%Y-%m-%dT%H:%MZ)"
+          # The commit names the run that made it (health.json does too, cli.run_identity), so
+          # checks/verify_releases.py grades each run by its own commit. Matching on time alone credited a run with
+          # the next run's commit (REVIEW.md R2-1).
+          git commit -m "refresh: $(date -u +%Y-%m-%dT%H:%MZ) run ${GITHUB_RUN_ID}" --trailer "Run-Id: ${GITHUB_RUN_ID}" --trailer "Run-Attempt: ${GITHUB_RUN_ATTEMPT}" --trailer "Event: ${GITHUB_EVENT_NAME}"
           # A person pushing while the nightly is mid-flight used to fail the whole job on a non-fast-forward
           # and throw the refresh commit away. That happened on 2026-09-12 and cost a day of the
           # two-consecutive-green-scheduled-runs check, because a failed run is not a green one. The

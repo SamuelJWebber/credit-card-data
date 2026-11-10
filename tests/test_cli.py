@@ -1,11 +1,39 @@
-"""The command line: `carddash check` grades only what the nightly run grades (REVIEW.md R1-6)."""
+"""The command line: `carddash check` grades only what the nightly run grades (REVIEW.md R1-6), and a refresh in
+Actions writes which run it was into health.json (REVIEW.md R2-1)."""
 
 from __future__ import annotations
 
+import json
+
 import pandas as pd
 
-from carddash.cli import cmd_check
+from carddash import cli
+from carddash.cli import cmd_check, run_identity
 from carddash.loader import write_facts
+
+
+def test_a_refresh_in_actions_names_its_run_in_health_json(tmp_paths, monkeypatch):
+    """checks/verify_releases.py graded a run by the next run's commit when it matched on time alone."""
+    assert run_identity({"GITHUB_RUN_ID": "42724326075", "GITHUB_RUN_ATTEMPT": "2", "GITHUB_EVENT_NAME": "schedule"}) \
+        == {"id": 42724326075, "attempt": 2, "event": "schedule"}
+    assert run_identity({}) is None and run_identity({"GITHUB_RUN_ID": ""}) is None
+
+    class Fake:  # a source with no series.csv rows fails before it fetches anything
+        @staticmethod
+        def fetch(meta, raw_dir, session, pulled_at):
+            raise AssertionError("never called")
+
+    monkeypatch.setattr(cli, "FETCHERS", {"fakesrc": Fake})
+    monkeypatch.setattr(cli, "check_golden", lambda *a, **k: [])
+    for name, value in (("GITHUB_RUN_ID", "42724326075"), ("GITHUB_RUN_ATTEMPT", "1"), ("GITHUB_EVENT_NAME", "push")):
+        monkeypatch.setenv(name, value)
+    assert cli.cmd_refresh(tmp_paths, ["fakesrc"], do_render=False) == 0
+    doc = json.loads(tmp_paths.health_json.read_text(encoding="utf-8"))
+    assert doc["run"] == {"id": 42724326075, "attempt": 1, "event": "push"}
+    assert list(doc) == ["generated_at", "run", "sources"]
+    monkeypatch.delenv("GITHUB_RUN_ID")  # a local refresh names no run
+    assert cli.cmd_refresh(tmp_paths, ["fakesrc"], do_render=False) == 0
+    assert "run" not in json.loads(tmp_paths.health_json.read_text(encoding="utf-8"))
 
 
 def _set_value(facts: pd.DataFrame, metric: str, entity: str, period_end: str, value: float) -> None:

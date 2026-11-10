@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -43,9 +44,25 @@ def read_health(paths: Paths) -> dict[str, SourceHealth]:
     return out
 
 
-def write_health(paths: Paths, health: dict[str, SourceHealth], generated_at: str) -> None:
+def run_identity(env=None) -> dict | None:
+    """The GitHub Actions run doing this refresh, from the variables Actions sets in every step; None elsewhere.
+
+    health.json carries it, and the bot commit carries it as trailers, so checks/verify_releases.py can grade each
+    run by the commit THAT run made. Matching by time credited a run with the next run's commit (REVIEW.md R2-1)."""
+    env = os.environ if env is None else env
+    run_id, attempt = env.get("GITHUB_RUN_ID", ""), env.get("GITHUB_RUN_ATTEMPT", "")
+    if not run_id.isdigit():
+        return None
+    return {"id": int(run_id), "attempt": int(attempt) if attempt.isdigit() else 1,
+            "event": env.get("GITHUB_EVENT_NAME", "")}
+
+
+def write_health(paths: Paths, health: dict[str, SourceHealth], generated_at: str, run: dict | None = None) -> None:
     paths.data.mkdir(parents=True, exist_ok=True)
-    doc = {"generated_at": generated_at, "sources": {k: v.to_dict() for k, v in sorted(health.items())}}
+    doc: dict = {"generated_at": generated_at}
+    if run:
+        doc["run"] = run
+    doc["sources"] = {k: v.to_dict() for k, v in sorted(health.items())}
     paths.health_json.write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
@@ -96,7 +113,7 @@ def cmd_refresh(paths: Paths, sources: list[str] | None, do_render: bool) -> int
     stamp_status_since(health, before, pulled_at)
     write_facts(facts, paths.facts_csv)
     append_revisions(pd.concat(all_revisions, ignore_index=True), paths.revisions_csv)
-    write_health(paths, health, pulled_at)
+    write_health(paths, health, pulled_at, run_identity())
     if do_render:
         out = render(paths)
         print(f"rendered {out}")

@@ -80,6 +80,45 @@ def test_actions_are_pinned_to_commits():
         assert re.search(r"#\s*v\d", comment), f"{name}: say which release the commit is"
 
 
+def test_each_bot_commit_names_the_run_that_made_it(tmp_path, monkeypatch):
+    """REVIEW.md R2-1: checks/verify_releases.py matched runs to commits by time and credited a run with the next run's
+    commit. The commit now carries the run in trailers. This makes a commit the way the workflow does, in a scratch
+    repository with real git, and reads it back with the script's own parser."""
+    import importlib.util
+    import json
+    import shlex
+    import subprocess
+
+    script = _steps()["Commit data and site"]["run"]
+    line = next(x.strip() for x in script.splitlines() if x.strip().startswith("git commit"))
+    for trailer in ('--trailer "Run-Id: ${GITHUB_RUN_ID}"', '--trailer "Run-Attempt: ${GITHUB_RUN_ATTEMPT}"',
+                    '--trailer "Event: ${GITHUB_EVENT_NAME}"'):
+        assert trailer in line
+    env = {"GITHUB_RUN_ID": "42724326075", "GITHUB_RUN_ATTEMPT": "2", "GITHUB_EVENT_NAME": "schedule"}
+    args = shlex.split(line.replace("$(date -u +%Y-%m-%dT%H:%MZ)", "2026-11-10T02:13Z")
+                       .replace("${GITHUB_RUN_ID}", env["GITHUB_RUN_ID"])
+                       .replace("${GITHUB_RUN_ATTEMPT}", env["GITHUB_RUN_ATTEMPT"])
+                       .replace("${GITHUB_EVENT_NAME}", env["GITHUB_EVENT_NAME"]))
+    assert "$" not in " ".join(args)
+
+    monkeypatch.chdir(tmp_path)
+    git = ["git", "-c", "user.name=carddash-bot", "-c", "user.email=carddash-bot@users.noreply.github.com",
+           "-c", "commit.gpgsign=false"]
+    subprocess.run(["git", "init", "-q"], check=True)
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "health.json").write_text(json.dumps({"generated_at": "2026-11-10T02:10:00Z"}), encoding="utf-8")
+    subprocess.run(["git", "add", "data"], check=True)
+    subprocess.run(git + args[1:], check=True, capture_output=True)
+
+    spec = importlib.util.spec_from_file_location("verify_releases", REPO / "checks" / "verify_releases.py")
+    vr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(vr)
+    (commit,) = vr.bot_commits("HEAD")
+    assert (commit["run_id"], commit["attempt"]) == (42724326075, 2)
+    run = {"id": 42724326075, "run_attempt": 2, "created_at": "2026-11-10T03:00:00Z", "updated_at": "2026-11-10T03:05:00Z"}
+    assert vr.match(run, [commit]) == (commit, "run id")  # named, so found although its stamp is outside the window
+
+
 def test_a_queued_run_starts_from_the_newest_main():
     """REVIEW.md R1-16: a run queued behind another checked out the commit it was triggered on, a refresh behind."""
     steps = yaml.safe_load(WORKFLOW.read_text(encoding="utf-8"))["jobs"]["refresh"]["steps"]

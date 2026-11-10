@@ -26,9 +26,11 @@ rule is what stops the drift.
   non-fast-forward. On 2026-09-12 that failed the job *after* tests and all fourteen sources had passed, threw
   the refresh commit away, and reset the two-green-runs count. Task 48 made the job rebase and retry, but still
   check `gh run list --limit 3` before pushing.
-- **`checks/verify_releases.py` reads the LOCAL clone.** A clone even one commit behind reports
-  "no bot commit found", so a green release looks like a failure. This has misled a reading twice.
-  Run `git fetch` first, every time.
+- **`checks/verify_releases.py` grades each run by the commit THAT run made**: since 2026-11-10 the bot commit
+  carries `Run-Id` and `Run-Attempt` trailers, and older commits are matched by the refresh job's own window
+  (REVIEW.md R2-1; the old 5-minute window credited a run with the next run's commit). It runs
+  `git fetch origin main` itself, because a clone one commit behind reported a green run as "no bot commit found"
+  and misled a reading twice.
 - **The cron is `0 22 * * *` but GitHub runs scheduled jobs late** — from late October to 2026-11-09 they
   started between 00:55 and 03:25 UTC, most between 01:15 and 02:11. A run is usually not gradable until about
   03:30 UTC. Only `schedule` events count; a `workflow_dispatch` run cannot substitute. Amber shows as

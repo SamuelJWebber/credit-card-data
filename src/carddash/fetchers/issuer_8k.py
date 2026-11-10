@@ -110,12 +110,13 @@ E_SYF = "ISSUER:SYNCHRONY"
 E_BFH = "ISSUER:BREAD_FINANCIAL"
 # American Express reports two segments on two BASES, and the basis is part of the population rather than a
 # label on it, so it is part of the entity. Amex stopped reporting 'Card Member loans' in May 2026 and started
-# reporting 'Card balances', which adds pay-in-full charge-card balances the old measure left out; the two
-# overlap for February and March 2026 and disagree by about 14 percent on the same month. Carrying them as one
-# series would invent a step. The retired pair therefore ends in March 2026 and never updates again, the way
-# the FDIC merged-out charters do, and the current pair starts in February 2026.
+# reporting 'Card balances', which adds pay-in-full charge-card balances the old measure left out; Amex published
+# February and March 2026 both ways, and the two disagree by about 14 percent on the same month. Carrying them as
+# one series would invent a step. The retired pair ends at January 2026 and never updates again, the way the FDIC
+# merged-out charters do: the newer filing covers February and March, so the planner never downloads the
+# old-basis March filing (filed 2026-04-15). The current pair starts in February 2026.
 E_AXP_CONSUMER = "ISSUER:AMEX_US_CONSUMER"                       # Card balances, February 2026 on
-E_AXP_CONSUMER_LOANS = "ISSUER:AMEX_US_CONSUMER_LOANS"           # Card Member loans, retired March 2026
+E_AXP_CONSUMER_LOANS = "ISSUER:AMEX_US_CONSUMER_LOANS"           # Card Member loans, retired: ends at January 2026
 E_AXP_SMALL_BUSINESS = "ISSUER:AMEX_US_SMALL_BUSINESS"
 E_AXP_SMALL_BUSINESS_LOANS = "ISSUER:AMEX_US_SMALL_BUSINESS_LOANS"
 
@@ -512,9 +513,11 @@ AXP_MARKER = "Net write-off rate"
 # HOW AMERICAN EXPRESS'S TWO POPULATIONS ARE CARRIED (decided 2026-09-11, task 46).
 #
 # The break below is real and cannot be closed from the filings, so it is not closed: each basis is its own
-# entity and the two are drawn as two lines that overlap for the two months Amex reported both. The reader sees
-# the size of the break instead of a step in one line, which is the only honest way to show it and is also the
-# most informative, because the gap between the lines IS the pay-in-full balance that the old measure omitted.
+# entity, drawn as its own line. The reader sees two lines that change measure between January and February 2026
+# instead of one line with a step in it, which is the only honest way to show it. (The lines do not overlap: Amex
+# reported February and March both ways, but the planner fills those months from the newer filing and never
+# downloads the old-basis March filing, so the retired line ends at January 2026. The fixtures hold that filing,
+# 2026-03.htm, so the tests see the overlap; the page does not.)
 #
 # Between the filings of 2026-04-15 and 2026-05-15 Amex stopped reporting "Card Member loans" and started
 # reporting "Card balances", and the population changed with the words: the new measure includes pay-in-full
@@ -531,8 +534,9 @@ AXP_MARKER = "Net write-off rate"
 # is the same class of error as the collapsed denominator task 41 removed. Loading only the new basis leaves
 # five months, which is not a series.
 #
-# The retired pair (ISSUER:AMEX_US_*_LOANS) ends in March 2026 and will never gain another month, so its
-# series.csv rows carry max_age_days 36500 and say so, exactly as the FDIC merged-out charters do. Nothing
+# The retired pair (ISSUER:AMEX_US_*_LOANS) ends at January 2026 (the newer filing covers February and March, so
+# the old-basis March filing is never downloaded) and will never gain another month, so its series.csv rows carry
+# max_age_days 36500 and say so, exactly as the FDIC merged-out charters do. Nothing
 # hard-codes the changeover date: the section label in each filing says which basis it is on, so the rows
 # follow the document.
 AXP_POPULATION_BREAK = dt.date(2026, 2, 28)

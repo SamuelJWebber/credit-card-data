@@ -56,13 +56,15 @@ Suggest them in the handoff instead. Definition of done for v1: five fetchers gr
   not even an index request. Synchrony's whole history is five downloads because each exhibit carries thirteen months.
 - Parse by header text, never by column position. Fail loudly on anything unexpected.
 - Never write facts.csv, health.json, or DuckDB. The loader does that.
-- Send the pipeline's own User-Agent (src/carddash/http.py). The CFPB's edge blocks browser-like agents sent from
-  scripts and accepts ours. Never fake a browser.
-  ONE EXCEPTION, issuer_8k: the SEC's edge 403s any User-Agent containing a URL in parentheses, which is exactly the
-  shape of ours, with or without a contact appended (verified 2026-09-11 on every SEC host). That fetcher sends
-  `carddash/<version> <CARDDASH_CONTACT>` instead, which is the format the SEC asks for. Still honest identification,
-  still not a browser string. CARDDASH_CONTACT must be set locally (.env) and as an Actions secret or the source
-  fails loudly; it is not defaulted, because the SEC requires a real contact.
+- Every request to every host sends the pipeline's own User-Agent, from `http.user_agent()`:
+  `carddash/<version> <CARDDASH_CONTACT>` (since 2026-11-09, REVIEW.md R1-14; a test refuses any other one in the code).
+  It is the form the SEC asks for, and the SEC's edge 403s any User-Agent holding a URL in parentheses, which is what
+  this used to send (verified 2026-09-11 on every SEC host). The CFPB's edge blocks browser-like agents sent from
+  scripts and accepts ours. Never fake a browser. issuer_8k only insists that CARDDASH_CONTACT is set (locally in
+  .env, and as an Actions secret): it fails loudly without one, because the SEC requires a real contact.
+- What a publisher requires the page to print (the FRED API notice, the SCE licence's attribution and disclaimer,
+  the NY Fed's Terms of Use) lives in src/carddash/notices.py, one entry per source; a test fails for a source
+  without one, so a new source arrives with that decision made.
 - Before writing a parser: download the real file, print its headers and first rows, then write the parser.
   Check the raw file in under tests/fixtures/<source>/ and write a test that parses it.
 - Every fetcher ships with: a fixture test, at least one golden entry in checks/golden.yaml that traces to
@@ -144,9 +146,12 @@ allows an empty cell before a column's first reading, never after.
   what returned HTTP 422 "Repository has already been taken"). It was aborted from the settings page by
   SamuelJWebber, which is an admin, and a transfer started by SamuelJWebber itself went through at once with no
   email acceptance. Pages, both Actions secrets (CARDDASH_CONTACT, FRED_API_KEY) and both workflows carried over.
-- Old links still work: github.com/User5017/credit-card-data redirects to this repo, and the repo
+- Old links still work in a browser: github.com/User5017/credit-card-data redirects (301) to this repo, and the repo
   `User5017/User5017.github.io` sends every old user5017.github.io/credit-card-data/... page to the same path on
-  the new site. Never create a repository named `credit-card-data` on User5017: it would break the first redirect.
+  the new site. Only the old site's root answers 200 (with a meta refresh); a deep link such as `.../latest.txt`,
+  `.../img/sentiment.png` or `.../data/facts.csv` answers HTTP 404 with a script redirect, which browsers follow and
+  curl, scripts and link-preview crawlers do not (checked 2026-11-10). Never create a repository named
+  `credit-card-data` on User5017: it would break the first redirect.
 - In Git Bash, prefix `gh api` calls with `MSYS_NO_PATHCONV=1` or omit the leading slash, or the path becomes `C:/Program Files/Git/...`.
 
 ## Verification standard

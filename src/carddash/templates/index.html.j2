@@ -370,7 +370,7 @@ read the scope note before comparing it with anything.</p>
 </div>
 
 <h2 id="health">Source health</h2>
-<p class="lede">Each source is fetched in full every run. A failed source keeps its previous data and is flagged here and on its charts; a chart is never silently stale.</p>
+<p class="lede">Every source is fetched every run, in full except for three: BEA's file is downloaded only when BEA has changed it, and the NCUA call reports and the issuers' 8-K filings only for periods not yet held, plus the newest two. A failed source keeps its previous data and is flagged here and on its charts; a chart is never silently stale.</p>
 <ul class="health">
 {% for s in health %}
   <li class="st-{{ s.status }}">

@@ -6,7 +6,7 @@ Publication facts, verified 2026-09-07:
   cfpb_tccp-data_2024-12-31_uYJ9Krf.xlsx), so the fetcher reads the links off the page and dates each file by the
   last date in its name. Snapshots are saved under a canonical name so a re-upload shows up as a content change.
 - The CFPB's Akamai edge answers 403 to a browser-like User-Agent sent from a script and 200 to this pipeline's own
-  'carddash/<version> (+repo url)' agent (src/carddash/http.py). Do not fake a browser here.
+  agent, 'carddash/<version> <contact>' (http.user_agent()). Do not fake a browser here.
 - One sheet per workbook (its name varies). Rows 1-9 are a title block including
   'Data for reporting period ... - December 31, 2025', the header is row 10, column A is empty, then one row per
   product. The header row is found by content and the title-block end date must agree with the file name.

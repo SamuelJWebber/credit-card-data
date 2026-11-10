@@ -210,6 +210,7 @@ figure.card:target, #browse-detail:target { outline: 2px solid var(--series-1); 
   <a href="#changed">Changed</a>
   <a href="#health">Health</a>
   <a href="#method">Method</a>
+  <a href="#notices">Notices</a>
   <span class="spacer"></span>
   <button type="button" id="theme" title="Switch between light and dark">Dark</button>
 </nav>
@@ -402,6 +403,12 @@ read the scope note before comparing it with anything.</p>
   <li>Every chart is also written as a PNG (the link in its footer), drawn from the same data as the page and showing the same {{ default_years }}-year window. The image carries no pull date, so it changes only when the data does.</li>
   <li>"Expected around" under each source is the period after the newest one loaded, plus the lag its releases have shown; it is a reader's expectation, not a status. The loader marks a source stale on its own rule.</li>
 </ul>
+
+<h2 id="notices">Notices</h2>
+<p class="lede">What the publishers of this data require with every use of it, in their own words. Each PNG carries the ones its own sources need.</p>
+<ul class="method notices">
+{% for n in notices %}  <li>{{ n.text }} <span class="note">(<a href="{{ n.terms_url }}">{{ n.terms }}</a>)</span></li>
+{% endfor %}</ul>
 </main>
 
 <script>{{ uplot_js | safe }}</script>

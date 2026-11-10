@@ -46,8 +46,29 @@ def _axis_formatter(unit: str):
     return lambda x, _pos: f"{x:,.0f}"
 
 
-def write_png(chart: dict, path: Path, recessions: list[list[int]] | None = None, years: int | None = None) -> Path:
-    """Draw one chart payload (render._chart_payload) to `path`. Returns the path."""
+CAPTION_LINE = 0.028   # one 7.5 pt caption line as a fraction of the 4.5 in figure height
+CAPTION_MIN = 0.07     # the area two lines need, which is what every caption had before notices (keeps their bytes)
+
+
+def caption_text(chart: dict, window_note: str = "", notes: list[str] | None = None) -> str:
+    """The caption printed under the chart: source line, then each notice the source's publisher requires on a
+    figure that travels without the page (notices.py), each wrapped on its own."""
+    parts = [textwrap.fill((chart.get("caption") or "") + window_note, CAPTION_WIDTH)]
+    parts += [textwrap.fill(n, CAPTION_WIDTH) for n in notes or []]
+    return "\n".join(parts)
+
+
+def caption_area(caption: str) -> float:
+    """The fraction of the figure height kept free below the axes for `caption`. It was a fixed 0.07, which fits
+    two lines: five captions wrapped to three or four and ran into the x axis labels."""
+    lines = caption.count("\n") + 1
+    return CAPTION_MIN if lines <= 2 else 0.014 + CAPTION_LINE * lines
+
+
+def write_png(chart: dict, path: Path, recessions: list[list[int]] | None = None, years: int | None = None,
+              notes: list[str] | None = None) -> Path:
+    """Draw one chart payload (render._chart_payload) to `path`, with the notices in `notes` under the caption.
+    Returns the path."""
     # offset arithmetic, not fromtimestamp: Windows rejects negative epochs and the G.19 series starts in 1968
     xs = [EPOCH + dt.timedelta(seconds=int(t)) for t in chart["data"][0]]
     window_note = ""
@@ -105,9 +126,9 @@ def write_png(chart: dict, path: Path, recessions: list[list[int]] | None = None
     ax.set_ylabel(chart["unit_label"], fontsize=9, color=INK2)
     if len(chart["series"]) > 1:
         ax.legend(frameon=False, fontsize=8, labelcolor=INK2, loc="best")
-    caption = textwrap.fill((chart.get("caption") or "") + window_note, CAPTION_WIDTH)
+    caption = caption_text(chart, window_note, notes)
     fig.text(0.01, 0.01, caption, fontsize=7.5, color=MUTED, va="bottom", ha="left")
-    fig.tight_layout(rect=(0, 0.07, 1, 1))
+    fig.tight_layout(rect=(0, caption_area(caption), 1, 1))
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, format="png", dpi=DPI, metadata={"Software": None})
     plt.close(fig)

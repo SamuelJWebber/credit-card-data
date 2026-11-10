@@ -1093,3 +1093,44 @@ def test_the_bea_interest_chart_says_it_is_modelled(page):
     assert "actually pay" not in html and "fewer dollars" not in html and "pay no interest at all" not in html
     assert "modelled, not measured from what households paid" in html
     assert html.count("NIPA Handbook chapter 14") >= 2                  # on the implied-rate chart and the income-share chart
+
+
+def test_the_page_carries_the_notices_its_publishers_require(page):
+    """REVIEW.md R2-2: the FRED API terms and the NY Fed's SCE licence each require a notice, and each ends the right
+    to use the data automatically without it. Neither was on the page; the README carried neither."""
+    from carddash.notices import FRED_API
+
+    html, payload = page
+    assert html.count(FRED_API) == 1
+    assert html.count("FRBNY disclaims any responsibility or legal liability for this analysis") == 1
+    assert "Source: Survey of Consumer Expectations, © 2013-2026 Federal Reserve Bank of New York (FRBNY)." in html
+    assert "© 2026 Federal Reserve Bank of New York. Content from the New York Fed subject to the Terms of Use" in html
+    assert '<a href="#notices">Notices</a>' in html and '<h2 id="notices">Notices</h2>' in html
+    assert html.index('<h2 id="notices">') > html.index('<h2 id="method">')
+    by_id = {c["id"]: c for c in payload["charts"]}
+    for cid in ("card_access", "lender_closures", "miss_payment_expectation", "credit_harder"):
+        # the licence's own form for a figure, on the page and on the PNG
+        assert by_id[cid]["caption"].startswith("Source: Survey of Consumer Expectations, New York Fed · "), cid
+
+
+def test_a_png_carries_its_sources_notices_in_a_caption_area_that_fits_them(page):
+    """A PNG is made to be pasted into a post, without the page's Notices block. The caption area was a fixed 7% of
+    the height, which holds two lines; five captions already wrapped to three or four and ran into the axis."""
+    from carddash.notices import NYFED, SCE, png_notices
+    from carddash.png import CAPTION_MIN, caption_area, caption_text
+
+    _, payload = page
+    by_id = {c["id"]: c for c in payload["charts"]}
+    years = {"nyfed_sce": 2026, "nyfed_hhdc": 2026}
+    window = " · last 5 years shown, full history on the page"
+    notes = png_notices({s["source"] for s in by_id["card_access"]["series"]}, years)
+    assert notes == [SCE.replace("{year}", "2026")]
+    text = caption_text(by_id["card_access"], window, notes)
+    assert text.startswith("Source: Survey of Consumer Expectations, New York Fed") and "FRBNY disclaims" in text
+    assert caption_area(text) > CAPTION_MIN
+    assert png_notices({s["source"] for s in by_id["hhdc_dq90_by_age"]["series"]}, years) == [NYFED.replace("{year}", "2026")]
+    plain = caption_text(by_id["revolving_level"], window)
+    assert png_notices({"fred"}, years) == [] and len(plain.splitlines()) <= 2
+    assert caption_area(plain) == CAPTION_MIN  # an unchanged two-line caption keeps its layout, and its PNG its bytes
+    long = caption_text(by_id["dq_triangulation"], window)  # four sources: it wraps to four lines
+    assert len(long.splitlines()) >= 3 and caption_area(long) > CAPTION_MIN

@@ -57,6 +57,26 @@ NCUA credit union call reports; Fed Distributional Financial Accounts; BEA perso
 income; Census monthly retail trade; and the monthly charge-off and delinquency metrics Capital One, Synchrony, Bread
 Financial and American Express file with the SEC. `CLAUDE.md` lists them with what each carries.
 
+## Notices
+
+This product uses the FRED® API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.
+([FRED® API Terms of Use](https://fred.stlouisfed.org/docs/api/terms_of_use.html))
+
+Source: Survey of Consumer Expectations, © 2013-2026 Federal Reserve Bank of New York (FRBNY). The SCE data are
+available without charge at http://www.newyorkfed.org/microeconomics/sce and may be used subject to license terms
+posted there. FRBNY disclaims any responsibility or legal liability for this analysis and interpretation of Survey of
+Consumer Expectations data.
+
+Source: New York Fed Consumer Credit Panel/Equifax. © 2026 Federal Reserve Bank of New York. Content from the New
+York Fed subject to the Terms of Use at newyorkfed.org.
+
+University of Michigan series: Copyright, 2016, Surveys of Consumers, University of Michigan. Reprinted with
+permission. Bankrate series: Copyright Bankrate, LLC.
+
+The page prints the same notices (its Notices section) and each PNG carries the ones its own sources require.
+`src/carddash/notices.py` records each publisher's terms and why the other sources need no notice.
+
 ## License
 
-Code: MIT. Data: as published by the respective agencies; see the notes under each chart.
+Code: MIT. Data: as published by the respective agencies and subject to their terms (the notices above); see the
+notes under each chart.

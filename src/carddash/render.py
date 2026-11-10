@@ -23,6 +23,8 @@ from .fetchers import tccp
 from .golden import check_golden, load_golden, number_text
 from .issuers import ISSUER_TYPES
 from .loader import RED, STATUS_RANK, read_facts, read_revisions
+from .notices import credit as notice_credit
+from .notices import page_notices, png_notices
 from .paths import Paths
 from .png import write_png
 from .redact import redact
@@ -84,7 +86,9 @@ def series_source_label(source: str, m) -> str:
     publisher = str(m.get("publisher", "") or "") if m is not None else ""
     if publisher:
         return f"{publisher}, via FRED" if source == "fred" else publisher
-    return SOURCE_LABELS.get(source, source)
+    # where a licence prescribes how a figure names the source (the SCE: 'Source: Survey of Consumer Expectations,
+    # New York Fed'), every chart and PNG uses that form (notices.py, REVIEW.md R2-2)
+    return notice_credit(source) or SOURCE_LABELS.get(source, source)
 
 
 STATUS_LABELS = {
@@ -2529,6 +2533,11 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
     health_rows = _health_rows(health, _latest_by_source(facts, meta_idx, today), facts, today)
     summary = _health_summary(health)
     red_sources = [r["label"].split(",")[0] for r in health_rows if r["status"] in RED]
+    # the year of each source's newest period: the {year} of its copyright notice moves with the data, so a PNG's
+    # bytes still change only when its data does
+    shown = sorted(set(health) | (set(facts["source"].unique()) if not facts.empty else set()))
+    years = ({str(s): int(d.year) for s, d in facts.groupby("source")["period_end"].max().items()}
+             if not facts.empty else {})
     # The thesis notes are served next to the page so the links render on Pages (the repository blob view shows
     # source). EVERY note is copied, not just the current one: each note links to the one it revises, and those
     # back-links are the record of what changed, so a superseded note must stay reachable.
@@ -2570,6 +2579,7 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
         new_periods=_new_periods(facts, run),
         has_revisions_csv=paths.revisions_csv.exists(),
         sources=[SOURCE_LABELS[s] for s in SOURCE_LABELS if s in health],
+        notices=page_notices(shown, years),
         default_years=DEFAULT_YEARS,
         benchmark_label=BENCHMARK_LABEL,
         n_facts=len(facts),
@@ -2594,6 +2604,9 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
     if paths.revisions_csv.exists():
         shutil.copyfile(paths.revisions_csv, paths.docs / "data" / "revisions.csv")
     for chart in payload["charts"]:  # every chart, so any of them can be pasted into a post
-        write_png(chart, paths.docs / "img" / f"{chart['id']}.png", recessions=payload["recessions"], years=DEFAULT_YEARS)
+        # a PNG travels without the page, so it carries the notices its publishers require (notices.py)
+        notes = png_notices({s["source"] for s in chart["series"]}, years)
+        write_png(chart, paths.docs / "img" / f"{chart['id']}.png", recessions=payload["recessions"], years=DEFAULT_YEARS,
+                  notes=notes)
     (paths.docs / ".nojekyll").write_text("", encoding="utf-8")
     return out

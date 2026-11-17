@@ -35480,7 +35480,7 @@ fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1984-06-30,Q,0.229146,fdi
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1984-09-30,Q,0.267446,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1984-12-31,Q,0.32071,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1985-03-31,Q,0.374538,fdic,2026-09-08T04:58:22Z
-fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1985-06-30,Q,0.451341,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1985-06-30,Q,0.451502,fdic,2026-11-17T04:27:36Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1985-09-30,Q,0.538698,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1985-12-31,Q,0.634895,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1986-03-31,Q,0.728224,fdic,2026-09-08T04:58:22Z
@@ -35620,11 +35620,11 @@ fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2019-06-30,Q,10.603072,fd
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2019-09-30,Q,9.931066,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2019-12-31,Q,10.432392,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2020-03-31,Q,11.136192,fdic,2026-09-08T04:58:22Z
-fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2020-06-30,Q,10.250316,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2020-06-30,Q,10.25033,fdic,2026-11-17T04:27:36Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2020-09-30,Q,8.730679,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2020-12-31,Q,7.007183,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2021-03-31,Q,7.821855,fdic,2026-09-08T04:58:22Z
-fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2021-06-30,Q,7.141036,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2021-06-30,Q,7.141042,fdic,2026-11-17T04:27:36Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2021-09-30,Q,5.424044,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2021-12-31,Q,5.329784,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2022-03-31,Q,5.864128,fdic,2026-09-08T04:58:22Z
@@ -39171,7 +39171,7 @@ fdic_card_loans,CERT:12368,bank,all,1984-06-30,Q,0.012083,fdic,2026-09-08T06:29:
 fdic_card_loans,CERT:12368,bank,all,1984-09-30,Q,0.013764,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,1984-12-31,Q,0.016568,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,1985-03-31,Q,0.047765,fdic,2026-09-08T06:29:25Z
-fdic_card_loans,CERT:12368,bank,all,1985-06-30,Q,0.063878,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:12368,bank,all,1985-06-30,Q,0.059012,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:12368,bank,all,1985-09-30,Q,0.063878,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,1985-12-31,Q,0.079527,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,1986-03-31,Q,0.088021,fdic,2026-09-08T06:29:25Z
@@ -39673,7 +39673,7 @@ fdic_card_loans,CERT:23702,bank,all,1984-06-30,Q,0.692332,fdic,2026-09-08T04:58:
 fdic_card_loans,CERT:23702,bank,all,1984-09-30,Q,0.766645,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:23702,bank,all,1984-12-31,Q,0.989808,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:23702,bank,all,1985-03-31,Q,1.270047,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:23702,bank,all,1985-06-30,Q,2.028036,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:23702,bank,all,1985-06-30,Q,1.696137,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:23702,bank,all,1985-09-30,Q,2.028036,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:23702,bank,all,1985-12-31,Q,3.301356,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:23702,bank,all,1986-03-31,Q,3.461932,fdic,2026-09-08T04:58:22Z
@@ -39812,7 +39812,7 @@ fdic_card_loans,CERT:23702,bank,all,2019-03-31,Q,95.064323,fdic,2026-09-08T04:58
 fdic_card_loans,CERT:25620,bank,all,1984-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:25620,bank,all,1984-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:25620,bank,all,1985-03-31,Q,0,fdic,2026-09-08T06:29:25Z
-fdic_card_loans,CERT:25620,bank,all,1985-06-30,Q,5.5e-05,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:25620,bank,all,1985-06-30,Q,3e-05,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:25620,bank,all,1985-09-30,Q,5.5e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:25620,bank,all,1985-12-31,Q,6.1e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:25620,bank,all,1986-03-31,Q,8.3e-05,fdic,2026-09-08T06:29:25Z
@@ -40433,7 +40433,7 @@ fdic_card_loans,CERT:32188,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,1984-12-31,Q,0.00523,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,1985-03-31,Q,0.067491,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:32188,bank,all,1985-06-30,Q,0.117327,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:32188,bank,all,1985-06-30,Q,0.099487,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:32188,bank,all,1985-09-30,Q,0.117327,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,1985-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,1986-03-31,Q,0.032515,fdic,2026-09-08T04:58:22Z
@@ -41374,7 +41374,7 @@ fdic_card_loans,CERT:3510,bank,all,1984-06-30,Q,3.848,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,1984-09-30,Q,4.195,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,1984-12-31,Q,4.681,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,1985-03-31,Q,4.779,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:3510,bank,all,1985-06-30,Q,5.082,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:3510,bank,all,1985-06-30,Q,4.882,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:3510,bank,all,1985-09-30,Q,5.082,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,1985-12-31,Q,5.362,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,1986-03-31,Q,5.222,fdic,2026-09-08T04:58:22Z
@@ -41544,7 +41544,7 @@ fdic_card_loans,CERT:3511,bank,all,1984-06-30,Q,0.767918,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:3511,bank,all,1984-09-30,Q,0.935885,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,1984-12-31,Q,1.078733,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,1985-03-31,Q,1.117646,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:3511,bank,all,1985-06-30,Q,1.173205,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:3511,bank,all,1985-06-30,Q,1.161073,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:3511,bank,all,1985-09-30,Q,1.173205,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,1985-12-31,Q,1.208394,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,1986-03-31,Q,1.209976,fdic,2026-09-08T04:58:22Z
@@ -41888,7 +41888,7 @@ fdic_card_loans,CERT:4091,bank,all,1984-06-30,Q,0.001862,fdic,2026-09-08T06:29:2
 fdic_card_loans,CERT:4091,bank,all,1984-09-30,Q,0.001958,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:4091,bank,all,1984-12-31,Q,0.002028,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:4091,bank,all,1985-03-31,Q,0.002004,fdic,2026-09-08T06:29:25Z
-fdic_card_loans,CERT:4091,bank,all,1985-06-30,Q,0.001967,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:4091,bank,all,1985-06-30,Q,0.001971,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:4091,bank,all,1985-09-30,Q,0.001967,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:4091,bank,all,1985-12-31,Q,0.001112,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:4091,bank,all,1986-03-31,Q,0.00116,fdic,2026-09-08T06:29:25Z
@@ -42058,7 +42058,7 @@ fdic_card_loans,CERT:4297,bank,all,1984-06-30,Q,0.011307,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:4297,bank,all,1984-09-30,Q,0.009508,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:4297,bank,all,1984-12-31,Q,0.009704,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:4297,bank,all,1985-03-31,Q,0.009762,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:4297,bank,all,1985-06-30,Q,0.00977,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:4297,bank,all,1985-06-30,Q,0.009356,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:4297,bank,all,1985-09-30,Q,0.00977,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:4297,bank,all,1985-12-31,Q,0.01028,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:4297,bank,all,1986-03-31,Q,0.010212,fdic,2026-09-08T04:58:22Z
@@ -42228,7 +42228,7 @@ fdic_card_loans,CERT:5452,bank,all,1984-06-30,Q,0.083713,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:5452,bank,all,1984-09-30,Q,0.095618,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5452,bank,all,1984-12-31,Q,0.117582,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5452,bank,all,1985-03-31,Q,0.12105,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:5452,bank,all,1985-06-30,Q,0.136773,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:5452,bank,all,1985-06-30,Q,0.123817,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:5452,bank,all,1985-09-30,Q,0.136773,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5452,bank,all,1985-12-31,Q,0.161903,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5452,bank,all,1986-03-31,Q,0.153442,fdic,2026-09-08T04:58:22Z
@@ -42398,7 +42398,7 @@ fdic_card_loans,CERT:5649,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5649,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5649,bank,all,1984-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5649,bank,all,1985-03-31,Q,0,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:5649,bank,all,1985-06-30,Q,4e-06,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:5649,bank,all,1985-06-30,Q,0,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:5649,bank,all,1985-09-30,Q,4e-06,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5649,bank,all,1985-12-31,Q,0.020799,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5649,bank,all,1986-03-31,Q,0.049151,fdic,2026-09-08T04:58:22Z
@@ -42840,7 +42840,7 @@ fdic_card_loans,CERT:5962,bank,all,1984-06-30,Q,6.1e-05,fdic,2026-09-08T04:58:22
 fdic_card_loans,CERT:5962,bank,all,1984-09-30,Q,6.5e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5962,bank,all,1984-12-31,Q,7.1e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5962,bank,all,1985-03-31,Q,6.1e-05,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:5962,bank,all,1985-06-30,Q,4.8e-05,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:5962,bank,all,1985-06-30,Q,4.7e-05,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:5962,bank,all,1985-09-30,Q,4.8e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5962,bank,all,1985-12-31,Q,5.9e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5962,bank,all,1986-03-31,Q,6.3e-05,fdic,2026-09-08T04:58:22Z
@@ -43010,7 +43010,7 @@ fdic_card_loans,CERT:628,bank,all,1984-06-30,Q,1.178347,fdic,2026-09-08T04:58:22
 fdic_card_loans,CERT:628,bank,all,1984-09-30,Q,1.223039,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,1984-12-31,Q,1.30224,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,1985-03-31,Q,1.286645,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:628,bank,all,1985-06-30,Q,1.31398,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:628,bank,all,1985-06-30,Q,1.346475,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:628,bank,all,1985-09-30,Q,1.31398,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,1985-12-31,Q,1.369713,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,1986-03-31,Q,1.270699,fdic,2026-09-08T04:58:22Z
@@ -43180,7 +43180,7 @@ fdic_card_loans,CERT:6384,bank,all,1984-06-30,Q,0.008483,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:6384,bank,all,1984-09-30,Q,0.008487,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6384,bank,all,1984-12-31,Q,0.008365,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6384,bank,all,1985-03-31,Q,0.008203,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:6384,bank,all,1985-06-30,Q,0.008095,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:6384,bank,all,1985-06-30,Q,0.008013,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:6384,bank,all,1985-09-30,Q,0.008095,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6384,bank,all,1985-12-31,Q,0.008053,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6384,bank,all,1986-03-31,Q,0.007856,fdic,2026-09-08T04:58:22Z
@@ -43350,7 +43350,7 @@ fdic_card_loans,CERT:6548,bank,all,1984-06-30,Q,0.030483,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:6548,bank,all,1984-09-30,Q,0.031377,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6548,bank,all,1984-12-31,Q,0.033568,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6548,bank,all,1985-03-31,Q,0.032081,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:6548,bank,all,1985-06-30,Q,0.034416,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:6548,bank,all,1985-06-30,Q,0.033768,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:6548,bank,all,1985-09-30,Q,0.034416,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6548,bank,all,1985-12-31,Q,0.04393,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6548,bank,all,1986-03-31,Q,0.03506,fdic,2026-09-08T04:58:22Z
@@ -43520,7 +43520,7 @@ fdic_card_loans,CERT:6672,bank,all,1984-06-30,Q,0.002954,fdic,2026-09-08T06:29:2
 fdic_card_loans,CERT:6672,bank,all,1984-09-30,Q,0.0031,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,1984-12-31,Q,0.003271,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,1985-03-31,Q,0.003216,fdic,2026-09-08T06:29:25Z
-fdic_card_loans,CERT:6672,bank,all,1985-06-30,Q,0.003671,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:6672,bank,all,1985-06-30,Q,0.003414,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:6672,bank,all,1985-09-30,Q,0.003671,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,1985-12-31,Q,0.00393,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,1986-03-31,Q,0.003699,fdic,2026-09-08T06:29:25Z
@@ -43690,7 +43690,7 @@ fdic_card_loans,CERT:7213,bank,all,1984-06-30,Q,0.828,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,1984-09-30,Q,0.951,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,1984-12-31,Q,1.016,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,1985-03-31,Q,1.095,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:7213,bank,all,1985-06-30,Q,1.31,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:7213,bank,all,1985-06-30,Q,1.113,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:7213,bank,all,1985-09-30,Q,1.31,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,1985-12-31,Q,1.45,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,1986-03-31,Q,1.446,fdic,2026-09-08T04:58:22Z
@@ -44030,7 +44030,7 @@ fdic_card_loans,CERT:9846,bank,all,1984-06-30,Q,0.032514,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:9846,bank,all,1984-09-30,Q,0.034838,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,1984-12-31,Q,0.039189,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,1985-03-31,Q,0.039135,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,CERT:9846,bank,all,1985-06-30,Q,0.055283,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:9846,bank,all,1985-06-30,Q,0.051458,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,CERT:9846,bank,all,1985-09-30,Q,0.055283,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,1985-12-31,Q,0.06141,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,1986-03-31,Q,0.063199,fdic,2026-09-08T04:58:22Z
@@ -44200,7 +44200,7 @@ fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1984-06-30,Q,51.158635,fdic,2026-
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1984-09-30,Q,56.645153,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1984-12-31,Q,64.110208,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1985-03-31,Q,67.02781,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1985-06-30,Q,74.875438,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1985-06-30,Q,71.279464,fdic,2026-11-17T04:27:36Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1985-09-30,Q,75.943416,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1985-12-31,Q,83.691116,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1986-03-31,Q,85.171831,fdic,2026-09-08T04:58:22Z
@@ -49363,7 +49363,7 @@ fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1984-06-30,Q,0.173752,fdic,2026-0
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1984-09-30,Q,0.206337,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1984-12-31,Q,0.261627,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1985-03-31,Q,0.309044,fdic,2026-09-08T04:58:22Z
-fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1985-06-30,Q,0.378077,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1985-06-30,Q,0.378213,fdic,2026-11-17T04:27:36Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1985-09-30,Q,0.460838,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1985-12-31,Q,0.551335,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1986-03-31,Q,0.631022,fdic,2026-09-08T04:58:22Z
@@ -49503,11 +49503,11 @@ fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2019-06-30,Q,8.761666,fdic,2026-0
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2019-09-30,Q,8.138055,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2019-12-31,Q,8.581401,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2020-03-31,Q,9.094574,fdic,2026-09-08T04:58:22Z
-fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2020-06-30,Q,8.365243,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2020-06-30,Q,8.365256,fdic,2026-11-17T04:27:36Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2020-09-30,Q,6.846895,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2020-12-31,Q,5.250379,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2021-03-31,Q,5.785267,fdic,2026-09-08T04:58:22Z
-fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2021-06-30,Q,5.037389,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2021-06-30,Q,5.037395,fdic,2026-11-17T04:27:36Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2021-09-30,Q,3.405898,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2021-12-31,Q,3.405678,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2022-03-31,Q,3.981798,fdic,2026-09-08T04:58:22Z
@@ -52044,7 +52044,7 @@ fdic_card_noncurrent,CERT:4091,bank,all,1984-06-30,Q,3e-06,fdic,2026-09-08T06:29
 fdic_card_noncurrent,CERT:4091,bank,all,1984-09-30,Q,1e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,1984-12-31,Q,3e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,1985-03-31,Q,1.9e-05,fdic,2026-09-08T06:29:25Z
-fdic_card_noncurrent,CERT:4091,bank,all,1985-06-30,Q,1.7e-05,fdic,2026-09-08T06:29:25Z
+fdic_card_noncurrent,CERT:4091,bank,all,1985-06-30,Q,0,fdic,2026-11-17T04:27:36Z
 fdic_card_noncurrent,CERT:4091,bank,all,1985-09-30,Q,1.7e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,1985-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,1986-03-31,Q,0,fdic,2026-09-08T06:29:25Z
@@ -53510,7 +53510,7 @@ fdic_card_noncurrent,CERT:6672,bank,all,1984-06-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,1984-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,1984-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,1985-03-31,Q,0,fdic,2026-09-08T06:29:25Z
-fdic_card_noncurrent,CERT:6672,bank,all,1985-06-30,Q,1.7e-05,fdic,2026-09-08T06:29:25Z
+fdic_card_noncurrent,CERT:6672,bank,all,1985-06-30,Q,0,fdic,2026-11-17T04:27:36Z
 fdic_card_noncurrent,CERT:6672,bank,all,1985-09-30,Q,1.7e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,1985-12-31,Q,1.7e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,1986-03-31,Q,9e-06,fdic,2026-09-08T06:29:25Z
@@ -59259,7 +59259,7 @@ fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1984-06-30,Q,0.055394,fdic
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1984-09-30,Q,0.061109,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1984-12-31,Q,0.059083,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1985-03-31,Q,0.065494,fdic,2026-09-08T04:58:22Z
-fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1985-06-30,Q,0.073264,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1985-06-30,Q,0.073289,fdic,2026-11-17T04:27:36Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1985-09-30,Q,0.07786,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1985-12-31,Q,0.08356,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1986-03-31,Q,0.097202,fdic,2026-09-08T04:58:22Z
@@ -59399,7 +59399,7 @@ fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2019-06-30,Q,1.841406,fdic
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2019-09-30,Q,1.793011,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2019-12-31,Q,1.850991,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2020-03-31,Q,2.041618,fdic,2026-09-08T04:58:22Z
-fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2020-06-30,Q,1.885073,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2020-06-30,Q,1.885074,fdic,2026-11-17T04:27:36Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2020-09-30,Q,1.883784,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2020-12-31,Q,1.756804,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2021-03-31,Q,2.036588,fdic,2026-09-08T04:58:22Z
@@ -70292,6 +70292,7 @@ issuer_card_dq30_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-06-30,M,8.77,issuer_8
 issuer_card_dq30_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-07-31,M,9.014,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_dq30_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-08-31,M,9.297,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_dq30_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-09-30,M,9.741,issuer_8k,2026-10-21T00:33:30Z
+issuer_card_dq30_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-10-31,M,10.144,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-02-28,M,1.3,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-03-31,M,1.3,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-04-30,M,1.2,issuer_8k,2026-09-11T23:59:04Z
@@ -70300,6 +70301,7 @@ issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-06-30,M,1.1,issuer
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-07-31,M,1.1,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-08-31,M,1.1,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-09-30,M,1.2,issuer_8k,2026-10-16T00:16:53Z
+issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-10-31,M,1.2,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2022-11-30,M,0.9,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2022-12-31,M,1,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2023-01-31,M,1,issuer_8k,2026-09-11T23:59:04Z
@@ -70347,6 +70349,7 @@ issuer_card_dq30_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-06-30,M,1.4,
 issuer_card_dq30_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-07-31,M,1.3,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-08-31,M,1.3,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-09-30,M,1.4,issuer_8k,2026-10-16T00:16:53Z
+issuer_card_dq30_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-10-31,M,1.3,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2022-11-30,M,0.8,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2022-12-31,M,0.9,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_dq30_rate,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2023-01-31,M,1,issuer_8k,2026-09-11T23:59:04Z
@@ -70506,6 +70509,7 @@ issuer_card_dq30_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-06-30,M,3.39,issuer_8k,
 issuer_card_dq30_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-07-31,M,3.48,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_dq30_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-08-31,M,3.57,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_dq30_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-09-30,M,3.74,issuer_8k,2026-10-21T00:33:30Z
+issuer_card_dq30_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-10-31,M,3.87,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_dq30_rate,ISSUER:SYNCHRONY,issuer,all,2021-03-31,M,2.8,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_dq30_rate,ISSUER:SYNCHRONY,issuer,all,2021-04-30,M,2.4,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_dq30_rate,ISSUER:SYNCHRONY,issuer,all,2021-05-31,M,2.2,issuer_8k,2026-09-11T19:53:50Z
@@ -70581,7 +70585,8 @@ issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-05-31,M,112.6,issu
 issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-06-30,M,113.8,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-07-31,M,113.5,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-08-31,M,113.7,issuer_8k,2026-09-16T00:09:34Z
-issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-09-30,M,113.9,issuer_8k,2026-10-16T00:16:53Z
+issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-09-30,M,114.2,issuer_8k,2026-11-17T04:27:36Z
+issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-10-31,M,114.7,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2022-11-30,M,69.4,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2022-12-31,M,71.6,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_avg,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2023-01-31,M,72,issuer_8k,2026-09-11T23:59:04Z
@@ -70628,7 +70633,8 @@ issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-05-31,M,46.2
 issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-06-30,M,46.3,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-07-31,M,46,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-08-31,M,46.1,issuer_8k,2026-09-16T00:09:34Z
-issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-09-30,M,46.2,issuer_8k,2026-10-16T00:16:53Z
+issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-09-30,M,46.3,issuer_8k,2026-11-17T04:27:36Z
+issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-10-31,M,47.3,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2022-11-30,M,21.3,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2022-12-31,M,21.4,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_avg,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2023-01-31,M,21.6,issuer_8k,2026-09-11T23:59:04Z
@@ -70776,6 +70782,7 @@ issuer_card_loans_avg,ISSUER:CAPITAL_ONE,issuer,all,2026-06-30,M,256.201,issuer_
 issuer_card_loans_avg,ISSUER:CAPITAL_ONE,issuer,all,2026-07-31,M,256.704,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_loans_avg,ISSUER:CAPITAL_ONE,issuer,all,2026-08-31,M,257.499,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_loans_avg,ISSUER:CAPITAL_ONE,issuer,all,2026-09-30,M,257.744,issuer_8k,2026-10-21T00:33:30Z
+issuer_card_loans_avg,ISSUER:CAPITAL_ONE,issuer,all,2026-10-31,M,258.16,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_loans_avg,ISSUER:SYNCHRONY,issuer,all,2021-03-31,M,76.9,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_loans_avg,ISSUER:SYNCHRONY,issuer,all,2021-04-30,M,76.3,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_loans_avg,ISSUER:SYNCHRONY,issuer,all,2021-05-31,M,76.6,issuer_8k,2026-09-11T19:53:50Z
@@ -70852,6 +70859,7 @@ issuer_card_loans_eop,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-06-30,M,113.8,issu
 issuer_card_loans_eop,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-07-31,M,113.1,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_eop,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-08-31,M,114.2,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_loans_eop,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-09-30,M,114.3,issuer_8k,2026-10-16T00:16:53Z
+issuer_card_loans_eop,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-10-31,M,115.1,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_loans_eop,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2022-11-30,M,70.4,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_eop,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2022-12-31,M,72.7,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_eop,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2023-01-31,M,71.3,issuer_8k,2026-09-11T23:59:04Z
@@ -70899,6 +70907,7 @@ issuer_card_loans_eop,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-06-30,M,45.9
 issuer_card_loans_eop,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-07-31,M,46.1,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_eop,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-08-31,M,46.1,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_loans_eop,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-09-30,M,46.6,issuer_8k,2026-10-16T00:16:53Z
+issuer_card_loans_eop,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-10-31,M,48.1,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_loans_eop,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2022-11-30,M,21.4,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_eop,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2022-12-31,M,21.4,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_loans_eop,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2023-01-31,M,21.9,issuer_8k,2026-09-11T23:59:04Z
@@ -71046,6 +71055,7 @@ issuer_card_loans_eop,ISSUER:CAPITAL_ONE,issuer,all,2026-06-30,M,259.005,issuer_
 issuer_card_loans_eop,ISSUER:CAPITAL_ONE,issuer,all,2026-07-31,M,258.94,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_loans_eop,ISSUER:CAPITAL_ONE,issuer,all,2026-08-31,M,260.642,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_loans_eop,ISSUER:CAPITAL_ONE,issuer,all,2026-09-30,M,260.252,issuer_8k,2026-10-21T00:33:30Z
+issuer_card_loans_eop,ISSUER:CAPITAL_ONE,issuer,all,2026-10-31,M,261.925,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_loans_eop,ISSUER:SYNCHRONY,issuer,all,2021-03-31,M,76.9,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_loans_eop,ISSUER:SYNCHRONY,issuer,all,2021-04-30,M,76.5,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_loans_eop,ISSUER:SYNCHRONY,issuer,all,2021-05-31,M,77.7,issuer_8k,2026-09-11T19:53:50Z
@@ -71274,6 +71284,7 @@ issuer_card_nco_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-06-30,M,0.934,issuer_8
 issuer_card_nco_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-07-31,M,0.881,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_nco_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-08-31,M,0.892,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_nco_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-09-30,M,0.787,issuer_8k,2026-10-21T00:33:30Z
+issuer_card_nco_amount,ISSUER:CAPITAL_ONE,issuer,all,2026-10-31,M,0.865,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-02-28,M,1.9,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-03-31,M,2,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-04-30,M,2.1,issuer_8k,2026-09-11T23:59:04Z
@@ -71281,7 +71292,8 @@ issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-05-31,M,2,issuer_8k
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-06-30,M,1.4,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-07-31,M,1.7,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-08-31,M,1.7,issuer_8k,2026-09-16T00:09:34Z
-issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-09-30,M,1.6,issuer_8k,2026-10-16T00:16:53Z
+issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-09-30,M,1.5,issuer_8k,2026-11-17T04:27:36Z
+issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER,issuer,all,2026-10-31,M,1.6,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2022-11-30,M,1,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2022-12-31,M,1.2,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_CONSUMER_LOANS,issuer,all,2023-01-31,M,1.5,issuer_8k,2026-09-11T23:59:04Z
@@ -71328,7 +71340,8 @@ issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-05-31,M,2.6,i
 issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-06-30,M,2.3,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-07-31,M,2.6,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-08-31,M,2.2,issuer_8k,2026-09-16T00:09:34Z
-issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-09-30,M,2.3,issuer_8k,2026-10-16T00:16:53Z
+issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-09-30,M,2.1,issuer_8k,2026-11-17T04:27:36Z
+issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS,issuer,all,2026-10-31,M,2,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2022-11-30,M,0.9,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2022-12-31,M,1,issuer_8k,2026-09-11T23:59:04Z
 issuer_card_nco_rate,ISSUER:AMEX_US_SMALL_BUSINESS_LOANS,issuer,all,2023-01-31,M,1.2,issuer_8k,2026-09-11T23:59:04Z
@@ -71476,6 +71489,7 @@ issuer_card_nco_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-06-30,M,4.37,issuer_8k,2
 issuer_card_nco_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-07-31,M,4.12,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_nco_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-08-31,M,4.16,issuer_8k,2026-09-16T00:09:34Z
 issuer_card_nco_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-09-30,M,3.66,issuer_8k,2026-10-21T00:33:30Z
+issuer_card_nco_rate,ISSUER:CAPITAL_ONE,issuer,all,2026-10-31,M,4.02,issuer_8k,2026-11-17T04:27:36Z
 issuer_card_nco_rate,ISSUER:SYNCHRONY,issuer,all,2021-03-31,M,3.8,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_nco_rate,ISSUER:SYNCHRONY,issuer,all,2021-04-30,M,3.8,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_nco_rate,ISSUER:SYNCHRONY,issuer,all,2021-05-31,M,3.7,issuer_8k,2026-09-11T19:53:50Z
@@ -90540,6 +90554,7 @@ sce_any_application_rate,AGE:40-59,age,all,2025-06-30,T,44.4696579,nyfed_sce,202
 sce_any_application_rate,AGE:40-59,age,all,2025-10-31,T,45.90791702,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:40-59,age,all,2026-02-28,T,48.69314957,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:40-59,age,all,2026-06-30,T,52.65243912,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_application_rate,AGE:40-59,age,all,2026-10-31,T,47.18709564,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_application_rate,AGE:GE60,age,all,2013-10-31,T,35.02669907,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:GE60,age,all,2014-02-28,T,34.66795349,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:GE60,age,all,2014-06-30,T,34.00326157,nyfed_sce,2026-09-08T07:45:41Z
@@ -90579,6 +90594,7 @@ sce_any_application_rate,AGE:GE60,age,all,2025-06-30,T,35.29512405,nyfed_sce,202
 sce_any_application_rate,AGE:GE60,age,all,2025-10-31,T,26.50266647,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:GE60,age,all,2026-02-28,T,33.49504852,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:GE60,age,all,2026-06-30,T,30.63323402,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_application_rate,AGE:GE60,age,all,2026-10-31,T,30.2109127,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_application_rate,AGE:LE40,age,all,2013-10-31,T,66.86540985,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:LE40,age,all,2014-02-28,T,61.58491135,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:LE40,age,all,2014-06-30,T,62.57682419,nyfed_sce,2026-09-08T07:45:41Z
@@ -90618,6 +90634,7 @@ sce_any_application_rate,AGE:LE40,age,all,2025-06-30,T,47.80404663,nyfed_sce,202
 sce_any_application_rate,AGE:LE40,age,all,2025-10-31,T,51.95599365,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:LE40,age,all,2026-02-28,T,52.07911682,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,AGE:LE40,age,all,2026-06-30,T,57.91242218,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_application_rate,AGE:LE40,age,all,2026-10-31,T,52.73971558,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_application_rate,SCE_ALL,aggregate,all,2013-10-31,T,50.00593948,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCE_ALL,aggregate,all,2014-02-28,T,49.94960785,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCE_ALL,aggregate,all,2014-06-30,T,49.44908142,nyfed_sce,2026-09-08T07:45:41Z
@@ -90657,6 +90674,7 @@ sce_any_application_rate,SCE_ALL,aggregate,all,2025-06-30,T,42.15158844,nyfed_sc
 sce_any_application_rate,SCE_ALL,aggregate,all,2025-10-31,T,41.06837463,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCE_ALL,aggregate,all,2026-02-28,T,44.4070015,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCE_ALL,aggregate,all,2026-06-30,T,46.09141922,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_application_rate,SCE_ALL,aggregate,all,2026-10-31,T,42.11577225,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_application_rate,SCORE:680-760,score,all,2014-02-28,T,54.10356522,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:680-760,score,all,2014-06-30,T,53.6452713,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:680-760,score,all,2014-10-31,T,47.52713394,nyfed_sce,2026-09-08T07:45:41Z
@@ -90695,6 +90713,7 @@ sce_any_application_rate,SCORE:680-760,score,all,2025-06-30,T,51.69618988,nyfed_
 sce_any_application_rate,SCORE:680-760,score,all,2025-10-31,T,50.2244606,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:680-760,score,all,2026-02-28,T,51.53855515,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:680-760,score,all,2026-06-30,T,50.21860504,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_application_rate,SCORE:680-760,score,all,2026-10-31,T,45.26909637,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_application_rate,SCORE:GE760,score,all,2014-02-28,T,50.61216354,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:GE760,score,all,2014-06-30,T,46.37985229,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:GE760,score,all,2014-10-31,T,45.75156403,nyfed_sce,2026-09-08T07:45:41Z
@@ -90733,6 +90752,7 @@ sce_any_application_rate,SCORE:GE760,score,all,2025-06-30,T,40.91122437,nyfed_sc
 sce_any_application_rate,SCORE:GE760,score,all,2025-10-31,T,35.78616333,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:GE760,score,all,2026-02-28,T,46.17871475,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:GE760,score,all,2026-06-30,T,42.1198082,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_application_rate,SCORE:GE760,score,all,2026-10-31,T,36.43227386,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_application_rate,SCORE:LT680,score,all,2014-02-28,T,62.4014473,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:LT680,score,all,2014-06-30,T,62.92882538,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:LT680,score,all,2014-10-31,T,53.13044739,nyfed_sce,2026-09-08T07:45:41Z
@@ -90771,6 +90791,7 @@ sce_any_application_rate,SCORE:LT680,score,all,2025-06-30,T,43.97460175,nyfed_sc
 sce_any_application_rate,SCORE:LT680,score,all,2025-10-31,T,51.71015167,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:LT680,score,all,2026-02-28,T,46.07636261,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_application_rate,SCORE:LT680,score,all,2026-06-30,T,58.70572662,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_application_rate,SCORE:LT680,score,all,2026-10-31,T,54.49657059,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_rejection_rate,AGE:40-59,age,all,2013-10-31,T,21.00735092,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:40-59,age,all,2014-02-28,T,19.6037674,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:40-59,age,all,2014-06-30,T,17.7550087,nyfed_sce,2026-09-08T07:45:41Z
@@ -90810,6 +90831,7 @@ sce_any_rejection_rate,AGE:40-59,age,all,2025-06-30,T,23.55057144,nyfed_sce,2026
 sce_any_rejection_rate,AGE:40-59,age,all,2025-10-31,T,24.9478569,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:40-59,age,all,2026-02-28,T,18.52058983,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:40-59,age,all,2026-06-30,T,19.11933136,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_rejection_rate,AGE:40-59,age,all,2026-10-31,T,21.46445084,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_rejection_rate,AGE:GE60,age,all,2013-10-31,T,17.05566025,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:GE60,age,all,2014-02-28,T,13.87822533,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:GE60,age,all,2014-06-30,T,21.75140381,nyfed_sce,2026-09-08T07:45:41Z
@@ -90849,6 +90871,7 @@ sce_any_rejection_rate,AGE:GE60,age,all,2025-06-30,T,19.37586403,nyfed_sce,2026-
 sce_any_rejection_rate,AGE:GE60,age,all,2025-10-31,T,17.88117409,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:GE60,age,all,2026-02-28,T,10.09270191,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:GE60,age,all,2026-06-30,T,6.069911003,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_rejection_rate,AGE:GE60,age,all,2026-10-31,T,16.05284882,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_rejection_rate,AGE:LE40,age,all,2013-10-31,T,26.28373528,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:LE40,age,all,2014-02-28,T,24.48666954,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:LE40,age,all,2014-06-30,T,19.57541847,nyfed_sce,2026-09-08T07:45:41Z
@@ -90888,6 +90911,7 @@ sce_any_rejection_rate,AGE:LE40,age,all,2025-06-30,T,26.05898094,nyfed_sce,2026-
 sce_any_rejection_rate,AGE:LE40,age,all,2025-10-31,T,28.52282143,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:LE40,age,all,2026-02-28,T,17.47831535,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,AGE:LE40,age,all,2026-06-30,T,19.68280792,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_rejection_rate,AGE:LE40,age,all,2026-10-31,T,17.02595901,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_rejection_rate,SCE_ALL,aggregate,all,2013-10-31,T,22.09807014,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCE_ALL,aggregate,all,2014-02-28,T,20.02797318,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCE_ALL,aggregate,all,2014-06-30,T,19.30045319,nyfed_sce,2026-09-08T07:45:41Z
@@ -90927,6 +90951,7 @@ sce_any_rejection_rate,SCE_ALL,aggregate,all,2025-06-30,T,23.1263752,nyfed_sce,2
 sce_any_rejection_rate,SCE_ALL,aggregate,all,2025-10-31,T,24.76304054,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCE_ALL,aggregate,all,2026-02-28,T,15.9180212,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCE_ALL,aggregate,all,2026-06-30,T,16.12636566,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_rejection_rate,SCE_ALL,aggregate,all,2026-10-31,T,18.27552032,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_rejection_rate,SCORE:680-760,score,all,2014-02-28,T,12.40894032,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:680-760,score,all,2014-06-30,T,7.238873482,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:680-760,score,all,2014-10-31,T,12.62683964,nyfed_sce,2026-09-08T07:45:41Z
@@ -90965,6 +90990,7 @@ sce_any_rejection_rate,SCORE:680-760,score,all,2025-06-30,T,12.49631786,nyfed_sc
 sce_any_rejection_rate,SCORE:680-760,score,all,2025-10-31,T,18.45907211,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:680-760,score,all,2026-02-28,T,18.96295929,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:680-760,score,all,2026-06-30,T,11.14182758,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_rejection_rate,SCORE:680-760,score,all,2026-10-31,T,14.70870876,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_rejection_rate,SCORE:GE760,score,all,2014-02-28,T,5.567440033,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:GE760,score,all,2014-06-30,T,4.818297386,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:GE760,score,all,2014-10-31,T,6.121730804,nyfed_sce,2026-09-08T07:45:41Z
@@ -91003,6 +91029,7 @@ sce_any_rejection_rate,SCORE:GE760,score,all,2025-06-30,T,9.352339745,nyfed_sce,
 sce_any_rejection_rate,SCORE:GE760,score,all,2025-10-31,T,3.770680666,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:GE760,score,all,2026-02-28,T,5.499627113,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:GE760,score,all,2026-06-30,T,3.3079772,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_rejection_rate,SCORE:GE760,score,all,2026-10-31,T,6.22448349,nyfed_sce,2026-11-17T04:27:36Z
 sce_any_rejection_rate,SCORE:LT680,score,all,2014-02-28,T,48.745224,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:LT680,score,all,2014-06-30,T,46.27341461,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:LT680,score,all,2014-10-31,T,48.65103531,nyfed_sce,2026-09-08T07:45:41Z
@@ -91041,6 +91068,7 @@ sce_any_rejection_rate,SCORE:LT680,score,all,2025-06-30,T,56.60565567,nyfed_sce,
 sce_any_rejection_rate,SCORE:LT680,score,all,2025-10-31,T,63.03816986,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:LT680,score,all,2026-02-28,T,35.32987213,nyfed_sce,2026-09-08T07:45:41Z
 sce_any_rejection_rate,SCORE:LT680,score,all,2026-06-30,T,46.59786606,nyfed_sce,2026-09-08T07:45:41Z
+sce_any_rejection_rate,SCORE:LT680,score,all,2026-10-31,T,41.04704285,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_application_rate,AGE:40-59,age,all,2013-10-31,T,20.45530701,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:40-59,age,all,2014-02-28,T,28.09613419,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:40-59,age,all,2014-06-30,T,28.06319618,nyfed_sce,2026-09-08T07:45:41Z
@@ -91080,6 +91108,7 @@ sce_card_application_rate,AGE:40-59,age,all,2025-06-30,T,27.14006996,nyfed_sce,2
 sce_card_application_rate,AGE:40-59,age,all,2025-10-31,T,28.86653709,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:40-59,age,all,2026-02-28,T,33.67580795,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:40-59,age,all,2026-06-30,T,33.425354,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_application_rate,AGE:40-59,age,all,2026-10-31,T,29.8799572,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_application_rate,AGE:GE60,age,all,2013-10-31,T,19.0731163,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:GE60,age,all,2014-02-28,T,23.81085968,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:GE60,age,all,2014-06-30,T,21.03733063,nyfed_sce,2026-09-08T07:45:41Z
@@ -91119,6 +91148,7 @@ sce_card_application_rate,AGE:GE60,age,all,2025-06-30,T,21.09205055,nyfed_sce,20
 sce_card_application_rate,AGE:GE60,age,all,2025-10-31,T,17.29135323,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:GE60,age,all,2026-02-28,T,24.67891312,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:GE60,age,all,2026-06-30,T,22.65928841,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_application_rate,AGE:GE60,age,all,2026-10-31,T,17.73103333,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_application_rate,AGE:LE40,age,all,2013-10-31,T,37.14383698,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:LE40,age,all,2014-02-28,T,38.82262421,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:LE40,age,all,2014-06-30,T,37.80986404,nyfed_sce,2026-09-08T07:45:41Z
@@ -91158,6 +91188,7 @@ sce_card_application_rate,AGE:LE40,age,all,2025-06-30,T,29.07344627,nyfed_sce,20
 sce_card_application_rate,AGE:LE40,age,all,2025-10-31,T,34.57709122,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:LE40,age,all,2026-02-28,T,32.17479324,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,AGE:LE40,age,all,2026-06-30,T,34.81539917,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_application_rate,AGE:LE40,age,all,2026-10-31,T,34.25744629,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_application_rate,SCE_ALL,aggregate,all,2013-10-31,T,24.81636047,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCE_ALL,aggregate,all,2014-02-28,T,29.77093887,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCE_ALL,aggregate,all,2014-06-30,T,28.61481476,nyfed_sce,2026-09-08T07:45:41Z
@@ -91197,6 +91228,7 @@ sce_card_application_rate,SCE_ALL,aggregate,all,2025-06-30,T,25.53968239,nyfed_s
 sce_card_application_rate,SCE_ALL,aggregate,all,2025-10-31,T,26.63980865,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCE_ALL,aggregate,all,2026-02-28,T,30.05343056,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCE_ALL,aggregate,all,2026-06-30,T,29.89229012,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_application_rate,SCE_ALL,aggregate,all,2026-10-31,T,26.37069702,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_application_rate,SCORE:680-760,score,all,2014-02-28,T,35.210186,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:680-760,score,all,2014-06-30,T,29.7769928,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:680-760,score,all,2014-10-31,T,27.91624641,nyfed_sce,2026-09-08T07:45:41Z
@@ -91235,6 +91267,7 @@ sce_card_application_rate,SCORE:680-760,score,all,2025-06-30,T,32.19229126,nyfed
 sce_card_application_rate,SCORE:680-760,score,all,2025-10-31,T,34.75206757,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:680-760,score,all,2026-02-28,T,32.87800598,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:680-760,score,all,2026-06-30,T,31.91712379,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_application_rate,SCORE:680-760,score,all,2026-10-31,T,29.05327797,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_application_rate,SCORE:GE760,score,all,2014-02-28,T,24.41086769,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:GE760,score,all,2014-06-30,T,20.56827164,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:GE760,score,all,2014-10-31,T,27.90897751,nyfed_sce,2026-09-08T07:45:41Z
@@ -91273,6 +91306,7 @@ sce_card_application_rate,SCORE:GE760,score,all,2025-06-30,T,22.66519356,nyfed_s
 sce_card_application_rate,SCORE:GE760,score,all,2025-10-31,T,19.95443916,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:GE760,score,all,2026-02-28,T,30.18292618,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:GE760,score,all,2026-06-30,T,25.84329605,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_application_rate,SCORE:GE760,score,all,2026-10-31,T,20.33890724,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_application_rate,SCORE:LT680,score,all,2014-02-28,T,43.8752861,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:LT680,score,all,2014-06-30,T,45.69001007,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:LT680,score,all,2014-10-31,T,34.38262558,nyfed_sce,2026-09-08T07:45:41Z
@@ -91311,6 +91345,7 @@ sce_card_application_rate,SCORE:LT680,score,all,2025-06-30,T,28.00821114,nyfed_s
 sce_card_application_rate,SCORE:LT680,score,all,2025-10-31,T,37.86499023,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:LT680,score,all,2026-02-28,T,35.89700317,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_application_rate,SCORE:LT680,score,all,2026-06-30,T,42.44718552,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_application_rate,SCORE:LT680,score,all,2026-10-31,T,37.68319702,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_expected_rejection_rate,SCE_ALL,aggregate,all,2014-02-28,T,24.15556717,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_expected_rejection_rate,SCE_ALL,aggregate,all,2014-06-30,T,29.29069328,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_expected_rejection_rate,SCE_ALL,aggregate,all,2014-10-31,T,29.75665855,nyfed_sce,2026-09-08T07:45:41Z
@@ -91349,6 +91384,7 @@ sce_card_expected_rejection_rate,SCE_ALL,aggregate,all,2025-06-30,T,31.92339516,
 sce_card_expected_rejection_rate,SCE_ALL,aggregate,all,2025-10-31,T,29.81358147,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_expected_rejection_rate,SCE_ALL,aggregate,all,2026-02-28,T,30.59656525,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_expected_rejection_rate,SCE_ALL,aggregate,all,2026-06-30,T,27.37922287,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_expected_rejection_rate,SCE_ALL,aggregate,all,2026-10-31,T,29.90203476,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_limit_rejection_rate,SCE_ALL,aggregate,all,2013-10-31,T,37.5989151,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_rejection_rate,SCE_ALL,aggregate,all,2014-02-28,T,33.97720337,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_rejection_rate,SCE_ALL,aggregate,all,2014-06-30,T,32.61641312,nyfed_sce,2026-09-08T07:45:41Z
@@ -91388,6 +91424,7 @@ sce_card_limit_rejection_rate,SCE_ALL,aggregate,all,2025-06-30,T,37.80243301,nyf
 sce_card_limit_rejection_rate,SCE_ALL,aggregate,all,2025-10-31,T,28.92705727,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_rejection_rate,SCE_ALL,aggregate,all,2026-02-28,T,25.67264938,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_rejection_rate,SCE_ALL,aggregate,all,2026-06-30,T,20.92264938,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_limit_rejection_rate,SCE_ALL,aggregate,all,2026-10-31,T,41.83889389,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_limit_request_rate,AGE:40-59,age,all,2013-10-31,T,12.03632069,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:40-59,age,all,2014-02-28,T,9.204057693,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:40-59,age,all,2014-06-30,T,13.12622356,nyfed_sce,2026-09-08T07:45:41Z
@@ -91427,6 +91464,7 @@ sce_card_limit_request_rate,AGE:40-59,age,all,2025-06-30,T,17.83769608,nyfed_sce
 sce_card_limit_request_rate,AGE:40-59,age,all,2025-10-31,T,17.88795471,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:40-59,age,all,2026-02-28,T,18.83490562,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:40-59,age,all,2026-06-30,T,24.93111992,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_limit_request_rate,AGE:40-59,age,all,2026-10-31,T,16.63164139,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_limit_request_rate,AGE:GE60,age,all,2013-10-31,T,5.23094368,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:GE60,age,all,2014-02-28,T,3.407291889,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:GE60,age,all,2014-06-30,T,5.166713238,nyfed_sce,2026-09-08T07:45:41Z
@@ -91466,6 +91504,7 @@ sce_card_limit_request_rate,AGE:GE60,age,all,2025-06-30,T,8.473982811,nyfed_sce,
 sce_card_limit_request_rate,AGE:GE60,age,all,2025-10-31,T,7.149018764,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:GE60,age,all,2026-02-28,T,9.387088776,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:GE60,age,all,2026-06-30,T,10.22921371,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_limit_request_rate,AGE:GE60,age,all,2026-10-31,T,8.380041122,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_limit_request_rate,AGE:LE40,age,all,2013-10-31,T,15.78464508,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:LE40,age,all,2014-02-28,T,18.04594421,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:LE40,age,all,2014-06-30,T,16.59176445,nyfed_sce,2026-09-08T07:45:41Z
@@ -91505,6 +91544,7 @@ sce_card_limit_request_rate,AGE:LE40,age,all,2025-06-30,T,23.24443817,nyfed_sce,
 sce_card_limit_request_rate,AGE:LE40,age,all,2025-10-31,T,31.83376312,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:LE40,age,all,2026-02-28,T,25.74735641,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,AGE:LE40,age,all,2026-06-30,T,17.97984314,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_limit_request_rate,AGE:LE40,age,all,2026-10-31,T,21.12791634,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_limit_request_rate,SCE_ALL,aggregate,all,2013-10-31,T,10.47372246,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCE_ALL,aggregate,all,2014-02-28,T,9.770364761,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCE_ALL,aggregate,all,2014-06-30,T,11.58994102,nyfed_sce,2026-09-08T07:45:41Z
@@ -91544,6 +91584,7 @@ sce_card_limit_request_rate,SCE_ALL,aggregate,all,2025-06-30,T,15.73496246,nyfed
 sce_card_limit_request_rate,SCE_ALL,aggregate,all,2025-10-31,T,17.82507324,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCE_ALL,aggregate,all,2026-02-28,T,17.42661667,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCE_ALL,aggregate,all,2026-06-30,T,17.7214489,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_limit_request_rate,SCE_ALL,aggregate,all,2026-10-31,T,14.48431587,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_limit_request_rate,SCORE:680-760,score,all,2014-02-28,T,10.60616493,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:680-760,score,all,2014-06-30,T,10.74916363,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:680-760,score,all,2014-10-31,T,13.89470196,nyfed_sce,2026-09-08T07:45:41Z
@@ -91582,6 +91623,7 @@ sce_card_limit_request_rate,SCORE:680-760,score,all,2025-06-30,T,16.33891869,nyf
 sce_card_limit_request_rate,SCORE:680-760,score,all,2025-10-31,T,20.06205368,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:680-760,score,all,2026-02-28,T,28.82505608,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:680-760,score,all,2026-06-30,T,23.0112114,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_limit_request_rate,SCORE:680-760,score,all,2026-10-31,T,11.37592602,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_limit_request_rate,SCORE:GE760,score,all,2014-02-28,T,7.924879551,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:GE760,score,all,2014-06-30,T,5.284287453,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:GE760,score,all,2014-10-31,T,5.477951527,nyfed_sce,2026-09-08T07:45:41Z
@@ -91620,6 +91662,7 @@ sce_card_limit_request_rate,SCORE:GE760,score,all,2025-06-30,T,10.96942234,nyfed
 sce_card_limit_request_rate,SCORE:GE760,score,all,2025-10-31,T,10.62761402,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:GE760,score,all,2026-02-28,T,11.1948843,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:GE760,score,all,2026-06-30,T,12.8075428,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_limit_request_rate,SCORE:GE760,score,all,2026-10-31,T,10.85491943,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_limit_request_rate,SCORE:LT680,score,all,2014-02-28,T,17.7491951,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:LT680,score,all,2014-06-30,T,24.76708031,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:LT680,score,all,2014-10-31,T,12.24357986,nyfed_sce,2026-09-08T07:45:41Z
@@ -91658,6 +91701,7 @@ sce_card_limit_request_rate,SCORE:LT680,score,all,2025-06-30,T,26.17269325,nyfed
 sce_card_limit_request_rate,SCORE:LT680,score,all,2025-10-31,T,33.0153656,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:LT680,score,all,2026-02-28,T,20.97056007,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_limit_request_rate,SCORE:LT680,score,all,2026-06-30,T,28.08947945,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_limit_request_rate,SCORE:LT680,score,all,2026-10-31,T,28.25054741,nyfed_sce,2026-11-17T04:27:36Z
 sce_card_rejection_rate,SCE_ALL,aggregate,all,2013-10-31,T,21.67846489,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_rejection_rate,SCE_ALL,aggregate,all,2014-02-28,T,20.39139175,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_rejection_rate,SCE_ALL,aggregate,all,2014-06-30,T,20.24060249,nyfed_sce,2026-09-08T07:45:41Z
@@ -91697,6 +91741,7 @@ sce_card_rejection_rate,SCE_ALL,aggregate,all,2025-06-30,T,22.21161461,nyfed_sce
 sce_card_rejection_rate,SCE_ALL,aggregate,all,2025-10-31,T,21.21198463,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_rejection_rate,SCE_ALL,aggregate,all,2026-02-28,T,12.94375134,nyfed_sce,2026-09-08T07:45:41Z
 sce_card_rejection_rate,SCE_ALL,aggregate,all,2026-06-30,T,15.39206028,nyfed_sce,2026-09-08T07:45:41Z
+sce_card_rejection_rate,SCE_ALL,aggregate,all,2026-10-31,T,14.80785465,nyfed_sce,2026-11-17T04:27:36Z
 sce_credit_year_ago_much_easier,SCE_ALL,aggregate,all,2013-06-30,M,1.208354354,nyfed_sce_monthly,2026-09-08T19:12:51Z
 sce_credit_year_ago_much_easier,SCE_ALL,aggregate,all,2013-07-31,M,2.058796406,nyfed_sce_monthly,2026-09-08T19:12:51Z
 sce_credit_year_ago_much_easier,SCE_ALL,aggregate,all,2013-08-31,M,1.470865488,nyfed_sce_monthly,2026-09-08T19:12:51Z
@@ -93346,6 +93391,7 @@ sce_discouraged_rate,AGE:40-59,age,all,2025-06-30,T,6.118810654,nyfed_sce,2026-0
 sce_discouraged_rate,AGE:40-59,age,all,2025-10-31,T,9.12603569,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:40-59,age,all,2026-02-28,T,6.540101528,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:40-59,age,all,2026-06-30,T,5.02155447,nyfed_sce,2026-09-08T07:45:41Z
+sce_discouraged_rate,AGE:40-59,age,all,2026-10-31,T,6.311606884,nyfed_sce,2026-11-17T04:27:36Z
 sce_discouraged_rate,AGE:GE60,age,all,2013-10-31,T,4.102890968,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:GE60,age,all,2014-02-28,T,6.679577351,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:GE60,age,all,2014-06-30,T,6.682024002,nyfed_sce,2026-09-08T07:45:41Z
@@ -93385,6 +93431,7 @@ sce_discouraged_rate,AGE:GE60,age,all,2025-06-30,T,8.194073677,nyfed_sce,2026-09
 sce_discouraged_rate,AGE:GE60,age,all,2025-10-31,T,6.625393867,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:GE60,age,all,2026-02-28,T,7.058742523,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:GE60,age,all,2026-06-30,T,5.349993706,nyfed_sce,2026-09-08T07:45:41Z
+sce_discouraged_rate,AGE:GE60,age,all,2026-10-31,T,4.106278419,nyfed_sce,2026-11-17T04:27:36Z
 sce_discouraged_rate,AGE:LE40,age,all,2013-10-31,T,7.712186337,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:LE40,age,all,2014-02-28,T,8.603673935,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:LE40,age,all,2014-06-30,T,5.020745277,nyfed_sce,2026-09-08T07:45:41Z
@@ -93424,6 +93471,7 @@ sce_discouraged_rate,AGE:LE40,age,all,2025-06-30,T,7.201550961,nyfed_sce,2026-09
 sce_discouraged_rate,AGE:LE40,age,all,2025-10-31,T,8.395245552,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:LE40,age,all,2026-02-28,T,11.59510899,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,AGE:LE40,age,all,2026-06-30,T,5.294555664,nyfed_sce,2026-09-08T07:45:41Z
+sce_discouraged_rate,AGE:LE40,age,all,2026-10-31,T,6.679756165,nyfed_sce,2026-11-17T04:27:36Z
 sce_discouraged_rate,SCE_ALL,aggregate,all,2013-10-31,T,7.551857471,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCE_ALL,aggregate,all,2014-02-28,T,8.455860138,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCE_ALL,aggregate,all,2014-06-30,T,8.158809662,nyfed_sce,2026-09-08T07:45:41Z
@@ -93463,6 +93511,7 @@ sce_discouraged_rate,SCE_ALL,aggregate,all,2025-06-30,T,7.17875576,nyfed_sce,202
 sce_discouraged_rate,SCE_ALL,aggregate,all,2025-10-31,T,8.038585663,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCE_ALL,aggregate,all,2026-02-28,T,8.265975952,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCE_ALL,aggregate,all,2026-06-30,T,5.224837303,nyfed_sce,2026-09-08T07:45:41Z
+sce_discouraged_rate,SCE_ALL,aggregate,all,2026-10-31,T,5.553891659,nyfed_sce,2026-11-17T04:27:36Z
 sce_discouraged_rate,SCORE:680-760,score,all,2014-02-28,T,3.64612031,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:680-760,score,all,2014-06-30,T,4.685929775,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:680-760,score,all,2014-10-31,T,2.34530592,nyfed_sce,2026-09-08T07:45:41Z
@@ -93501,6 +93550,7 @@ sce_discouraged_rate,SCORE:680-760,score,all,2025-06-30,T,1.755079865,nyfed_sce,
 sce_discouraged_rate,SCORE:680-760,score,all,2025-10-31,T,2.986245871,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:680-760,score,all,2026-02-28,T,5.972476006,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:680-760,score,all,2026-06-30,T,0.7903228402,nyfed_sce,2026-09-08T07:45:41Z
+sce_discouraged_rate,SCORE:680-760,score,all,2026-10-31,T,3.507122755,nyfed_sce,2026-11-17T04:27:36Z
 sce_discouraged_rate,SCORE:GE760,score,all,2014-02-28,T,0.8582643867,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:GE760,score,all,2014-06-30,T,0.4154643416,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:GE760,score,all,2014-10-31,T,0.3827235997,nyfed_sce,2026-09-08T07:45:41Z
@@ -93539,6 +93589,7 @@ sce_discouraged_rate,SCORE:GE760,score,all,2025-06-30,T,0.3851078153,nyfed_sce,2
 sce_discouraged_rate,SCORE:GE760,score,all,2025-10-31,T,0.3837884963,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:GE760,score,all,2026-02-28,T,0.1237786785,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:GE760,score,all,2026-06-30,T,0.5931681991,nyfed_sce,2026-09-08T07:45:41Z
+sce_discouraged_rate,SCORE:GE760,score,all,2026-10-31,T,0.3455426395,nyfed_sce,2026-11-17T04:27:36Z
 sce_discouraged_rate,SCORE:LT680,score,all,2014-02-28,T,23.15380478,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:LT680,score,all,2014-06-30,T,15.19517326,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:LT680,score,all,2014-10-31,T,19.49149704,nyfed_sce,2026-09-08T07:45:41Z
@@ -93577,6 +93628,7 @@ sce_discouraged_rate,SCORE:LT680,score,all,2025-06-30,T,22.10500145,nyfed_sce,20
 sce_discouraged_rate,SCORE:LT680,score,all,2025-10-31,T,27.76799965,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:LT680,score,all,2026-02-28,T,29.69841766,nyfed_sce,2026-09-08T07:45:41Z
 sce_discouraged_rate,SCORE:LT680,score,all,2026-06-30,T,20.73807335,nyfed_sce,2026-09-08T07:45:41Z
+sce_discouraged_rate,SCORE:LT680,score,all,2026-10-31,T,20.50392723,nyfed_sce,2026-11-17T04:27:36Z
 sce_finances_year_ago_much_better,SCE_ALL,aggregate,all,2013-06-30,M,1.541322351,nyfed_sce_monthly,2026-09-08T19:12:51Z
 sce_finances_year_ago_much_better,SCE_ALL,aggregate,all,2013-07-31,M,1.758464813,nyfed_sce_monthly,2026-09-08T19:12:51Z
 sce_finances_year_ago_much_better,SCE_ALL,aggregate,all,2013-08-31,M,3.136560678,nyfed_sce_monthly,2026-09-08T19:12:51Z
@@ -95226,6 +95278,7 @@ sce_lender_closed_rate,AGE:40-59,age,all,2025-06-30,T,9.550517082,nyfed_sce,2026
 sce_lender_closed_rate,AGE:40-59,age,all,2025-10-31,T,10.31868362,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:40-59,age,all,2026-02-28,T,9.686356544,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:40-59,age,all,2026-06-30,T,6.1773839,nyfed_sce,2026-09-08T07:45:41Z
+sce_lender_closed_rate,AGE:40-59,age,all,2026-10-31,T,9.250945091,nyfed_sce,2026-11-17T04:27:36Z
 sce_lender_closed_rate,AGE:GE60,age,all,2013-10-31,T,1.086501241,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:GE60,age,all,2014-02-28,T,1.196621418,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:GE60,age,all,2014-06-30,T,2.466765642,nyfed_sce,2026-09-08T07:45:41Z
@@ -95265,6 +95318,7 @@ sce_lender_closed_rate,AGE:GE60,age,all,2025-06-30,T,6.478301048,nyfed_sce,2026-
 sce_lender_closed_rate,AGE:GE60,age,all,2025-10-31,T,9.135380745,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:GE60,age,all,2026-02-28,T,5.161183834,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:GE60,age,all,2026-06-30,T,6.721916199,nyfed_sce,2026-09-08T07:45:41Z
+sce_lender_closed_rate,AGE:GE60,age,all,2026-10-31,T,6.629887581,nyfed_sce,2026-11-17T04:27:36Z
 sce_lender_closed_rate,AGE:LE40,age,all,2013-10-31,T,7.1111269,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:LE40,age,all,2014-02-28,T,4.043800831,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:LE40,age,all,2014-06-30,T,5.660674095,nyfed_sce,2026-09-08T07:45:41Z
@@ -95304,6 +95358,7 @@ sce_lender_closed_rate,AGE:LE40,age,all,2025-06-30,T,8.019743919,nyfed_sce,2026-
 sce_lender_closed_rate,AGE:LE40,age,all,2025-10-31,T,6.718424797,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:LE40,age,all,2026-02-28,T,12.69254971,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,AGE:LE40,age,all,2026-06-30,T,8.344522476,nyfed_sce,2026-09-08T07:45:41Z
+sce_lender_closed_rate,AGE:LE40,age,all,2026-10-31,T,8.749283791,nyfed_sce,2026-11-17T04:27:36Z
 sce_lender_closed_rate,SCE_ALL,aggregate,all,2013-10-31,T,4.56571579,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCE_ALL,aggregate,all,2014-02-28,T,3.00951004,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCE_ALL,aggregate,all,2014-06-30,T,4.752718925,nyfed_sce,2026-09-08T07:45:41Z
@@ -95343,6 +95398,7 @@ sce_lender_closed_rate,SCE_ALL,aggregate,all,2025-06-30,T,8.01949501,nyfed_sce,2
 sce_lender_closed_rate,SCE_ALL,aggregate,all,2025-10-31,T,8.827310562,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCE_ALL,aggregate,all,2026-02-28,T,9.089281082,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCE_ALL,aggregate,all,2026-06-30,T,7.031043053,nyfed_sce,2026-09-08T07:45:41Z
+sce_lender_closed_rate,SCE_ALL,aggregate,all,2026-10-31,T,8.067227364,nyfed_sce,2026-11-17T04:27:36Z
 sce_lender_closed_rate,SCORE:680-760,score,all,2014-02-28,T,1.321182728,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:680-760,score,all,2014-06-30,T,2.602076292,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:680-760,score,all,2014-10-31,T,1.568055153,nyfed_sce,2026-09-08T07:45:41Z
@@ -95381,6 +95437,7 @@ sce_lender_closed_rate,SCORE:680-760,score,all,2025-06-30,T,4.282606125,nyfed_sc
 sce_lender_closed_rate,SCORE:680-760,score,all,2025-10-31,T,5.048523426,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:680-760,score,all,2026-02-28,T,5.638921261,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:680-760,score,all,2026-06-30,T,2.449489832,nyfed_sce,2026-09-08T07:45:41Z
+sce_lender_closed_rate,SCORE:680-760,score,all,2026-10-31,T,9.32984066,nyfed_sce,2026-11-17T04:27:36Z
 sce_lender_closed_rate,SCORE:GE760,score,all,2014-02-28,T,1.863957644,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:GE760,score,all,2014-06-30,T,2.358832121,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:GE760,score,all,2014-10-31,T,3.599350214,nyfed_sce,2026-09-08T07:45:41Z
@@ -95419,6 +95476,7 @@ sce_lender_closed_rate,SCORE:GE760,score,all,2025-06-30,T,3.112093449,nyfed_sce,
 sce_lender_closed_rate,SCORE:GE760,score,all,2025-10-31,T,4.123838902,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:GE760,score,all,2026-02-28,T,5.535329342,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:GE760,score,all,2026-06-30,T,4.355578899,nyfed_sce,2026-09-08T07:45:41Z
+sce_lender_closed_rate,SCORE:GE760,score,all,2026-10-31,T,2.361632347,nyfed_sce,2026-11-17T04:27:36Z
 sce_lender_closed_rate,SCORE:LT680,score,all,2014-02-28,T,8.105672836,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:LT680,score,all,2014-06-30,T,11.39655304,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:LT680,score,all,2014-10-31,T,11.57554722,nyfed_sce,2026-09-08T07:45:41Z
@@ -95457,6 +95515,7 @@ sce_lender_closed_rate,SCORE:LT680,score,all,2025-06-30,T,22.89102364,nyfed_sce,
 sce_lender_closed_rate,SCORE:LT680,score,all,2025-10-31,T,26.12753296,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:LT680,score,all,2026-02-28,T,21.40398979,nyfed_sce,2026-09-08T07:45:41Z
 sce_lender_closed_rate,SCORE:LT680,score,all,2026-06-30,T,20.92314148,nyfed_sce,2026-09-08T07:45:41Z
+sce_lender_closed_rate,SCORE:LT680,score,all,2026-10-31,T,20.28257751,nyfed_sce,2026-11-17T04:27:36Z
 sce_miss_payment_prob,AGE:40-60,age,all,2013-06-30,M,15.26630306,nyfed_sce_monthly,2026-09-08T19:12:51Z
 sce_miss_payment_prob,AGE:40-60,age,all,2013-07-31,M,16.23987579,nyfed_sce_monthly,2026-09-08T19:12:51Z
 sce_miss_payment_prob,AGE:40-60,age,all,2013-08-31,M,17.0099659,nyfed_sce_monthly,2026-09-08T19:12:51Z
@@ -98072,6 +98131,7 @@ sce_observations,AGE:40-59,age,all,2025-06-30,T,376,nyfed_sce,2026-09-08T07:45:4
 sce_observations,AGE:40-59,age,all,2025-10-31,T,375,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:40-59,age,all,2026-02-28,T,379,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:40-59,age,all,2026-06-30,T,384,nyfed_sce,2026-09-08T07:45:41Z
+sce_observations,AGE:40-59,age,all,2026-10-31,T,407,nyfed_sce,2026-11-17T04:27:36Z
 sce_observations,AGE:GE60,age,all,2013-10-31,T,437,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:GE60,age,all,2014-02-28,T,350,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:GE60,age,all,2014-06-30,T,366,nyfed_sce,2026-09-08T07:45:41Z
@@ -98111,6 +98171,7 @@ sce_observations,AGE:GE60,age,all,2025-06-30,T,248,nyfed_sce,2026-09-08T07:45:41
 sce_observations,AGE:GE60,age,all,2025-10-31,T,208,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:GE60,age,all,2026-02-28,T,231,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:GE60,age,all,2026-06-30,T,210,nyfed_sce,2026-09-08T07:45:41Z
+sce_observations,AGE:GE60,age,all,2026-10-31,T,251,nyfed_sce,2026-11-17T04:27:36Z
 sce_observations,AGE:LE40,age,all,2013-10-31,T,350,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:LE40,age,all,2014-02-28,T,323,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:LE40,age,all,2014-06-30,T,331,nyfed_sce,2026-09-08T07:45:41Z
@@ -98150,6 +98211,7 @@ sce_observations,AGE:LE40,age,all,2025-06-30,T,347,nyfed_sce,2026-09-08T07:45:41
 sce_observations,AGE:LE40,age,all,2025-10-31,T,336,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:LE40,age,all,2026-02-28,T,313,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,AGE:LE40,age,all,2026-06-30,T,301,nyfed_sce,2026-09-08T07:45:41Z
+sce_observations,AGE:LE40,age,all,2026-10-31,T,286,nyfed_sce,2026-11-17T04:27:36Z
 sce_observations,SCE_ALL,aggregate,all,2013-10-31,T,1379,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCE_ALL,aggregate,all,2014-02-28,T,1103,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCE_ALL,aggregate,all,2014-06-30,T,1122,nyfed_sce,2026-09-08T07:45:41Z
@@ -98189,6 +98251,7 @@ sce_observations,SCE_ALL,aggregate,all,2025-06-30,T,971,nyfed_sce,2026-09-08T07:
 sce_observations,SCE_ALL,aggregate,all,2025-10-31,T,919,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCE_ALL,aggregate,all,2026-02-28,T,923,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCE_ALL,aggregate,all,2026-06-30,T,895,nyfed_sce,2026-09-08T07:45:41Z
+sce_observations,SCE_ALL,aggregate,all,2026-10-31,T,944,nyfed_sce,2026-11-17T04:27:36Z
 sce_observations,SCORE:680-760,score,all,2014-02-28,T,396,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:680-760,score,all,2014-06-30,T,391,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:680-760,score,all,2014-10-31,T,387,nyfed_sce,2026-09-08T07:45:41Z
@@ -98227,6 +98290,7 @@ sce_observations,SCORE:680-760,score,all,2025-06-30,T,242,nyfed_sce,2026-09-08T0
 sce_observations,SCORE:680-760,score,all,2025-10-31,T,218,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:680-760,score,all,2026-02-28,T,194,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:680-760,score,all,2026-06-30,T,198,nyfed_sce,2026-09-08T07:45:41Z
+sce_observations,SCORE:680-760,score,all,2026-10-31,T,217,nyfed_sce,2026-11-17T04:27:36Z
 sce_observations,SCORE:GE760,score,all,2014-02-28,T,353,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:GE760,score,all,2014-06-30,T,380,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:GE760,score,all,2014-10-31,T,408,nyfed_sce,2026-09-08T07:45:41Z
@@ -98265,6 +98329,7 @@ sce_observations,SCORE:GE760,score,all,2025-06-30,T,491,nyfed_sce,2026-09-08T07:
 sce_observations,SCORE:GE760,score,all,2025-10-31,T,508,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:GE760,score,all,2026-02-28,T,481,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:GE760,score,all,2026-06-30,T,508,nyfed_sce,2026-09-08T07:45:41Z
+sce_observations,SCORE:GE760,score,all,2026-10-31,T,517,nyfed_sce,2026-11-17T04:27:36Z
 sce_observations,SCORE:LT680,score,all,2014-02-28,T,163,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:LT680,score,all,2014-06-30,T,208,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:LT680,score,all,2014-10-31,T,211,nyfed_sce,2026-09-08T07:45:41Z
@@ -98303,6 +98368,7 @@ sce_observations,SCORE:LT680,score,all,2025-06-30,T,178,nyfed_sce,2026-09-08T07:
 sce_observations,SCORE:LT680,score,all,2025-10-31,T,153,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:LT680,score,all,2026-02-28,T,144,nyfed_sce,2026-09-08T07:45:41Z
 sce_observations,SCORE:LT680,score,all,2026-06-30,T,151,nyfed_sce,2026-09-08T07:45:41Z
+sce_observations,SCORE:LT680,score,all,2026-10-31,T,174,nyfed_sce,2026-11-17T04:27:36Z
 sloos_card_demand_net_stronger,SLOOS_DOMESTIC,aggregate,all,2011-03-31,Q,-2.8,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_DOMESTIC,aggregate,all,2011-06-30,Q,5.7,fred,2026-09-08T18:42:01Z
 sloos_card_demand_net_stronger,SLOOS_DOMESTIC,aggregate,all,2011-09-30,Q,8.6,fred,2026-09-08T18:42:01Z

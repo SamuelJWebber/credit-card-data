@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-11-17T04:27:36Z",
+  "generated_at": "2026-11-18T03:38:11Z",
   "sources": {
     "bea": {
       "source": "bea",
       "status": "ok",
       "messages": [],
       "last_period_end": "2026-09-30",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 8130,
       "n_series": 10,
       "n_revisions": 0,
@@ -14,34 +14,24 @@
     },
     "census": {
       "source": "census",
-      "status": "stale",
+      "status": "ok",
       "messages": [
-        "retail_sales_sa.NAICS:44X72: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_nsa.NAICS:44X72: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_sa.NAICS:445: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_nsa.NAICS:445: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_sa.NAICS:447: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_nsa.NAICS:447: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_sa.NAICS:448: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_nsa.NAICS:448: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_sa.NAICS:454: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_nsa.NAICS:454: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_sa.NAICS:722: latest period 2026-08-31 is 78 days old (limit 76)",
-        "retail_sales_nsa.NAICS:722: latest period 2026-08-31 is 78 days old (limit 76)"
+        "22 revised value(s) since last load",
+        "12 new row(s)"
       ],
-      "last_period_end": "2026-08-31",
-      "pulled_at": "2026-11-17T04:27:36Z",
-      "rows": 4992,
+      "last_period_end": "2026-09-30",
+      "pulled_at": "2026-11-18T03:38:11Z",
+      "rows": 5004,
       "n_series": 12,
-      "n_revisions": 0,
-      "status_since": "2026-11-16T01:50:07Z"
+      "n_revisions": 22,
+      "status_since": "2026-11-18T03:38:11Z"
     },
     "cfpb_cct": {
       "source": "cfpb_cct",
       "status": "ok",
       "messages": [],
       "last_period_end": "2026-08-31",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 6284,
       "n_series": 26,
       "n_revisions": 0,
@@ -52,7 +42,7 @@
       "status": "ok",
       "messages": [],
       "last_period_end": "2026-06-30",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 11840,
       "n_series": 80,
       "n_revisions": 0,
@@ -62,14 +52,13 @@
       "source": "fdic",
       "status": "ok",
       "messages": [
-        "28 revised value(s) since last load",
         "issuer crosswalk: all 35 charter names match the FDIC institution records"
       ],
       "last_period_end": "2026-06-30",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 28942,
       "n_series": 216,
-      "n_revisions": 28,
+      "n_revisions": 0,
       "status_since": "2026-11-09T22:55:23Z"
     },
     "fred": {
@@ -77,7 +66,7 @@
       "status": "ok",
       "messages": [],
       "last_period_end": "2026-11-11",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 22312,
       "n_series": 40,
       "n_revisions": 0,
@@ -86,15 +75,12 @@
     "issuer_8k": {
       "source": "issuer_8k",
       "status": "ok",
-      "messages": [
-        "4 revised value(s) since last load",
-        "14 new row(s)"
-      ],
+      "messages": [],
       "last_period_end": "2026-10-31",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 1454,
       "n_series": 34,
-      "n_revisions": 4,
+      "n_revisions": 0,
       "status_since": "2026-11-09T22:55:23Z"
     },
     "ncua": {
@@ -102,7 +88,7 @@
       "status": "ok",
       "messages": [],
       "last_period_end": "2026-06-30",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 1008,
       "n_series": 24,
       "n_revisions": 0,
@@ -113,7 +99,7 @@
       "status": "ok",
       "messages": [],
       "last_period_end": "2026-09-30",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 6812,
       "n_series": 68,
       "n_revisions": 0,
@@ -122,11 +108,9 @@
     "nyfed_sce": {
       "source": "nyfed_sce",
       "status": "ok",
-      "messages": [
-        "52 new row(s)"
-      ],
+      "messages": [],
       "last_period_end": "2026-10-31",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 2058,
       "n_series": 52,
       "n_revisions": 0,
@@ -137,7 +121,7 @@
       "status": "ok",
       "messages": [],
       "last_period_end": "2026-10-31",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 5796,
       "n_series": 36,
       "n_revisions": 0,
@@ -148,7 +132,7 @@
       "status": "ok",
       "messages": [],
       "last_period_end": "2025-12-31",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 2420,
       "n_series": 106,
       "n_revisions": 0,
@@ -159,7 +143,7 @@
       "status": "ok",
       "messages": [],
       "last_period_end": "2026-06-30",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 2855,
       "n_series": 51,
       "n_revisions": 0,
@@ -172,7 +156,7 @@
         "issuer crosswalk: all 28 top-25 institution names in the 2025-12-31 TCCP file match issuers.csv or the NCUA credit unions the ncua source tracks (24 bank names, 4 credit union names)"
       ],
       "last_period_end": "2025-12-31",
-      "pulled_at": "2026-11-17T04:27:36Z",
+      "pulled_at": "2026-11-18T03:38:11Z",
       "rows": 82,
       "n_series": 15,
       "n_revisions": 0,

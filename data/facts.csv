@@ -3789,6 +3789,7 @@ card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-10-21,W,19.7,fred,2026-10
 card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-10-28,W,19.71,fred,2026-10-30T01:51:05Z
 card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-11-04,W,19.71,fred,2026-11-06T02:13:47Z
 card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-11-11,W,19.75,fred,2026-11-13T02:33:39Z
+card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-11-18,W,19.76,fred,2026-11-20T03:00:42Z
 card_apr_all_accounts,COMBANKS_ALL,aggregate,all,1994-12-31,Q,15.69,fred,2026-09-07T17:34:59Z
 card_apr_all_accounts,COMBANKS_ALL,aggregate,all,1995-03-31,Q,16.1,fred,2026-09-07T17:34:59Z
 card_apr_all_accounts,COMBANKS_ALL,aggregate,all,1995-06-30,Q,16.14,fred,2026-09-07T17:34:59Z
@@ -16380,7 +16381,8 @@ continuing_claims_sa,US_ECONOMY,aggregate,all,2026-10-03,W,1703,fred,2026-10-23T
 continuing_claims_sa,US_ECONOMY,aggregate,all,2026-10-10,W,1722,fred,2026-10-30T01:51:05Z
 continuing_claims_sa,US_ECONOMY,aggregate,all,2026-10-17,W,1695,fred,2026-11-06T02:13:47Z
 continuing_claims_sa,US_ECONOMY,aggregate,all,2026-10-24,W,1717,fred,2026-11-13T02:33:39Z
-continuing_claims_sa,US_ECONOMY,aggregate,all,2026-10-31,W,1697,fred,2026-11-13T02:33:39Z
+continuing_claims_sa,US_ECONOMY,aggregate,all,2026-10-31,W,1693,fred,2026-11-20T03:00:42Z
+continuing_claims_sa,US_ECONOMY,aggregate,all,2026-11-07,W,1763,fred,2026-11-20T03:00:42Z
 cpi_all_urban_sa,US_ECONOMY,aggregate,all,1947-01-31,M,21.48,fred,2026-09-08T07:30:11Z
 cpi_all_urban_sa,US_ECONOMY,aggregate,all,1947-02-28,M,21.62,fred,2026-09-08T07:30:11Z
 cpi_all_urban_sa,US_ECONOMY,aggregate,all,1947-03-31,M,22,fred,2026-09-08T07:30:11Z
@@ -70171,7 +70173,8 @@ initial_claims_sa,US_ECONOMY,aggregate,all,2026-10-10,W,200,fred,2026-10-23T00:3
 initial_claims_sa,US_ECONOMY,aggregate,all,2026-10-17,W,195,fred,2026-10-30T01:51:05Z
 initial_claims_sa,US_ECONOMY,aggregate,all,2026-10-24,W,195,fred,2026-11-06T02:13:47Z
 initial_claims_sa,US_ECONOMY,aggregate,all,2026-10-31,W,191,fred,2026-11-13T02:33:39Z
-initial_claims_sa,US_ECONOMY,aggregate,all,2026-11-07,W,200,fred,2026-11-13T02:33:39Z
+initial_claims_sa,US_ECONOMY,aggregate,all,2026-11-07,W,202,fred,2026-11-20T03:00:42Z
+initial_claims_sa,US_ECONOMY,aggregate,all,2026-11-14,W,203,fred,2026-11-20T03:00:42Z
 issuer_card_dq30_amount,ISSUER:BREAD_FINANCIAL,issuer,all,2022-07-31,M,0.81,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_dq30_amount,ISSUER:BREAD_FINANCIAL,issuer,all,2022-08-31,M,0.9,issuer_8k,2026-09-11T19:53:50Z
 issuer_card_dq30_amount,ISSUER:BREAD_FINANCIAL,issuer,all,2022-09-30,M,0.97,issuer_8k,2026-09-11T19:53:50Z

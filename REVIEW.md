@@ -5,7 +5,7 @@ reviewed it: first-line reviewers attacked the work and compared it with other p
 second reviewer tried to refute each HIGH and MEDIUM finding. Only the verified result is below.
 Full reports, with commands and sources: `reviews/fable-2026-11-10/` (`credit-V.md` is the verification;
 the others are the first-line reports, including claims the verifier narrowed or rejected).
-**Nothing here has been implemented.** Mark each row Fixed / Rejected / Deferred as it is handled.
+**Status as of 2026-11-21:** the one HIGH finding (credit-B-1) and credit-A-3 are fixed; the rest are deferred or the owner's. See "Status of each finding".
 
 ## Verdict table
 
@@ -30,6 +30,26 @@ the others are the first-line reports, including claims the verifier narrowed or
 
 Counts: 11 UPHELD (one re-graded down), 4 WEAKENED, 0 REFUTED, 0 UNVERIFIABLE, plus one LOW upgraded from PLAUSIBLE.
 After re-grading: 1 HIGH, 12 MEDIUM, 2 LOW among the 15 HIGH and MEDIUM findings.
+
+## Status of each finding (2026-11-21, Claude Code)
+
+| Finding | Status | What was done, or why not |
+| --- | --- | --- |
+| credit-B-1 "interest households actually pay" (with credit-A-12) | **Fixed** | The chart is titled "BEA's modelled nonmortgage interest as an implied rate on consumer credit, against the card APR"; its series is "Implied rate on all consumer credit (BEA modelled interest over G.19 credit outstanding)". The note says BEA computes the series as Fed credit outstanding times a blended Fed rate (NIPA Handbook chapter 14, FAQ 1407) and that it counts items that are not consumer credit; the sentences about interest-free balances and "fewer dollars" are deleted. The income-share chart and the series note in `crosswalks/series.csv` carry the same caveat. `tests/test_render.py::test_the_bea_interest_chart_says_it_is_modelled`. |
+| credit-A-3 HTML escaping off | **Fixed** | `render.py`: `autoescape=True`. `select_autoescape(["html"])` matches on the file extension and the template is `index.html.j2`, so nothing was escaped. `test_a_script_tag_in_a_health_message_is_escaped` renders a script tag through a health message and asserts the helper's old answer. The page rendered from the committed data before and after differs only in apostrophes and URL ampersands; no markup became text. |
+| credit-A-1 contact address in commit history | **Owner's decision** | A history rewrite and force push; the same question is open on two other public repos. |
+| credit-A-2 offered APR fall is new respondents | **Deferred** | Needs a matched-panel or top-25 series drawn; not a wording change. |
+| credit-A-4 charge-off peaks and unemployment | **Deferred** | One sentence to rewrite. |
+| credit-A-5 "same survey of the same banks" | **Deferred** | Chart note and the second thesis note. |
+| credit-A-6 SA never compared with NSA | **Deferred** | Three charts need the Fed's unadjusted rates, or the method line needs changing. |
+| credit-B-2 stock delinquency read as distress | **Deferred** | The NY Fed's charged-off caveat on the state map, two state charts and the loan-type chart, and three sentences. |
+| credit-B-3 "highest on record" without "nominal" | **Deferred** | Add "in dollars" to the record flag. |
+| credit-B-4, credit-B-8 | **Deferred** (LOW after re-grading) | |
+| credit-B-5, credit-B-6, credit-B-7 | **Deferred** | Thesis notes, which are dated analysis and edited by hand. |
+| credit-B-9 five "About" notes describe another quantity | **Deferred** | Each derived line carries its first input's note. |
+
+Merged the same day: the sixteen commits of `wip/paused-2026-11-10` (review round 2: R2-1 to R2-6 and improvements 1, 2
+and 5), rebased onto `main`; the one conflict was two tests appended at the same place. 482 tests pass on the result.
 
 ## Fix first
 

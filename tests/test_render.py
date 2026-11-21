@@ -627,7 +627,7 @@ def test_monthly_sce_charts_and_reading(page):
     assert income["data"][1][-1] > income["data"][3][-1]
     harder = ids["credit_harder"]
     assert abs(harder["data"][1][-1] - (15.306 + 30.606)) < 0.01  # much plus somewhat harder, August 2026
-    assert "Households' stated chance of missing a debt payment" in html
+    assert "Households&#39; stated chance of missing a debt payment" in html   # escaped since autoescape is on
 
 
 def test_hhdc_all_debt_charts(page):
@@ -1064,3 +1064,32 @@ def test_puerto_rico_is_shown_but_its_series_stops(page):
     dq = payload["state_map"]["metrics"][0]
     pr_years = sorted(int(y) for y in dq["values"]["PR"])
     assert max(pr_years) < max(payload["state_map"]["years"]), "Puerto Rico should stop before the newest year"
+
+
+def test_a_script_tag_in_a_health_message_is_escaped(tmp_paths, fixture_facts):
+    """REVIEW.md credit-A-3. Health messages carry the first bytes of an upstream reply. Escaping was off for the whole
+    page, because select_autoescape(["html"]) looks at the file extension and the template is index.html.j2, so a source
+    answering with a script tag would have run script on the public page."""
+    from jinja2 import select_autoescape
+
+    assert select_autoescape(["html"])("index.html.j2") is False        # why the old setting did nothing
+    tag = "<script src=//evil.example/x.js></script>"
+    health = _health(RUN2)
+    health["sources"]["fred"]["status"] = "failed"
+    health["sources"]["fred"]["messages"] = [f"unexpected reply: b'{tag}'"]
+    write_facts(fixture_facts, tmp_paths.facts_csv)
+    tmp_paths.health_json.write_text(json.dumps(health), encoding="utf-8")
+    html = render(tmp_paths, today=TODAY).read_text(encoding="utf-8")
+    assert tag not in html
+    assert "&lt;script src=//evil.example/x.js&gt;&lt;/script&gt;" in html
+    assert "evil.example" not in html.replace("&lt;script src=//evil.example/x.js&gt;", "")   # and nowhere else unescaped
+
+
+def test_the_bea_interest_chart_says_it_is_modelled(page):
+    """REVIEW.md credit-B-1: BEA builds the series as Fed credit times a blended Fed rate; it is not interest paid."""
+    html, payload = page
+    eff = {c["id"]: c for c in payload["charts"]}["effective_rate"]
+    assert eff["title"].startswith("BEA's modelled nonmortgage interest as an implied rate")
+    assert "actually pay" not in html and "fewer dollars" not in html and "pay no interest at all" not in html
+    assert "modelled, not measured from what households paid" in html
+    assert html.count("NIPA Handbook chapter 14") >= 2                  # on the implied-rate chart and the income-share chart

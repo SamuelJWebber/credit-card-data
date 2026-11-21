@@ -17,7 +17,7 @@ from pathlib import Path
 
 import duckdb
 import pandas as pd
-from jinja2 import Environment, PackageLoader, select_autoescape
+from jinja2 import Environment, PackageLoader
 
 from .fetchers import tccp
 from .golden import check_golden, load_golden, number_text
@@ -400,12 +400,23 @@ CCT_NOTE = (
     "page states these numbers, so this is the one source on the page checked by cross-file sums rather than a "
     "golden number."
 )
+# BEA's nonmortgage interest is a model, not a measurement (independent review 2026-11-10, REVIEW.md credit-B-1).
+# INTEREST_MODEL_NOTE goes on every chart drawn from the series; INTEREST_NOTE adds what dividing it by the G.19
+# credit total gives back. Until 2026-11-21 the chart was titled "Interest households actually pay" and its note read
+# the gap to the card APR as balances that pay no interest; the method cannot show that.
+INTEREST_MODEL_NOTE = (
+    "This BEA series is modelled, not measured from what households paid. BEA computes nonmortgage interest paid by "
+    "persons as consumer credit outstanding (Federal Reserve data) multiplied by a blended interest rate, also from "
+    "Federal Reserve data, at monthly, quarterly and annual frequency (NIPA Handbook chapter 14; BEA FAQ 1407). It "
+    "also counts smaller items that are not consumer credit, such as margin-loan and life-insurance policy-loan "
+    "interest."
+)
 INTEREST_NOTE = (
-    "Household interest payments (BEA, nonmortgage interest, at an annual rate) divided by consumer credit "
-    "outstanding (G.19 total, same month) is the rate households actually pay on all consumer credit, cards, auto "
-    "and student loans together. The card APR is what revolvers are charged on cards alone; the gap between the two "
-    "is the cheaper non-card debt and the card balances that pay no interest at all. The APR rising while the "
-    "effective rate stays flat means the repricing is landing on fewer dollars."
+    "BEA's modelled nonmortgage interest (at an annual rate) divided by consumer credit outstanding (G.19 total, same "
+    "month). " + INTEREST_MODEL_NOTE + " Dividing the result by the G.19 credit total therefore gives back, roughly, "
+    "the blended rate BEA assumed for all consumer credit, cards, auto and student loans together. It is not a "
+    "record of interest paid, it cannot show how many card balances pay no interest, and the gap between it and the "
+    "card APR says nothing about them. The card APR is what accounts assessed interest are charged on cards alone."
 )
 CLAIMS_NOTE = (
     "Department of Labor unemployment insurance claims, weekly, seasonally adjusted. The thesis watch keys on the "
@@ -565,12 +576,12 @@ PANELS = [
             },
             {
                 "id": "effective_rate",
-                "title": "Interest households actually pay on consumer credit, against the card APR",
+                "title": "BEA's modelled nonmortgage interest as an implied rate on consumer credit, against the card APR",
                 "unit": "pct",
                 "step": False,
                 "notes": [INTEREST_NOTE],
                 "series": [
-                    S("hh_interest_payments_saar", "US_HOUSEHOLDS", "Effective rate on all consumer credit (BEA interest paid over G.19 credit outstanding)",
+                    S("hh_interest_payments_saar", "US_HOUSEHOLDS", "Implied rate on all consumer credit (BEA modelled interest over G.19 credit outstanding)",
                       source="bea", view="v_interest_burden", field="effective_rate_pct"),
                     S("card_apr_assessed_interest", "COMBANKS_ALL", "Card APR on accounts assessed interest (G.19)", period_type="Q"),
                 ],
@@ -1555,7 +1566,8 @@ PANELS = [
                 "notes": [
                     "Household interest payments (BEA, every kind of nonmortgage interest) over disposable personal "
                     "income, both monthly at annual rates. The debt service ratio above counts principal too and "
-                    "arrives five months late; this is the interest half of it, four weeks after the month. " + INTEREST_NOTE
+                    "arrives five months late; this is the interest half of it, four weeks after the month. "
+                    + INTEREST_MODEL_NOTE
                 ],
                 "series": [
                     S("hh_interest_payments_saar", "US_HOUSEHOLDS", "Interest paid, share of disposable income", source="bea",
@@ -2528,7 +2540,10 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
             shutil.copyfile(note, paths.docs / "design" / note.name)
         thesis_href = THESIS_NOTE
 
-    env = Environment(loader=PackageLoader("carddash", "templates"), autoescape=select_autoescape(["html"]))
+    # autoescape=True, not select_autoescape(["html"]): that helper matches on the file extension, the template is
+    # index.html.j2, and so escaping was off for the whole page (REVIEW.md credit-A-3). Health messages carry bytes
+    # from upstream replies. tests/test_render.py renders a script tag through one.
+    env = Environment(loader=PackageLoader("carddash", "templates"), autoescape=True)
     tpl = env.get_template("index.html.j2")
     html = tpl.render(
         generated_at=generated_at,

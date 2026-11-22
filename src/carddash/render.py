@@ -158,18 +158,33 @@ STATE_NOTE = (
     "over 2003 to 2025 the two national series differ by at most 0.34 points. Puerto Rico is in the file and ends in "
     "2016, so it leaves the range after that."
 )
+STOCK_DQ_NOTE = (
+    "This is the stock of balances 90 or more days late on credit reports, not the quarterly flow into delinquency. "
+    "Charged-off card balances leave lender books but stay on credit reports for years (about 80 percent are still "
+    "reported a year later, up from about 40 percent in 2004-2012, per the NY Fed's August 2026 Liberty Street "
+    "Economics post 'How Distressed Are Consumers?'), and with charged-off balances removed the NY Fed finds card "
+    "delinquency flat after 2024. The 2024 to 2025 rise in the stock rate is therefore an accumulating pool of stale "
+    "charged-off debt rather than worsening current distress; no state-level flow series is published."
+)
 STATE_BREADTH_NOTE = (
-    "The breadth test for the loss cycle. Card delinquency rose in every one of the 51 areas between 2021 and 2025, "
-    "by 2.3 points in the state that moved least, so the deterioration was national rather than concentrated in a "
-    "few places. The range across states also widened, from 6.0 points in 2019 to 8.3 in 2025."
+    "The breadth test for the loss cycle. Card delinquency rose in every one of the 51 areas between 2021 and 2024 "
+    "(by at least 1.56 points, and by at least 2.3 points through 2025), so the 2021-2024 deterioration was national "
+    "rather than concentrated in a few places. Most of the widening in the range across states (from 6.0 points in "
+    "2019 to 6.9 in 2024 and 8.3 in 2025) came in 2025, when the national flow into delinquency was flat. "
+    + STOCK_DQ_NOTE
 )
 
 LOAN_TYPE_NOTE = (
-    "Every loan type on the same households' credit reports, measured the same way by the same panel, so the lines "
-    "are comparable in a way that figures from different regulators are not. 'Credit card' is bankcards; retail "
+    "Every loan type on the same households' credit reports, from the same panel. 'Credit card' is bankcards; retail "
     "cards and consumer finance loans sit in 'Other'. Mortgages and home equity lines are secured and belong on the "
-    "chart as the floor, not as a comparison. New York Fed Consumer Credit Panel/Equifax, quarterly, not "
-    "seasonally adjusted."
+    "chart as the floor, not as a direct comparison with unsecured cards. New York Fed Consumer Credit Panel/Equifax, "
+    "quarterly, not seasonally adjusted."
+)
+LOAN_TYPE_STOCK_NOTE = (
+    "This chart shows the stock of balances 90 or more days late on credit reports. Because charged-off card debt "
+    "stays on credit reports for years while defaulted mortgages and auto loans are resolved through foreclosure or "
+    "repossession, the stock levels are not directly comparable across loan types or across years after 2024; for "
+    "current distress use the quarterly flow into 90+ day delinquency on the next chart. " + STOCK_DQ_NOTE
 )
 
 ISSUER_8K_NOTE = (
@@ -184,7 +199,8 @@ ISSUER_8K_NOTE = (
     "loans and divides its delinquency by period-end PRINCIPAL loans, a smaller denominator than its own "
     "end-of-period loan figure. None of the three matches the call report scope either. Read the direction and "
     "the turning points, not the gaps between the lines. Three issuers are also not the industry, which is what "
-    "the dashed all-commercial-bank line is there for. American Express, the prime end of the same market, is "
+    "the dashed all-commercial-bank line (Fed, seasonally adjusted, against the issuers' unadjusted monthly rates) "
+    "is there for. American Express, the prime end of the same market, is "
     "on its own chart below, because it changed what it counts in May 2026 and needs two lines."
 )
 
@@ -273,9 +289,12 @@ CONSUMER_NOTE = (
     "gap says whether card stress is idiosyncratic or the leading edge of a broader consumer credit cycle."
 )
 LABOR_NOTE = (
-    "Card charge-offs against the unemployment rate. Losses are historically a job-loss phenomenon more than an "
-    "interest-rate one: every past charge-off peak followed an unemployment peak within a few quarters. Charge-offs "
-    "well above what the labour market implies is the signal that underwriting, not the economy, is the cause."
+    "Card charge-offs against the unemployment rate. Of six charge-off peaks since 1985, three (1992, 2002 and 2009) "
+    "came in or beside a recession (charge-offs peaked before unemployment in 1992 and 2002, and in the same quarter "
+    "in 2009) and three (1997, 2005 and 2024) came with unemployment low or falling, while the 2020 unemployment "
+    "spike had no charge-off peak after it at all. Charge-offs rising while the labour market holds is therefore a "
+    "pattern from non-recession episodes (underwriting or the 2005 bankruptcy law), not a rule that every peak "
+    "follows unemployment."
 )
 SHUTDOWN_NOTE = (
     "The break in the unemployment line at OCTOBER 2025 is a month that does not exist: the federal shutdown "
@@ -550,10 +569,13 @@ PANELS = [
                 "unit": "pct",
                 "step": True,
                 "notes": [
-                    "All three rates come from the same quarterly survey of the same banks, so the gap between them "
-                    "is a pricing decision and not a difference in measurement. A card margin that widened while "
-                    "personal and car loan rates tracked the policy rate is the issuer's choice; all three widening "
-                    "together would have been the cost of funds."
+                    "All three rates are published in the G.19 release, from two quarterly Fed forms with different "
+                    "panels and definitions (G.19 About page): the personal-loan and new-car rates come from form "
+                    "FR 2835 (about 75 banks, the simple unweighted average of each bank's most common rate on new "
+                    "loans), while the card rate comes from form FR 2835a (a sample of 50 card-issuing banks, total "
+                    "finance charges divided by the balances assessed interest across the existing book). Read the "
+                    "direction of each rate against the prime rate, not the level gap between them as a like-for-like "
+                    "measure."
                 ],
                 "series": [
                     S("card_apr_assessed_interest", "COMBANKS_ALL", "Credit card, accounts assessed interest", period_type="Q"),
@@ -768,16 +790,16 @@ PANELS = [
                 "step": False,
                 "benchmark": True,
                 "notes": [
-                    "The deep subprime, subprime and near-prime groups together (all lenders, monthly, CFPB) against "
-                    "the same measure for the large banks of the Y-14 (quarterly, Philly Fed). The two agreeing says "
-                    "the large-bank picture in the Borrowers panel holds for the whole market; the all-lender line "
-                    "sitting above it says the small lines to subprime borrowers are being written by smaller "
-                    "lenders. " + CCT_NOTE
+                    "The deep subprime, subprime and near-prime groups together (all lenders, monthly, seasonally "
+                    "adjusted, CFPB) against the same measure for the large banks of the Y-14 (quarterly, not "
+                    "seasonally adjusted, Philly Fed). The two agreeing says the large-bank picture in the Borrowers "
+                    "panel holds for the whole market; the all-lender line sitting above it says the small lines to "
+                    "subprime borrowers are being written by smaller lenders. " + CCT_NOTE
                 ],
                 "series": [
-                    S("cct_card_new_lines_sa", "CFPB_CCP_ALL", "All lenders, share of new credit line dollars (CFPB, monthly)", tier="near_prime",
+                    S("cct_card_new_lines_sa", "CFPB_CCP_ALL", "All lenders, share of new credit line dollars (CFPB, monthly, SA)", tier="near_prime",
                       source="cfpb_cct", view="v_cct_shares", field="below_prime_share_pct"),
-                    S("y14_card_new_commitments_share", "Y14_CARD_FILERS", "Large banks, share of new credit lines (Y-14, quarterly)",
+                    S("y14_card_new_commitments_share", "Y14_CARD_FILERS", "Large banks, share of new credit lines (Y-14, quarterly, NSA)",
                       tier="lt660", period_type="Q", source="phillyfed"),
                 ],
             },
@@ -866,7 +888,7 @@ PANELS = [
                     S("issuer_card_nco_rate", "ISSUER:CAPITAL_ONE", "Capital One, monthly", source="issuer_8k"),
                     S("issuer_card_nco_rate", "ISSUER:SYNCHRONY", "Synchrony, monthly", source="issuer_8k"),
                     S("issuer_card_nco_rate", "ISSUER:BREAD_FINANCIAL", "Bread Financial, monthly", source="issuer_8k"),
-                    S("card_nco_rate_sa", "COMBANKS_ALL", "All commercial banks, quarterly", period_type="Q", dash=True),
+                    S("card_nco_rate_sa", "COMBANKS_ALL", "All commercial banks, quarterly (Fed, SA)", period_type="Q", dash=True),
                 ],
             },
             {
@@ -879,7 +901,7 @@ PANELS = [
                     S("issuer_card_dq30_rate", "ISSUER:CAPITAL_ONE", "Capital One, monthly", source="issuer_8k"),
                     S("issuer_card_dq30_rate", "ISSUER:SYNCHRONY", "Synchrony, monthly", source="issuer_8k"),
                     S("issuer_card_dq30_rate", "ISSUER:BREAD_FINANCIAL", "Bread Financial, monthly", source="issuer_8k"),
-                    S("card_dq_rate_sa", "COMBANKS_ALL", "All commercial banks, quarterly", period_type="Q", dash=True),
+                    S("card_dq_rate_sa", "COMBANKS_ALL", "All commercial banks, quarterly (Fed, SA)", period_type="Q", dash=True),
                 ],
             },
             {
@@ -945,7 +967,7 @@ PANELS = [
                 "title": "Balances 90+ days delinquent, by loan type",
                 "unit": "pct",
                 "step": True,
-                "notes": [LOAN_TYPE_NOTE],
+                "notes": [LOAN_TYPE_NOTE, LOAN_TYPE_STOCK_NOTE],
                 "series": [
                     S("hhdc_card_dq90_rate_balances", "CCP_ALL", "Credit card", period_type="Q", source="nyfed_hhdc"),
                     S("hhdc_student_dq90_rate_balances", "CCP_ALL", "Student loan", period_type="Q", source="nyfed_hhdc"),
@@ -1035,7 +1057,8 @@ PANELS = [
                     "Net charge-offs on credit union card loans, de-cumulated from the year-to-date call report "
                     "figures to the quarter, times four, over the average of the beginning and end-of-quarter card "
                     "loans (sql/views.sql v_ncua_rates), the way the FDIC rate on this page is built. Against the "
-                    "Fed's charge-off rate for commercial banks. Credit unions lend to members on rates capped at 18 "
+                    "Fed's seasonally adjusted charge-off rate for commercial banks (the credit union rates are not "
+                    "seasonally adjusted). Credit unions lend to members on rates capped at 18 "
                     "percent, so their loss rate is the read on a different underwriting model, not a different "
                     "economy. " + NCUA_NOTE
                 ],
@@ -1277,8 +1300,9 @@ PANELS = [
                 "step": True,
                 "notes": [
                     "The three highest and three lowest states at the latest reading, with the national rate. The "
-                    "ordering barely changes from year to year: the same states sit at each end throughout, which "
-                    "is why the range widening matters more than which state is on top. " + STATE_NOTE
+                    "ordering barely changes from year to year: the same states sit at each end throughout. "
+                    + STATE_NOTE,
+                    STOCK_DQ_NOTE,
                 ],
                 "series": [
                     S("state_card_dq90_rate_balances", "CCP_ALL", "National", period_type="A", source="nyfed_state", dash=True),
@@ -1755,6 +1779,198 @@ VIEW_BOUNDS_UNCHECKED = frozenset({
     ("facts", "value"),
 })
 
+# Scope notes for every SQL view field drawn by PANELS (REVIEW.md credit-B-9). Each view is keyed on one of its input
+# series so _series_rows can query it like facts, which meant _chart_payload used to print that key input's scope_note
+# from series.csv as the "About this chart" description of the derived quantity (for example, the FDIC noncurrent-loan
+# share and the all-FDIC charge-off rate carried the note of fdic_card_nco_q in quarterly dollars; the credit-union
+# charge-off rates carried the year-to-date dollar charge-off note; the Y-14 payment rate carried total balances in
+# billions; and credit limit per account carried total balances in billions). Every non-facts (view, field) must have
+# an entry here and must never pass its raw input note through unchanged.
+VIEW_NOTES: dict[tuple[str, str], str] = {
+    ("v_fdic_rates", "noncurrent_share"): (
+        "Credit card loans 90 or more days past due or in nonaccrual status (FDIC Call Report fields P9CRCD plus "
+        "NACRCD) as a percentage of on-balance-sheet credit card loans (LNCRCD), at quarter end, not seasonally "
+        "adjusted. Summed over all FDIC-insured commercial banks and savings institutions (the Quarterly Banking "
+        "Profile population)."
+    ),
+    ("v_fdic_rates", "dq30_89_share"): (
+        "Credit card loans 30 to 89 days past due and still accruing (FDIC Call Report field P3CRCD) as a percentage "
+        "of on-balance-sheet credit card loans (LNCRCD), at quarter end, not seasonally adjusted."
+    ),
+    ("v_fdic_rates", "nco_rate_annualized"): (
+        "Annualized quarterly net charge-off rate on credit card loans (percent): four times the quarter's net "
+        "charge-offs (FDIC Call Report field NTCRCDQ) divided by the average of beginning and end-of-quarter "
+        "on-balance-sheet card loans (LNCRCD), not seasonally adjusted. Quarters with an average card book under "
+        "$100 million carry no rate. For an issuer roll-up, charters are summed from crosswalks/issuers.csv; for All "
+        "FDIC-insured institutions, summed over all insured commercial banks and savings institutions."
+    ),
+    ("v_fdic_issuer", "value"): (
+        "On-balance-sheet credit card loans (FDIC Call Report field LNCRCD) summed across the bank charters mapped to "
+        "this issuer in crosswalks/issuers.csv (acquirer plus acquired charters for their whole history), billions of "
+        "dollars at quarter end, not seasonally adjusted."
+    ),
+    ("v_ncua_rates", "nco_rate_annualized"): (
+        "Annualized quarterly net charge-off rate on unsecured credit card loans (percent): year-to-date gross "
+        "charge-offs (NCUA 5300 Call Report account 680) minus recoveries (account 681), de-cumulated to the single "
+        "quarter, multiplied by four and divided by the average of beginning and end-of-quarter card loans (account "
+        "396), not seasonally adjusted."
+    ),
+    ("v_y14_flows", "payment_rate"): (
+        "Quarterly cardholder payments as a percentage of the opening credit card balance (100 x (purchases - "
+        "(closing balance - opening balance)) / opening balance), derived from FR Y-14M aggregate cycle-end balances "
+        "and purchase volume. Charge-offs sit inside the implied payment flow because the Y-14 publishes charge-offs "
+        "as a rate rather than dollars. FR Y-14M credit card filers only (bank holding companies with card balances "
+        "above $5 billion or material to Tier 1 capital), quarterly, not seasonally adjusted."
+    ),
+    ("v_y14_flows", "revolver_share"): (
+        "Cycle-end credit card balances carrying interest (or in a promotional revolving period) as a percentage of "
+        "total cycle-end credit card balances on active consumer bankcard accounts. FR Y-14M credit card filers only "
+        "(bank holding companies with card balances above $5 billion or material to Tier 1 capital), quarterly, not "
+        "seasonally adjusted."
+    ),
+    ("v_hhdc_per_account", "limit_per_account"): (
+        "Total credit card limit on credit reports divided by the number of open credit card accounts, in dollars per "
+        "account (1,000 x aggregate limit in billions / open accounts in millions; joint accounts are counted twice "
+        "in the account series). New York Fed Consumer Credit Panel/Equifax, all lenders, quarterly, not seasonally "
+        "adjusted."
+    ),
+    ("v_hhdc_per_account", "available_per_account"): (
+        "Unused credit card limit on credit reports (aggregate limit minus aggregate balance) divided by the number of "
+        "open credit card accounts, in dollars per account (joint accounts are counted twice in the account series). "
+        "New York Fed Consumer Credit Panel/Equifax, all lenders, quarterly, not seasonally adjusted."
+    ),
+    ("v_hhdc_per_account", "balance_per_account"): (
+        "Total credit card balances on credit reports divided by the number of open credit card accounts, in dollars "
+        "per account (1,000 x aggregate balances in billions / open accounts in millions; joint accounts are counted "
+        "twice in the account series). New York Fed Consumer Credit Panel/Equifax, all lenders, quarterly, not "
+        "seasonally adjusted."
+    ),
+    ("v_apr_spread", "apr"): (
+        "Commercial bank interest rate on credit card plans, accounts assessed interest (revolvers only), percent. "
+        "Fed G.19 terms of credit, quarterly survey taken in the middle month of the quarter (February, May, August, "
+        "November) and dated to quarter end."
+    ),
+    ("v_apr_spread", "prime"): (
+        "Bank prime loan rate in the middle month of each quarter (the month the G.19 card APR survey is taken: "
+        "February, May, August, November), percent, from Federal Reserve H.15 via FRED (MPRIME)."
+    ),
+    ("v_apr_spread", "spread_over_prime"): (
+        "Card APR on accounts assessed interest (Fed G.19) minus the bank prime loan rate of the survey's middle "
+        "month (MPRIME), in percentage points."
+    ),
+    ("v_tccp_offered_range", "hi"): (
+        "Highest of the three credit-tier purchase APR medians (scores 619 or less, 620 to 719, 720 and up) across "
+        "all card products in the semiannual CFPB Terms of Credit Card Plans (TCCP) survey, percent."
+    ),
+    ("v_tccp_offered_range", "lo"): (
+        "Lowest of the three credit-tier purchase APR medians (scores 619 or less, 620 to 719, 720 and up) across "
+        "all card products in the semiannual CFPB Terms of Credit Card Plans (TCCP) survey, percent."
+    ),
+    ("v_offered_vs_paid", "spread_pct_pts"): (
+        "Median purchase APR offered to applicants with credit scores 620 to 719 in the semiannual CFPB TCCP survey "
+        "minus the quarterly G.19 commercial bank APR on accounts assessed interest (matched as-of through the latest "
+        "TCCP half-year), in percentage points."
+    ),
+    ("v_interest_burden", "effective_rate_pct"): (
+        "Implied annualized interest rate on all consumer credit (percent): BEA modelled household nonmortgage "
+        "interest payments (Table 2.6, SAAR) divided by total consumer credit outstanding (Fed G.19, SA) in the same "
+        "month. Because BEA models nonmortgage interest as Fed consumer credit times a blended Fed rate (NIPA Handbook "
+        "chapter 14, FAQ 1407), this ratio returns BEA's assumed blended rate rather than observed interest payments."
+    ),
+    ("v_interest_burden", "share_of_income_pct"): (
+        "BEA modelled household nonmortgage interest payments (Table 2.6, SAAR) as a percentage of BEA monthly "
+        "disposable personal income (Table 2.6, SAAR), monthly, seasonally adjusted."
+    ),
+    ("v_card_burden", "pct_of_disposable_income"): (
+        "Revolving consumer credit outstanding (Fed G.19, SA) as a percentage of quarterly disposable personal income "
+        "(BEA via FRED, SAAR), at quarter-end months."
+    ),
+    ("v_card_burden", "revolving"): (
+        "Revolving consumer credit owned and securitized, all holders, in current (nominal) billions of dollars, "
+        "seasonally adjusted (Fed G.19)."
+    ),
+    ("v_card_burden", "revolving_real"): (
+        "Revolving consumer credit owned and securitized, all holders (Fed G.19, SA), restated in the price level of "
+        "the latest CPI-U reading (BLS via FRED, SA), in billions of constant dollars."
+    ),
+    ("v_holder_share", "share_pct"): (
+        "Holder's revolving consumer credit (NSA) as a percentage of total revolving consumer credit across all "
+        "holders (NSA, 100 x holder / all holders)."
+    ),
+    ("v_retail_share", "share_pct"): (
+        "Nonstore retail sales (NAICS 454, online and mail-order sellers, SA) as a percentage of total retail and "
+        "food services sales (NAICS 44X72, SA), monthly, from the Census Monthly Retail Trade Survey."
+    ),
+    ("v_cct_shares", "share_pct"): (
+        "Group's share of new card credit-line dollars opened in the month (100 x group / sum across all groups in "
+        "the month, percent), derived from the seasonally adjusted CFPB Consumer Credit Trends series."
+    ),
+    ("v_cct_shares", "below_prime_share_pct"): (
+        "Share of new card credit-line dollars going to borrowers with FICO 8 scores below 660 at origination (deep "
+        "subprime under 580, subprime 580-619 and near-prime 620-659 summed, divided by the sum across all five score "
+        "tiers, percent), derived from the seasonally adjusted CFPB Consumer Credit Trends series."
+    ),
+    ("v_dfa_shares", "share_pct"): (
+        "Plotted as this group's percentage share of all households' consumer credit (100 x group / all households)."
+    ),
+    ("v_dfa_shares", "deposits_to_credit_pct"): (
+        "Plotted as this group's liquid deposits (checkable and time deposits plus currency) as a percentage of its "
+        "consumer credit (100 x deposits / consumer credit)."
+    ),
+    ("v_dfa_shares", "credit_to_net_worth_pct"): (
+        "Plotted as this group's consumer credit as a percentage of its net worth (100 x consumer credit / net worth)."
+    ),
+    ("v_dfa_shares", "credit_per_household"): (
+        "Plotted as this group's consumer credit divided by the number of households in the group, in dollars per "
+        "household."
+    ),
+    ("v_state_card", "state_max"): (
+        "Highest area reading in each year across the 50 states, DC and (through 2016) Puerto Rico, from the New York "
+        "Fed State Level Household Debt Statistics (fourth quarter of each year)."
+    ),
+    ("v_state_card", "state_min"): (
+        "Lowest area reading in each year across the 50 states, DC and (through 2016) Puerto Rico, from the New York "
+        "Fed State Level Household Debt Statistics (fourth quarter of each year)."
+    ),
+    ("v_state_card", "state_median"): (
+        "Median area reading in each year across the 50 states, DC and (through 2016) Puerto Rico, from the New York "
+        "Fed State Level Household Debt Statistics (fourth quarter of each year)."
+    ),
+    ("v_sce_sums", "combined"): (
+        "Combined share of respondents answering 'much' or 'somewhat' (the two categories summed, percent) in the "
+        "New York Fed Survey of Consumer Expectations monthly core survey."
+    ),
+    ("v_growth", "yoy_pct"): (
+        "Year-over-year percentage change (100 x (value / value a year earlier - 1), percent)."
+    ),
+}
+
+
+def _view_scope_note(s: dict, m) -> str:
+    """Scope note for one plotted series. A facts series uses its series.csv scope_note; a view-derived series uses
+    VIEW_NOTES (retaining any entity-specific charter or group sentence from series.csv without the raw input's unit)."""
+    raw = str(m["scope_note"] if m is not None else "")
+    if s["view"] == "facts":
+        return raw
+    vf = (s["view"], s["field"])
+    base = VIEW_NOTES[vf]
+    if vf == ("v_ncua_rates", "nco_rate_annualized") and "v_ncua_rates. " in raw:
+        return f"{base} {raw.split('v_ncua_rates. ', 1)[1].strip()}"
+    if s["view"] == "v_dfa_shares" and "Billions of dollars." in raw:
+        return raw.replace("Billions of dollars.", base)
+    if vf == ("v_cct_shares", "share_pct") and "billions of dollars, seasonally adjusted" in raw:
+        return f"{base} {raw.replace('billions of dollars, seasonally adjusted', 'derived from the seasonally adjusted dollar series').strip()}"
+    if vf == ("v_holder_share", "share_pct") and raw:
+        return f"{base} Underlying holder series: {raw.strip()}"
+    if vf == ("v_growth", "yoy_pct") and raw:
+        return f"{base} Underlying series: {raw.strip()}"
+    if vf == ("v_sce_sums", "combined") and raw:
+        return (
+            raw.replace("saying it is much harder", "saying it is much or somewhat harder (the two answers summed)")
+            .replace("saying their household is much worse off", "saying their household is much or somewhat worse off (the two answers summed)")
+        )
+    return base
+
 
 # A tile-grid cartogram of the states: each area is one square in a rough map of the country. It is not a map and
 # does not pretend to be one -- every state gets the same square, so Rhode Island is as visible as Texas and the
@@ -1780,9 +1996,12 @@ STATE_MAP_METRICS = [
     {
         "key": "dq",
         "metric": "state_card_dq90_rate_balances",
-        "label": "90+ days delinquent",
+        "label": "90+ days late or charged off",
         "unit": "pct",
-        "note": "Share of credit card balances 90 or more days delinquent, at the fourth quarter of each year.",
+        "note": (
+            "Share of credit card balances on credit reports that are 90 or more days delinquent, at the fourth "
+            "quarter of each year. " + STOCK_DQ_NOTE
+        ),
     },
     {
         "key": "debt",
@@ -1993,7 +2212,7 @@ def _chart_payload(con, spec: dict, meta_idx: dict, health: dict, golden: dict, 
                 "last_period_iso": ended[-1][0].isoformat() if ended else None,
                 "source_label": series_source_label(s["source"], m),
                 "source_url": (m["source_url"] if m is not None else ""),
-                "scope_note": (m["scope_note"] if m is not None else ""),
+                "scope_note": _view_scope_note(s, m),
                 "rights": (str(m.get("rights", "") or "") if m is not None else ""),
                 "data_as_of": _series_pulled_at(con, s) or src_health.get("pulled_at"),
                 "status": src_health.get("status", "failed") if src_health else "failed",
@@ -2177,18 +2396,19 @@ def _headline(facts: pd.DataFrame, key: tuple, label: str, kind: str, today: dt.
         hi = [d for d, v in earlier if v >= latest]
         lo = [d for d, v in earlier if v <= latest]
         first_d = min(values)
+        unit = " in dollars" if kind == "level" else ""
         if not hi:
-            flag = f"highest on record (since {period_label(first_d, pt)})"
+            flag = f"highest on record{unit} (since {period_label(first_d, pt)})"
         elif not lo:
-            flag = f"lowest on record (since {period_label(first_d, pt)})"
+            flag = f"lowest on record{unit} (since {period_label(first_d, pt)})"
         else:
             since_hi, since_lo = max(hi), max(lo)
             years_hi = (latest_d - since_hi).days / 365.25
             years_lo = (latest_d - since_lo).days / 365.25
             if years_hi >= 3 and years_hi >= years_lo:
-                flag = f"highest since {period_label(since_hi, pt)}"
+                flag = f"highest{unit} since {period_label(since_hi, pt)}"
             elif years_lo >= 3:
-                flag = f"lowest since {period_label(since_lo, pt)}"
+                flag = f"lowest{unit} since {period_label(since_lo, pt)}"
     parts = [p for p in (change, bench, flag) if p]
     text = f"{_fmt_value(latest, kind)} in {period_label(latest_d, pt)}" + (", " + ", ".join(parts) if parts else "")
     return {"label": label, "text": text, "source": source, "source_label": SOURCE_LABELS.get(source, source), "chart": chart}

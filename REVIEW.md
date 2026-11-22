@@ -5,7 +5,7 @@ reviewed it: first-line reviewers attacked the work and compared it with other p
 second reviewer tried to refute each HIGH and MEDIUM finding. Only the verified result is below.
 Full reports, with commands and sources: `reviews/fable-2026-11-10/` (`credit-V.md` is the verification;
 the others are the first-line reports, including claims the verifier narrowed or rejected).
-**Status as of 2026-11-21:** the one HIGH finding (credit-B-1) and credit-A-3 are fixed; the rest are deferred or the owner's. See "Status of each finding".
+**Status as of 2026-11-22:** the one HIGH finding (credit-B-1) and seven MEDIUM findings (credit-A-3, credit-A-4, credit-A-5, credit-A-6, credit-B-2, credit-B-3, credit-B-9) are fixed; credit-A-1 is rejected; the rest are deferred. See "Status of each finding".
 
 ## Verdict table
 
@@ -31,7 +31,7 @@ the others are the first-line reports, including claims the verifier narrowed or
 Counts: 11 UPHELD (one re-graded down), 4 WEAKENED, 0 REFUTED, 0 UNVERIFIABLE, plus one LOW upgraded from PLAUSIBLE.
 After re-grading: 1 HIGH, 12 MEDIUM, 2 LOW among the 15 HIGH and MEDIUM findings.
 
-## Status of each finding (2026-11-21, Claude Code)
+## Status of each finding (2026-11-22)
 
 | Finding | Status | What was done, or why not |
 | --- | --- | --- |
@@ -39,14 +39,14 @@ After re-grading: 1 HIGH, 12 MEDIUM, 2 LOW among the 15 HIGH and MEDIUM findings
 | credit-A-3 HTML escaping off | **Fixed** | `render.py`: `autoescape=True`. `select_autoescape(["html"])` matches on the file extension and the template is `index.html.j2`, so nothing was escaped. `test_a_script_tag_in_a_health_message_is_escaped` renders a script tag through a health message and asserts the helper's old answer. The page rendered from the committed data before and after differs only in apostrophes and URL ampersands; no markup became text. |
 | credit-A-1 contact address in commit history | **Rejected** (2026-11-22, decision delegated by the owner) | No history rewrite: it would not remove the address from GitHub's side, and it would change every cited commit hash and break every clone. No commit since 2026-09-14 carries it. Reasons and how to reverse are in HANDOFF.md. |
 | credit-A-2 offered APR fall is new respondents | **Deferred** | Needs a matched-panel or top-25 series drawn; not a wording change. |
-| credit-A-4 charge-off peaks and unemployment | **Deferred** | One sentence to rewrite. |
-| credit-A-5 "same survey of the same banks" | **Deferred** | Chart note and the second thesis note. |
-| credit-A-6 SA never compared with NSA | **Deferred** | Three charts need the Fed's unadjusted rates, or the method line needs changing. |
-| credit-B-2 stock delinquency read as distress | **Deferred** | The NY Fed's charged-off caveat on the state map, two state charts and the loan-type chart, and three sentences. |
-| credit-B-3 "highest on record" without "nominal" | **Deferred** | Add "in dollars" to the record flag. |
+| credit-A-4 charge-off peaks and unemployment | **Fixed** | `LABOR_NOTE` in `render.py` states what the two series show: of six charge-off peaks since 1985, three (1992, 2002 and 2009) came in or beside a recession (charge-offs peaked first in 1992 and 2002 and in the same quarter in 2009) and three (1997, 2005 and 2024) came with unemployment low or falling, while the 2020 unemployment spike had no charge-off peak after it. `tests/test_render.py::test_charge_off_and_unemployment_note_states_the_six_peaks_and_withdraws_every_past_peak`. |
+| credit-A-5 "same survey of the same banks" | **Fixed** | The `consumer_loan_rates` chart note in `render.py` explains that the rates come from two quarterly Fed forms with different panels and definitions (G.19 About page): personal-loan and new-car rates from FR 2835 (about 75 banks, simple unweighted average of each bank's most common rate on new loans) and card rates from FR 2835a (a sample of 50 card-issuing banks, total finance charges over balances assessed interest). The dated 2026-09-11 thesis note is left unedited as a dated artifact. `tests/test_render.py::test_consumer_loan_rates_note_names_the_two_fed_forms_and_withdraws_same_survey`. |
+| credit-A-6 SA never compared with NSA | **Fixed** | The Data and method section in `templates/index.html.j2` states that within-source charts keep SA and NSA apart while five cross-source charts draw an unadjusted issuer, credit-union, call-report or Y-14 series against a seasonally adjusted Fed or CFPB benchmark and label the adjusted line SA. The commercial-bank benchmark on `issuer_monthly_nco` and `issuer_monthly_dq` and the two lines on `cct_below_prime_share` carry explicit SA/NSA labels. `tests/test_render.py::test_method_and_cross_source_charts_disclose_sa_against_nsa`. |
+| credit-B-2 stock delinquency read as distress | **Fixed** | `STOCK_DQ_NOTE` and `LOAN_TYPE_STOCK_NOTE` in `render.py` put the NY Fed's August 2026 Liberty Street Economics charged-off caveat on `dq_by_loan_type`, `state_card_dq_range`, `state_card_dq_selected` and the state map (`STATE_MAP_METRICS` and `#statemap` in `templates/index.html.j2`), retitle the state map "Card balances 90+ days late and debt per person, by state" (measure "90+ days late or charged off"), note that 2021-2024 holds across all 51 areas while most of the range widening came in 2025 when the flow was flat, and drop the unqualified comparability and range-widening claims. The dated 2026-09-11 thesis note is left as a dated artifact. `tests/test_render.py::test_stock_delinquency_charts_and_state_map_carry_the_charged_off_caveat`. |
+| credit-B-3 "highest on record" without "nominal" | **Fixed** | `_headline` in `render.py` appends `" in dollars"` to the record and multi-year high/low flags whenever `kind == "level"`, while rate and count series keep the plain flag. `tests/test_render.py::test_record_flag_says_in_dollars_for_levels_and_not_for_rates`. |
 | credit-B-4, credit-B-8 | **Deferred** (LOW after re-grading) | |
 | credit-B-5, credit-B-6, credit-B-7 | **Deferred** | Thesis notes, which are dated analysis and edited by hand. |
-| credit-B-9 five "About" notes describe another quantity | **Deferred** | Each derived line carries its first input's note. |
+| credit-B-9 five "About" notes describe another quantity | **Fixed** | `VIEW_NOTES` and `_view_scope_note` in `render.py` give every non-`facts` `(view, field)` its own scope note (preserving entity-specific charter or household-group context without the raw input's unit), so no view-derived series prints its key input's `series.csv` scope note unchanged. `tests/test_render.py::test_every_view_derived_series_carries_its_own_about_note_not_an_inputs_note`. |
 
 Merged the same day: the sixteen commits of `wip/paused-2026-11-10` (review round 2: R2-1 to R2-6 and improvements 1, 2
 and 5), rebased onto `main`; the one conflict was two tests appended at the same place. 482 tests pass on the result.

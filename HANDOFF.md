@@ -47,8 +47,14 @@ Rewritten **2026-11-21** (Claude Code). Read `CLAUDE.md` first for the rules, th
 
 ## Needs the user
 
-- credit-A-1 and the same question on two other public repos: a personal address is the author of 73 public
-  commits. Removing it means rewriting history and a force push. Yes or no.
+- credit-A-1. **Decided 2026-11-22: no history rewrite** (the owner said "make the decision and do it"). 73
+  commits here carry a personal address, none since 2026-09-14; the repo has no forks. A rewrite would not remove
+  the address from GitHub (old commits stay reachable by hash until GitHub Support purges them, and public push-
+  event archives keep author addresses), and it would change every commit hash these review and handoff files cite
+  and break every clone and the scheduled jobs' pushes. The leak is already stopped: every commit since uses the
+  noreply address, held by the hook and tests. Reverse by running `git filter-repo --mailmap` and force-pushing;
+  nothing done today prevents it. One account setting would also stop it at the source and is the owner's own:
+  GitHub Settings, Emails, "Keep my email addresses private" and "Block command line pushes that expose my email".
 
 ## Traps that have already cost time
 

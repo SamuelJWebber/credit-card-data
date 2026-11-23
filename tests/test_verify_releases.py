@@ -224,3 +224,66 @@ def test_the_daily_watch_reports_a_night_with_no_run_or_a_run_that_never_ran(vr,
         capsys.readouterr().out
     monkeypatch.setattr(vr, "sh", FakeShell(runs=[]))
     assert vr.main(["--watch", "30"]) == 1 and "MISSING: no scheduled run" in capsys.readouterr().out
+
+
+def test_malformed_github_responses_cli_errors_and_bad_health_json_fail_closed(vr, monkeypatch, capsys):
+    # 1. gh CLI failure in both default and watch modes
+    def fail_gh(*args):
+        if args[0] == "gh":
+            raise subprocess.CalledProcessError(1, args)
+        return FakeShell()(*args)
+
+    monkeypatch.setattr(vr, "sh", fail_gh)
+    assert vr.main(["--no-fetch"]) == 1 and "ERROR could not read workflow runs" in capsys.readouterr().out
+    assert vr.main(["--watch", "30"]) == 1 and "ERROR could not read workflow runs" in capsys.readouterr().out
+
+    # 2. Malformed JSON / missing workflow_runs / bad run timestamp
+    for bad_body in ("<html>502 Bad Gateway</html>", '{"message": "rate limited"}', '{"workflow_runs": null}',
+                     '{"workflow_runs": [{"id": 1}]}'):
+        def bad_runs(*args, _body=bad_body):
+            if args[0] == "gh" and args[2].endswith("/runs"):
+                return _body
+            return FakeShell()(*args)
+
+        monkeypatch.setattr(vr, "sh", bad_runs)
+        assert vr.main(["--no-fetch"]) == 1 and "ERROR" in capsys.readouterr().out
+        assert vr.main(["--watch", "30"]) == 1 and "ERROR" in capsys.readouterr().out
+
+    # 3. git fetch failure fails closed
+    def fail_fetch(*args):
+        if args[:2] == ("git", "fetch"):
+            raise subprocess.CalledProcessError(128, args)
+        return FakeShell()(*args)
+
+    monkeypatch.setattr(vr, "sh", fail_fetch)
+    assert vr.main([]) == 1 and "ERROR git fetch origin main failed" in capsys.readouterr().out
+
+    # 4. Malformed health.json ("sources": null, invalid generated_at, non-dict health) and malformed jobs API
+    runs = [_run(50000000010, "schedule", "2026-11-11T01:30:00Z", "2026-11-11T01:40:00Z")]
+
+    class _WeirdShell(FakeShell):
+        def __call__(self, *args):
+            if args[0] == "gh" and "/jobs" in args[2]:
+                return '{"jobs": null}'
+            if args[:2] == ("git", "show"):
+                return '{"generated_at": "not-a-timestamp", "sources": null, "run": {"id": "not-an-int"}}'
+            return super().__call__(*args)
+
+    commits = [_commit("d" * 40, "2026-11-11T01:38:00Z", "2026-11-11T01:31:00Z", body="Run-Id: 50000000010")]
+    monkeypatch.setattr(vr, "sh", _WeirdShell(runs=runs, commits=commits))
+    assert vr.main(["--limit", "1", "--need", "1"]) == 1
+    out = capsys.readouterr().out
+    assert "50000000010" in out and "not green" in out and "no bot commit found" in out
+
+    # 5. In-progress run (conclusion=None) is never graded GREEN even if an earlier commit exists
+    in_prog = [_run(50000000011, "schedule", "2026-11-11T01:30:00Z", "2026-11-11T01:40:00Z", conclusion=None)]
+    commits_ok = [_commit("e" * 40, "2026-11-11T01:38:00Z", "2026-11-11T01:31:00Z", body="Run-Id: 50000000011")]
+    monkeypatch.setattr(vr, "sh", FakeShell(runs=in_prog, commits=commits_ok, jobs={}))
+    assert vr.main(["--limit", "1", "--need", "1"]) == 1 and "not green" in capsys.readouterr().out
+
+    # 6. Vacuous/invalid CLI bounds fail closed (exit 2)
+    for bad_argv in (["--need", "0"], ["--limit", "0"], ["--limit", "1", "--need", "2"],
+                     ["--max-age-hours", "0"], ["--watch", "0"]):
+        with pytest.raises(SystemExit) as exc:
+            vr.main(bad_argv)
+        assert exc.value.code == 2

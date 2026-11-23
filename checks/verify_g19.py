@@ -24,8 +24,10 @@ were skipped than checked (the page's layout has probably changed).
 
 from __future__ import annotations
 
+import argparse
 import datetime as dt
 import html
+import math
 import re
 import sys
 from pathlib import Path
@@ -54,19 +56,19 @@ ROW_FOR_METRIC = {
 def _cells(row_html: str) -> list[tuple[str, int]]:
     """(text, colspan) for each cell."""
     out = []
-    for m in re.finditer(r"<t([dh])([^>]*)>(.*?)</t[dh]>", row_html, flags=re.S):
+    for m in re.finditer(r"<t([dh])([^>]*)>(.*?)</t[dh]>", row_html, flags=re.I | re.S):
         attrs, inner = m.group(2), m.group(3)
-        span = re.search(r'colspan="?(\d+)', attrs)
+        span = re.search(r'colspan\s*=\s*"?(\d+)', attrs, flags=re.I)
         text = " ".join(html.unescape(re.sub(r"<[^>]+>", " ", inner)).split())
-        out.append((text, int(span.group(1)) if span else 1))
+        out.append((text, max(1, int(span.group(1))) if span else 1))
     return out
 
 
 def parse_tables(page: str) -> list[dict[str, dict[str, str]]]:
     """Each table -> {row label: {column key: value}}. Column keys look like '2025', 'Q1 2026', 'Jun 2026'."""
     tables = []
-    for tbl in re.findall(r"<table[^>]*>(.*?)</table>", page, flags=re.S):
-        rows = [_cells(r) for r in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl, flags=re.S)]
+    for tbl in re.findall(r"<table[^>]*>(.*?)</table>", page, flags=re.I | re.S):
+        rows = [_cells(r) for r in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl, flags=re.I | re.S)]
         rows = [r for r in rows if r]
         # find the header row with period labels (Q1, Apr, 2024 ...) and the year row just above it
         col_keys: list[str] | None = None
@@ -81,11 +83,12 @@ def parse_tables(page: str) -> list[dict[str, dict[str, str]]]:
                 keys = []
                 period_cols = [x for x in labels if x != ""]
                 # the year row aligns to period columns from the right (label cell is unspanned on the left)
-                years = years[-len(period_cols):] if years else [""] * len(period_cols)
+                years = ([""] * max(0, len(period_cols) - len(years)) + years)[-len(period_cols):]
                 for lab, yr in zip(period_cols, years):
                     lab = re.sub(r" [rp]$", "", lab)
                     keys.append(lab if re.fullmatch(r"20\d\d", lab) else f"{lab} {yr}".strip())
-                col_keys = keys
+                if len(set(keys)) == len(keys):
+                    col_keys = keys
                 continue
             if col_keys and len(labels) >= 2:
                 name = labels[0]
@@ -93,7 +96,8 @@ def parse_tables(page: str) -> list[dict[str, dict[str, str]]]:
                 if len(vals) == len(col_keys) and name:
                     data.setdefault(name, {})
                     # a table can hold several 'Revolving' rows (pct change, flow, level); keep them all, in order
-                    key = name if name not in data or not data[name] else f"{name}#{sum(k.startswith(name) for k in data)}"
+                    n_same = sum(k == name or k.startswith(f"{name}#") for k in data)
+                    key = name if not data[name] else f"{name}#{n_same}"
                     data[key] = dict(zip(col_keys, vals))
         if data:
             tables.append(data)
@@ -126,9 +130,10 @@ def find_row(tables, label: str, kind: str) -> dict[str, str] | None:
 def _num(s: str) -> float | None:
     s = s.replace(",", "").strip()
     try:
-        return float(s)
+        v = float(s)
     except ValueError:
         return None
+    return v if math.isfinite(v) else None
 
 
 def columns_for(period_end: dt.date, period_type: str) -> list[str]:
@@ -160,8 +165,14 @@ def oldest_month(row: dict[str, str]) -> dt.date | None:
 
 def release_date(page: str) -> dt.date | None:
     """The 'Release Date: September 8, 2026' line every G.19 page carries."""
-    m = re.search(r"Release Date.*?:\s*([A-Z][a-z]+ \d{1,2}, \d{4})", page, flags=re.S)
-    return dt.datetime.strptime(m.group(1), "%B %d, %Y").date() if m else None
+    plain = " ".join(html.unescape(re.sub(r"<[^>]+>", " ", page)).split())
+    m = re.search(r"Release Date(?:\s*\*)?\s*:\s*([A-Z][a-z]+ \d{1,2}, \d{4})", plain)
+    if not m:
+        return None
+    try:
+        return dt.datetime.strptime(m.group(1), "%B %d, %Y").date()
+    except ValueError:
+        return None
 
 
 def rebased_entry(e: dict, value: float, column: str, released: dt.date) -> dict:
@@ -176,12 +187,26 @@ def rebased_entry(e: dict, value: float, column: str, released: dt.date) -> dict
 
 
 def main(argv: list[str] | None = None) -> int:
-    args = sys.argv[1:] if argv is None else argv
-    provenance = "--provenance" in args
-    rebase = "--rebase" in args and not provenance
+    p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0], allow_abbrev=False)
+    p.add_argument("--provenance", action="store_true", help="check each entry against the dated page it cites")
+    p.add_argument("--rebase", action="store_true", help="print a re-based YAML candidate for each FAIL on the current page")
+    args = p.parse_args(sys.argv[1:] if argv is None else argv)
+    if args.provenance and args.rebase:
+        p.error("--rebase cannot be combined with --provenance")
+    provenance = args.provenance
+    rebase = args.rebase
     candidates: list[dict] = []
     root = Path(__file__).resolve().parents[1]
-    entries = yaml.safe_load((root / "checks" / "golden.yaml").read_text(encoding="utf-8")) or []
+    golden_path = root / "checks" / "golden.yaml"
+    try:
+        raw_entries = yaml.safe_load(golden_path.read_text(encoding="utf-8"))
+    except (OSError, yaml.YAMLError) as exc:
+        print(f"ERROR could not read {golden_path}: {exc}")
+        return 1
+    entries = [] if raw_entries is None else raw_entries
+    if not isinstance(entries, list):
+        print(f"ERROR {golden_path} must be a YAML list, not {type(entries).__name__}")
+        return 1
     load_dotenv(root / ".env")  # CARDDASH_CONTACT, for the pipeline's own User-Agent
     session = make_session()
     pages: dict[str, list] = {}
@@ -201,19 +226,32 @@ def main(argv: list[str] | None = None) -> int:
     bad = passed = aged = missing = 0
     try:
         for e in entries:
-            if "/releases/g19/" not in e.get("origin_url", ""):
+            if not isinstance(e, dict):
+                raise CheckFailed(f"malformed entry in {golden_path}: expected mapping, got {type(e).__name__}")
+            if "/releases/g19/" not in str(e.get("origin_url", "")):
                 continue
-            key = (e["metric"], e["entity"]) if (e["metric"], e["entity"]) in ROW_FOR_METRIC else e["metric"]
+            try:
+                eid = str(e["id"])
+                metric = str(e["metric"])
+                entity = str(e["entity"])
+                period_type = str(e["period_type"])
+                period_end = dt.date.fromisoformat(str(e["period_end"]))
+                expected = float(e["expected"])
+                tolerance = float(e.get("tolerance", 0))
+            except (KeyError, TypeError, ValueError) as exc:
+                raise CheckFailed(f"malformed G.19 golden entry {e.get('id', '?')}: {exc}") from exc
+            if not (math.isfinite(expected) and math.isfinite(tolerance) and tolerance >= 0):
+                raise CheckFailed(f"malformed expected/tolerance in {eid}")
+            key = (metric, entity) if (metric, entity) in ROW_FOR_METRIC else metric
             if key not in ROW_FOR_METRIC:
                 missing += 1
-                print(f"MISSING {e['id']}: no page row mapped for {key} in ROW_FOR_METRIC")
+                print(f"MISSING {eid}: no page row mapped for {key} in ROW_FOR_METRIC")
                 continue
             url = e["origin_url"] if provenance else G19_URL
             tables = tables_for(url)
             label, kind = ROW_FOR_METRIC[key]
             row = find_row(tables, label, kind)
-            period_end = dt.date.fromisoformat(str(e["period_end"]))
-            cands = columns_for(period_end, e["period_type"])
+            cands = columns_for(period_end, period_type)
             col, got = None, None
             for c in cands:
                 got = _num(row.get(c, "")) if row else None
@@ -223,25 +261,25 @@ def main(argv: list[str] | None = None) -> int:
             if got is None:
                 if provenance:  # the cited release must show the cited period: not finding it is a broken citation
                     bad += 1
-                    print(f"FAIL {e['id']}: none of {cands} on {url}")
+                    print(f"FAIL {eid}: none of {cands} on {url}")
                     continue
                 oldest = oldest_month(row) if row else None
                 if oldest and period_end < oldest:
                     # the page prints only its last few months (and quarter and year ends): an older month has aged
                     # off it, which is expected, and --provenance still checks it against the release it cites
                     aged += 1
-                    print(f"SKIP {e['id']}: {cands[0]} is older than the page's oldest month ({oldest:%b %Y})")
+                    print(f"SKIP {eid}: {cands[0]} is older than the page's oldest month ({oldest:%b %Y})")
                     continue
                 missing += 1  # the row or the column should be there and is not: the layout may have changed
                 where = f"no '{label}' row" if not row else f"none of {cands}, though the page runs from {oldest:%b %Y}" \
                     if oldest else f"none of {cands}"
-                print(f"MISSING {e['id']}: {where} on the current page")
+                print(f"MISSING {eid}: {where} on the current page")
                 continue
-            ok = abs(got - float(e["expected"])) <= float(e.get("tolerance", 0))
+            ok = abs(got - expected) <= tolerance
             bad += 0 if ok else 1
             passed += 1 if ok else 0
             where = url.split("/releases/g19/")[1].split("/")[0]
-            print(f"{'PASS' if ok else 'FAIL'} {e['id']}: page {got} vs golden {e['expected']} (column {col}, {where})")
+            print(f"{'PASS' if ok else 'FAIL'} {eid}: page {got} vs golden {e['expected']} (column {col}, {where})")
             if rebase and not ok:
                 candidates.append(rebased_entry(e, got, col, released[url]))
     except CheckFailed as exc:
@@ -255,6 +293,9 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     if missing:
         print(f"{missing} entr{'y' if missing == 1 else 'ies'} could not be found on {what}: has its layout changed?")
+        return 1
+    if not provenance and aged > checked:
+        print(f"too many entries aged off the page ({aged} skipped vs {checked} checked): has its layout changed?")
         return 1
     print(f"all checked entries match {what}" if not bad else f"{bad} mismatch(es)")
     if candidates:

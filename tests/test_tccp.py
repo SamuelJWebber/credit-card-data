@@ -275,3 +275,23 @@ def test_products_csv_round_trips_through_duckdb(tmp_path, tccp_products):
     direct = tccp.products_to_facts(tccp_products, PULLED_AT)
     assert len(again) == len(direct)
     con.close()
+
+
+def test_committed_tccp_products_top25_panel_is_stable_across_the_2025_respondent_surge():
+    """REVIEW.md credit-A-2: between 2025 H1 and 2025 H2, responding institutions jumped >20% (123 to 195), pulling
+    the unweighted TCCP_ALL 620-719 median down 1.50 pp while the statutory TCCP_TOP25 panel moved only 0.50 pp."""
+    from conftest import REPO
+
+    df = pd.read_csv(REPO / "data" / "raw" / "tccp" / "tccp_products.csv")
+    facts = coerce_facts(tccp.products_to_facts(df.assign(period_end=pd.to_datetime(df["period_end"])), PULLED_AT))
+    v = facts.set_index(["metric", "entity", "tier", "period_end"])["value"]
+    n_h1 = v[("tccp_issuer_count", "TCCP_ALL", "all", pd.Timestamp("2025-06-30"))]
+    n_h2 = v[("tccp_issuer_count", "TCCP_ALL", "all", pd.Timestamp("2025-12-31"))]
+    assert n_h1 == 123 and n_h2 == 195 and (n_h2 - n_h1) / n_h1 > 0.20
+    all_drop = v[("tccp_purchase_apr_median", "TCCP_ALL", "620_719", pd.Timestamp("2025-06-30"))] - v[
+        ("tccp_purchase_apr_median", "TCCP_ALL", "620_719", pd.Timestamp("2025-12-31"))
+    ]
+    top25_drop = v[("tccp_purchase_apr_median", "TCCP_TOP25", "620_719", pd.Timestamp("2025-06-30"))] - v[
+        ("tccp_purchase_apr_median", "TCCP_TOP25", "620_719", pd.Timestamp("2025-12-31"))
+    ]
+    assert abs(all_drop - 1.50) < 1e-6 and abs(top25_drop - 0.50) < 1e-6

@@ -154,3 +154,98 @@ def test_a_subset_that_does_not_parse_does_not_become_the_cache(meta, tmp_path):
     # the old validators stay, so the next run asks for the old file, gets the new one in full, and fails loudly
     # again rather than parsing a stale subset under the new file's validators
     assert '"broken:0"' not in (tmp_path / "latest" / bea.VALIDATORS_NAME).read_text(encoding="utf-8")
+
+
+def test_bea_october_pio_nov25_release_updates_facts_and_keeps_live_goldens_green(meta, tmp_path):
+    """Edge case: BEA Oct PIO due Nov 25 adds 2026M10 and revises Q3 (Jul-Sep) without tripping live checks
+    (checks/golden.yaml keeps bea_dpi_change_2026_04 live while Jul-Sep are check_live: false)."""
+    import datetime as dt
+
+    from carddash import loader
+    from carddash.golden import check_golden, load_golden
+    from conftest import REPO
+
+    mine = series_for_source(meta, bea.SOURCE)
+    base_text = _full_file()
+    server = _FakeBea(base_text, etag='"nov04:0"', modified="Wed, 04 Nov 2026 14:23:02 GMT")
+    prev_facts = bea.fetch(mine, tmp_path, server, "2026-11-24T01:00:00Z")
+
+    # Simulate BEA Oct PIO release on Nov 25: add 2026M10 for all 10 BEA codes and revise 2026M07..M09 slightly
+    oct_lines = []
+    for line in base_text.splitlines():
+        if line.startswith("%SeriesCode") or line.startswith("A001RC"):
+            oct_lines.append(line)
+            continue
+        code, period, val = line.split(",", 2)
+        if period in ("2026M07", "2026M08", "2026M09"):
+            revised = bea.parse_value(val) + 100.0
+            oct_lines.append(f'{code},{period},"{revised:,.0f}"')
+        else:
+            oct_lines.append(line)
+        if period == "2026M09":
+            oct_val = bea.parse_value(val) + 150.0
+            oct_lines.append(f'{code},2026M10,"{oct_val:,.0f}"')
+    server.body = "\n".join(oct_lines) + "\n"
+    server.etag = '"nov25:0"'
+    server.modified = "Wed, 25 Nov 2026 13:30:00 GMT"
+
+    facts, health, revs = loader.refresh_source(
+        bea.SOURCE,
+        prev_facts,
+        mine,
+        bea.fetch,
+        tmp_path,
+        server,
+        dt.date(2026, 11, 25),
+        "2026-11-26T01:00:00Z",
+        set(),
+    )
+    assert health.status == "ok", health.messages
+    assert health.last_period_end == "2026-10-31"
+    assert len(revs) == 30  # 10 series x 3 revised Q3 months
+    bea_goldens = [e for e in load_golden(REPO / "checks" / "golden.yaml") if e["source"] == "bea"]
+    live_res = check_golden(facts, bea_goldens, live_only=True)
+    assert len(live_res) == 1 and live_res[0]["id"] == "bea_dpi_change_2026_04" and live_res[0]["ok"]
+
+
+def test_bea_nov25_malformed_and_lagged_responses_fail_closed(meta, tmp_path):
+    """Edge cases around BEA Oct PIO: HTML error page, 503 error, ragged series ends, and corrupt validators."""
+    mine = series_for_source(meta, bea.SOURCE)
+    good = _FakeBea(_full_file())
+    bea.fetch(mine, tmp_path, good, PULLED_AT)
+
+    # Corrupt validators file -> falls back to plain full GET without conditional headers
+    (tmp_path / "latest" / bea.VALIDATORS_NAME).write_text("{not-json", encoding="utf-8")
+    bea.fetch(mine, tmp_path, good, PULLED_AT)
+    assert good.requests[-1] == {}
+
+    # 200 HTML maintenance page -> fails subset_lines loudly without overwriting cached subset
+    saved_subset = (tmp_path / "latest" / bea.RAW_NAME).read_text(encoding="utf-8")
+    html_err = _FakeBea("<!DOCTYPE html><html>Maintenance</html>", etag='"html:0"', modified="Wed, 25 Nov 2026 13:30:00 GMT")
+    with pytest.raises(ValueError, match="does not start with"):
+        bea.fetch(mine, tmp_path, html_err, PULLED_AT)
+    assert (tmp_path / "latest" / bea.RAW_NAME).read_text(encoding="utf-8") == saved_subset
+    assert '"html:0"' not in (tmp_path / "latest" / bea.VALIDATORS_NAME).read_text(encoding="utf-8")
+
+    # Ragged Oct release where DPCERC advances to 2026M10 while B069RC lags at 2026M09 -> fails loudly
+    ragged_text = _full_file() + 'DPCERC,2026M10,"22,550,000"\n'
+    ragged = _FakeBea(ragged_text, etag='"ragged:0"', modified="Wed, 25 Nov 2026 13:30:00 GMT")
+    with pytest.raises(ValueError, match="end on different months"):
+        bea.fetch(mine, tmp_path, ragged, PULLED_AT)
+    assert '"ragged:0"' not in (tmp_path / "latest" / bea.VALIDATORS_NAME).read_text(encoding="utf-8")
+
+    # 200 without ETag/Last-Modified drops validators file cleanly
+    no_hdrs = _FakeBea(_full_file())
+
+    class _NoHeaders:
+        def get(self, url, headers=None):
+            class R:
+                status_code, text, headers = 200, no_hdrs.body, {}
+
+                def raise_for_status(self):
+                    pass
+
+            return R()
+
+    bea.fetch(mine, tmp_path, _NoHeaders(), PULLED_AT)
+    assert not (tmp_path / "latest" / bea.VALIDATORS_NAME).exists()

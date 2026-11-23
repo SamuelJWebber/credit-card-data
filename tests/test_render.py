@@ -106,20 +106,25 @@ def test_fred_charts(page):
 def test_offered_vs_paid_band_and_spread(page):
     html, payload = page
     ovp = {c["id"]: c for c in payload["charts"]}["offered_vs_paid"]
-    assert len(ovp["series"]) == 5 and ovp["n_points"] > 10 and ovp["band"] == [1, 2]
-    assert [s["unit"] for s in ovp["series"]] == ["pct", "pct", "pct", "pct", "pp"]
-    assert ovp["series"][4]["dash"] and not ovp["series"][3]["dash"]
-    assert "percentage points" in ovp["series"][4]["label"]
+    assert len(ovp["series"]) == 6 and ovp["n_points"] > 10 and ovp["band"] == [1, 2]
+    assert [s["unit"] for s in ovp["series"]] == ["pct", "pct", "pct", "pct", "pct", "pp"]
+    assert ovp["series"][3]["dash"] and ovp["series"][5]["dash"]
+    assert not ovp["series"][2]["dash"] and not ovp["series"][4]["dash"]
+    assert "top 25 issuers" in ovp["series"][2]["label"]
+    assert "all respondents" in ovp["series"][3]["label"]
+    assert "percentage points" in ovp["series"][5]["label"]
     last = lambda k: max(i for i, v in enumerate(ovp["data"][k]) if v is not None)  # noqa: E731
-    assert last(5) <= max(last(1), last(2), last(3))  # the spread stops at the last offered period
-    assert last(4) > last(5)  # the paid rate runs on past it
-    # the band is the range across the tiers: hi >= mid >= lo wherever all three exist
+    assert last(6) <= max(last(1), last(2), last(3))  # the spread stops at the last top-25 offered period
+    assert last(5) > last(6)  # the paid rate runs on past it
+    # the band is the range across the top-25 tiers: hi >= mid >= lo wherever all three exist
     for hi, lo, mid in zip(ovp["data"][1], ovp["data"][2], ovp["data"][3]):
         if hi is not None and lo is not None and mid is not None:
             assert hi >= mid >= lo
-    assert len(ovp["footer_lines"]) == 5  # two sources and two cadences: one line per series
+    assert len(ovp["footer_lines"]) == 6  # two sources and two cadences: one line per series
     assert "CFPB Terms of Credit Card Plans" in ovp["footer"] and "Federal Reserve Board" in ovp["footer"]
     assert any("secured cards" in n for n in ovp["notes"])
+    assert any("720-and-up median is the lowest" in n for n in ovp["notes"])
+    assert "sub-620 median is usually the lowest" not in html
 
 
 def test_new_charts_draw_the_other_sources(page):
@@ -1153,6 +1158,159 @@ def test_every_source_has_a_distinct_short_name_and_the_due_line_uses_it(page):
     due = html.split('<p class="due">Due in the next two weeks: ')[1].split("</p>")[0]
     assert any(due.startswith(short) or f"; {short} " in due for short in SOURCE_SHORT.values()), due
     assert "Federal Reserve Bank" not in due and "Capital One " not in due
+
+
+def test_credit_a2_offered_apr_top25_and_respondent_swing_guard(page, fixture_facts):
+    """REVIEW.md credit-A-2: offered_vs_paid draws the fixed top-25 statutory panel as its primary band/line,
+    keeps all respondents dashed, prints per-half-year institution counts, and flags >20% respondent swings."""
+    from carddash.loader import read_facts
+    from carddash.render import _tccp_respondent_note
+
+    html, payload = page
+    ovp = {c["id"]: c for c in payload["charts"]}["offered_vs_paid"]
+    notes = " ".join(ovp["notes"])
+    assert "Responding institutions per half-year" in notes
+    assert "2023 H1: 140" in notes and "2025 H2: 195" in notes
+    assert "changed by more than 20%" in notes and "+39%" in notes
+
+    # Guard on the committed live dataset too: if tccp_issuer_count swings >20% between consecutive half-years
+    # (123 in 2025 H1 -> 195 in 2025 H2, +59%), the chart note must name the half-years and flag the >20% swing.
+    live_facts = read_facts(REPO / "data" / "facts.csv")
+    con = _connect(live_facts, REPO / "sql" / "views.sql", REPO / "data" / "raw" / "tccp" / "tccp_products.csv",
+                   REPO / "crosswalks" / "issuers.csv")
+    try:
+        live_note = _tccp_respondent_note(con, dt.date(2026, 11, 22))
+        counts = con.execute(
+            "SELECT period_end, value FROM facts WHERE metric = 'tccp_issuer_count' AND entity = 'TCCP_ALL' "
+            "AND source = 'tccp' ORDER BY period_end"
+        ).fetchall()
+    finally:
+        con.close()
+    assert live_note is not None
+    assert "2025 H1: 123" in live_note and "2025 H2: 195" in live_note
+    for (d0, n0), (d1, n1) in zip(counts, counts[1:]):
+        if n0 > 0 and abs(n1 - n0) / n0 > 0.20:
+            assert "changed by more than 20%" in live_note
+            assert f"{int(round(n0))} to {int(round(n1))}" in live_note
+
+    # Synthetic <=20% change: counts still printed, no >20% swing alarm
+    calm = fixture_facts.copy()
+    calm.loc[(calm["metric"] == "tccp_issuer_count") & (calm["period_end"] == pd.Timestamp("2025-12-31")), "value"] = 150.0
+    con_calm = _connect(
+        calm,
+        REPO / "sql" / "views.sql",
+        REPO / "data" / "raw" / "tccp" / "tccp_products.csv",
+        REPO / "crosswalks" / "issuers.csv",
+    )
+    try:
+        calm_note = _tccp_respondent_note(con_calm, TODAY)
+    finally:
+        con_calm.close()
+    assert calm_note is not None and "2023 H1: 140, 2025 H2: 150." == calm_note.split("line): ")[1]
+
+
+def test_effective_rate_and_card_volume_vs_retail_label_mixed_sa_and_nsa(page, meta):
+    """Cross-review follow-up on credit-A-6: mixed SA/NSA charts outside credit-A-6's PR #2 charts explicitly label SA vs NSA."""
+    from carddash.render import _key
+    from carddash.series import series_index
+
+    _, payload = page
+    by_id = {c["id"]: c for c in payload["charts"]}
+    idx = series_index(meta)
+
+    eff = by_id["effective_rate"]
+    assert "SA" in eff["series"][0]["label"] and "NSA" in eff["series"][1]["label"]
+    assert any("SAAR/SA" in n and "(NSA)" in n for n in eff["notes"])
+
+    cvr = by_id["card_volume_vs_retail"]
+    assert "NSA" in cvr["series"][0]["label"] and "SA" in cvr["series"][1]["label"]
+    assert any("not seasonally adjusted" in n and "seasonally adjusted" in n for n in cvr["notes"])
+
+    cct = by_id["cct_below_prime_share"]
+    assert "SA" in cct["series"][0]["label"] and "NSA" in cct["series"][1]["label"]
+    assert any("seasonally adjusted" in n and "not seasonally adjusted" in n for n in cct["notes"])
+
+    # issuer_monthly_nco and issuer_monthly_dq are covered under credit-A-6 in separate PR #2
+    pr2_credit_a6_ids = {"issuer_monthly_nco", "issuer_monthly_dq"}
+    mixed_ids = []
+    for panel in PANELS:
+        for spec in panel["charts"]:
+            sas = {bool(idx[_key(s)]["sa"]) for s in spec["series"] if _key(s) in idx}
+            if len(sas) > 1:
+                mixed_ids.append(spec["id"])
+                if spec["id"] not in pr2_credit_a6_ids:
+                    chart = by_id[spec["id"]]
+                    assert any("SA" in s["label"] for s in chart["series"] if not s["benchmark"]), spec["id"]
+    assert {"effective_rate", "card_volume_vs_retail", "cct_below_prime_share"} <= set(mixed_ids)
+
+
+def test_remaining_review_notes_census_max_age_and_licenses(page, meta, tmp_paths, fixture_facts):
+    """REVIEW.md credit-A-7, credit-A-9, credit-A-10, credit-A-11, credit-A-13, credit-B-4, credit-B-8, credit-B-11."""
+    from carddash import loader
+    from carddash.render import RELEASE_RHYTHM, _age_dq_note, _cpi_note, next_expected
+
+    html, payload = page
+    by_id = {c["id"]: c for c in payload["charts"]}
+
+    # credit-A-7: census max_age_days=85 prevents false stale alarms on normal release dates (~day 77-78)
+    census_meta = meta[meta["source"] == "census"].copy()
+    assert set(census_meta["max_age_days"]) == {85.0}
+    assert RELEASE_RHYTHM["census"][3] == 48
+    # Simulate census with Aug 31 data checked on Nov 17 (78 days old): stays ok, not stale
+    aug_only = fixture_facts[fixture_facts["source"] == "census"].copy()
+    _, h_cen, _ = loader.refresh_source(
+        "census", aug_only, census_meta, lambda m, r, s, p: aug_only, None, None, dt.date(2026, 11, 17), PULLED_AT, set()
+    )
+    assert h_cen.status == "ok"
+
+    # credit-A-9: 8 stale/inaccurate prose claims replaced or computed mechanically
+    assert "oldest borrowers are the only age band" not in html
+    assert "about 25 percent" not in html
+    assert "five months" not in html
+    assert "few tenths of a point" not in html
+    assert "payment rates and full-payer shares set records" not in html
+    assert "leads every lender-reported series" not in html
+    assert "nonfinancial businesses" not in " ".join(meta["scope_note"].fillna(""))
+    assert "\\'" not in " ".join(meta["scope_note"].fillna(""))
+    assert "only survey that asks households directly" not in html
+    assert "only survey on this page that asks households directly" in html
+
+    # Computed CPI and age-band notes match fixture facts and live facts
+    assert any("Consumer prices (CPI-U) rose 28.4% between Jan 2020 and Jul 2026" in n for n in by_id["revolving_real"]["notes"])
+    assert any("70+ card flow into 90+ day delinquency was 6.34%" in n for n in by_id["age70_by_loan_type"]["notes"])
+    live_con = _connect(
+        loader.read_facts(REPO / "data" / "facts.csv"),
+        REPO / "sql" / "views.sql",
+        REPO / "data" / "raw" / "tccp" / "tccp_products.csv",
+        REPO / "crosswalks" / "issuers.csv",
+    )
+    try:
+        assert "30.2%" in (_cpi_note(live_con, dt.date(2026, 11, 22)) or "")
+        live_age = _age_dq_note(live_con, dt.date(2026, 11, 22)) or ""
+        assert "6.09%" in live_age and "50-59 (6.47%" in live_age
+    finally:
+        live_con.close()
+
+    # credit-A-10, credit-A-11, credit-B-4, credit-B-8
+    assert "about 50 banks" in html and "about 270 applicants" in html
+    assert "7.18%, so this test trips only on a new high" in html
+    assert any("90+ day delinquent and stale charged-off accounts" in n for n in by_id["per_account_credit"]["notes"])
+    assert any("balance-weighted shares of dollars" in n for n in by_id["dq_triangulation"]["notes"])
+
+    # credit-A-13: root MIT LICENSE and vendored uPlot MIT notice
+    root_lic = (REPO / "LICENSE").read_text(encoding="utf-8")
+    uplot_lic = (REPO / "src" / "carddash" / "vendor" / "LICENSE-uPlot").read_text(encoding="utf-8")
+    assert "MIT License" in root_lic and "SamuelJWebber" in root_lic
+    assert "MIT License" in uplot_lic and "Leon Sorokin" in uplot_lic
+
+    # BEA Oct PIO due Nov 25 calendar expectation transitions (pre-due, grace window, overdue)
+    pre_due = next_expected(fixture_facts, "bea", dt.date(2026, 11, 22))
+    grace = next_expected(fixture_facts, "bea", dt.date(2026, 11, 28))
+    overdue = next_expected(fixture_facts, "bea", dt.date(2026, 12, 5))
+    assert pre_due is not None and pre_due["due"] == "2026-11-27" and not pre_due["overdue"]
+    assert "expected around 2026-11-27" in pre_due["text"]
+    assert grace is not None and not grace["overdue"] and "expected any day" in grace["text"]
+    assert overdue is not None and overdue["overdue"] and "has not appeared" in overdue["text"]
 
 
 def test_record_flag_says_in_dollars_for_levels_and_not_for_rates(page, session_paths, fixture_facts):

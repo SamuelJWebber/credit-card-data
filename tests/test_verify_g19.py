@@ -135,3 +135,114 @@ def test_a_month_that_aged_off_the_page_is_skipped_and_a_column_that_vanished_is
     code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY, july], pages=_Pages(no_july))
     out = capsys.readouterr().out
     assert code == 1 and "MISSING g19_revolving_sa_2026_07: none of ['Jul 2026'], though the page runs from May 2026" in out
+
+
+def _dec_g19_page(revolving_oct="1,375.2", release="December 7, 2026", apr_q3="22.40") -> str:
+    """Minimal synthetic December 2026 Fed G.19 HTML release page matching real table layout."""
+    return f"""<html><body>
+<div>Release Date<sup><a href="#date1">*</a></sup>: <span>{release}</span></div>
+<table>
+<tr><th></th><th colspan="3">Annual</th><th colspan="2">2025</th><th colspan="6">2026</th></tr>
+<tr><th></th><th>2023</th><th>2024</th><th>2025</th><th>Q3</th><th>Q4</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Aug</th><th>Sep r</th><th>Oct p</th></tr>
+<tr><td>Total percent change</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td></tr>
+<tr><td>Revolving</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td></tr>
+<tr><td>Total outstanding</td><td>5000.0</td><td>5100.0</td><td>5200.0</td><td>5150.0</td><td>5200.0</td><td>5210.0</td><td>5220.0</td><td>5240.0</td><td>5230.0</td><td>5240.0</td><td>5250.0</td></tr>
+<tr><td>Revolving</td><td>1250.0</td><td>1297.0</td><td>1325.1</td><td>1312.7</td><td>1325.1</td><td>1338.2</td><td>1354.5</td><td>1368.5</td><td>1362.0</td><td>1368.5</td><td>{revolving_oct}</td></tr>
+<tr><td>All accounts</td><td>21.00</td><td>21.50</td><td>21.20</td><td>21.10</td><td>21.20</td><td>21.00</td><td>20.94</td><td>21.19</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+<tr><td>Accounts assessed interest</td><td>22.10</td><td>22.80</td><td>22.30</td><td>22.83</td><td>22.30</td><td>21.52</td><td>22.15</td><td>{apr_q3}</td><td>n.a.</td><td>n.a.</td><td>n.a.</td></tr>
+</table>
+</body></html>"""
+
+
+def test_dec_g19_rebase_updates_revised_entries_and_fails_closed_on_missing_or_excess_skips(vg, monkeypatch, tmp_path, capsys):
+    dec_page = _dec_g19_page()
+    dec_2025 = {**ENTRY, "id": "g19_revolving_sa_2025_12", "period_end": "2025-12-31", "expected": 1324.3,
+                "check_live": True, "origin": "Fed G.19 release of 2026-09-08, '2025' column",
+                "origin_url": DATED}
+    apr_q3 = {"id": "g19_card_apr_assessed_2026_q3", "metric": "card_apr_assessed_interest", "entity": "COMBANKS_ALL",
+              "tier": "all", "period_type": "Q", "period_end": "2026-09-30", "source": "fred", "expected": 22.36,
+              "tolerance": 0.006, "check_live": True, "origin": "Fed G.19 release of 2026-11-06, 'Q3 2026' column",
+              "origin_url": "https://www.federalreserve.gov/releases/g19/20261106/default.htm"}
+
+    # Clean Dec rebase prints candidates citing 20261207 and keeps exit code 1 (mismatches present)
+    code, _ = _run(vg, monkeypatch, tmp_path, [dec_2025, apr_q3], "--rebase", pages=_Pages(dec_page))
+    out = capsys.readouterr().out
+    assert code == 1 and "2 mismatch(es)" in out
+    cands = yaml.safe_load(out.split("# inside the revision window")[1].split("\n", 1)[1])
+    assert [c["id"] for c in cands] == ["g19_revolving_sa_2025_12", "g19_card_apr_assessed_2026_q3"]
+    assert cands[0]["expected"] == 1325.1 and cands[0]["origin_url"].endswith("/releases/g19/20261207/default.htm")
+    assert cands[1]["expected"] == 22.4
+
+    # Fail-closed #1: if any entry is MISSING in --rebase mode, exit 1 and NEVER print re-based candidates
+    missing_holder = {**dec_2025, "id": "g19_depository", "metric": "revolving_credit_nsa",
+                      "entity": "DEPOSITORY_INSTITUTIONS"}
+    code, _ = _run(vg, monkeypatch, tmp_path, [dec_2025, missing_holder], "--rebase", pages=_Pages(dec_page))
+    out = capsys.readouterr().out
+    assert code == 1 and "MISSING g19_depository" in out and "Re-based entries" not in out
+
+    # Fail-closed #2: if more entries aged off than were checked (aged > checked), exit 1 and suppress candidates
+    aged_may = {**ENTRY, "id": "g19_revolving_sa_2026_05", "period_end": "2026-05-31"}
+    aged_jul = {**ENTRY, "id": "g19_revolving_sa_2026_07", "period_end": "2026-07-31"}
+    code, _ = _run(vg, monkeypatch, tmp_path, [dec_2025, aged_may, aged_jul], "--rebase", pages=_Pages(dec_page))
+    out = capsys.readouterr().out
+    assert code == 1 and "too many entries aged off the page (2 skipped vs 1 checked)" in out
+    assert "Re-based entries" not in out
+
+
+def test_malformed_fed_responses_and_bad_cli_flags_fail_closed(vg, monkeypatch, tmp_path, capsys):
+    import requests
+
+    # Network error / timeout
+    class _FailingSession:
+        def get(self, url):
+            raise requests.ReadTimeout("timed out")
+
+    code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY], pages=_FailingSession())
+    assert code == 1 and "ERROR could not fetch" in capsys.readouterr().out
+
+    # HTTP 200 empty body
+    code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY], pages=_Pages("", status=200))
+    assert code == 1 and "empty body" in capsys.readouterr().out
+
+    # HTTP 200 with invalid calendar Release Date (must not crash with uncaught ValueError)
+    bad_date_page = _dec_g19_page(release="February 30, 2026")
+    for mode in ([], ["--rebase"], ["--provenance"]):
+        code, _ = _run(vg, monkeypatch, tmp_path, [ENTRY], *mode, pages=_Pages(bad_date_page))
+        out = capsys.readouterr().out
+        assert code == 1 and "carries no 'Release Date'" in out and "Re-based entries" not in out
+
+    # Non-finite cell ("NaN", "inf") -> never parses as a float or enters --rebase YAML
+    assert vg._num("NaN") is None and vg._num("inf") is None
+    nan_page = _dec_g19_page(revolving_oct="NaN", apr_q3="inf")
+    oct_entry = {**ENTRY, "id": "g19_revolving_sa_2026_10", "period_end": "2026-10-31", "expected": 1370.0}
+    code, _ = _run(vg, monkeypatch, tmp_path, [oct_entry], "--rebase", pages=_Pages(nan_page))
+    out = capsys.readouterr().out
+    assert code == 1 and "MISSING g19_revolving_sa_2026_10" in out and "Re-based entries" not in out
+
+    # Malformed golden.yaml (empty or non-list) fails closed
+    code, _ = _run(vg, monkeypatch, tmp_path, [])
+    assert code == 1 and "0 entries checked" in capsys.readouterr().out
+    (tmp_path / "repo" / "checks" / "golden.yaml").write_text("not: a_list\n", encoding="utf-8")
+    monkeypatch.setattr(vg, "__file__", str(tmp_path / "repo" / "checks" / "verify_g19.py"))
+    assert vg.main([]) == 1 and "must be a YAML list" in capsys.readouterr().out
+
+    # Unknown CLI flags or combining --provenance and --rebase fail closed
+    for bad_argv in (["--rebas"], ["--provenance", "--rebase"]):
+        with pytest.raises(SystemExit) as exc:
+            vg.main(bad_argv)
+        assert exc.value.code == 2
+
+
+def test_parse_tables_handles_prefix_row_names_and_uppercase_tags(vg):
+    html_upper = (
+        "<TABLE><TR><TH></TH><TH COLSPAN=\"2\">2025</TH><TH COLSPAN=\"4\">2026</TH></TR>"
+        "<TR><TH></TH><TH>Q3</TH><TH>Q4</TH><TH>Q1</TH><TH>Q2</TH><TH>Sep r</TH><TH>Oct p</TH></TR>"
+        "<TR><TD>Total outstanding</TD><TD>1</TD><TD>2</TD><TD>3</TD><TD>4</TD><TD>5</TD><TD>6</TD></TR>"
+        "<TR><TD>Total</TD><TD>10</TD><TD>20</TD><TD>30</TD><TD>40</TD><TD>50</TD><TD>60</TD></TR>"
+        "<TR><TD>Total</TD><TD>11</TD><TD>21</TD><TD>31</TD><TD>41</TD><TD>51</TD><TD>61</TD></TR>"
+        "</TABLE>"
+    )
+    tables = vg.parse_tables(html_upper)
+    assert len(tables) == 1
+    assert "Total" in tables[0] and "Total#1" in tables[0] and "Total#2" not in tables[0]
+    assert tables[0]["Total#1"]["Oct 2026"] == "61" and tables[0]["Total#1"]["Sep 2026"] == "51"

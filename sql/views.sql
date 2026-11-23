@@ -33,12 +33,12 @@ JOIN f b
       END
 WHERE b.value <> 0;
 
--- Offered vs paid: the TCCP median purchase APR offered to applicants with scores 620 to 719 (semiannual, every
--- respondent, the middle of the three tier bands the chart draws) matched as-of to the G.19 rate on accounts assessed
--- interest (quarterly). Keyed on the G.19 series so render.py can select it like any other, with the offered value
--- and the spread (percentage points) as extra fields. The spread exists only through the last offered period: a
--- quarter after it has no offered reading to compare with, so the line stops instead of carrying the last semiannual
--- value forward.
+-- Offered vs paid: the TCCP median purchase APR offered to applicants with scores 620 to 719 (semiannual, both all
+-- respondents and the fixed panel of the 25 largest issuers, the middle of the three tier bands the chart draws)
+-- matched as-of to the G.19 rate on accounts assessed interest (quarterly). Keyed on the G.19 series so render.py can
+-- select it like any other, with the offered values and the spreads (percentage points) as extra fields. The spread
+-- exists only through the last offered period: a quarter after it has no offered reading to compare with, so the line
+-- stops instead of carrying the last semiannual value forward.
 CREATE OR REPLACE VIEW v_offered_vs_paid AS
 WITH paid AS (
   SELECT metric, entity, entity_type, tier, period_type, source,
@@ -50,12 +50,21 @@ offered AS (
   SELECT CAST(period_end AS DATE) AS period_end, value AS offered_apr
   FROM facts
   WHERE metric = 'tccp_purchase_apr_median' AND entity = 'TCCP_ALL' AND tier = '620_719' AND source = 'tccp'
+),
+offered_top25 AS (
+  SELECT CAST(period_end AS DATE) AS period_end, value AS offered_apr
+  FROM facts
+  WHERE metric = 'tccp_purchase_apr_median' AND entity = 'TCCP_TOP25' AND tier = '620_719' AND source = 'tccp'
 )
 SELECT p.metric, p.entity, p.entity_type, p.tier, p.period_type, p.source, p.period_end,
        p.paid_apr, o.offered_apr, o.period_end AS offered_period_end,
-       o.offered_apr - p.paid_apr AS spread_pct_pts
+       o.offered_apr - p.paid_apr AS spread_pct_pts,
+       t.offered_apr AS top25_offered_apr, t.period_end AS top25_offered_period_end,
+       CASE WHEN p.period_end <= (SELECT max(period_end) FROM offered_top25)
+            THEN t.offered_apr - p.paid_apr END AS top25_spread_pct_pts
 FROM paid p
 ASOF JOIN offered o ON p.period_end >= o.period_end
+ASOF LEFT JOIN offered_top25 t ON p.period_end >= t.period_end
 WHERE p.period_end <= (SELECT max(period_end) FROM offered);
 
 -- FDIC issuer roll-up: the per-charter series (entity CERT:<n>, source fdic) summed by issuer and period, acquirer
@@ -93,14 +102,15 @@ WHERE f.source = 'fdic' AND f.entity_type = 'bank'
 GROUP BY f.metric, d.rollup_issuer_id, d.rollup_issuer_name, f.tier, f.period_type, f.source, f.period_end;
 
 -- Offered range: the highest, lowest and middle (620-719) of the three TCCP tier medians per half-year, keyed on the
--- 620-719 series so render.py can select the band edges as fields. The sub-620 median is often the lowest of the
--- three (secured-card products dominate that tier), which is why the band is min to max, not sub-620 to superprime.
+-- 620-719 series so render.py can select the band edges as fields. The 720-and-up median is the lowest of the three,
+-- while the sub-620 median often sits below the 620-719 median (secured-card products dominate that tier), which is
+-- why the band is min to max, not superprime to sub-620.
 CREATE OR REPLACE VIEW v_tccp_offered_range AS
 SELECT metric, entity, entity_type, '620_719' AS tier, period_type, source, CAST(period_end AS DATE) AS period_end,
        max(value) AS hi, min(value) AS lo,
        max(CASE WHEN tier = '620_719' THEN value END) AS mid
 FROM facts
-WHERE metric = 'tccp_purchase_apr_median' AND entity = 'TCCP_ALL' AND source = 'tccp'
+WHERE metric = 'tccp_purchase_apr_median' AND source = 'tccp'
   AND tier IN ('le619', '620_719', 'superprime')
 GROUP BY metric, entity, entity_type, period_type, source, period_end;
 
@@ -160,7 +170,9 @@ FROM l;
 -- Y-14 flows: what the large banks' cardholders actually do. revolver_share is the share of balances carrying interest.
 -- payment_rate is payments as a share of the opening balance, derived as purchases minus the change in balances (the
 -- accounting identity closing = opening + purchases - payments - charge-offs, with charge-offs left in payments
--- because the Y-14 charge-off series is a rate, not a dollar amount; the error is a few tenths of a point). It needs
+-- because the Y-14 charge-off series is a rate, not a dollar amount, which overstates the quarterly payment rate by
+-- about 1.25 points while omitting interest, fees, cash advances and balance transfers added to balances understates
+-- it by roughly 3.9 points, leaving the net quarterly figure understated by roughly 2.5 to 3 points). It needs
 -- consecutive quarters, so a gap in the panel leaves the quarter null. Per-account figures turn billions over
 -- millions of accounts into dollars.
 CREATE OR REPLACE VIEW v_y14_flows AS

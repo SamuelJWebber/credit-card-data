@@ -55,7 +55,7 @@ RELEASE_RHYTHM = {
     "nyfed_sce": ("sce_any_rejection_rate", "SCE_ALL", "T", 40),  # a wave lands four to six weeks after fielding
     "nyfed_sce_monthly": ("sce_miss_payment_prob", "SCE_ALL", "M", 10),  # August 2026 landed 2026-09-08
     "bea": ("pce_total_saar", "US_HOUSEHOLDS", "M", 27),  # July 2026 on 2026-08-26
-    "census": ("retail_sales_sa", "NAICS:44X72", "M", 45),  # June 2026 in the workbook with the 2026-08-14 release
+    "census": ("retail_sales_sa", "NAICS:44X72", "M", 48),  # monthly retail workbook lands mid-month two months after period end (Sep 2026 on 2026-11-17)
     "ncua": ("ncua_card_loans", "NCUA_FICU", "Q", 65),  # a quarter's zip lands about two months after quarter end
     "dfa": ("dfa_consumer_credit", "DFA_ALL_HOUSEHOLDS", "Q", 80),  # about a week after the Z.1: 2026 Q1 on 2026-06-18
     "cfpb_cct": ("cct_card_inquiry_index_sa", "CFPB_CCP_ALL", "M", 105),  # the inquiry index runs about three months behind (originations seven)
@@ -241,7 +241,9 @@ DQ_TRIANGULATION_NOTE = (
     "Liberty Street post 'How Distressed Are Consumers?'), so it sits far above the lender-book measures. The Fed "
     "series is 30 or more days past due at commercial banks, seasonally adjusted. The Y-14 series covers the largest "
     "banks only. The FDIC series is 90 or more days past due plus nonaccrual, all insured institutions. Read the "
-    "turning points together, not the levels."
+    "turning points together, not the levels. All four series here are balance-weighted shares of dollars; Y-14 "
+    "account-weighted delinquency shares are in the series browser below, while borrower-count bureau measures can "
+    "diverge when smaller-balance accounts fall behind."
 )
 Y14_NOTE = (
     "FR Y-14M credit card filers only: bank holding companies with card balances above $5 billion or material to "
@@ -256,8 +258,8 @@ BURDEN_NOTE = (
     "they were in 2008."
 )
 REAL_NOTE = (
-    "The same balances in nominal dollars and restated at the latest CPI price level. Consumer prices rose about 25 "
-    "percent between 2020 and 2026, so a flat nominal balance is a falling real one."
+    "The same balances in nominal dollars and restated at the latest CPI price level, so a flat nominal balance "
+    "during high inflation is a falling real one."
 )
 PRIME_NOTE = (
     "Most variable card APRs are set as the prime rate plus a margin. The prime rate follows the federal funds target, "
@@ -287,9 +289,10 @@ FLOWS_NOTE = (
     "Two measures of how cardholders use the product, from the Y-14 series already loaded. The revolving share is the "
     "percentage of balances carrying interest. The payment rate is payments as a percentage of the opening balance, "
     "derived from the accounting identity (closing balance equals opening plus purchases minus payments and "
-    "charge-offs); charge-offs are left inside payments because the Y-14 publishes a charge-off rate rather than a "
-    "dollar amount, which overstates the payment rate by a few tenths of a point. A rising payment rate with a falling "
-    "revolving share means the growth is transactors, not borrowers. " + Y14_NOTE
+    "charge-offs); leaving charge-offs inside payments overstates the quarterly rate by roughly 1.25 points, while "
+    "omitting interest, fees, cash advances and balance transfers added to balances understates it by roughly 4 points, "
+    "so the plotted quarterly rate is roughly 2.5 to 3 points below true gross payments. A rising payment rate with "
+    "a falling revolving share means the growth is transactors, not borrowers. " + Y14_NOTE
 )
 NCUA_NOTE = (
     "NCUA 5300 Call Report, quarterly, from 2016 Q1: unsecured credit card loans on the credit union's own books, "
@@ -314,14 +317,16 @@ HHDC_ALL_DEBT_NOTE = (
 )
 PER_ACCOUNT_NOTE = (
     "Balances, limits and unused credit per open card account on credit reports. Joint accounts are counted twice in "
-    "the NY Fed's account series, so these are lower bounds on the per-borrower figures. The gap between the limit and "
-    "the balance line is the unused credit the household is carrying."
+    "the NY Fed's account series, so these are lower bounds on the per-borrower figures. Aggregate credit-report "
+    "balances also include 90+ day delinquent and stale charged-off accounts still reported on credit files (about "
+    "13 percent of balances in 2026 Q2). The gap between the limit and the balance line is the unused credit the "
+    "household is carrying."
 )
 DEBT_SERVICE_NOTE = (
     "The Federal Reserve Board's own estimates of required debt payments as a share of disposable personal income: the "
-    "household ratio includes mortgages, the consumer ratio covers cards, auto and student debt. Published about five "
-    "months after the quarter, so this is the slowest series on the page and the one that settles whether a record "
-    "balance is actually a burden."
+    "household ratio includes mortgages, the consumer ratio covers cards, auto and student debt. Published about three "
+    "months after the quarter (longer-lag series such as Y-14, TCCP and CFPB originations arrive later), and the one "
+    "that settles whether a record balance is actually a burden."
 )
 
 HOLDER_NOTE = (
@@ -343,7 +348,8 @@ SCE_MONTHLY_NOTE = (
     "rotating panel, nationally weighted, from June 2013. The delinquency question asks for the respondent's own "
     "probability, from 0 to 100, of not being able to make a minimum debt payment in the next three months. It is a "
     "stated probability, not a delinquency rate: its level runs far above any measured delinquency and the "
-    "direction is the signal. Monthly, so it leads every lender-reported series on the page by a quarter or more."
+    "direction is the signal. Monthly, so it leads quarterly lender-reported series on the page by a quarter or more "
+    "(monthly issuer 8-K filings arrive on a similar timetable)."
 )
 SCE_SUBGROUP_NOTE = (
     "Subgroup samples are a few hundred respondents a month, so read the three-month direction, not one month's move."
@@ -404,7 +410,8 @@ INTEREST_NOTE = (
     "month). " + INTEREST_MODEL_NOTE + " Dividing the result by the G.19 credit total therefore gives back, roughly, "
     "the blended rate BEA assumed for all consumer credit, cards, auto and student loans together. It is not a "
     "record of interest paid, it cannot show how many card balances pay no interest, and the gap between it and the "
-    "card APR says nothing about them. The card APR is what accounts assessed interest are charged on cards alone."
+    "card APR says nothing about them. The implied rate uses seasonally adjusted inputs (SAAR/SA), whereas the G.19 "
+    "card APR is not seasonally adjusted (NSA) and reflects what accounts assessed interest are charged on cards alone."
 )
 CLAIMS_NOTE = (
     "Department of Labor unemployment insurance claims, weekly, seasonally adjusted. The thesis watch keys on the "
@@ -569,9 +576,9 @@ PANELS = [
                 "step": False,
                 "notes": [INTEREST_NOTE],
                 "series": [
-                    S("hh_interest_payments_saar", "US_HOUSEHOLDS", "Implied rate on all consumer credit (BEA modelled interest over G.19 credit outstanding)",
+                    S("hh_interest_payments_saar", "US_HOUSEHOLDS", "Implied rate on all consumer credit, SA (BEA modelled interest over G.19 credit outstanding)",
                       source="bea", view="v_interest_burden", field="effective_rate_pct"),
-                    S("card_apr_assessed_interest", "COMBANKS_ALL", "Card APR on accounts assessed interest (G.19)", period_type="Q"),
+                    S("card_apr_assessed_interest", "COMBANKS_ALL", "Card APR on accounts assessed interest (G.19, NSA)", period_type="Q"),
                 ],
             },
             {
@@ -595,41 +602,46 @@ PANELS = [
                 ],
             },
             {
-                # the cross-source chart: the range of terms issuers advertise (TCCP, the highest and lowest of the
-                # three credit-tier medians as a band, the 620-719 median as a line) against the rate revolvers pay
-                # (G.19). The spread is the 620-719 median minus paid, in percentage points, and stops at the last
-                # offered period (sql/views.sql v_offered_vs_paid).
+                # the cross-source chart: the range of terms the fixed top-25 panel advertises (TCCP_TOP25, highest
+                # and lowest of the three credit-tier medians as a band, the 620-719 median as the solid line, and
+                # all respondents as a dashed comparison line) against the rate revolvers pay (G.19). The spread is
+                # the top-25 620-719 median minus paid, in percentage points, and stops at the last offered period
+                # (sql/views.sql v_offered_vs_paid).
                 "id": "offered_vs_paid",
                 "title": "Card APR offered vs APR paid",
                 "unit": "pct",
                 "step": True,
                 "since": "2022-01-01",
-                "band": [1, 2],  # fill between the highest and lowest tier medians
+                "band": [1, 2],  # fill between the highest and lowest tier medians of the top-25 fixed panel
                 "notes": [
-                    "The band is the range across the three credit-tier medians of the CFPB survey (scores 619 or "
-                    "less, 620 to 719, 720 and up). The sub-620 median is usually the lowest of the three, not the "
-                    "highest: products that target that tier are mostly secured cards with lower APRs. The G.19 rate "
-                    "is the average across all accounts that paid interest, so it sits below the terms offered to new "
-                    "applicants in the middle tier."
+                    "The band and solid offered line follow the fixed statutory panel of the 25 largest card issuers "
+                    "(TCCP, available from H2 2023), while the dashed offered line shows the unweighted median across "
+                    "all responding issuers (which swings when smaller credit unions and community banks enter or leave "
+                    "the sample). The 720-and-up median is the lowest of the three credit tiers; the sub-620 median "
+                    "often sits below the 620 to 719 median because products targeting that tier include secured cards "
+                    "with lower APRs. The G.19 rate is the average across all accounts that paid interest, so it sits "
+                    "below the terms offered to new applicants in the middle tier."
                 ],
                 "series": [
-                    S("tccp_purchase_apr_median", "TCCP_ALL", "Highest of the three tier medians offered (TCCP)",
+                    S("tccp_purchase_apr_median", "TCCP_TOP25", "Highest of the three tier medians offered, top 25 issuers (TCCP)",
                       tier="620_719", period_type="H", source="tccp", view="v_tccp_offered_range", field="hi"),
-                    S("tccp_purchase_apr_median", "TCCP_ALL", "Lowest of the three tier medians offered (TCCP)",
+                    S("tccp_purchase_apr_median", "TCCP_TOP25", "Lowest of the three tier medians offered, top 25 issuers (TCCP)",
                       tier="620_719", period_type="H", source="tccp", view="v_tccp_offered_range", field="lo"),
-                    S("tccp_purchase_apr_median", "TCCP_ALL", "Offered to scores 620 to 719, median (TCCP)",
+                    S("tccp_purchase_apr_median", "TCCP_TOP25", "Offered to scores 620 to 719, median, top 25 issuers (TCCP)",
                       tier="620_719", period_type="H", source="tccp"),
+                    S("tccp_purchase_apr_median", "TCCP_ALL", "Offered to scores 620 to 719, median, all respondents (TCCP)",
+                      tier="620_719", period_type="H", source="tccp", dash=True),
                     S("card_apr_assessed_interest", "COMBANKS_ALL", "Paid: APR on accounts assessed interest (G.19)",
                       period_type="Q"),
-                    S("card_apr_assessed_interest", "COMBANKS_ALL", "Offered to 620-719 minus paid, percentage points",
-                      period_type="Q", view="v_offered_vs_paid", field="spread_pct_pts", unit="pp", dash=True),
+                    S("card_apr_assessed_interest", "COMBANKS_ALL", "Top-25 offered to 620-719 minus paid, percentage points",
+                      period_type="Q", view="v_offered_vs_paid", field="top25_spread_pct_pts", unit="pp", dash=True),
                 ],
             },
         ],
     },
     {
         "name": "Access",
-        "blurb": "Who is asking for card credit, who is getting it, and who is being shut out. The demand side, from the only survey that asks households directly.",
+        "blurb": "Who is asking for card credit, who is getting it, and who is being shut out. The demand side, from the only survey on this page that asks households directly.",
         "charts": [
             {
                 "id": "card_access",
@@ -768,16 +780,16 @@ PANELS = [
                 "step": False,
                 "benchmark": True,
                 "notes": [
-                    "The deep subprime, subprime and near-prime groups together (all lenders, monthly, CFPB) against "
-                    "the same measure for the large banks of the Y-14 (quarterly, Philly Fed). The two agreeing says "
-                    "the large-bank picture in the Borrowers panel holds for the whole market; the all-lender line "
-                    "sitting above it says the small lines to subprime borrowers are being written by smaller "
-                    "lenders. " + CCT_NOTE
+                    "The deep subprime, subprime and near-prime groups together (all lenders, monthly, CFPB, seasonally "
+                    "adjusted) against the same measure for the large banks of the Y-14 (quarterly, Philly Fed, not "
+                    "seasonally adjusted). The two agreeing says the large-bank picture in the Borrowers panel holds "
+                    "for the whole market; the all-lender line sitting above it says the small lines to subprime "
+                    "borrowers are being written by smaller lenders. " + CCT_NOTE
                 ],
                 "series": [
-                    S("cct_card_new_lines_sa", "CFPB_CCP_ALL", "All lenders, share of new credit line dollars (CFPB, monthly)", tier="near_prime",
+                    S("cct_card_new_lines_sa", "CFPB_CCP_ALL", "All lenders, share of new credit line dollars (CFPB, monthly, SA)", tier="near_prime",
                       source="cfpb_cct", view="v_cct_shares", field="below_prime_share_pct"),
-                    S("y14_card_new_commitments_share", "Y14_CARD_FILERS", "Large banks, share of new credit lines (Y-14, quarterly)",
+                    S("y14_card_new_commitments_share", "Y14_CARD_FILERS", "Large banks, share of new credit lines (Y-14, quarterly, NSA)",
                       tier="lt660", period_type="Q", source="phillyfed"),
                 ],
             },
@@ -982,10 +994,9 @@ PANELS = [
                 "unit": "pct",
                 "step": True,
                 "notes": [
-                    "The oldest borrowers are the only age band whose card delinquency has kept rising, which the "
-                    "thesis note lists as something it cannot explain. Their auto loans and their debt as a whole "
-                    "are drawn beside it: the card line pulling away from the other two says the deterioration is "
-                    "about the card, not about the household's whole balance sheet. " + LOAN_TYPE_NOTE
+                    "The over-70 age band's flow into 90+ day delinquency on cards, auto loans and all debt: the card "
+                    "line sitting above or diverging from the other two shows whether stress is specific to cards "
+                    "rather than the household's whole balance sheet. " + LOAN_TYPE_NOTE
                 ],
                 "series": [
                     S("hhdc_card_transition_dq90", "AGE:70+", "Credit card", period_type="Q", source="nyfed_hhdc"),
@@ -1395,14 +1406,16 @@ PANELS = [
                 "step": True,
                 "notes": [
                     "Purchase volume on the largest banks' cards (Y-14, quarterly, not seasonally adjusted, compared "
-                    "with the same quarter a year earlier) against seasonally adjusted retail and food services "
-                    "sales. Card volume growing faster than sales is share gain by cards over cash, debit and "
-                    "checks; the gap closing is the card's share stalling. " + Y14_NOTE
+                    "with the same quarter a year earlier) against seasonally adjusted retail and food services sales "
+                    "(year-over-year growth compares the same period a year earlier, dampening regular annual "
+                    "seasonality on the Y-14 line while keeping trading-day and holiday adjustment on Census sales). "
+                    "Card volume growing faster than sales is share gain by cards over cash, debit and checks; the "
+                    "gap closing is the card's share stalling. " + Y14_NOTE
                 ],
                 "series": [
-                    S("y14_card_purchase_volume", "Y14_CARD_FILERS", "Card purchase volume, large banks (Y-14)", period_type="Q",
+                    S("y14_card_purchase_volume", "Y14_CARD_FILERS", "Card purchase volume, large banks (Y-14, NSA)", period_type="Q",
                       source="phillyfed", view="v_growth", field="yoy_pct"),
-                    S("retail_sales_sa", "NAICS:44X72", "Retail and food services sales (Census)", source="census",
+                    S("retail_sales_sa", "NAICS:44X72", "Retail and food services sales (Census, SA)", source="census",
                       view="v_growth", field="yoy_pct"),
                 ],
             },
@@ -1441,8 +1454,9 @@ PANELS = [
                 "benchmark": True,
                 "notes": [
                     "University of Michigan index of consumer sentiment, 1966 Q1 = 100. On the page because stated "
-                    "sentiment and card behaviour have diverged since 2022: sentiment near historic lows while payment "
-                    "rates and full-payer shares set records. One of the two is not describing the median cardholder.",
+                    "sentiment and card behaviour have diverged since 2022: sentiment near historic lows while "
+                    "full-payer shares set records and payment rates remained well above pre-2020 levels (peaking in "
+                    "2022 Q2). One of the two is not describing the median cardholder.",
                     "The survey was QUARTERLY until January 1978 and monthly from February 1978, so the readings "
                     "before 1978 are three months apart. This is the one chart on the page drawn through its gaps, "
                     "because they are a change of cadence rather than months that went unmeasured; everywhere else a "
@@ -1554,7 +1568,8 @@ PANELS = [
                 "notes": [
                     "Household interest payments (BEA, every kind of nonmortgage interest) over disposable personal "
                     "income, both monthly at annual rates. The debt service ratio above counts principal too and "
-                    "arrives five months late; this is the interest half of it, four weeks after the month. "
+                    "arrives about three months after the quarter; this is the interest half of it, four weeks after "
+                    "the month. "
                     + INTEREST_MODEL_NOTE
                 ],
                 "series": [
@@ -1627,7 +1642,7 @@ THESIS_TESTS = [
         "label": "Flow into 90+ day delinquency stays below 7.5%",
         "series": S("hhdc_card_transition_dq90", "CCP_ALL", "", period_type="Q", source="nyfed_hhdc"),
         "op": "<", "threshold": 7.5, "unit": "pct", "chart": "hhdc_dq90_by_age",
-        "why": "A break above this would mean the loosening that began in late 2025 was larger than the small line sizes suggest, and that this is a cycle after all.",
+        "why": "A break above 7.5% (which sits above the 2022-24 surge peak of 7.18%, so this test trips only on a new high) would mean the loosening that began in late 2025 was larger than the small line sizes suggest, and that this is a cycle after all.",
     },
     {
         "label": "Card charge-off rate stays below 4.2%",
@@ -1654,11 +1669,11 @@ HEADLINES = [
     (("card_nco_rate_sa", "COMBANKS_ALL", "all", "Q", "fred"), "Card charge-off rate, annualized, commercial banks (Fed, SA)", "rate", "card_nco"),
     (("hhdc_card_transition_dq90", "CCP_ALL", "all", "Q", "nyfed_hhdc"), "Card balances newly 90+ days late, annualized flow (NY Fed)", "rate", "hhdc_dq90_by_age"),
     (("y14_card_pay_minimum_share", "Y14_CARD_FILERS", "all", "Q", "phillyfed"), "Accounts paying only the minimum, large banks (Philly Fed)", "rate", "y14_payment_behavior"),
-    (("sce_card_rejection_rate", "SCE_ALL", "all", "T", "nyfed_sce"), "Card applications refused, of those who applied (NY Fed survey)", "rate", "card_access"),
+    (("sce_card_rejection_rate", "SCE_ALL", "all", "T", "nyfed_sce"), "Card applications refused, of those who applied (NY Fed survey, about 270 applicants)", "rate", "card_access"),
     (("sce_lender_closed_rate", "SCE_ALL", "all", "T", "nyfed_sce"), "Had an account closed by a lender (NY Fed survey)", "rate", "lender_closures"),
     (("debt_service_ratio_consumer", "US_HOUSEHOLDS", "all", "Q", "fred"), "Consumer debt payments as a share of disposable income (Fed)", "rate", "debt_service"),
     (("unemployment_rate_sa", "US_ECONOMY", "all", "M", "fred"), "Unemployment rate (BLS)", "rate", "losses_vs_labor"),
-    (("sloos_card_standards_net_tightening", "SLOOS_DOMESTIC", "all", "Q", "fred"), "Banks tightening card standards, net (SLOOS)", "net", "sloos_cards"),
+    (("sloos_card_standards_net_tightening", "SLOOS_DOMESTIC", "all", "Q", "fred"), "Banks tightening card standards, net (SLOOS, about 50 banks)", "net", "sloos_cards"),
     (("sce_miss_payment_prob", "SCE_ALL", "all", "M", "nyfed_sce_monthly"), "Households' stated chance of missing a debt payment in the next 3 months (NY Fed survey)", "rate", "miss_payment_expectation"),
     (("dfa_consumer_credit", "WEALTH:BOTTOM50", "all", "Q", "dfa"), "Consumer credit owed by the bottom half of households by wealth (Fed DFA)", "level", "dfa_credit_by_wealth"),
     (("cct_card_originations_sa", "CFPB_CCP_ALL", "all", "M", "cfpb_cct"), "New credit cards opened in the month, all lenders (CFPB, SA)", "millions", "cct_originations"),
@@ -1745,7 +1760,7 @@ VIEW_BOUNDS_UNCHECKED = frozenset({
     ("v_dfa_shares", "deposits_to_credit_pct"),
     ("v_dfa_shares", "credit_per_household"),
     ("v_apr_spread", "apr"), ("v_apr_spread", "prime"), ("v_apr_spread", "spread_over_prime"),
-    ("v_offered_vs_paid", "spread_pct_pts"),
+    ("v_offered_vs_paid", "spread_pct_pts"), ("v_offered_vs_paid", "top25_spread_pct_pts"),
     ("v_state_card", "state_min"), ("v_state_card", "state_median"), ("v_state_card", "state_max"),
     ("v_hhdc_per_account", "balance_per_account"), ("v_hhdc_per_account", "limit_per_account"),
     ("v_hhdc_per_account", "available_per_account"),
@@ -1969,6 +1984,109 @@ def _missing_periods(rows, period_type: str) -> list[dt.date]:
             out.append(cursor)
 
 
+def _tccp_respondent_note(con, today: dt.date) -> str | None:
+    """Responding institution counts per half-year for offered_vs_paid, flagging >20% swings (REVIEW.md credit-A-2)."""
+    rows = con.execute(
+        "SELECT CAST(period_end AS DATE) AS d, value FROM facts "
+        "WHERE metric = 'tccp_issuer_count' AND entity = 'TCCP_ALL' AND tier = 'all' "
+        "AND period_type = 'H' AND source = 'tccp' AND CAST(period_end AS DATE) <= ? ORDER BY d",
+        [today],
+    ).fetchall()
+    if not rows:
+        return None
+    counts = [(d, int(round(float(v)))) for d, v in rows]
+    summary = ", ".join(f"{period_label(d, 'H')}: {n}" for d, n in counts)
+    swings = [
+        f"{period_label(d0, 'H')} to {period_label(d1, 'H')} ({n0} to {n1}, {100 * (n1 / n0 - 1):+.0f}%)"
+        for (d0, n0), (d1, n1) in zip(counts, counts[1:])
+        if n0 > 0 and abs(n1 - n0) / n0 > 0.20
+    ]
+    note = f"Responding institutions per half-year (all-respondents line): {summary}."
+    if swings:
+        note += (
+            f" Respondent count changed by more than 20% in {', '.join(swings)}, shifting the unweighted "
+            "all-respondents median independently of lender pricing."
+        )
+    return note
+
+
+def _cpi_note(con, today: dt.date) -> str | None:
+    """Computed cumulative CPI-U change since January 2020 for revolving_real (REVIEW.md credit-A-9)."""
+    rows = con.execute(
+        "SELECT CAST(period_end AS DATE) AS d, value FROM facts "
+        "WHERE metric = 'cpi_all_urban_sa' AND entity = 'US_ECONOMY' AND tier = 'all' "
+        "AND period_type = 'M' AND source = 'fred' AND CAST(period_end AS DATE) <= ? ORDER BY d",
+        [today],
+    ).fetchall()
+    by_date = {d: float(v) for d, v in rows}
+    base_d = dt.date(2020, 1, 31)
+    if base_d not in by_date or not rows:
+        return None
+    last_d, last_v = rows[-1][0], float(rows[-1][1])
+    if last_d <= base_d or by_date[base_d] <= 0:
+        return None
+    pct = 100.0 * (last_v / by_date[base_d] - 1.0)
+    return (
+        f"Consumer prices (CPI-U) rose {pct:.1f}% between {period_label(base_d, 'M')} and "
+        f"{period_label(last_d, 'M')} ({by_date[base_d]:.1f} to {last_v:.1f})."
+    )
+
+
+def _age_dq_note(con, today: dt.date) -> str | None:
+    """Computed latest-quarter age-band 90+ delinquency summary for age70_by_loan_type (REVIEW.md credit-A-9)."""
+    rows = con.execute(
+        "SELECT entity, CAST(period_end AS DATE) AS d, value FROM facts "
+        "WHERE metric = 'hhdc_card_transition_dq90' AND entity_type = 'age' AND tier = 'all' "
+        "AND period_type = 'Q' AND source = 'nyfed_hhdc' AND CAST(period_end AS DATE) <= ? ORDER BY d",
+        [today],
+    ).fetchall()
+    if not rows:
+        return None
+    by_ent: dict[str, dict[dt.date, float]] = {}
+    for ent, d, v in rows:
+        by_ent.setdefault(str(ent).removeprefix("AGE:"), {})[d] = float(v)
+    if "70+" not in by_ent or not by_ent["70+"]:
+        return None
+    latest_d = max(by_ent["70+"])
+    prev_d = shift_period(latest_d, "Q", -1)
+    yoy_d = shift_period(latest_d, "Q", -4)
+    latest_vals = {g: m[latest_d] for g, m in by_ent.items() if latest_d in m}
+    if not latest_vals:
+        return None
+    parts = [f"In {period_label(latest_d, 'Q')}, the 70+ card flow into 90+ day delinquency was {latest_vals['70+']:.2f}%"]
+    deltas = []
+    if prev_d in by_ent["70+"]:
+        deltas.append(f"{latest_vals['70+'] - by_ent['70+'][prev_d]:+.2f} pp QoQ")
+    if yoy_d in by_ent["70+"]:
+        deltas.append(f"{latest_vals['70+'] - by_ent['70+'][yoy_d]:+.2f} pp YoY")
+    if deltas:
+        parts[-1] += f" ({', '.join(deltas)})"
+    rising_yoy = [
+        f"ages {g} ({latest_vals[g]:.2f}%, {latest_vals[g] - by_ent[g][yoy_d]:+.2f} pp YoY)"
+        for g in AGE_GROUPS if g in latest_vals and yoy_d in by_ent.get(g, {}) and latest_vals[g] > by_ent[g][yoy_d]
+    ]
+    hi_g = max(latest_vals, key=latest_vals.__getitem__)
+    lo_g = min(latest_vals, key=latest_vals.__getitem__)
+    if rising_yoy:
+        parts.append("age bands up YoY: " + ", ".join(rising_yoy))
+    else:
+        parts.append("no age band was higher YoY")
+    parts.append(f"range across bands: {lo_g} lowest at {latest_vals[lo_g]:.2f}%, {hi_g} highest at {latest_vals[hi_g]:.2f}%")
+    return "; ".join(parts) + "."
+
+
+def _dynamic_notes(con, chart_id: str, today: dt.date) -> list[str]:
+    fn = {
+        "offered_vs_paid": _tccp_respondent_note,
+        "revolving_real": _cpi_note,
+        "age70_by_loan_type": _age_dq_note,
+    }.get(chart_id)
+    if fn is None:
+        return []
+    note = fn(con, today)
+    return [note] if note else []
+
+
 def _chart_payload(con, spec: dict, meta_idx: dict, health: dict, golden: dict, today: dt.date) -> dict:
     per_series = []
     all_rows = []
@@ -2063,7 +2181,7 @@ def _chart_payload(con, spec: dict, meta_idx: dict, health: dict, golden: dict, 
         if mixed
         else []
     )
-    notes = list(spec.get("notes", []))
+    notes = list(spec.get("notes", [])) + _dynamic_notes(con, spec["id"], today)
     about = []
     seen = set()
     for p in real:

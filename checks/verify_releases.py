@@ -44,24 +44,59 @@ def sh(*args: str) -> str:
     return subprocess.run(args, check=True, capture_output=True, text=True, encoding="utf-8").stdout
 
 
+class VerifyError(RuntimeError):
+    """Fail-closed error when gh/git output or API responses cannot be parsed."""
+
+
+def _int_or_none(v) -> int | None:
+    if v is None or isinstance(v, bool):
+        return None
+    try:
+        return int(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def _ts(s: str) -> dt.datetime:
+    if not isinstance(s, str) or not s.strip():
+        raise ValueError(f"missing timestamp: {s!r}")
+    parsed = dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
+    if parsed.tzinfo is None:
+        raise ValueError(f"timestamp has no timezone: {s!r}")
+    return parsed
+
+
 def runs(event: str, limit: int) -> list[dict]:
-    out = sh(
-        "gh", "api", f"repos/{OWNER_REPO}/actions/workflows/{WORKFLOW}/runs",
-        "-X", "GET", "-f", f"event={event}", "-f", f"per_page={limit}",
-    )
-    return json.loads(out)["workflow_runs"]
+    try:
+        out = sh(
+            "gh", "api", f"repos/{OWNER_REPO}/actions/workflows/{WORKFLOW}/runs",
+            "-X", "GET", "-f", f"event={event}", "-f", f"per_page={limit}",
+        )
+        doc = json.loads(out)
+    except (subprocess.CalledProcessError, OSError, ValueError) as exc:
+        raise VerifyError(f"could not read workflow runs from GitHub API: {exc}") from exc
+    if not isinstance(doc, dict) or not isinstance(doc.get("workflow_runs"), list):
+        raise VerifyError("malformed GitHub API runs response: expected object with 'workflow_runs' list")
+    items = doc["workflow_runs"]
+    if any(not isinstance(r, dict) for r in items):
+        raise VerifyError("malformed GitHub API runs response: workflow_runs entry is not an object")
+    return items
 
 
 def job_window(run_id: int) -> tuple[dt.datetime, dt.datetime | None] | None:
     """When a runner started and finished the refresh job of this run, or None if the jobs API cannot say."""
     try:
-        jobs = json.loads(sh("gh", "api", f"repos/{OWNER_REPO}/actions/runs/{run_id}/jobs"))["jobs"]
-    except (subprocess.CalledProcessError, KeyError, ValueError):
+        doc = json.loads(sh("gh", "api", f"repos/{OWNER_REPO}/actions/runs/{run_id}/jobs"))
+        jobs = doc.get("jobs") if isinstance(doc, dict) else None
+        if not isinstance(jobs, list):
+            return None
+        job = next((j for j in jobs if isinstance(j, dict) and j.get("name") == JOB),
+                   jobs[0] if len(jobs) == 1 and isinstance(jobs[0], dict) else None)
+        if not job or not job.get("started_at"):
+            return None
+        return _ts(job["started_at"]), (_ts(job["completed_at"]) if job.get("completed_at") else None)
+    except (subprocess.CalledProcessError, OSError, KeyError, TypeError, ValueError):
         return None
-    job = next((j for j in jobs if j.get("name") == JOB), jobs[0] if len(jobs) == 1 else None)
-    if not job or not job.get("started_at"):
-        return None
-    return _ts(job["started_at"]), (_ts(job["completed_at"]) if job.get("completed_at") else None)
 
 
 def _trailer(body: str, key: str) -> int | None:
@@ -72,7 +107,10 @@ def _trailer(body: str, key: str) -> int | None:
 def bot_commits(ref: str) -> list[dict]:
     """Every 'refresh:' commit on `ref`, newest first: sha, health.json at that commit, the stamp it carries and the
     run that made it (from the commit's trailers, else from health.json; None for commits older than both)."""
-    log = sh("git", "log", ref, "--format=%H%x1f%cI%x1f%s%x1f%b%x1e", "--committer=carddash-bot", "-n", "200")
+    try:
+        log = sh("git", "log", ref, "--format=%H%x1f%cI%x1f%s%x1f%b%x1e", "--committer=carddash-bot", "-n", "200")
+    except (subprocess.CalledProcessError, OSError) as exc:
+        raise VerifyError(f"could not read git log for {ref}: {exc}") from exc
     out = []
     for record in log.split("\x1e"):
         fields = record.strip("\n").split("\x1f")
@@ -81,19 +119,21 @@ def bot_commits(ref: str) -> list[dict]:
         sha, _when, _subject, body = fields[:4]
         try:
             health = json.loads(sh("git", "show", f"{sha}:data/health.json"))
-        except (subprocess.CalledProcessError, ValueError):
+        except (subprocess.CalledProcessError, OSError, ValueError):
             health = None
-        named = (health or {}).get("run") or {}
-        run_id = _trailer(body, "Run-Id") or named.get("id")
-        attempt = _trailer(body, "Run-Attempt") or named.get("attempt")
-        stamp = _ts(health["generated_at"]) if health and health.get("generated_at") else None
-        out.append({"sha": sha, "health": health, "stamp": stamp,
-                    "run_id": int(run_id) if run_id else None, "attempt": int(attempt) if attempt else None})
+        if not isinstance(health, dict):
+            health = None
+        named = health.get("run") if isinstance((health or {}).get("run"), dict) else {}
+        run_id = _trailer(body, "Run-Id") or _int_or_none(named.get("id"))
+        attempt = _trailer(body, "Run-Attempt") or _int_or_none(named.get("attempt"))
+        stamp = None
+        if health and health.get("generated_at"):
+            try:
+                stamp = _ts(health["generated_at"])
+            except ValueError:
+                stamp = None
+        out.append({"sha": sha, "health": health, "stamp": stamp, "run_id": run_id, "attempt": attempt})
     return out
-
-
-def _ts(s: str) -> dt.datetime:
-    return dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
 
 
 def by_run_id(run: dict, commits: list[dict]) -> dict | None:
@@ -105,11 +145,15 @@ def by_run_id(run: dict, commits: list[dict]) -> dict | None:
 
 def by_window(run: dict, commits: list[dict], window) -> tuple[dict | None, str]:
     """For commits older than run names: the newest stamp inside the job window, else inside the run window."""
-    how = "job window"
-    if window is None:
-        how = "run window"
-        window = (_ts(run.get("run_started_at") or run["created_at"]), _ts(run["updated_at"]))
-    start, end = window[0], window[1] or _ts(run["updated_at"])
+    try:
+        updated = _ts(run["updated_at"])
+        how = "job window"
+        if window is None:
+            how = "run window"
+            window = (_ts(run.get("run_started_at") or run["created_at"]), updated)
+        start, end = window[0], window[1] or updated
+    except (KeyError, TypeError, ValueError) as exc:
+        raise VerifyError(f"malformed run timestamps for run {run.get('id', '?')}: {exc}") from exc
     # a commit that names a run is never another run's
     inside = [c for c in commits if c["run_id"] is None and c["stamp"] and start <= c["stamp"] <= end]
     return (inside[0], how) if inside else (None, "none")
@@ -139,28 +183,39 @@ def watch(hours: float) -> int:
     run executes no step, so it opens no failure issue, and GitHub can skip a schedule outright. Either way the v1
     count would simply stop with nothing said (REVIEW.md bigger improvement 1). A run that FAILED is not reported
     here: it opened the failure issue itself. An amber run is the attention issue's business."""
-    newest = runs("schedule", 1)
+    try:
+        newest = runs("schedule", 1)
+    except VerifyError as exc:
+        print(f"ERROR {exc}")
+        return 1
     if not newest:
         print(f"MISSING: no scheduled run of {WORKFLOW} at all")
         return 1
     run = newest[0]
-    created = run["created_at"][:16].replace("T", " ")
-    age = (_now() - _ts(run["created_at"])).total_seconds() / 3600
+    try:
+        rid = run["id"]
+        created_raw = run["created_at"]
+        created_ts = _ts(created_raw)
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"ERROR malformed scheduled run payload: {exc}")
+        return 1
+    created = created_raw[:16].replace("T", " ")
+    age = (_now() - created_ts).total_seconds() / 3600
     if age > hours:
-        print(f"MISSING: the newest scheduled run, {run['id']}, was created {created} UTC, {age:.1f} hours ago "
+        print(f"MISSING: the newest scheduled run, {rid}, was created {created} UTC, {age:.1f} hours ago "
               f"(more than {hours:g}). Last night's run did not happen. {run.get('html_url', '')}".rstrip())
         return 1
     if run.get("conclusion") in STOPPED:
-        print(f"STOPPED: the newest scheduled run, {run['id']} ({created} UTC), ended '{run['conclusion']}' without "
+        print(f"STOPPED: the newest scheduled run, {rid} ({created} UTC), ended '{run['conclusion']}' without "
               f"running its steps, so it opened no failure issue. {run.get('html_url', '')}".rstrip())
         return 1
-    print(f"OK: scheduled run {run['id']} created {created} UTC, {age:.1f} hours ago: "
+    print(f"OK: scheduled run {rid} created {created} UTC, {age:.1f} hours ago: "
           f"{run.get('conclusion') or run.get('status')}")
     return 0
 
 
 def main(argv=None) -> int:
-    p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0], allow_abbrev=False)
     p.add_argument("--event", default="schedule", help="workflow trigger to inspect (schedule, push, workflow_dispatch)")
     p.add_argument("--limit", type=int, default=5, help="how many recent runs to list")
     p.add_argument("--need", type=int, default=2, help="how many consecutive newest runs must be all green")
@@ -172,42 +227,72 @@ def main(argv=None) -> int:
                    help="only say whether a scheduled run was created in the last HOURS and ran its steps (exit 1 if "
                         "not); reads no commits. For .github/workflows/watch.yml")
     args = p.parse_args(argv)
-
     if args.watch is not None:
+        if args.watch <= 0:
+            p.error("--watch must be positive")
         return watch(args.watch)
-    if not args.no_fetch:
-        sh("git", "fetch", "--quiet", "origin", "main")
-    commits = bot_commits(args.ref)
-    if not commits:
-        print(f"no bot commits on {args.ref}: is this a clone of {OWNER_REPO}, and did the fetch work?")
+    if args.limit < 1:
+        p.error("--limit must be at least 1")
+    if args.need < 1:
+        p.error("--need must be at least 1")
+    if args.need > args.limit:
+        p.error("--need cannot exceed --limit")
+    if args.max_age_hours is not None and args.max_age_hours <= 0:
+        p.error("--max-age-hours must be positive")
+
+    try:
+        if not args.no_fetch:
+            try:
+                sh("git", "fetch", "--quiet", "origin", "main")
+            except (subprocess.CalledProcessError, OSError) as exc:
+                raise VerifyError(f"git fetch origin main failed: {exc}") from exc
+        commits = bot_commits(args.ref)
+        if not commits:
+            print(f"no bot commits on {args.ref}: is this a clone of {OWNER_REPO}, and did the fetch work?")
+            return 1
+        workflow_runs = runs(args.event, args.limit)
+        rows = []
+        for run in workflow_runs:
+            try:
+                rid = run["id"]
+                created_raw = run["created_at"]
+                created_ts = _ts(created_raw)
+                event_name = str(run["event"])
+                outcome = str(run.get("conclusion") or run["status"])
+            except (KeyError, TypeError, ValueError) as exc:
+                raise VerifyError(f"malformed workflow run payload: {exc}") from exc
+            commit, how = match(run, commits, lambda rid=rid: job_window(rid))
+            health = (commit or {}).get("health") or {}
+            raw_sources = health.get("sources") if isinstance(health, dict) else None
+            statuses = {
+                s: (d.get("status") if isinstance(d, dict) else None)
+                for s, d in (raw_sources.items() if isinstance(raw_sources, dict) else ())
+            }
+            all_green = bool(statuses) and all(v == GREEN for v in statuses.values()) and run.get("conclusion") == "success"
+            rows.append((run, created_ts, commit, statuses, all_green))
+            stamp = created_raw[:16].replace("T", " ")
+            summary = ", ".join(f"{s}={v}" for s, v in sorted(statuses.items())) or "no bot commit found"
+            sha = (commit or {}).get("sha") or ""
+            print(f"{rid}  {stamp} UTC  {event_name:9s} {outcome:9s} "
+                  f"{sha[:7]:7s} {'GREEN' if all_green else 'not green'}  {summary}"
+                  + (f"  (matched by {how})" if commit else ""))
+    except VerifyError as exc:
+        print(f"ERROR {exc}")
         return 1
-    rows = []
-    for run in runs(args.event, args.limit):
-        commit, how = match(run, commits, lambda rid=run["id"]: job_window(rid))
-        health = (commit or {}).get("health") or {}
-        statuses = {s: d.get("status") for s, d in health.get("sources", {}).items()}
-        all_green = bool(statuses) and all(v == GREEN for v in statuses.values()) and run["conclusion"] == "success"
-        rows.append((run, commit, statuses, all_green))
-        stamp = run["created_at"][:16].replace("T", " ")
-        summary = ", ".join(f"{s}={v}" for s, v in sorted(statuses.items())) or "no bot commit found"
-        sha = (commit or {}).get("sha") or ""
-        print(f"{run['id']}  {stamp} UTC  {run['event']:9s} {run['conclusion'] or run['status']:9s} "
-              f"{sha[:7]:7s} {'GREEN' if all_green else 'not green'}  {summary}"
-              + (f"  (matched by {how})" if commit else ""))
     if not rows:
         print(f"no {args.event} runs of {WORKFLOW} yet")
         return 1
     if args.max_age_hours is not None:
-        age = _now() - _ts(rows[0][0]["created_at"])
+        age = _now() - rows[0][1]
         if age > dt.timedelta(hours=args.max_age_hours):
             print(f"\nMISSING: the newest {args.event} run was created {age.total_seconds() / 3600:.1f} hours ago, "
                   f"more than {args.max_age_hours:g}")
             return 1
     newest = rows[: args.need]
-    ok = len(newest) == args.need and all(r[3] for r in newest)
+    ok = len(newest) == args.need and all(r[4] for r in newest)
     print(
         f"\n{'PASS' if ok else 'NOT YET'}: newest {args.need} {args.event} run(s) all green with every source ok"
-        + ("" if ok else f" (have {sum(1 for r in newest if r[3])} of {args.need})")
+        + ("" if ok else f" (have {sum(1 for r in newest if r[4])} of {args.need})")
     )
     return 0 if ok else 1
 

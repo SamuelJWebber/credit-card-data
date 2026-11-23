@@ -367,15 +367,15 @@ def test_latest_readings_are_computed_from_the_facts(page, session_paths, fixtur
     assert labels[0].startswith("Revolving consumer credit") and len(items) == 15  # no 30+ delinquency fixture
     rev = items[0]["text"]
     # the 2026-09-08 G.19 vintage added July 2026 at $1,357bn, above the October 2024 peak, so the record flag fires
-    assert rev == "$1,357bn in Jul 2026, +3.6% on the year, highest on record (since Jan 1968)"
+    assert rev == "$1,357bn in Jul 2026, +3.6% on the year, highest on record in dollars (since Jan 1968)"
     # the flag logic on a synthetic series: a record, a three-year high, and a value with no flag
     base = fixture_facts[(fixture_facts["metric"] == "revolving_credit_sa")].sort_values("period_end").copy()
     record = base.copy()
     record.loc[record["period_end"] == record["period_end"].max(), "value"] = 9999.0
-    assert "highest on record (since Jan 1968)" in headlines(coerce_facts(record), TODAY)[0]["text"]
+    assert "highest on record in dollars (since Jan 1968)" in headlines(coerce_facts(record), TODAY)[0]["text"]
     low = base.copy()
     low.loc[low["period_end"] == low["period_end"].max(), "value"] = 0.5
-    assert "lowest on record (since Jan 1968)" in headlines(coerce_facts(low), TODAY)[0]["text"]
+    assert "lowest on record in dollars (since Jan 1968)" in headlines(coerce_facts(low), TODAY)[0]["text"]
     apr = next(h for h in items if h["label"].startswith("APR paid"))["text"]
     assert apr.startswith("22.15% in 2026 Q2, ") and "pp on the year" in apr and BENCHMARK_LABEL in apr
     sloos = next(h for h in items if h["label"].startswith("Banks tightening"))["text"]
@@ -1311,3 +1311,136 @@ def test_remaining_review_notes_census_max_age_and_licenses(page, meta, tmp_path
     assert "expected around 2026-11-27" in pre_due["text"]
     assert grace is not None and not grace["overdue"] and "expected any day" in grace["text"]
     assert overdue is not None and overdue["overdue"] and "has not appeared" in overdue["text"]
+
+
+def test_record_flag_says_in_dollars_for_levels_and_not_for_rates(page, session_paths, fixture_facts):
+    """REVIEW.md credit-B-3 (and credit-A-8): nominal dollar aggregates setting a record must say 'in dollars' on the
+    record flag, while rate and count series keep the plain flag."""
+    from carddash.render import HEADLINES, _headline
+
+    html, _ = page
+    text = (session_paths.docs / "latest.txt").read_text(encoding="utf-8")
+    items = {h["label"]: h["text"] for h in headlines(fixture_facts, TODAY)}
+    level_labels = [label for _, label, kind, _ in HEADLINES if kind == "level"]
+    assert len(level_labels) == 3
+    for label in level_labels:
+        if "on record" in items[label]:
+            assert "on record in dollars (" in items[label], (label, items[label])
+    assert "highest on record in dollars (since Jan 1968)" in html
+    assert "highest on record in dollars (since Jan 1968)" in text
+    assert "highest on record (since Jan 1968)" not in html
+    assert "highest on record (since Jan 1968)" not in text
+    # a rate series at a synthetic record still says 'highest on record (since ...)' without 'in dollars'
+    apr_key, apr_label, apr_kind, apr_chart = next(h for h in HEADLINES if h[0][0] == "card_apr_assessed_interest")
+    apr_df = fixture_facts[fixture_facts["metric"] == "card_apr_assessed_interest"].sort_values("period_end").copy()
+    apr_df.loc[apr_df["period_end"] == apr_df["period_end"].max(), "value"] = 99.0
+    apr_h = _headline(coerce_facts(apr_df), apr_key, apr_label, apr_kind, TODAY, apr_chart)
+    assert apr_h is not None and "highest on record (since " in apr_h["text"] and "in dollars" not in apr_h["text"]
+
+
+def test_charge_off_and_unemployment_note_states_the_six_peaks_and_withdraws_every_past_peak(page):
+    """REVIEW.md credit-A-4: of six charge-off peaks since 1985, none followed an unemployment peak."""
+    html, payload = page
+    chart = {c["id"]: c for c in payload["charts"]}["losses_vs_labor"]
+    note = " ".join(chart["notes"])
+    assert "every past charge-off peak followed an unemployment peak" not in html
+    assert "every past charge-off peak" not in note
+    assert "Of six charge-off peaks since 1985" in note
+    assert "1992, 2002 and 2009" in note and "1997, 2005 and 2024" in note
+    assert "2020 unemployment spike had no charge-off peak" in note
+
+
+def test_consumer_loan_rates_note_names_the_two_fed_forms_and_withdraws_same_survey(page):
+    """REVIEW.md credit-A-5: personal/auto loan rates come from FR 2835 (about 75 banks, most common rate on new loans)
+    and card rates come from FR 2835a (50 card-issuing banks, finance charges over balances assessed interest)."""
+    html, payload = page
+    chart = {c["id"]: c for c in payload["charts"]}["consumer_loan_rates"]
+    note = " ".join(chart["notes"])
+    assert "same quarterly survey of the same banks" not in html
+    assert "not a difference in measurement" not in html
+    assert "FR 2835" in note and "FR 2835a" in note
+    assert "about 75 banks" in note and "50 card-issuing banks" in note
+
+
+def test_stock_delinquency_charts_and_state_map_carry_the_charged_off_caveat(page):
+    """REVIEW.md credit-B-2: the NY Fed's August 2026 Liberty Street Economics post explains that the 90+ stock rate on
+    credit reports includes stale charged-off debt and is flat after 2024 once charged-off balances are removed. The
+    four stock views (dq_by_loan_type, state_card_dq_range, state_card_dq_selected, and the state map) must carry that
+    caveat and drop the unqualified level/range claims."""
+    html, payload = page
+    by_id = {c["id"]: c for c in payload["charts"]}
+    for cid in ("dq_by_loan_type", "state_card_dq_range", "state_card_dq_selected", "dq_triangulation"):
+        notes = " ".join(by_id[cid]["notes"])
+        assert "How Distressed Are Consumers?" in notes, cid
+        assert "charged-off" in notes, cid
+    dq_map = payload["state_map"]["metrics"][0]
+    assert "How Distressed Are Consumers?" in dq_map["note"] and "charged-off" in dq_map["note"]
+    assert dq_map["label"] == "90+ days late or charged off"
+    assert '<h2 id="statemap">Card balances 90+ days late and debt per person, by state</h2>' in html
+    assert "Card distress by state" not in html
+    assert "which is why the range widening matters more than which state is on top" not in html
+    assert "so the lines are comparable in a way that figures from different regulators are not" not in html
+
+
+def test_method_and_cross_source_charts_disclose_sa_against_nsa(page):
+    """REVIEW.md credit-A-6: five cross-source charts compare an unadjusted series against a seasonally adjusted
+    benchmark, so the method section must name them instead of promising SA and NSA are never compared, and the
+    commercial-bank benchmark on the monthly issuer charts must say SA."""
+    html, payload = page
+    by_id = {c["id"]: c for c in payload["charts"]}
+    assert "never compared across that line" not in html
+    assert "Five cross-source charts draw an unadjusted issuer, credit-union, call-report or Y-14 series" in html
+    assert by_id["issuer_monthly_nco"]["series"][-1]["label"] == "All commercial banks, quarterly (Fed, SA)"
+    assert by_id["issuer_monthly_dq"]["series"][-1]["label"] == "All commercial banks, quarterly (Fed, SA)"
+    assert "SA" in by_id["cct_below_prime_share"]["series"][0]["label"]
+    assert "NSA" in by_id["cct_below_prime_share"]["series"][1]["label"]
+
+
+def test_every_view_derived_series_carries_its_own_about_note_not_an_inputs_note(page):
+    """REVIEW.md credit-B-9: a series drawn from a SQL view must never print its key input series' scope_note from
+    series.csv unchanged in 'About this chart'."""
+    from carddash.render import VIEW_NOTES, _key, _view_scope_note
+    from carddash.series import load_series, series_index
+
+    _, payload = page
+    meta_idx = series_index(load_series(REPO / "crosswalks" / "series.csv"))
+    used_views = {
+        (sr["view"], sr["field"])
+        for panel in PANELS for c in panel["charts"] for sr in c["series"]
+        if sr["view"] != "facts"
+    }
+    assert used_views <= set(VIEW_NOTES), f"view fields without VIEW_NOTES entry: {sorted(used_views - set(VIEW_NOTES))}"
+    for panel in PANELS:
+        for spec in panel["charts"]:
+            for sr in spec["series"]:
+                if sr["view"] != "facts":
+                    m = meta_idx.get(_key(sr))
+                    raw = str(m["scope_note"] if m is not None else "")
+                    note = _view_scope_note(sr, m)
+                    assert note, (spec["id"], sr["view"], sr["field"])
+                    assert note != raw, f"{spec['id']} ({sr['view']}.{sr['field']}) printed its input note unchanged"
+
+    by_id = {c["id"]: c for c in payload["charts"]}
+    # 1. dq_triangulation: FDIC noncurrent share is not quarterly dollar charge-offs
+    tri_notes = {a["label"]: a["note"] for a in by_id["dq_triangulation"]["about"]}
+    fdic_label = "Noncurrent (90+ or nonaccrual), share of card loans, all FDIC-insured banks"
+    assert "90 or more days past due or in nonaccrual status" in tri_notes[fdic_label]
+    assert "Net charge-offs of credit card plan loans during the quarter" not in tri_notes[fdic_label]
+    # 2. credit_union_card_losses: annualized charge-off rates are not YTD dollar charge-offs
+    cu_notes = [a["note"] for a in by_id["credit_union_card_losses"]["about"] if a["label"] != "Commercial banks (Fed, SA)"]
+    assert len(cu_notes) == 3
+    assert all("Annualized quarterly net charge-off rate" in n and "YEAR TO DATE (resets" not in n for n in cu_notes)
+    # 3. y14_payment_flows: payment rate and revolving share each have their own rate/share note
+    flow_notes = {a["label"]: a["note"] for a in by_id["y14_payment_flows"]["about"]}
+    assert "Quarterly cardholder payments as a percentage of the opening credit card balance" in flow_notes["Payments as a share of the opening balance"]
+    assert "Cycle-end credit card balances carrying interest" in flow_notes["Balances carrying interest, share of total"]
+    assert all("Total cycle-end balances on all active consumer bankcard accounts, billions" not in n for n in flow_notes.values())
+    # 4. per_account_credit: limit, unused credit and balance per account each have their own per-account note
+    pa_notes = {a["label"]: a["note"] for a in by_id["per_account_credit"]["about"]}
+    assert set(pa_notes) == {"Credit limit per account", "Unused credit per account", "Balance per account"}
+    assert "Total credit card limit on credit reports divided by the number of open credit card accounts" in pa_notes["Credit limit per account"]
+    assert all("Credit card balances outstanding on credit reports, billions" not in n for n in pa_notes.values())
+    # 5. nco_by_issuer: all-FDIC and issuer lines carry the annualized charge-off rate note, not quarterly dollars
+    nco_notes = [a["note"] for a in by_id["nco_by_issuer"]["about"]]
+    assert nco_notes and all("Annualized quarterly net charge-off rate" in n for n in nco_notes)
+    assert all("Net charge-offs of credit card plan loans during the quarter" not in n for n in nco_notes)

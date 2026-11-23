@@ -285,10 +285,12 @@ They are checked here on every refresh.</p>
 </section>
 {% endfor %}
 
-<h2 id="statemap">Card distress by state</h2>
+<h2 id="statemap">Card balances 90+ days late and debt per person, by state</h2>
 <p class="lede">Every area the New York Fed publishes, one square each, in a rough map of the country. Squares are
-all the same size on purpose: this is not a map, and land area is not population. Drag the year to see the whole
-history, and hover a square for its reading.</p>
+all the same size on purpose: this is not a map, and land area is not population. The delinquency measure is the
+stock of 90+ day balances on credit reports (which includes stale charged-off debt that remains on file for years;
+no state-level flow into delinquency is published). Drag the year to see the whole history, and hover a square for
+its reading.</p>
 <div class="statemap">
   <div class="controls">
     <label for="map-metric">Measure</label>
@@ -298,7 +300,7 @@ history, and hover a square for its reading.</p>
     <output id="map-year-out" for="map-year"></output>
     <button type="button" class="link" data-link="statemap" title="Copy a link to this map">Link</button>
   </div>
-  <div class="tilegrid" id="tilegrid" role="img" aria-label="Card distress by state"></div>
+  <div class="tilegrid" id="tilegrid" role="img" aria-label="Card balances 90+ days late and debt per person, by state"></div>
   <div class="seqlegend" id="map-legend" aria-hidden="true"></div>
   <div class="seqticks" id="map-ticks"></div>
   <p class="maptip" id="map-tip"></p>
@@ -394,7 +396,7 @@ read the scope note before comparing it with anything.</p>
   <li>Every period is dated to its last day: month end, quarter end, or the Wednesday for weekly bank data. A quarterly survey taken in May is shown at June 30; the July Senior Loan Officer survey, which asks about the quarter just ended, is shown at June 30.</li>
   <li>Step charts hold each reading across its own period. Nothing is interpolated between readings. Charts open on the last {{ default_years }} years; the button on each card shows the full history.</li>
   <li>Shaded bands are NBER recessions (peak month to trough month). Dashed grey lines are the {{ benchmark_label }} of the first series on the chart, the last full expansion before the pandemic.</li>
-  <li>SA means seasonally adjusted. Series are labeled SA or NSA and are never compared across that line.</li>
+  <li>SA means seasonally adjusted; NSA means not seasonally adjusted. Within-source charts keep SA and NSA apart (for example, the G.19 holder split is NSA only and is not drawn against the SA total). Five cross-source charts draw an unadjusted issuer, credit-union, call-report or Y-14 series against a seasonally adjusted Fed or CFPB benchmark (monthly issuer charge-offs and 30+ delinquency, four-measures delinquency, credit-union charge-offs, and the sub-660 share of new credit lines) and label the adjusted line SA so seasonal movement in the unadjusted series is not read as a gap to the benchmark.</li>
   <li>Different sources measure different populations. G.19 covers all lenders; the H.8, charge-off and APR series cover commercial banks only; the Y-14 series cover the largest banks; the NY Fed series are credit reports, all lenders; the FDIC series are bank charters. Notes under each chart say which, with a link to the source.</li>
   <li>"Data as of" on a chart is when its newest value was loaded. A card carries a status badge when its source is not OK; "last fetch attempt" is then the run that failed. "Checked against the release" lists numbers copied by hand from each source's own release page. ✓ means the data on the page reproduces it. The ones old enough not to be revised routinely are also checked on every run, and a mismatch there (✗) turns the source amber. A number the source has revised since that release is shown as first published and as revised, without a mark.</li>
   <li>The latest readings are computed from the series on the page: latest value, change against the same period a year earlier, the {{ benchmark_label }} for rates, and whether the value is the highest or lowest in at least three years. No model writes any of it.</li>

@@ -30656,6 +30656,7 @@ fdic_card_charge_offs_q,CERT:12368,bank,all,2025-09-30,Q,0.016,fdic,2026-09-08T0
 fdic_card_charge_offs_q,CERT:12368,bank,all,2025-12-31,Q,0.017,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:12368,bank,all,2026-03-31,Q,0.018,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:12368,bank,all,2026-06-30,Q,0.018,fdic,2026-09-08T06:29:25Z
+fdic_card_charge_offs_q,CERT:12368,bank,all,2026-09-30,Q,0.018,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:1299,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:1299,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:1299,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -30826,6 +30827,7 @@ fdic_card_charge_offs_q,CERT:1299,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:
 fdic_card_charge_offs_q,CERT:1299,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:1299,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:1299,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:1299,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:18409,bank,all,1989-03-31,Q,2.8e-05,fdic,2026-09-08T05:28:06Z
 fdic_card_charge_offs_q,CERT:18409,bank,all,1989-06-30,Q,2.3e-05,fdic,2026-09-08T05:28:06Z
 fdic_card_charge_offs_q,CERT:18409,bank,all,1989-09-30,Q,1.1e-05,fdic,2026-09-08T05:28:06Z
@@ -30976,6 +30978,7 @@ fdic_card_charge_offs_q,CERT:18409,bank,all,2025-09-30,Q,0.066244,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:18409,bank,all,2025-12-31,Q,0.070857,fdic,2026-09-08T05:28:06Z
 fdic_card_charge_offs_q,CERT:18409,bank,all,2026-03-31,Q,0.073981,fdic,2026-09-08T05:28:06Z
 fdic_card_charge_offs_q,CERT:18409,bank,all,2026-06-30,Q,0.073278,fdic,2026-09-08T05:28:06Z
+fdic_card_charge_offs_q,CERT:18409,bank,all,2026-09-30,Q,0.063955,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:23702,bank,all,1984-03-31,Q,0.003902,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:23702,bank,all,1984-06-30,Q,0.005111,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:23702,bank,all,1984-09-30,Q,0.006437,fdic,2026-09-08T04:58:22Z
@@ -31285,6 +31288,7 @@ fdic_card_charge_offs_q,CERT:25620,bank,all,2025-09-30,Q,0.049659,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:25620,bank,all,2025-12-31,Q,0.054509,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:25620,bank,all,2026-03-31,Q,0.062071,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:25620,bank,all,2026-06-30,Q,0.065384,fdic,2026-09-08T06:29:25Z
+fdic_card_charge_offs_q,CERT:25620,bank,all,2026-09-30,Q,0.064842,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:27314,bank,all,1988-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27314,bank,all,1988-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27314,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -31437,6 +31441,7 @@ fdic_card_charge_offs_q,CERT:27314,bank,all,2025-09-30,Q,1.514,fdic,2026-09-08T0
 fdic_card_charge_offs_q,CERT:27314,bank,all,2025-12-31,Q,1.587,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27314,bank,all,2026-03-31,Q,1.606,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27314,bank,all,2026-06-30,Q,1.616,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:27314,bank,all,2026-09-30,Q,1.501,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:27471,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27471,bank,all,1989-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27471,bank,all,1989-09-30,Q,4.8e-05,fdic,2026-09-08T04:58:22Z
@@ -31587,6 +31592,7 @@ fdic_card_charge_offs_q,CERT:27471,bank,all,2025-09-30,Q,0.812073,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:27471,bank,all,2025-12-31,Q,0.931882,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27471,bank,all,2026-03-31,Q,0.878878,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27471,bank,all,2026-06-30,Q,0.91505,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:27471,bank,all,2026-09-30,Q,0.817204,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:27499,bank,all,1989-06-30,Q,0.006492,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27499,bank,all,1989-09-30,Q,0.009964,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27499,bank,all,1989-12-31,Q,0.010546,fdic,2026-09-08T04:58:22Z
@@ -31736,6 +31742,7 @@ fdic_card_charge_offs_q,CERT:27499,bank,all,2025-09-30,Q,0.140167,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:27499,bank,all,2025-12-31,Q,0.142304,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27499,bank,all,2026-03-31,Q,0.140237,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:27499,bank,all,2026-06-30,Q,0.130326,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:27499,bank,all,2026-09-30,Q,0.12097,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:32188,bank,all,1990-03-31,Q,0.000986,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:32188,bank,all,1990-06-30,Q,0.001161,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:32188,bank,all,1990-09-30,Q,0.00355,fdic,2026-09-08T04:58:22Z
@@ -31882,6 +31889,7 @@ fdic_card_charge_offs_q,CERT:32188,bank,all,2025-09-30,Q,0.151,fdic,2026-09-08T0
 fdic_card_charge_offs_q,CERT:32188,bank,all,2025-12-31,Q,0.162,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:32188,bank,all,2026-03-31,Q,0.182,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:32188,bank,all,2026-06-30,Q,0.174,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:32188,bank,all,2026-09-30,Q,0.169,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:33124,bank,all,2008-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33124,bank,all,2009-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33124,bank,all,2009-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -31953,6 +31961,7 @@ fdic_card_charge_offs_q,CERT:33124,bank,all,2025-09-30,Q,0.32,fdic,2026-09-08T04
 fdic_card_charge_offs_q,CERT:33124,bank,all,2025-12-31,Q,0.347,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33124,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33124,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:33124,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:33947,bank,all,1994-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33947,bank,all,1995-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33947,bank,all,1995-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -32080,6 +32089,7 @@ fdic_card_charge_offs_q,CERT:33947,bank,all,2025-09-30,Q,0.174128,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:33947,bank,all,2025-12-31,Q,0.165472,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33947,bank,all,2026-03-31,Q,0.166097,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33947,bank,all,2026-06-30,Q,0.156847,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:33947,bank,all,2026-09-30,Q,0.147171,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:33954,bank,all,1994-12-31,Q,0.003633,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33954,bank,all,1995-03-31,Q,0.008676,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:33954,bank,all,1995-06-30,Q,0.016396,fdic,2026-09-08T04:58:22Z
@@ -32420,6 +32430,7 @@ fdic_card_charge_offs_q,CERT:34403,bank,all,2025-09-30,Q,0.026053,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:34403,bank,all,2025-12-31,Q,0.025684,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:34403,bank,all,2026-03-31,Q,0.025465,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:34403,bank,all,2026-06-30,Q,0.027073,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:34403,bank,all,2026-09-30,Q,0.023434,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:34404,bank,all,1997-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:34404,bank,all,1997-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:34404,bank,all,1997-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -32537,6 +32548,7 @@ fdic_card_charge_offs_q,CERT:34404,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58
 fdic_card_charge_offs_q,CERT:34404,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:34404,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:34404,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:34404,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:34519,bank,all,1997-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:34519,bank,all,1997-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:34519,bank,all,1998-03-31,Q,0,fdic,2026-09-08T06:29:25Z
@@ -32653,6 +32665,7 @@ fdic_card_charge_offs_q,CERT:34519,bank,all,2025-09-30,Q,0.219736,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:34519,bank,all,2025-12-31,Q,0.231819,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:34519,bank,all,2026-03-31,Q,0.249277,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:34519,bank,all,2026-06-30,Q,0.247518,fdic,2026-09-08T06:29:25Z
+fdic_card_charge_offs_q,CERT:34519,bank,all,2026-09-30,Q,0.225404,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:3510,bank,all,1984-03-31,Q,0.027,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:3510,bank,all,1984-06-30,Q,0.027,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:3510,bank,all,1984-09-30,Q,0.029,fdic,2026-09-08T04:58:22Z
@@ -32823,6 +32836,7 @@ fdic_card_charge_offs_q,CERT:3510,bank,all,2025-09-30,Q,1.085,fdic,2026-09-08T04
 fdic_card_charge_offs_q,CERT:3510,bank,all,2025-12-31,Q,1.089,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:3510,bank,all,2026-03-31,Q,1.144,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:3510,bank,all,2026-06-30,Q,1.149,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:3510,bank,all,2026-09-30,Q,1.097,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:3511,bank,all,1984-03-31,Q,0.001989,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:3511,bank,all,1984-06-30,Q,0.002194,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:3511,bank,all,1984-09-30,Q,-9.8e-05,fdic,2026-09-08T04:58:22Z
@@ -32993,6 +33007,7 @@ fdic_card_charge_offs_q,CERT:3511,bank,all,2025-09-30,Q,0.71,fdic,2026-09-08T04:
 fdic_card_charge_offs_q,CERT:3511,bank,all,2025-12-31,Q,0.735,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:3511,bank,all,2026-03-31,Q,0.765,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:3511,bank,all,2026-06-30,Q,0.77,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:3511,bank,all,2026-09-30,Q,0.732,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:35328,bank,all,2000-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:35328,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:35328,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -33167,6 +33182,7 @@ fdic_card_charge_offs_q,CERT:35444,bank,all,2025-09-30,Q,0.000419,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:35444,bank,all,2025-12-31,Q,0.000172,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:35444,bank,all,2026-03-31,Q,0.000133,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:35444,bank,all,2026-06-30,Q,0.000173,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:35444,bank,all,2026-09-30,Q,0.000262,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:4091,bank,all,1984-03-31,Q,5e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:4091,bank,all,1984-06-30,Q,6e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:4091,bank,all,1984-09-30,Q,6e-06,fdic,2026-09-08T06:29:25Z
@@ -33337,6 +33353,7 @@ fdic_card_charge_offs_q,CERT:4091,bank,all,2025-09-30,Q,0,fdic,2026-09-08T06:29:
 fdic_card_charge_offs_q,CERT:4091,bank,all,2025-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:4091,bank,all,2026-03-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:4091,bank,all,2026-06-30,Q,0,fdic,2026-09-08T06:29:25Z
+fdic_card_charge_offs_q,CERT:4091,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:4297,bank,all,1984-03-31,Q,0.000147,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:4297,bank,all,1984-06-30,Q,-9.6e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:4297,bank,all,1984-09-30,Q,1.2e-05,fdic,2026-09-08T04:58:22Z
@@ -33507,6 +33524,7 @@ fdic_card_charge_offs_q,CERT:4297,bank,all,2025-09-30,Q,3.980216,fdic,2026-09-08
 fdic_card_charge_offs_q,CERT:4297,bank,all,2025-12-31,Q,4.203061,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:4297,bank,all,2026-03-31,Q,4.401,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:4297,bank,all,2026-06-30,Q,4.212,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:4297,bank,all,2026-09-30,Q,3.81,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:5452,bank,all,1984-03-31,Q,0.000359,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5452,bank,all,1984-06-30,Q,0.000384,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5452,bank,all,1984-09-30,Q,0.000395,fdic,2026-09-08T04:58:22Z
@@ -33677,6 +33695,7 @@ fdic_card_charge_offs_q,CERT:5452,bank,all,2025-09-30,Q,0.12617,fdic,2026-09-08T
 fdic_card_charge_offs_q,CERT:5452,bank,all,2025-12-31,Q,0.126824,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5452,bank,all,2026-03-31,Q,0.127942,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5452,bank,all,2026-06-30,Q,0.121885,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:5452,bank,all,2026-09-30,Q,0.11388,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:5649,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5649,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5649,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -33943,6 +33962,7 @@ fdic_card_charge_offs_q,CERT:57203,bank,all,2025-09-30,Q,0.38,fdic,2026-09-08T04
 fdic_card_charge_offs_q,CERT:57203,bank,all,2025-12-31,Q,0.399,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57203,bank,all,2026-03-31,Q,0.429,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57203,bank,all,2026-06-30,Q,0.47,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:57203,bank,all,2026-09-30,Q,0.404,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:57570,bank,all,2003-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57570,bank,all,2004-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57570,bank,all,2004-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -34034,6 +34054,7 @@ fdic_card_charge_offs_q,CERT:57570,bank,all,2025-09-30,Q,0.263272,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:57570,bank,all,2025-12-31,Q,0.267879,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57570,bank,all,2026-03-31,Q,0.273068,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57570,bank,all,2026-06-30,Q,0.263205,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:57570,bank,all,2026-09-30,Q,0.248262,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:57957,bank,all,2005-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57957,bank,all,2005-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57957,bank,all,2005-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -34119,6 +34140,7 @@ fdic_card_charge_offs_q,CERT:57957,bank,all,2025-09-30,Q,0.026994,fdic,2026-09-0
 fdic_card_charge_offs_q,CERT:57957,bank,all,2025-12-31,Q,0.02524,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57957,bank,all,2026-03-31,Q,0.025556,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:57957,bank,all,2026-06-30,Q,0.024461,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:57957,bank,all,2026-09-30,Q,0.02325,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:5962,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5962,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5962,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -34289,6 +34311,7 @@ fdic_card_charge_offs_q,CERT:5962,bank,all,2025-09-30,Q,9e-06,fdic,2026-09-08T04
 fdic_card_charge_offs_q,CERT:5962,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5962,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:5962,bank,all,2026-06-30,Q,1e-06,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:5962,bank,all,2026-09-30,Q,6e-06,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:628,bank,all,1984-03-31,Q,0.002,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:628,bank,all,1984-06-30,Q,0.006488,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:628,bank,all,1984-09-30,Q,0.008505,fdic,2026-09-08T04:58:22Z
@@ -34459,6 +34482,7 @@ fdic_card_charge_offs_q,CERT:628,bank,all,2025-09-30,Q,1.888,fdic,2026-09-08T04:
 fdic_card_charge_offs_q,CERT:628,bank,all,2025-12-31,Q,1.948,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:628,bank,all,2026-03-31,Q,2.109,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:628,bank,all,2026-06-30,Q,2.106,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:628,bank,all,2026-09-30,Q,1.932,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:6384,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:6384,bank,all,1984-06-30,Q,4e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:6384,bank,all,1984-09-30,Q,3.2e-05,fdic,2026-09-08T04:58:22Z
@@ -34629,6 +34653,7 @@ fdic_card_charge_offs_q,CERT:6384,bank,all,2025-09-30,Q,0.06433,fdic,2026-09-08T
 fdic_card_charge_offs_q,CERT:6384,bank,all,2025-12-31,Q,0.061687,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:6384,bank,all,2026-03-31,Q,0.063085,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:6384,bank,all,2026-06-30,Q,0.064989,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:6384,bank,all,2026-09-30,Q,0.056364,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:6548,bank,all,1984-03-31,Q,0.000122,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:6548,bank,all,1984-06-30,Q,9.8e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:6548,bank,all,1984-09-30,Q,0.0001,fdic,2026-09-08T04:58:22Z
@@ -34799,6 +34824,7 @@ fdic_card_charge_offs_q,CERT:6548,bank,all,2025-09-30,Q,0.344579,fdic,2026-09-08
 fdic_card_charge_offs_q,CERT:6548,bank,all,2025-12-31,Q,0.357507,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:6548,bank,all,2026-03-31,Q,0.370615,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:6548,bank,all,2026-06-30,Q,0.373266,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:6548,bank,all,2026-09-30,Q,0.348648,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:6672,bank,all,1984-03-31,Q,9e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:6672,bank,all,1984-06-30,Q,4e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:6672,bank,all,1984-09-30,Q,9e-06,fdic,2026-09-08T06:29:25Z
@@ -34969,6 +34995,7 @@ fdic_card_charge_offs_q,CERT:6672,bank,all,2025-09-30,Q,0.02,fdic,2026-09-08T06:
 fdic_card_charge_offs_q,CERT:6672,bank,all,2025-12-31,Q,0.021,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:6672,bank,all,2026-03-31,Q,0.019,fdic,2026-09-08T06:29:25Z
 fdic_card_charge_offs_q,CERT:6672,bank,all,2026-06-30,Q,0.02,fdic,2026-09-08T06:29:25Z
+fdic_card_charge_offs_q,CERT:6672,bank,all,2026-09-30,Q,0.019,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:7213,bank,all,1984-03-31,Q,0.006,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:7213,bank,all,1984-06-30,Q,-0.002,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:7213,bank,all,1984-09-30,Q,0.003,fdic,2026-09-08T04:58:22Z
@@ -35139,6 +35166,7 @@ fdic_card_charge_offs_q,CERT:7213,bank,all,2025-09-30,Q,2.097,fdic,2026-09-08T04
 fdic_card_charge_offs_q,CERT:7213,bank,all,2025-12-31,Q,2.117,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:7213,bank,all,2026-03-31,Q,2.186,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:7213,bank,all,2026-06-30,Q,2.25,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:7213,bank,all,2026-09-30,Q,2.096,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:8283,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:8283,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:8283,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -35309,6 +35337,7 @@ fdic_card_charge_offs_q,CERT:8283,bank,all,2025-09-30,Q,0.000802,fdic,2026-09-08
 fdic_card_charge_offs_q,CERT:8283,bank,all,2025-12-31,Q,0.007156,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:8283,bank,all,2026-03-31,Q,0.002869,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:8283,bank,all,2026-06-30,Q,0.003014,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:8283,bank,all,2026-09-30,Q,0.003198,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,CERT:9846,bank,all,1984-03-31,Q,4e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:9846,bank,all,1984-06-30,Q,0.000103,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:9846,bank,all,1984-09-30,Q,0.000121,fdic,2026-09-08T04:58:22Z
@@ -35479,6 +35508,7 @@ fdic_card_charge_offs_q,CERT:9846,bank,all,2025-09-30,Q,0.046,fdic,2026-09-08T04
 fdic_card_charge_offs_q,CERT:9846,bank,all,2025-12-31,Q,0.047,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:9846,bank,all,2026-03-31,Q,0.049,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,CERT:9846,bank,all,2026-06-30,Q,0.047,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,CERT:9846,bank,all,2026-09-30,Q,0.043,fdic,2026-11-25T04:54:29Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1984-03-31,Q,0.212431,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1984-06-30,Q,0.229146,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,1984-09-30,Q,0.267446,fdic,2026-09-08T04:58:22Z
@@ -35647,8 +35677,9 @@ fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2025-03-31,Q,16.411231,fd
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2025-06-30,Q,14.668909,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2025-09-30,Q,14.717159,fdic,2026-09-08T04:58:22Z
 fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2025-12-31,Q,15.335459,fdic,2026-09-08T04:58:22Z
-fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,15.56882,fdic,2026-09-08T04:58:22Z
-fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,15.493445,fdic,2026-09-08T04:58:22Z
+fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,15.568815,fdic,2026-11-25T04:54:29Z
+fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,15.493451,fdic,2026-11-25T04:54:29Z
+fdic_card_charge_offs_q,FDIC_ALL_INSURED,aggregate,all,2026-09-30,Q,14.269212,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:12368,bank,all,2001-03-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:12368,bank,all,2001-06-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:12368,bank,all,2001-09-30,Q,0,fdic,2026-09-08T06:29:25Z
@@ -35751,6 +35782,7 @@ fdic_card_dq30_89,CERT:12368,bank,all,2025-09-30,Q,0.02,fdic,2026-09-08T06:29:25
 fdic_card_dq30_89,CERT:12368,bank,all,2025-12-31,Q,0.022,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:12368,bank,all,2026-03-31,Q,0.021,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:12368,bank,all,2026-06-30,Q,0.02,fdic,2026-09-08T06:29:25Z
+fdic_card_dq30_89,CERT:12368,bank,all,2026-09-30,Q,0.022,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:1299,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:1299,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:1299,bank,all,2001-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -35853,6 +35885,7 @@ fdic_card_dq30_89,CERT:1299,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:1299,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:1299,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:1299,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:1299,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:18409,bank,all,2001-03-31,Q,0,fdic,2026-09-08T05:28:06Z
 fdic_card_dq30_89,CERT:18409,bank,all,2001-06-30,Q,0,fdic,2026-09-08T05:28:06Z
 fdic_card_dq30_89,CERT:18409,bank,all,2001-09-30,Q,0,fdic,2026-09-08T05:28:06Z
@@ -35955,6 +35988,7 @@ fdic_card_dq30_89,CERT:18409,bank,all,2025-09-30,Q,0.087242,fdic,2026-09-08T05:2
 fdic_card_dq30_89,CERT:18409,bank,all,2025-12-31,Q,0.093175,fdic,2026-09-08T05:28:06Z
 fdic_card_dq30_89,CERT:18409,bank,all,2026-03-31,Q,0.080113,fdic,2026-09-08T05:28:06Z
 fdic_card_dq30_89,CERT:18409,bank,all,2026-06-30,Q,0.075975,fdic,2026-09-08T05:28:06Z
+fdic_card_dq30_89,CERT:18409,bank,all,2026-09-30,Q,0.077925,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:23702,bank,all,2001-03-31,Q,0.391655,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:23702,bank,all,2001-06-30,Q,0.404948,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:23702,bank,all,2001-09-30,Q,0.483179,fdic,2026-09-08T04:58:22Z
@@ -36130,6 +36164,7 @@ fdic_card_dq30_89,CERT:25620,bank,all,2025-09-30,Q,0.059056,fdic,2026-09-08T06:2
 fdic_card_dq30_89,CERT:25620,bank,all,2025-12-31,Q,0.06462,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:25620,bank,all,2026-03-31,Q,0.060832,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:25620,bank,all,2026-06-30,Q,0.070852,fdic,2026-09-08T06:29:25Z
+fdic_card_dq30_89,CERT:25620,bank,all,2026-09-30,Q,0.084952,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:27314,bank,all,2001-03-31,Q,0.006271,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27314,bank,all,2001-06-30,Q,0.006439,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27314,bank,all,2001-09-30,Q,0.007673,fdic,2026-09-08T04:58:22Z
@@ -36232,6 +36267,7 @@ fdic_card_dq30_89,CERT:27314,bank,all,2025-09-30,Q,2.06,fdic,2026-09-08T04:58:22
 fdic_card_dq30_89,CERT:27314,bank,all,2025-12-31,Q,2.178,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27314,bank,all,2026-03-31,Q,2.023,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27314,bank,all,2026-06-30,Q,1.945,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:27314,bank,all,2026-09-30,Q,2.13,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:27471,bank,all,2001-03-31,Q,0.15174,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27471,bank,all,2001-06-30,Q,0.157835,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27471,bank,all,2001-09-30,Q,0.151034,fdic,2026-09-08T04:58:22Z
@@ -36334,6 +36370,7 @@ fdic_card_dq30_89,CERT:27471,bank,all,2025-09-30,Q,0.624209,fdic,2026-09-08T04:5
 fdic_card_dq30_89,CERT:27471,bank,all,2025-12-31,Q,0.62977,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27471,bank,all,2026-03-31,Q,0.601228,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27471,bank,all,2026-06-30,Q,0.568812,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:27471,bank,all,2026-09-30,Q,0.662427,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:27499,bank,all,2001-03-31,Q,0.003815,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27499,bank,all,2001-06-30,Q,0.00411,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27499,bank,all,2001-09-30,Q,0.004274,fdic,2026-09-08T04:58:22Z
@@ -36436,6 +36473,7 @@ fdic_card_dq30_89,CERT:27499,bank,all,2025-09-30,Q,0.230686,fdic,2026-09-08T04:5
 fdic_card_dq30_89,CERT:27499,bank,all,2025-12-31,Q,0.227259,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27499,bank,all,2026-03-31,Q,0.207629,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:27499,bank,all,2026-06-30,Q,0.209616,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:27499,bank,all,2026-09-30,Q,0.221038,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:32188,bank,all,2001-03-31,Q,0.027886,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:32188,bank,all,2001-06-30,Q,0.028567,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:32188,bank,all,2001-09-30,Q,0.032415,fdic,2026-09-08T04:58:22Z
@@ -36538,6 +36576,7 @@ fdic_card_dq30_89,CERT:32188,bank,all,2025-09-30,Q,0.153,fdic,2026-09-08T04:58:2
 fdic_card_dq30_89,CERT:32188,bank,all,2025-12-31,Q,0.162,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:32188,bank,all,2026-03-31,Q,0.142,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:32188,bank,all,2026-06-30,Q,0.147,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:32188,bank,all,2026-09-30,Q,0.185,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:33124,bank,all,2008-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33124,bank,all,2009-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33124,bank,all,2009-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -36609,6 +36648,7 @@ fdic_card_dq30_89,CERT:33124,bank,all,2025-09-30,Q,0.427,fdic,2026-09-08T04:58:2
 fdic_card_dq30_89,CERT:33124,bank,all,2025-12-31,Q,0.41,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33124,bank,all,2026-03-31,Q,0.364,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33124,bank,all,2026-06-30,Q,0.376,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:33124,bank,all,2026-09-30,Q,0.454,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:33947,bank,all,2001-03-31,Q,0.000399,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33947,bank,all,2001-06-30,Q,0.000385,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33947,bank,all,2001-09-30,Q,0.000332,fdic,2026-09-08T04:58:22Z
@@ -36711,6 +36751,7 @@ fdic_card_dq30_89,CERT:33947,bank,all,2025-09-30,Q,0.201213,fdic,2026-09-08T04:5
 fdic_card_dq30_89,CERT:33947,bank,all,2025-12-31,Q,0.194652,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33947,bank,all,2026-03-31,Q,0.194331,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33947,bank,all,2026-06-30,Q,0.180507,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:33947,bank,all,2026-09-30,Q,0.191293,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:33954,bank,all,2001-03-31,Q,0.299378,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33954,bank,all,2001-06-30,Q,0.326981,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:33954,bank,all,2001-09-30,Q,0.305706,fdic,2026-09-08T04:58:22Z
@@ -36993,6 +37034,7 @@ fdic_card_dq30_89,CERT:34403,bank,all,2025-09-30,Q,0.019783,fdic,2026-09-08T04:5
 fdic_card_dq30_89,CERT:34403,bank,all,2025-12-31,Q,0.022542,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:34403,bank,all,2026-03-31,Q,0.023296,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:34403,bank,all,2026-06-30,Q,0.024864,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:34403,bank,all,2026-09-30,Q,0.016054,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:34404,bank,all,2001-03-31,Q,2.5e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:34404,bank,all,2001-06-30,Q,1.5e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:34404,bank,all,2001-09-30,Q,1.6e-05,fdic,2026-09-08T04:58:22Z
@@ -37095,6 +37137,7 @@ fdic_card_dq30_89,CERT:34404,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:34404,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:34404,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:34404,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:34404,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:34519,bank,all,2001-03-31,Q,0.01872,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:34519,bank,all,2001-06-30,Q,0.023119,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:34519,bank,all,2001-09-30,Q,0.023898,fdic,2026-09-08T06:29:25Z
@@ -37197,6 +37240,7 @@ fdic_card_dq30_89,CERT:34519,bank,all,2025-09-30,Q,0.244673,fdic,2026-09-08T06:2
 fdic_card_dq30_89,CERT:34519,bank,all,2025-12-31,Q,0.255683,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:34519,bank,all,2026-03-31,Q,0.224593,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:34519,bank,all,2026-06-30,Q,0.23384,fdic,2026-09-08T06:29:25Z
+fdic_card_dq30_89,CERT:34519,bank,all,2026-09-30,Q,0.261284,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:3510,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:3510,bank,all,2001-06-30,Q,0.016,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:3510,bank,all,2001-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -37299,6 +37343,7 @@ fdic_card_dq30_89,CERT:3510,bank,all,2025-09-30,Q,1.205,fdic,2026-09-08T04:58:22
 fdic_card_dq30_89,CERT:3510,bank,all,2025-12-31,Q,1.253,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:3510,bank,all,2026-03-31,Q,1.17,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:3510,bank,all,2026-06-30,Q,1.111,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:3510,bank,all,2026-09-30,Q,1.277,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:3511,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:3511,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:3511,bank,all,2001-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -37401,6 +37446,7 @@ fdic_card_dq30_89,CERT:3511,bank,all,2025-09-30,Q,0.743,fdic,2026-09-08T04:58:22
 fdic_card_dq30_89,CERT:3511,bank,all,2025-12-31,Q,0.783,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:3511,bank,all,2026-03-31,Q,0.732,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:3511,bank,all,2026-06-30,Q,0.711,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:3511,bank,all,2026-09-30,Q,0.786,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:35328,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:35328,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:35328,bank,all,2001-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -37572,6 +37618,7 @@ fdic_card_dq30_89,CERT:35444,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:35444,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:35444,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:35444,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:35444,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:4091,bank,all,2001-03-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:4091,bank,all,2001-06-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:4091,bank,all,2001-09-30,Q,0,fdic,2026-09-08T06:29:25Z
@@ -37674,6 +37721,7 @@ fdic_card_dq30_89,CERT:4091,bank,all,2025-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:4091,bank,all,2025-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:4091,bank,all,2026-03-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:4091,bank,all,2026-06-30,Q,0,fdic,2026-09-08T06:29:25Z
+fdic_card_dq30_89,CERT:4091,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:4297,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:4297,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:4297,bank,all,2001-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -37776,6 +37824,7 @@ fdic_card_dq30_89,CERT:4297,bank,all,2025-09-30,Q,5.577306,fdic,2026-09-08T04:58
 fdic_card_dq30_89,CERT:4297,bank,all,2025-12-31,Q,5.670281,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:4297,bank,all,2026-03-31,Q,4.97,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:4297,bank,all,2026-06-30,Q,4.904,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:4297,bank,all,2026-09-30,Q,5.614,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:5452,bank,all,2001-03-31,Q,0.019518,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5452,bank,all,2001-06-30,Q,0.016942,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5452,bank,all,2001-09-30,Q,0.02457,fdic,2026-09-08T04:58:22Z
@@ -37878,6 +37927,7 @@ fdic_card_dq30_89,CERT:5452,bank,all,2025-09-30,Q,0.106596,fdic,2026-09-08T04:58
 fdic_card_dq30_89,CERT:5452,bank,all,2025-12-31,Q,0.103838,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5452,bank,all,2026-03-31,Q,0.098352,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5452,bank,all,2026-06-30,Q,0.090903,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:5452,bank,all,2026-09-30,Q,0.099577,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:5649,bank,all,2001-03-31,Q,0.546612,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5649,bank,all,2001-06-30,Q,0.560534,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5649,bank,all,2001-09-30,Q,0.6189,fdic,2026-09-08T04:58:22Z
@@ -38076,6 +38126,7 @@ fdic_card_dq30_89,CERT:57203,bank,all,2025-09-30,Q,0.465,fdic,2026-09-08T04:58:2
 fdic_card_dq30_89,CERT:57203,bank,all,2025-12-31,Q,0.494,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57203,bank,all,2026-03-31,Q,0.452,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57203,bank,all,2026-06-30,Q,0.357,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:57203,bank,all,2026-09-30,Q,0.404,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:57570,bank,all,2003-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57570,bank,all,2004-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57570,bank,all,2004-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -38167,6 +38218,7 @@ fdic_card_dq30_89,CERT:57570,bank,all,2025-09-30,Q,0.397934,fdic,2026-09-08T04:5
 fdic_card_dq30_89,CERT:57570,bank,all,2025-12-31,Q,0.40632,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57570,bank,all,2026-03-31,Q,0.374179,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57570,bank,all,2026-06-30,Q,0.379034,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:57570,bank,all,2026-09-30,Q,0.406859,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:57957,bank,all,2005-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57957,bank,all,2005-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57957,bank,all,2005-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -38252,6 +38304,7 @@ fdic_card_dq30_89,CERT:57957,bank,all,2025-09-30,Q,0.027676,fdic,2026-09-08T04:5
 fdic_card_dq30_89,CERT:57957,bank,all,2025-12-31,Q,0.027876,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57957,bank,all,2026-03-31,Q,0.02672,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:57957,bank,all,2026-06-30,Q,0.021,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:57957,bank,all,2026-09-30,Q,0.024512,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:5962,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5962,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5962,bank,all,2001-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -38354,6 +38407,7 @@ fdic_card_dq30_89,CERT:5962,bank,all,2025-09-30,Q,1e-05,fdic,2026-09-08T04:58:22
 fdic_card_dq30_89,CERT:5962,bank,all,2025-12-31,Q,1.5e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5962,bank,all,2026-03-31,Q,2.4e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:5962,bank,all,2026-06-30,Q,2.4e-05,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:5962,bank,all,2026-09-30,Q,1.9e-05,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:628,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:628,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:628,bank,all,2001-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -38456,6 +38510,7 @@ fdic_card_dq30_89,CERT:628,bank,all,2025-09-30,Q,2.15,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:628,bank,all,2025-12-31,Q,2.236,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:628,bank,all,2026-03-31,Q,2.044,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:628,bank,all,2026-06-30,Q,1.92,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:628,bank,all,2026-09-30,Q,2.184,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:6384,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:6384,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:6384,bank,all,2001-09-30,Q,1e-06,fdic,2026-09-08T04:58:22Z
@@ -38558,6 +38613,7 @@ fdic_card_dq30_89,CERT:6384,bank,all,2025-09-30,Q,0.07167,fdic,2026-09-08T04:58:
 fdic_card_dq30_89,CERT:6384,bank,all,2025-12-31,Q,0.082161,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:6384,bank,all,2026-03-31,Q,0.068257,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:6384,bank,all,2026-06-30,Q,0.057057,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:6384,bank,all,2026-09-30,Q,0.062,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:6548,bank,all,2001-03-31,Q,0.002394,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:6548,bank,all,2001-06-30,Q,0.016821,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:6548,bank,all,2001-09-30,Q,0.10116,fdic,2026-09-08T04:58:22Z
@@ -38660,6 +38716,7 @@ fdic_card_dq30_89,CERT:6548,bank,all,2025-09-30,Q,0.408987,fdic,2026-09-08T04:58
 fdic_card_dq30_89,CERT:6548,bank,all,2025-12-31,Q,0.419461,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:6548,bank,all,2026-03-31,Q,0.394071,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:6548,bank,all,2026-06-30,Q,0.372425,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:6548,bank,all,2026-09-30,Q,0.421127,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:6672,bank,all,2001-03-31,Q,0.005714,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:6672,bank,all,2001-06-30,Q,0.005447,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:6672,bank,all,2001-09-30,Q,0.007283,fdic,2026-09-08T06:29:25Z
@@ -38762,6 +38819,7 @@ fdic_card_dq30_89,CERT:6672,bank,all,2025-09-30,Q,0.017,fdic,2026-09-08T06:29:25
 fdic_card_dq30_89,CERT:6672,bank,all,2025-12-31,Q,0.018,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:6672,bank,all,2026-03-31,Q,0.016,fdic,2026-09-08T06:29:25Z
 fdic_card_dq30_89,CERT:6672,bank,all,2026-06-30,Q,0.015,fdic,2026-09-08T06:29:25Z
+fdic_card_dq30_89,CERT:6672,bank,all,2026-09-30,Q,0.017,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:7213,bank,all,2001-03-31,Q,0.594,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:7213,bank,all,2001-06-30,Q,0.65,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:7213,bank,all,2001-09-30,Q,0.706,fdic,2026-09-08T04:58:22Z
@@ -38864,6 +38922,7 @@ fdic_card_dq30_89,CERT:7213,bank,all,2025-09-30,Q,2.235,fdic,2026-09-08T04:58:22
 fdic_card_dq30_89,CERT:7213,bank,all,2025-12-31,Q,2.32,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:7213,bank,all,2026-03-31,Q,2.173,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:7213,bank,all,2026-06-30,Q,2.224,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:7213,bank,all,2026-09-30,Q,2.235,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:8283,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:8283,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:8283,bank,all,2001-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -38966,6 +39025,7 @@ fdic_card_dq30_89,CERT:8283,bank,all,2025-09-30,Q,0.02045,fdic,2026-09-08T04:58:
 fdic_card_dq30_89,CERT:8283,bank,all,2025-12-31,Q,0.02336,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:8283,bank,all,2026-03-31,Q,0.019111,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:8283,bank,all,2026-06-30,Q,0.022601,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:8283,bank,all,2026-09-30,Q,0.021342,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,CERT:9846,bank,all,2001-03-31,Q,0.008011,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:9846,bank,all,2001-06-30,Q,0.009059,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:9846,bank,all,2001-09-30,Q,0.008706,fdic,2026-09-08T04:58:22Z
@@ -39068,6 +39128,7 @@ fdic_card_dq30_89,CERT:9846,bank,all,2025-09-30,Q,0.048,fdic,2026-09-08T04:58:22
 fdic_card_dq30_89,CERT:9846,bank,all,2025-12-31,Q,0.051,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:9846,bank,all,2026-03-31,Q,0.045,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,CERT:9846,bank,all,2026-06-30,Q,0.043,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,CERT:9846,bank,all,2026-09-30,Q,0.046,fdic,2026-11-25T04:54:29Z
 fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2001-03-31,Q,5.768561,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2001-06-30,Q,6.237343,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2001-09-30,Q,6.410009,fdic,2026-09-08T04:58:22Z
@@ -39169,7 +39230,8 @@ fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2025-06-30,Q,16.406956,fdic,202
 fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2025-09-30,Q,17.828413,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2025-12-31,Q,18.385011,fdic,2026-09-08T04:58:22Z
 fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,16.735797,fdic,2026-09-08T04:58:22Z
-fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,16.296074,fdic,2026-09-08T04:58:22Z
+fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,16.2961,fdic,2026-11-25T04:54:29Z
+fdic_card_dq30_89,FDIC_ALL_INSURED,aggregate,all,2026-09-30,Q,18.138873,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:12368,bank,all,1984-03-31,Q,0.010146,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,1984-06-30,Q,0.012083,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,1984-09-30,Q,0.013764,fdic,2026-09-08T06:29:25Z
@@ -39340,6 +39402,7 @@ fdic_card_loans,CERT:12368,bank,all,2025-09-30,Q,1.437,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,2025-12-31,Q,1.519,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,2026-03-31,Q,1.473,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:12368,bank,all,2026-06-30,Q,1.498,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:12368,bank,all,2026-09-30,Q,1.512,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:1299,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:1299,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:1299,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -39510,6 +39573,7 @@ fdic_card_loans,CERT:1299,bank,all,2025-09-30,Q,0.045969,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:1299,bank,all,2025-12-31,Q,0.056621,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:1299,bank,all,2026-03-31,Q,0.05189,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:1299,bank,all,2026-06-30,Q,0.051409,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:1299,bank,all,2026-09-30,Q,0.053139,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:18409,bank,all,1986-03-31,Q,0.002996,fdic,2026-09-08T05:28:06Z
 fdic_card_loans,CERT:18409,bank,all,1986-06-30,Q,0.003238,fdic,2026-09-08T05:28:06Z
 fdic_card_loans,CERT:18409,bank,all,1986-09-30,Q,0.003345,fdic,2026-09-08T05:28:06Z
@@ -39672,6 +39736,7 @@ fdic_card_loans,CERT:18409,bank,all,2025-09-30,Q,5.444363,fdic,2026-09-08T05:28:
 fdic_card_loans,CERT:18409,bank,all,2025-12-31,Q,5.369254,fdic,2026-09-08T05:28:06Z
 fdic_card_loans,CERT:18409,bank,all,2026-03-31,Q,4.996064,fdic,2026-09-08T05:28:06Z
 fdic_card_loans,CERT:18409,bank,all,2026-06-30,Q,4.783253,fdic,2026-09-08T05:28:06Z
+fdic_card_loans,CERT:18409,bank,all,2026-09-30,Q,4.639492,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:23702,bank,all,1984-03-31,Q,0.559239,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:23702,bank,all,1984-06-30,Q,0.692332,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:23702,bank,all,1984-09-30,Q,0.766645,fdic,2026-09-08T04:58:22Z
@@ -39981,6 +40046,7 @@ fdic_card_loans,CERT:25620,bank,all,2025-09-30,Q,1.527822,fdic,2026-09-08T06:29:
 fdic_card_loans,CERT:25620,bank,all,2025-12-31,Q,1.710913,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:25620,bank,all,2026-03-31,Q,1.791062,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:25620,bank,all,2026-06-30,Q,1.974056,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:25620,bank,all,2026-09-30,Q,2.164707,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:27314,bank,all,1988-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27314,bank,all,1988-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27314,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -40133,6 +40199,7 @@ fdic_card_loans,CERT:27314,bank,all,2025-09-30,Q,89.045,fdic,2026-09-08T04:58:22
 fdic_card_loans,CERT:27314,bank,all,2025-12-31,Q,92.579,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27314,bank,all,2026-03-31,Q,89.277,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27314,bank,all,2026-06-30,Q,90.783,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:27314,bank,all,2026-09-30,Q,92.215,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:27471,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27471,bank,all,1989-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27471,bank,all,1989-09-30,Q,0.05,fdic,2026-09-08T04:58:22Z
@@ -40283,6 +40350,7 @@ fdic_card_loans,CERT:27471,bank,all,2025-09-30,Q,106.59926,fdic,2026-09-08T04:58
 fdic_card_loans,CERT:27471,bank,all,2025-12-31,Q,114.111899,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27471,bank,all,2026-03-31,Q,110.479548,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27471,bank,all,2026-06-30,Q,113.444029,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:27471,bank,all,2026-09-30,Q,113.861899,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:27499,bank,all,1989-06-30,Q,0.483317,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27499,bank,all,1989-09-30,Q,0.501063,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27499,bank,all,1989-12-31,Q,0.586026,fdic,2026-09-08T04:58:22Z
@@ -40432,6 +40500,7 @@ fdic_card_loans,CERT:27499,bank,all,2025-09-30,Q,6.346682,fdic,2026-09-08T04:58:
 fdic_card_loans,CERT:27499,bank,all,2025-12-31,Q,6.75618,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27499,bank,all,2026-03-31,Q,6.381363,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:27499,bank,all,2026-06-30,Q,6.322778,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:27499,bank,all,2026-09-30,Q,6.297984,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:32188,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -40602,6 +40671,7 @@ fdic_card_loans,CERT:32188,bank,all,2025-09-30,Q,17.481,fdic,2026-09-08T04:58:22
 fdic_card_loans,CERT:32188,bank,all,2025-12-31,Q,18.294,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,2026-03-31,Q,17.964,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:32188,bank,all,2026-06-30,Q,18.631,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:32188,bank,all,2026-09-30,Q,19.192,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:33124,bank,all,2008-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33124,bank,all,2009-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33124,bank,all,2009-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -40673,6 +40743,7 @@ fdic_card_loans,CERT:33124,bank,all,2025-09-30,Q,20.017,fdic,2026-09-08T04:58:22
 fdic_card_loans,CERT:33124,bank,all,2025-12-31,Q,19.738,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33124,bank,all,2026-03-31,Q,19.051,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33124,bank,all,2026-06-30,Q,19.502,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:33124,bank,all,2026-09-30,Q,19.899,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:33947,bank,all,1994-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33947,bank,all,1995-03-31,Q,7e-06,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33947,bank,all,1995-06-30,Q,6.4e-05,fdic,2026-09-08T04:58:22Z
@@ -40800,6 +40871,7 @@ fdic_card_loans,CERT:33947,bank,all,2025-09-30,Q,8.66251,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:33947,bank,all,2025-12-31,Q,9.468367,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33947,bank,all,2026-03-31,Q,8.558388,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33947,bank,all,2026-06-30,Q,8.518458,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:33947,bank,all,2026-09-30,Q,8.554344,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:33954,bank,all,1994-12-31,Q,2.230633,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33954,bank,all,1995-03-31,Q,2.479709,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:33954,bank,all,1995-06-30,Q,2.668605,fdic,2026-09-08T04:58:22Z
@@ -41140,6 +41212,7 @@ fdic_card_loans,CERT:34403,bank,all,2025-09-30,Q,0.600735,fdic,2026-09-08T04:58:
 fdic_card_loans,CERT:34403,bank,all,2025-12-31,Q,0.684223,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:34403,bank,all,2026-03-31,Q,0.766161,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:34403,bank,all,2026-06-30,Q,0.851526,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:34403,bank,all,2026-09-30,Q,0.680302,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:34404,bank,all,1997-06-30,Q,0.015,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:34404,bank,all,1997-09-30,Q,0.015,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:34404,bank,all,1997-12-31,Q,0.015,fdic,2026-09-08T04:58:22Z
@@ -41257,6 +41330,7 @@ fdic_card_loans,CERT:34404,bank,all,2025-09-30,Q,0.12721,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:34404,bank,all,2025-12-31,Q,0.091334,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:34404,bank,all,2026-03-31,Q,0.158133,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:34404,bank,all,2026-06-30,Q,0.189672,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:34404,bank,all,2026-09-30,Q,0.117399,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:34519,bank,all,1997-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:34519,bank,all,1997-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:34519,bank,all,1998-03-31,Q,3e-06,fdic,2026-09-08T06:29:25Z
@@ -41373,6 +41447,7 @@ fdic_card_loans,CERT:34519,bank,all,2025-09-30,Q,6.113434,fdic,2026-09-08T06:29:
 fdic_card_loans,CERT:34519,bank,all,2025-12-31,Q,6.289466,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:34519,bank,all,2026-03-31,Q,6.127297,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:34519,bank,all,2026-06-30,Q,6.278169,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:34519,bank,all,2026-09-30,Q,6.627361,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:3510,bank,all,1984-03-31,Q,3.711,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,1984-06-30,Q,3.848,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,1984-09-30,Q,4.195,fdic,2026-09-08T04:58:22Z
@@ -41543,6 +41618,7 @@ fdic_card_loans,CERT:3510,bank,all,2025-09-30,Q,102.109,fdic,2026-09-08T04:58:22
 fdic_card_loans,CERT:3510,bank,all,2025-12-31,Q,106.027,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,2026-03-31,Q,102.833,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3510,bank,all,2026-06-30,Q,105.659,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:3510,bank,all,2026-09-30,Q,107.342,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:3511,bank,all,1984-03-31,Q,0.65907,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,1984-06-30,Q,0.767918,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,1984-09-30,Q,0.935885,fdic,2026-09-08T04:58:22Z
@@ -41713,6 +41789,7 @@ fdic_card_loans,CERT:3511,bank,all,2025-09-30,Q,56.996,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,2025-12-31,Q,59.54,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,2026-03-31,Q,57.277,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:3511,bank,all,2026-06-30,Q,58.394,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:3511,bank,all,2026-09-30,Q,59.489,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:35328,bank,all,2000-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:35328,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:35328,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -41887,6 +41964,7 @@ fdic_card_loans,CERT:35444,bank,all,2025-09-30,Q,0.415957,fdic,2026-09-08T04:58:
 fdic_card_loans,CERT:35444,bank,all,2025-12-31,Q,0.729101,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:35444,bank,all,2026-03-31,Q,1.21926,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:35444,bank,all,2026-06-30,Q,0.336344,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:35444,bank,all,2026-09-30,Q,0.259752,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:4091,bank,all,1984-03-31,Q,0.001898,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:4091,bank,all,1984-06-30,Q,0.001862,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:4091,bank,all,1984-09-30,Q,0.001958,fdic,2026-09-08T06:29:25Z
@@ -42057,6 +42135,7 @@ fdic_card_loans,CERT:4091,bank,all,2025-09-30,Q,1.708447,fdic,2026-09-08T06:29:2
 fdic_card_loans,CERT:4091,bank,all,2025-12-31,Q,2.197556,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:4091,bank,all,2026-03-31,Q,2.911747,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:4091,bank,all,2026-06-30,Q,2.911647,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:4091,bank,all,2026-09-30,Q,0.86308,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:4297,bank,all,1984-03-31,Q,0.011228,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:4297,bank,all,1984-06-30,Q,0.011307,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:4297,bank,all,1984-09-30,Q,0.009508,fdic,2026-09-08T04:58:22Z
@@ -42227,6 +42306,7 @@ fdic_card_loans,CERT:4297,bank,all,2025-09-30,Q,247.168335,fdic,2026-09-08T04:58
 fdic_card_loans,CERT:4297,bank,all,2025-12-31,Q,256.015215,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:4297,bank,all,2026-03-31,Q,246.638,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:4297,bank,all,2026-06-30,Q,250.519,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:4297,bank,all,2026-09-30,Q,251.766,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:5452,bank,all,1984-03-31,Q,0.077002,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5452,bank,all,1984-06-30,Q,0.083713,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5452,bank,all,1984-09-30,Q,0.095618,fdic,2026-09-08T04:58:22Z
@@ -42397,6 +42477,7 @@ fdic_card_loans,CERT:5452,bank,all,2025-09-30,Q,7.609673,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:5452,bank,all,2025-12-31,Q,7.919271,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5452,bank,all,2026-03-31,Q,7.637945,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5452,bank,all,2026-06-30,Q,7.784184,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:5452,bank,all,2026-09-30,Q,7.818749,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:5649,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5649,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5649,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -42663,6 +42744,7 @@ fdic_card_loans,CERT:57203,bank,all,2025-09-30,Q,34.104,fdic,2026-09-08T04:58:22
 fdic_card_loans,CERT:57203,bank,all,2025-12-31,Q,35.768,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57203,bank,all,2026-03-31,Q,34.351,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57203,bank,all,2026-06-30,Q,28.22,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:57203,bank,all,2026-09-30,Q,28.602,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:57570,bank,all,2003-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57570,bank,all,2004-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57570,bank,all,2004-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -42754,6 +42836,7 @@ fdic_card_loans,CERT:57570,bank,all,2025-09-30,Q,10.619213,fdic,2026-09-08T04:58
 fdic_card_loans,CERT:57570,bank,all,2025-12-31,Q,11.282953,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57570,bank,all,2026-03-31,Q,10.892884,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57570,bank,all,2026-06-30,Q,11.100023,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:57570,bank,all,2026-09-30,Q,11.329205,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:57957,bank,all,2005-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57957,bank,all,2005-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57957,bank,all,2005-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -42839,6 +42922,7 @@ fdic_card_loans,CERT:57957,bank,all,2025-09-30,Q,1.862722,fdic,2026-09-08T04:58:
 fdic_card_loans,CERT:57957,bank,all,2025-12-31,Q,1.907004,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57957,bank,all,2026-03-31,Q,1.856083,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:57957,bank,all,2026-06-30,Q,1.905087,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:57957,bank,all,2026-09-30,Q,1.920965,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:5962,bank,all,1984-03-31,Q,5.1e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5962,bank,all,1984-06-30,Q,6.1e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5962,bank,all,1984-09-30,Q,6.5e-05,fdic,2026-09-08T04:58:22Z
@@ -43009,6 +43093,7 @@ fdic_card_loans,CERT:5962,bank,all,2025-09-30,Q,0.001328,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:5962,bank,all,2025-12-31,Q,0.001342,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5962,bank,all,2026-03-31,Q,0.001399,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:5962,bank,all,2026-06-30,Q,0.001283,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:5962,bank,all,2026-09-30,Q,0.00136,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:628,bank,all,1984-03-31,Q,0.355822,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,1984-06-30,Q,1.178347,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,1984-09-30,Q,1.223039,fdic,2026-09-08T04:58:22Z
@@ -43179,6 +43264,7 @@ fdic_card_loans,CERT:628,bank,all,2025-09-30,Q,203.624,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,2025-12-31,Q,215.892,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,2026-03-31,Q,206.178,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:628,bank,all,2026-06-30,Q,216.172,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:628,bank,all,2026-09-30,Q,218.443,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:6384,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6384,bank,all,1984-06-30,Q,0.008483,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6384,bank,all,1984-09-30,Q,0.008487,fdic,2026-09-08T04:58:22Z
@@ -43349,6 +43435,7 @@ fdic_card_loans,CERT:6384,bank,all,2025-09-30,Q,5.692922,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:6384,bank,all,2025-12-31,Q,6.08468,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6384,bank,all,2026-03-31,Q,6.024527,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6384,bank,all,2026-06-30,Q,6.323284,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:6384,bank,all,2026-09-30,Q,6.539,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:6548,bank,all,1984-03-31,Q,0.029238,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6548,bank,all,1984-06-30,Q,0.030483,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6548,bank,all,1984-09-30,Q,0.031377,fdic,2026-09-08T04:58:22Z
@@ -43519,6 +43606,7 @@ fdic_card_loans,CERT:6548,bank,all,2025-09-30,Q,30.593823,fdic,2026-09-08T04:58:
 fdic_card_loans,CERT:6548,bank,all,2025-12-31,Q,32.234128,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6548,bank,all,2026-03-31,Q,31.66809,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:6548,bank,all,2026-06-30,Q,32.946802,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:6548,bank,all,2026-09-30,Q,33.703357,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:6672,bank,all,1984-03-31,Q,0.002901,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,1984-06-30,Q,0.002954,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,1984-09-30,Q,0.0031,fdic,2026-09-08T06:29:25Z
@@ -43689,6 +43777,7 @@ fdic_card_loans,CERT:6672,bank,all,2025-09-30,Q,1.692,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,2025-12-31,Q,1.747,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,2026-03-31,Q,1.658,fdic,2026-09-08T06:29:25Z
 fdic_card_loans,CERT:6672,bank,all,2026-06-30,Q,1.683,fdic,2026-09-08T06:29:25Z
+fdic_card_loans,CERT:6672,bank,all,2026-09-30,Q,1.684,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:7213,bank,all,1984-03-31,Q,0.771,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,1984-06-30,Q,0.828,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,1984-09-30,Q,0.951,fdic,2026-09-08T04:58:22Z
@@ -43859,6 +43948,7 @@ fdic_card_loans,CERT:7213,bank,all,2025-09-30,Q,166.887,fdic,2026-09-08T04:58:22
 fdic_card_loans,CERT:7213,bank,all,2025-12-31,Q,173.188,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,2026-03-31,Q,166.41,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:7213,bank,all,2026-06-30,Q,176.013,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:7213,bank,all,2026-09-30,Q,176.335,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:8283,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:8283,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:8283,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -44029,6 +44119,7 @@ fdic_card_loans,CERT:8283,bank,all,2025-09-30,Q,0.288532,fdic,2026-09-08T04:58:2
 fdic_card_loans,CERT:8283,bank,all,2025-12-31,Q,0.326374,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:8283,bank,all,2026-03-31,Q,0.33366,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:8283,bank,all,2026-06-30,Q,0.293919,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:8283,bank,all,2026-09-30,Q,0.300151,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,CERT:9846,bank,all,1984-03-31,Q,0.031214,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,1984-06-30,Q,0.032514,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,1984-09-30,Q,0.034838,fdic,2026-09-08T04:58:22Z
@@ -44199,6 +44290,7 @@ fdic_card_loans,CERT:9846,bank,all,2025-09-30,Q,3.275,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,2025-12-31,Q,3.36,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,2026-03-31,Q,3.199,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,CERT:9846,bank,all,2026-06-30,Q,3.207,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,CERT:9846,bank,all,2026-09-30,Q,3.176,fdic,2026-11-25T04:54:29Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1984-03-31,Q,46.520512,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1984-06-30,Q,51.158635,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,1984-09-30,Q,56.645153,fdic,2026-09-08T04:58:22Z
@@ -44368,7 +44460,8 @@ fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,2025-06-30,Q,1141.109656,fdic,202
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,2025-09-30,Q,1151.167512,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,2025-12-31,Q,1204.429073,fdic,2026-09-08T04:58:22Z
 fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,1161.264221,fdic,2026-09-08T04:58:22Z
-fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,1189.600732,fdic,2026-09-08T04:58:22Z
+fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,1189.599038,fdic,2026-11-25T04:54:29Z
+fdic_card_loans,FDIC_ALL_INSURED,aggregate,all,2026-09-30,Q,1198.698566,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:12368,bank,all,1984-03-31,Q,1.4e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:12368,bank,all,1984-06-30,Q,8e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:12368,bank,all,1984-09-30,Q,5e-06,fdic,2026-09-08T06:29:25Z
@@ -44539,6 +44632,7 @@ fdic_card_nco_q,CERT:12368,bank,all,2025-09-30,Q,0.013,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:12368,bank,all,2025-12-31,Q,0.015,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:12368,bank,all,2026-03-31,Q,0.015,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:12368,bank,all,2026-06-30,Q,0.016,fdic,2026-09-08T06:29:25Z
+fdic_card_nco_q,CERT:12368,bank,all,2026-09-30,Q,0.014,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:1299,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:1299,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:1299,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -44709,6 +44803,7 @@ fdic_card_nco_q,CERT:1299,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:1299,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:1299,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:1299,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:1299,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:18409,bank,all,1989-03-31,Q,2.6e-05,fdic,2026-09-08T05:28:06Z
 fdic_card_nco_q,CERT:18409,bank,all,1989-06-30,Q,1.9e-05,fdic,2026-09-08T05:28:06Z
 fdic_card_nco_q,CERT:18409,bank,all,1989-09-30,Q,7e-06,fdic,2026-09-08T05:28:06Z
@@ -44859,6 +44954,7 @@ fdic_card_nco_q,CERT:18409,bank,all,2025-09-30,Q,0.058456,fdic,2026-09-08T05:28:
 fdic_card_nco_q,CERT:18409,bank,all,2025-12-31,Q,0.062741,fdic,2026-09-08T05:28:06Z
 fdic_card_nco_q,CERT:18409,bank,all,2026-03-31,Q,0.058326,fdic,2026-09-08T05:28:06Z
 fdic_card_nco_q,CERT:18409,bank,all,2026-06-30,Q,0.05562,fdic,2026-09-08T05:28:06Z
+fdic_card_nco_q,CERT:18409,bank,all,2026-09-30,Q,0.055845,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:23702,bank,all,1984-03-31,Q,0.003727,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:23702,bank,all,1984-06-30,Q,0.004715,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:23702,bank,all,1984-09-30,Q,0.006021,fdic,2026-09-08T04:58:22Z
@@ -45168,6 +45264,7 @@ fdic_card_nco_q,CERT:25620,bank,all,2025-09-30,Q,0.041602,fdic,2026-09-08T06:29:
 fdic_card_nco_q,CERT:25620,bank,all,2025-12-31,Q,0.046633,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:25620,bank,all,2026-03-31,Q,0.053066,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:25620,bank,all,2026-06-30,Q,0.055573,fdic,2026-09-08T06:29:25Z
+fdic_card_nco_q,CERT:25620,bank,all,2026-09-30,Q,0.053671,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:27314,bank,all,1988-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27314,bank,all,1988-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27314,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -45320,6 +45417,7 @@ fdic_card_nco_q,CERT:27314,bank,all,2025-09-30,Q,1.166,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27314,bank,all,2025-12-31,Q,1.228,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27314,bank,all,2026-03-31,Q,1.205,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27314,bank,all,2026-06-30,Q,1.208,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:27314,bank,all,2026-09-30,Q,1.11,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:27471,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27471,bank,all,1989-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27471,bank,all,1989-09-30,Q,4.8e-05,fdic,2026-09-08T04:58:22Z
@@ -45470,6 +45568,7 @@ fdic_card_nco_q,CERT:27471,bank,all,2025-09-30,Q,0.59873,fdic,2026-09-08T04:58:2
 fdic_card_nco_q,CERT:27471,bank,all,2025-12-31,Q,0.720488,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27471,bank,all,2026-03-31,Q,0.655722,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27471,bank,all,2026-06-30,Q,0.643797,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:27471,bank,all,2026-09-30,Q,0.578121,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:27499,bank,all,1989-06-30,Q,0.004488,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27499,bank,all,1989-09-30,Q,0.007747,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27499,bank,all,1989-12-31,Q,0.008667,fdic,2026-09-08T04:58:22Z
@@ -45619,6 +45718,7 @@ fdic_card_nco_q,CERT:27499,bank,all,2025-09-30,Q,0.109005,fdic,2026-09-08T04:58:
 fdic_card_nco_q,CERT:27499,bank,all,2025-12-31,Q,0.112392,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27499,bank,all,2026-03-31,Q,0.107463,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:27499,bank,all,2026-06-30,Q,0.099429,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:27499,bank,all,2026-09-30,Q,0.092564,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:32188,bank,all,1990-03-31,Q,0.000815,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:32188,bank,all,1990-06-30,Q,0.000945,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:32188,bank,all,1990-09-30,Q,0.002892,fdic,2026-09-08T04:58:22Z
@@ -45765,6 +45865,7 @@ fdic_card_nco_q,CERT:32188,bank,all,2025-09-30,Q,0.126,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:32188,bank,all,2025-12-31,Q,0.138,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:32188,bank,all,2026-03-31,Q,0.155,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:32188,bank,all,2026-06-30,Q,0.147,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:32188,bank,all,2026-09-30,Q,0.14,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:33124,bank,all,2008-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33124,bank,all,2009-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33124,bank,all,2009-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -45836,6 +45937,7 @@ fdic_card_nco_q,CERT:33124,bank,all,2025-09-30,Q,0.275,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33124,bank,all,2025-12-31,Q,0.303,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33124,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33124,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:33124,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:33947,bank,all,1994-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33947,bank,all,1995-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33947,bank,all,1995-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -45963,6 +46065,7 @@ fdic_card_nco_q,CERT:33947,bank,all,2025-09-30,Q,0.133349,fdic,2026-09-08T04:58:
 fdic_card_nco_q,CERT:33947,bank,all,2025-12-31,Q,0.1218,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33947,bank,all,2026-03-31,Q,0.122136,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33947,bank,all,2026-06-30,Q,0.117578,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:33947,bank,all,2026-09-30,Q,0.103509,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:33954,bank,all,1994-12-31,Q,0.002354,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33954,bank,all,1995-03-31,Q,0.005707,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:33954,bank,all,1995-06-30,Q,0.013061,fdic,2026-09-08T04:58:22Z
@@ -46303,6 +46406,7 @@ fdic_card_nco_q,CERT:34403,bank,all,2025-09-30,Q,0.023759,fdic,2026-09-08T04:58:
 fdic_card_nco_q,CERT:34403,bank,all,2025-12-31,Q,0.023923,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:34403,bank,all,2026-03-31,Q,0.024016,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:34403,bank,all,2026-06-30,Q,0.024232,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:34403,bank,all,2026-09-30,Q,0.021054,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:34404,bank,all,1997-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:34404,bank,all,1997-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:34404,bank,all,1997-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -46420,6 +46524,7 @@ fdic_card_nco_q,CERT:34404,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:34404,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:34404,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:34404,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:34404,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:34519,bank,all,1997-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:34519,bank,all,1997-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:34519,bank,all,1998-03-31,Q,0,fdic,2026-09-08T06:29:25Z
@@ -46536,6 +46641,7 @@ fdic_card_nco_q,CERT:34519,bank,all,2025-09-30,Q,0.185042,fdic,2026-09-08T06:29:
 fdic_card_nco_q,CERT:34519,bank,all,2025-12-31,Q,0.193999,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:34519,bank,all,2026-03-31,Q,0.212257,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:34519,bank,all,2026-06-30,Q,0.205906,fdic,2026-09-08T06:29:25Z
+fdic_card_nco_q,CERT:34519,bank,all,2026-09-30,Q,0.174854,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:3510,bank,all,1984-03-31,Q,0.022,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3510,bank,all,1984-06-30,Q,0.021,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3510,bank,all,1984-09-30,Q,0.023,fdic,2026-09-08T04:58:22Z
@@ -46706,6 +46812,7 @@ fdic_card_nco_q,CERT:3510,bank,all,2025-09-30,Q,0.88,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3510,bank,all,2025-12-31,Q,0.882,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3510,bank,all,2026-03-31,Q,0.925,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3510,bank,all,2026-06-30,Q,0.917,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:3510,bank,all,2026-09-30,Q,0.858,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:3511,bank,all,1984-03-31,Q,0.001256,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3511,bank,all,1984-06-30,Q,0.001469,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3511,bank,all,1984-09-30,Q,-0.000851,fdic,2026-09-08T04:58:22Z
@@ -46876,6 +46983,7 @@ fdic_card_nco_q,CERT:3511,bank,all,2025-09-30,Q,0.571,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3511,bank,all,2025-12-31,Q,0.584,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3511,bank,all,2026-03-31,Q,0.606,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:3511,bank,all,2026-06-30,Q,0.597,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:3511,bank,all,2026-09-30,Q,0.557,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:35328,bank,all,2000-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:35328,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:35328,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -47050,6 +47158,7 @@ fdic_card_nco_q,CERT:35444,bank,all,2025-09-30,Q,0.000419,fdic,2026-09-08T04:58:
 fdic_card_nco_q,CERT:35444,bank,all,2025-12-31,Q,0.000172,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:35444,bank,all,2026-03-31,Q,0.000133,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:35444,bank,all,2026-06-30,Q,0.000173,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:35444,bank,all,2026-09-30,Q,0.000262,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:4091,bank,all,1984-03-31,Q,-3e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:4091,bank,all,1984-06-30,Q,2e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:4091,bank,all,1984-09-30,Q,4e-06,fdic,2026-09-08T06:29:25Z
@@ -47220,6 +47329,7 @@ fdic_card_nco_q,CERT:4091,bank,all,2025-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:4091,bank,all,2025-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:4091,bank,all,2026-03-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:4091,bank,all,2026-06-30,Q,0,fdic,2026-09-08T06:29:25Z
+fdic_card_nco_q,CERT:4091,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:4297,bank,all,1984-03-31,Q,0.000106,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:4297,bank,all,1984-06-30,Q,-5.5e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:4297,bank,all,1984-09-30,Q,1.2e-05,fdic,2026-09-08T04:58:22Z
@@ -47390,6 +47500,7 @@ fdic_card_nco_q,CERT:4297,bank,all,2025-09-30,Q,2.91879,fdic,2026-09-08T04:58:22
 fdic_card_nco_q,CERT:4297,bank,all,2025-12-31,Q,3.156676,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:4297,bank,all,2026-03-31,Q,3.228,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:4297,bank,all,2026-06-30,Q,3.001,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:4297,bank,all,2026-09-30,Q,2.568,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:5452,bank,all,1984-03-31,Q,0.000238,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5452,bank,all,1984-06-30,Q,0.000228,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5452,bank,all,1984-09-30,Q,0.000264,fdic,2026-09-08T04:58:22Z
@@ -47560,6 +47671,7 @@ fdic_card_nco_q,CERT:5452,bank,all,2025-09-30,Q,0.100302,fdic,2026-09-08T04:58:2
 fdic_card_nco_q,CERT:5452,bank,all,2025-12-31,Q,0.101934,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5452,bank,all,2026-03-31,Q,0.102304,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5452,bank,all,2026-06-30,Q,0.083936,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:5452,bank,all,2026-09-30,Q,0.084356,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:5649,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5649,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5649,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -47826,6 +47938,7 @@ fdic_card_nco_q,CERT:57203,bank,all,2025-09-30,Q,0.282,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57203,bank,all,2025-12-31,Q,0.295,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57203,bank,all,2026-03-31,Q,0.32,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57203,bank,all,2026-06-30,Q,0.355,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:57203,bank,all,2026-09-30,Q,0.284,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:57570,bank,all,2003-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57570,bank,all,2004-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57570,bank,all,2004-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -47917,6 +48030,7 @@ fdic_card_nco_q,CERT:57570,bank,all,2025-09-30,Q,0.212842,fdic,2026-09-08T04:58:
 fdic_card_nco_q,CERT:57570,bank,all,2025-12-31,Q,0.21783,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57570,bank,all,2026-03-31,Q,0.217328,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57570,bank,all,2026-06-30,Q,0.20977,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:57570,bank,all,2026-09-30,Q,0.198155,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:57957,bank,all,2005-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57957,bank,all,2005-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57957,bank,all,2005-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -48002,6 +48116,7 @@ fdic_card_nco_q,CERT:57957,bank,all,2025-09-30,Q,0.023892,fdic,2026-09-08T04:58:
 fdic_card_nco_q,CERT:57957,bank,all,2025-12-31,Q,0.02198,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57957,bank,all,2026-03-31,Q,0.022103,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:57957,bank,all,2026-06-30,Q,0.021,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:57957,bank,all,2026-09-30,Q,0.019858,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:5962,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5962,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5962,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -48172,6 +48287,7 @@ fdic_card_nco_q,CERT:5962,bank,all,2025-09-30,Q,9e-06,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5962,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5962,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:5962,bank,all,2026-06-30,Q,1e-06,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:5962,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:628,bank,all,1984-03-31,Q,0.001407,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:628,bank,all,1984-06-30,Q,0.005139,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:628,bank,all,1984-09-30,Q,0.006996,fdic,2026-09-08T04:58:22Z
@@ -48342,6 +48458,7 @@ fdic_card_nco_q,CERT:628,bank,all,2025-09-30,Q,1.522,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:628,bank,all,2025-12-31,Q,1.566,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:628,bank,all,2026-03-31,Q,1.689,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:628,bank,all,2026-06-30,Q,1.664,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:628,bank,all,2026-09-30,Q,1.468,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:6384,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:6384,bank,all,1984-06-30,Q,2.4e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:6384,bank,all,1984-09-30,Q,2.8e-05,fdic,2026-09-08T04:58:22Z
@@ -48512,6 +48629,7 @@ fdic_card_nco_q,CERT:6384,bank,all,2025-09-30,Q,0.048321,fdic,2026-09-08T04:58:2
 fdic_card_nco_q,CERT:6384,bank,all,2025-12-31,Q,0.048436,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:6384,bank,all,2026-03-31,Q,0.043842,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:6384,bank,all,2026-06-30,Q,0.047617,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:6384,bank,all,2026-09-30,Q,0.039026,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:6548,bank,all,1984-03-31,Q,8.7e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:6548,bank,all,1984-06-30,Q,6.8e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:6548,bank,all,1984-09-30,Q,6.4e-05,fdic,2026-09-08T04:58:22Z
@@ -48682,6 +48800,7 @@ fdic_card_nco_q,CERT:6548,bank,all,2025-09-30,Q,0.284386,fdic,2026-09-08T04:58:2
 fdic_card_nco_q,CERT:6548,bank,all,2025-12-31,Q,0.297263,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:6548,bank,all,2026-03-31,Q,0.303173,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:6548,bank,all,2026-06-30,Q,0.300315,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:6548,bank,all,2026-09-30,Q,0.27467,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:6672,bank,all,1984-03-31,Q,7e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:6672,bank,all,1984-06-30,Q,2e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:6672,bank,all,1984-09-30,Q,7e-06,fdic,2026-09-08T06:29:25Z
@@ -48852,6 +48971,7 @@ fdic_card_nco_q,CERT:6672,bank,all,2025-09-30,Q,0.016,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:6672,bank,all,2025-12-31,Q,0.015,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:6672,bank,all,2026-03-31,Q,0.014,fdic,2026-09-08T06:29:25Z
 fdic_card_nco_q,CERT:6672,bank,all,2026-06-30,Q,0.015,fdic,2026-09-08T06:29:25Z
+fdic_card_nco_q,CERT:6672,bank,all,2026-09-30,Q,0.014,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:7213,bank,all,1984-03-31,Q,0.003,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:7213,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:7213,bank,all,1984-09-30,Q,0.002,fdic,2026-09-08T04:58:22Z
@@ -49022,6 +49142,7 @@ fdic_card_nco_q,CERT:7213,bank,all,2025-09-30,Q,1.659,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:7213,bank,all,2025-12-31,Q,1.663,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:7213,bank,all,2026-03-31,Q,1.663,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:7213,bank,all,2026-06-30,Q,1.764,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:7213,bank,all,2026-09-30,Q,1.593,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:8283,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:8283,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:8283,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -49192,6 +49313,7 @@ fdic_card_nco_q,CERT:8283,bank,all,2025-09-30,Q,0.000782,fdic,2026-09-08T04:58:2
 fdic_card_nco_q,CERT:8283,bank,all,2025-12-31,Q,0.00505,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:8283,bank,all,2026-03-31,Q,0.002221,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:8283,bank,all,2026-06-30,Q,0.002595,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:8283,bank,all,2026-09-30,Q,0.002756,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,CERT:9846,bank,all,1984-03-31,Q,2.1e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:9846,bank,all,1984-06-30,Q,8.5e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:9846,bank,all,1984-09-30,Q,0.000108,fdic,2026-09-08T04:58:22Z
@@ -49362,6 +49484,7 @@ fdic_card_nco_q,CERT:9846,bank,all,2025-09-30,Q,0.04,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:9846,bank,all,2025-12-31,Q,0.039,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:9846,bank,all,2026-03-31,Q,0.042,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,CERT:9846,bank,all,2026-06-30,Q,0.04,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,CERT:9846,bank,all,2026-09-30,Q,0.035,fdic,2026-11-25T04:54:29Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1984-03-31,Q,0.154305,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1984-06-30,Q,0.173752,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,1984-09-30,Q,0.206337,fdic,2026-09-08T04:58:22Z
@@ -49530,8 +49653,9 @@ fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2025-03-31,Q,13.450162,fdic,2026-
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2025-06-30,Q,11.700292,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2025-09-30,Q,11.451513,fdic,2026-09-08T04:58:22Z
 fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2025-12-31,Q,12.016363,fdic,2026-09-08T04:58:22Z
-fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,11.95559,fdic,2026-09-08T04:58:22Z
-fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,11.753098,fdic,2026-09-08T04:58:22Z
+fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,11.955678,fdic,2026-11-25T04:54:29Z
+fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,11.753011,fdic,2026-11-25T04:54:29Z
+fdic_card_nco_q,FDIC_ALL_INSURED,aggregate,all,2026-09-30,Q,10.494831,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:12368,bank,all,1991-03-31,Q,0.00048,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:12368,bank,all,1991-06-30,Q,0.000487,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:12368,bank,all,1991-09-30,Q,0.000477,fdic,2026-09-08T06:29:25Z
@@ -49674,6 +49798,7 @@ fdic_card_noncurrent,CERT:12368,bank,all,2025-09-30,Q,0.02,fdic,2026-09-08T06:29
 fdic_card_noncurrent,CERT:12368,bank,all,2025-12-31,Q,0.022,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:12368,bank,all,2026-03-31,Q,0.022,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:12368,bank,all,2026-06-30,Q,0.021,fdic,2026-09-08T06:29:25Z
+fdic_card_noncurrent,CERT:12368,bank,all,2026-09-30,Q,0.021,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:1299,bank,all,1985-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:1299,bank,all,1985-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:1299,bank,all,1985-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -49839,6 +49964,7 @@ fdic_card_noncurrent,CERT:1299,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:1299,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:1299,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:1299,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:1299,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:18409,bank,all,1991-03-31,Q,2.9e-05,fdic,2026-09-08T05:28:06Z
 fdic_card_noncurrent,CERT:18409,bank,all,1991-06-30,Q,3.7e-05,fdic,2026-09-08T05:28:06Z
 fdic_card_noncurrent,CERT:18409,bank,all,1991-09-30,Q,2.6e-05,fdic,2026-09-08T05:28:06Z
@@ -49981,6 +50107,7 @@ fdic_card_noncurrent,CERT:18409,bank,all,2025-09-30,Q,0.083266,fdic,2026-09-08T0
 fdic_card_noncurrent,CERT:18409,bank,all,2025-12-31,Q,0.08664,fdic,2026-09-08T05:28:06Z
 fdic_card_noncurrent,CERT:18409,bank,all,2026-03-31,Q,0.087122,fdic,2026-09-08T05:28:06Z
 fdic_card_noncurrent,CERT:18409,bank,all,2026-06-30,Q,0.07349,fdic,2026-09-08T05:28:06Z
+fdic_card_noncurrent,CERT:18409,bank,all,2026-09-30,Q,0.075389,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:23702,bank,all,1991-03-31,Q,0.194096,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:23702,bank,all,1991-06-30,Q,0.199555,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:23702,bank,all,1991-09-30,Q,0.193229,fdic,2026-09-08T04:58:22Z
@@ -50259,6 +50386,7 @@ fdic_card_noncurrent,CERT:25620,bank,all,2025-09-30,Q,0.05376,fdic,2026-09-08T06
 fdic_card_noncurrent,CERT:25620,bank,all,2025-12-31,Q,0.061615,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:25620,bank,all,2026-03-31,Q,0.064527,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:25620,bank,all,2026-06-30,Q,0.062883,fdic,2026-09-08T06:29:25Z
+fdic_card_noncurrent,CERT:25620,bank,all,2026-09-30,Q,0.075867,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:27314,bank,all,1988-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27314,bank,all,1988-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27314,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -50404,6 +50532,7 @@ fdic_card_noncurrent,CERT:27314,bank,all,2025-09-30,Q,2.02,fdic,2026-09-08T04:58
 fdic_card_noncurrent,CERT:27314,bank,all,2025-12-31,Q,2.137,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27314,bank,all,2026-03-31,Q,2.151,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27314,bank,all,2026-06-30,Q,1.94,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:27314,bank,all,2026-09-30,Q,2.024,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:27471,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27471,bank,all,1989-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27471,bank,all,1989-09-30,Q,2e-06,fdic,2026-09-08T04:58:22Z
@@ -50554,6 +50683,7 @@ fdic_card_noncurrent,CERT:27471,bank,all,2025-09-30,Q,0.859364,fdic,2026-09-08T0
 fdic_card_noncurrent,CERT:27471,bank,all,2025-12-31,Q,0.838218,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27471,bank,all,2026-03-31,Q,0.83561,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27471,bank,all,2026-06-30,Q,0.72158,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:27471,bank,all,2026-09-30,Q,0.710014,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:27499,bank,all,1991-03-31,Q,0.020666,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27499,bank,all,1991-06-30,Q,0.018629,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27499,bank,all,1991-09-30,Q,0.019108,fdic,2026-09-08T04:58:22Z
@@ -50696,6 +50826,7 @@ fdic_card_noncurrent,CERT:27499,bank,all,2025-09-30,Q,0.237127,fdic,2026-09-08T0
 fdic_card_noncurrent,CERT:27499,bank,all,2025-12-31,Q,0.241523,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27499,bank,all,2026-03-31,Q,0.221687,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:27499,bank,all,2026-06-30,Q,0.204916,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:27499,bank,all,2026-09-30,Q,0.220957,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:32188,bank,all,1997-03-31,Q,0.022425,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:32188,bank,all,1997-06-30,Q,0.02251,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:32188,bank,all,1997-09-30,Q,0.021771,fdic,2026-09-08T04:58:22Z
@@ -50814,6 +50945,7 @@ fdic_card_noncurrent,CERT:32188,bank,all,2025-09-30,Q,0.281,fdic,2026-09-08T04:5
 fdic_card_noncurrent,CERT:32188,bank,all,2025-12-31,Q,0.308,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:32188,bank,all,2026-03-31,Q,0.309,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:32188,bank,all,2026-06-30,Q,0.3,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:32188,bank,all,2026-09-30,Q,0.316,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:33124,bank,all,2008-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33124,bank,all,2009-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33124,bank,all,2009-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -50885,6 +51017,7 @@ fdic_card_noncurrent,CERT:33124,bank,all,2025-09-30,Q,0.421,fdic,2026-09-08T04:5
 fdic_card_noncurrent,CERT:33124,bank,all,2025-12-31,Q,0.414,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33124,bank,all,2026-03-31,Q,0.36,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33124,bank,all,2026-06-30,Q,0.34,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:33124,bank,all,2026-09-30,Q,0.361,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:33947,bank,all,1994-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33947,bank,all,1995-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33947,bank,all,1995-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -51012,6 +51145,7 @@ fdic_card_noncurrent,CERT:33947,bank,all,2025-09-30,Q,0.205806,fdic,2026-09-08T0
 fdic_card_noncurrent,CERT:33947,bank,all,2025-12-31,Q,0.205464,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33947,bank,all,2026-03-31,Q,0.190679,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33947,bank,all,2026-06-30,Q,0.180319,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:33947,bank,all,2026-09-30,Q,0.181638,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:33954,bank,all,1994-12-31,Q,0.024761,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33954,bank,all,1995-03-31,Q,0.040132,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:33954,bank,all,1995-06-30,Q,0.046342,fdic,2026-09-08T04:58:22Z
@@ -51352,6 +51486,7 @@ fdic_card_noncurrent,CERT:34403,bank,all,2025-09-30,Q,0.042303,fdic,2026-09-08T0
 fdic_card_noncurrent,CERT:34403,bank,all,2025-12-31,Q,0.043969,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:34403,bank,all,2026-03-31,Q,0.048646,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:34403,bank,all,2026-06-30,Q,0.053747,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:34403,bank,all,2026-09-30,Q,0.035697,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:34404,bank,all,1997-06-30,Q,6.2e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:34404,bank,all,1997-09-30,Q,0.000148,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:34404,bank,all,1997-12-31,Q,0.000254,fdic,2026-09-08T04:58:22Z
@@ -51469,6 +51604,7 @@ fdic_card_noncurrent,CERT:34404,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22
 fdic_card_noncurrent,CERT:34404,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:34404,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:34404,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:34404,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:34519,bank,all,1997-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:34519,bank,all,1997-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:34519,bank,all,1998-03-31,Q,0,fdic,2026-09-08T06:29:25Z
@@ -51585,6 +51721,7 @@ fdic_card_noncurrent,CERT:34519,bank,all,2025-09-30,Q,0.295918,fdic,2026-09-08T0
 fdic_card_noncurrent,CERT:34519,bank,all,2025-12-31,Q,0.322215,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:34519,bank,all,2026-03-31,Q,0.319113,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:34519,bank,all,2026-06-30,Q,0.283015,fdic,2026-09-08T06:29:25Z
+fdic_card_noncurrent,CERT:34519,bank,all,2026-09-30,Q,0.317015,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:3510,bank,all,1991-03-31,Q,0.108,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:3510,bank,all,1991-06-30,Q,0.115,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:3510,bank,all,1991-09-30,Q,0.115,fdic,2026-09-08T04:58:22Z
@@ -51727,6 +51864,7 @@ fdic_card_noncurrent,CERT:3510,bank,all,2025-09-30,Q,1.259,fdic,2026-09-08T04:58
 fdic_card_noncurrent,CERT:3510,bank,all,2025-12-31,Q,1.352,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:3510,bank,all,2026-03-31,Q,1.341,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:3510,bank,all,2026-06-30,Q,1.241,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:3510,bank,all,2026-09-30,Q,1.211,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:3511,bank,all,1991-03-31,Q,0.046819,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:3511,bank,all,1991-06-30,Q,0.047885,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:3511,bank,all,1991-09-30,Q,0.04727,fdic,2026-09-08T04:58:22Z
@@ -51869,6 +52007,7 @@ fdic_card_noncurrent,CERT:3511,bank,all,2025-09-30,Q,0.764,fdic,2026-09-08T04:58
 fdic_card_noncurrent,CERT:3511,bank,all,2025-12-31,Q,0.814,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:3511,bank,all,2026-03-31,Q,0.813,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:3511,bank,all,2026-06-30,Q,0.758,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:3511,bank,all,2026-09-30,Q,0.781,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:35328,bank,all,2000-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:35328,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:35328,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -52043,6 +52182,7 @@ fdic_card_noncurrent,CERT:35444,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22
 fdic_card_noncurrent,CERT:35444,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:35444,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:35444,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:35444,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:4091,bank,all,1984-03-31,Q,1e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,1984-06-30,Q,3e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,1984-09-30,Q,1e-05,fdic,2026-09-08T06:29:25Z
@@ -52213,6 +52353,7 @@ fdic_card_noncurrent,CERT:4091,bank,all,2025-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,2025-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,2026-03-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:4091,bank,all,2026-06-30,Q,0,fdic,2026-09-08T06:29:25Z
+fdic_card_noncurrent,CERT:4091,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:4297,bank,all,1991-03-31,Q,4.3e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:4297,bank,all,1991-06-30,Q,7.7e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:4297,bank,all,1991-09-30,Q,9.6e-05,fdic,2026-09-08T04:58:22Z
@@ -52355,6 +52496,7 @@ fdic_card_noncurrent,CERT:4297,bank,all,2025-09-30,Q,5.402828,fdic,2026-09-08T04
 fdic_card_noncurrent,CERT:4297,bank,all,2025-12-31,Q,5.905537,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:4297,bank,all,2026-03-31,Q,5.523,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:4297,bank,all,2026-06-30,Q,4.867,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:4297,bank,all,2026-09-30,Q,5.289,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:5452,bank,all,1991-03-31,Q,0.012258,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5452,bank,all,1991-06-30,Q,0.010018,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5452,bank,all,1991-09-30,Q,0.010841,fdic,2026-09-08T04:58:22Z
@@ -52497,6 +52639,7 @@ fdic_card_noncurrent,CERT:5452,bank,all,2025-09-30,Q,0.111459,fdic,2026-09-08T04
 fdic_card_noncurrent,CERT:5452,bank,all,2025-12-31,Q,0.114246,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5452,bank,all,2026-03-31,Q,0.108391,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5452,bank,all,2026-06-30,Q,0.097799,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:5452,bank,all,2026-09-30,Q,0.096245,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:5649,bank,all,1985-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5649,bank,all,1985-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5649,bank,all,1985-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -52742,6 +52885,7 @@ fdic_card_noncurrent,CERT:57203,bank,all,2025-09-30,Q,0.548,fdic,2026-09-08T04:5
 fdic_card_noncurrent,CERT:57203,bank,all,2025-12-31,Q,0.608,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57203,bank,all,2026-03-31,Q,0.612,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57203,bank,all,2026-06-30,Q,0.486,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:57203,bank,all,2026-09-30,Q,0.455,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:57570,bank,all,2003-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57570,bank,all,2004-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57570,bank,all,2004-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -52833,6 +52977,7 @@ fdic_card_noncurrent,CERT:57570,bank,all,2025-09-30,Q,0.415117,fdic,2026-09-08T0
 fdic_card_noncurrent,CERT:57570,bank,all,2025-12-31,Q,0.430298,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57570,bank,all,2026-03-31,Q,0.408634,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57570,bank,all,2026-06-30,Q,0.375204,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:57570,bank,all,2026-09-30,Q,0.41407,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:57957,bank,all,2005-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57957,bank,all,2005-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57957,bank,all,2005-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -52918,6 +53063,7 @@ fdic_card_noncurrent,CERT:57957,bank,all,2025-09-30,Q,0.022254,fdic,2026-09-08T0
 fdic_card_noncurrent,CERT:57957,bank,all,2025-12-31,Q,0.021963,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57957,bank,all,2026-03-31,Q,0.020815,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:57957,bank,all,2026-06-30,Q,0.019453,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:57957,bank,all,2026-09-30,Q,0.017977,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:5962,bank,all,1985-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5962,bank,all,1985-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5962,bank,all,1985-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -53083,6 +53229,7 @@ fdic_card_noncurrent,CERT:5962,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5962,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5962,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:5962,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:5962,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:628,bank,all,1991-03-31,Q,0.005,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:628,bank,all,1991-06-30,Q,0.005,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:628,bank,all,1991-09-30,Q,0.005,fdic,2026-09-08T04:58:22Z
@@ -53225,6 +53372,7 @@ fdic_card_noncurrent,CERT:628,bank,all,2025-09-30,Q,2.143,fdic,2026-09-08T04:58:
 fdic_card_noncurrent,CERT:628,bank,all,2025-12-31,Q,2.331,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:628,bank,all,2026-03-31,Q,2.328,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:628,bank,all,2026-06-30,Q,2.083,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:628,bank,all,2026-09-30,Q,2.046,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:6384,bank,all,1991-03-31,Q,8.5e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:6384,bank,all,1991-06-30,Q,7.1e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:6384,bank,all,1991-09-30,Q,0.000159,fdic,2026-09-08T04:58:22Z
@@ -53367,6 +53515,7 @@ fdic_card_noncurrent,CERT:6384,bank,all,2025-09-30,Q,0.063888,fdic,2026-09-08T04
 fdic_card_noncurrent,CERT:6384,bank,all,2025-12-31,Q,0.06746,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:6384,bank,all,2026-03-31,Q,0.065245,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:6384,bank,all,2026-06-30,Q,0.058524,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:6384,bank,all,2026-09-30,Q,0.06,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:6548,bank,all,1991-03-31,Q,0.001026,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:6548,bank,all,1991-06-30,Q,0.001188,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:6548,bank,all,1991-09-30,Q,0.001282,fdic,2026-09-08T04:58:22Z
@@ -53509,6 +53658,7 @@ fdic_card_noncurrent,CERT:6548,bank,all,2025-09-30,Q,0.383704,fdic,2026-09-08T04
 fdic_card_noncurrent,CERT:6548,bank,all,2025-12-31,Q,0.404574,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:6548,bank,all,2026-03-31,Q,0.400845,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:6548,bank,all,2026-06-30,Q,0.366172,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:6548,bank,all,2026-09-30,Q,0.376058,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:6672,bank,all,1984-03-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,1984-06-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,1984-09-30,Q,0,fdic,2026-09-08T06:29:25Z
@@ -53674,6 +53824,7 @@ fdic_card_noncurrent,CERT:6672,bank,all,2025-09-30,Q,0.046,fdic,2026-09-08T06:29
 fdic_card_noncurrent,CERT:6672,bank,all,2025-12-31,Q,0.046,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,2026-03-31,Q,0.048,fdic,2026-09-08T06:29:25Z
 fdic_card_noncurrent,CERT:6672,bank,all,2026-06-30,Q,0.045,fdic,2026-09-08T06:29:25Z
+fdic_card_noncurrent,CERT:6672,bank,all,2026-09-30,Q,0.045,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:7213,bank,all,1991-03-31,Q,0.034,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:7213,bank,all,1991-06-30,Q,0.04,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:7213,bank,all,1991-09-30,Q,0.047,fdic,2026-09-08T04:58:22Z
@@ -53816,6 +53967,7 @@ fdic_card_noncurrent,CERT:7213,bank,all,2025-09-30,Q,2.359,fdic,2026-09-08T04:58
 fdic_card_noncurrent,CERT:7213,bank,all,2025-12-31,Q,2.517,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:7213,bank,all,2026-03-31,Q,2.51,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:7213,bank,all,2026-06-30,Q,2.324,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:7213,bank,all,2026-09-30,Q,2.323,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:8283,bank,all,1985-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:8283,bank,all,1985-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:8283,bank,all,1985-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -53981,6 +54133,7 @@ fdic_card_noncurrent,CERT:8283,bank,all,2025-09-30,Q,0.012374,fdic,2026-09-08T04
 fdic_card_noncurrent,CERT:8283,bank,all,2025-12-31,Q,0.015034,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:8283,bank,all,2026-03-31,Q,0.017213,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:8283,bank,all,2026-06-30,Q,0.020951,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:8283,bank,all,2026-09-30,Q,0.019323,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,CERT:9846,bank,all,1991-03-31,Q,0.000395,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:9846,bank,all,1991-06-30,Q,0.000277,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:9846,bank,all,1991-09-30,Q,0.000284,fdic,2026-09-08T04:58:22Z
@@ -54123,6 +54276,7 @@ fdic_card_noncurrent,CERT:9846,bank,all,2025-09-30,Q,0.048,fdic,2026-09-08T04:58
 fdic_card_noncurrent,CERT:9846,bank,all,2025-12-31,Q,0.052,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:9846,bank,all,2026-03-31,Q,0.05,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,CERT:9846,bank,all,2026-06-30,Q,0.045,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,CERT:9846,bank,all,2026-09-30,Q,0.045,fdic,2026-11-25T04:54:29Z
 fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,1991-03-31,Q,2.485155,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,1991-06-30,Q,2.460288,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,1991-09-30,Q,2.458656,fdic,2026-09-08T04:58:22Z
@@ -54264,7 +54418,8 @@ fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,2025-06-30,Q,17.608558,fdic,
 fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,2025-09-30,Q,18.274303,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,2025-12-31,Q,19.551021,fdic,2026-09-08T04:58:22Z
 fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,19.042007,fdic,2026-09-08T04:58:22Z
-fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,17.142606,fdic,2026-09-08T04:58:22Z
+fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,17.142615,fdic,2026-11-25T04:54:29Z
+fdic_card_noncurrent,FDIC_ALL_INSURED,aggregate,all,2026-09-30,Q,17.695177,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:12368,bank,all,1984-03-31,Q,3.4e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:12368,bank,all,1984-06-30,Q,2.6e-05,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:12368,bank,all,1984-09-30,Q,2.7e-05,fdic,2026-09-08T06:29:25Z
@@ -54435,6 +54590,7 @@ fdic_card_recoveries_q,CERT:12368,bank,all,2025-09-30,Q,0.003,fdic,2026-09-08T06
 fdic_card_recoveries_q,CERT:12368,bank,all,2025-12-31,Q,0.002,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:12368,bank,all,2026-03-31,Q,0.003,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:12368,bank,all,2026-06-30,Q,0.002,fdic,2026-09-08T06:29:25Z
+fdic_card_recoveries_q,CERT:12368,bank,all,2026-09-30,Q,0.004,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:1299,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:1299,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:1299,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -54605,6 +54761,7 @@ fdic_card_recoveries_q,CERT:1299,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:2
 fdic_card_recoveries_q,CERT:1299,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:1299,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:1299,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:1299,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:18409,bank,all,1989-03-31,Q,2e-06,fdic,2026-09-08T05:28:06Z
 fdic_card_recoveries_q,CERT:18409,bank,all,1989-06-30,Q,4e-06,fdic,2026-09-08T05:28:06Z
 fdic_card_recoveries_q,CERT:18409,bank,all,1989-09-30,Q,4e-06,fdic,2026-09-08T05:28:06Z
@@ -54755,6 +54912,7 @@ fdic_card_recoveries_q,CERT:18409,bank,all,2025-09-30,Q,0.007788,fdic,2026-09-08
 fdic_card_recoveries_q,CERT:18409,bank,all,2025-12-31,Q,0.008116,fdic,2026-09-08T05:28:06Z
 fdic_card_recoveries_q,CERT:18409,bank,all,2026-03-31,Q,0.015655,fdic,2026-09-08T05:28:06Z
 fdic_card_recoveries_q,CERT:18409,bank,all,2026-06-30,Q,0.017658,fdic,2026-09-08T05:28:06Z
+fdic_card_recoveries_q,CERT:18409,bank,all,2026-09-30,Q,0.00811,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:23702,bank,all,1984-03-31,Q,0.000175,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:23702,bank,all,1984-06-30,Q,0.000396,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:23702,bank,all,1984-09-30,Q,0.000416,fdic,2026-09-08T04:58:22Z
@@ -55064,6 +55222,7 @@ fdic_card_recoveries_q,CERT:25620,bank,all,2025-09-30,Q,0.008057,fdic,2026-09-08
 fdic_card_recoveries_q,CERT:25620,bank,all,2025-12-31,Q,0.007876,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:25620,bank,all,2026-03-31,Q,0.009005,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:25620,bank,all,2026-06-30,Q,0.009811,fdic,2026-09-08T06:29:25Z
+fdic_card_recoveries_q,CERT:25620,bank,all,2026-09-30,Q,0.011171,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:27314,bank,all,1988-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27314,bank,all,1988-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27314,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -55216,6 +55375,7 @@ fdic_card_recoveries_q,CERT:27314,bank,all,2025-09-30,Q,0.348,fdic,2026-09-08T04
 fdic_card_recoveries_q,CERT:27314,bank,all,2025-12-31,Q,0.359,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27314,bank,all,2026-03-31,Q,0.401,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27314,bank,all,2026-06-30,Q,0.408,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:27314,bank,all,2026-09-30,Q,0.391,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:27471,bank,all,1989-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27471,bank,all,1989-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27471,bank,all,1989-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -55366,6 +55526,7 @@ fdic_card_recoveries_q,CERT:27471,bank,all,2025-09-30,Q,0.213343,fdic,2026-09-08
 fdic_card_recoveries_q,CERT:27471,bank,all,2025-12-31,Q,0.211394,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27471,bank,all,2026-03-31,Q,0.223156,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27471,bank,all,2026-06-30,Q,0.271253,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:27471,bank,all,2026-09-30,Q,0.239083,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:27499,bank,all,1989-06-30,Q,0.002004,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27499,bank,all,1989-09-30,Q,0.002217,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27499,bank,all,1989-12-31,Q,0.001879,fdic,2026-09-08T04:58:22Z
@@ -55515,6 +55676,7 @@ fdic_card_recoveries_q,CERT:27499,bank,all,2025-09-30,Q,0.031162,fdic,2026-09-08
 fdic_card_recoveries_q,CERT:27499,bank,all,2025-12-31,Q,0.029912,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27499,bank,all,2026-03-31,Q,0.032774,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:27499,bank,all,2026-06-30,Q,0.030897,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:27499,bank,all,2026-09-30,Q,0.028406,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:32188,bank,all,1990-03-31,Q,0.000171,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:32188,bank,all,1990-06-30,Q,0.000216,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:32188,bank,all,1990-09-30,Q,0.000658,fdic,2026-09-08T04:58:22Z
@@ -55661,6 +55823,7 @@ fdic_card_recoveries_q,CERT:32188,bank,all,2025-09-30,Q,0.025,fdic,2026-09-08T04
 fdic_card_recoveries_q,CERT:32188,bank,all,2025-12-31,Q,0.024,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:32188,bank,all,2026-03-31,Q,0.027,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:32188,bank,all,2026-06-30,Q,0.027,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:32188,bank,all,2026-09-30,Q,0.029,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:33124,bank,all,2008-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33124,bank,all,2009-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33124,bank,all,2009-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -55732,6 +55895,7 @@ fdic_card_recoveries_q,CERT:33124,bank,all,2025-09-30,Q,0.045,fdic,2026-09-08T04
 fdic_card_recoveries_q,CERT:33124,bank,all,2025-12-31,Q,0.044,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33124,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33124,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:33124,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:33947,bank,all,1994-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33947,bank,all,1995-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33947,bank,all,1995-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -55859,6 +56023,7 @@ fdic_card_recoveries_q,CERT:33947,bank,all,2025-09-30,Q,0.040779,fdic,2026-09-08
 fdic_card_recoveries_q,CERT:33947,bank,all,2025-12-31,Q,0.043672,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33947,bank,all,2026-03-31,Q,0.043961,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33947,bank,all,2026-06-30,Q,0.039269,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:33947,bank,all,2026-09-30,Q,0.043662,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:33954,bank,all,1994-12-31,Q,0.001279,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33954,bank,all,1995-03-31,Q,0.002969,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:33954,bank,all,1995-06-30,Q,0.003335,fdic,2026-09-08T04:58:22Z
@@ -56199,6 +56364,7 @@ fdic_card_recoveries_q,CERT:34403,bank,all,2025-09-30,Q,0.002294,fdic,2026-09-08
 fdic_card_recoveries_q,CERT:34403,bank,all,2025-12-31,Q,0.001761,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:34403,bank,all,2026-03-31,Q,0.001449,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:34403,bank,all,2026-06-30,Q,0.002841,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:34403,bank,all,2026-09-30,Q,0.00238,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:34404,bank,all,1997-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:34404,bank,all,1997-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:34404,bank,all,1997-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -56316,6 +56482,7 @@ fdic_card_recoveries_q,CERT:34404,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:
 fdic_card_recoveries_q,CERT:34404,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:34404,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:34404,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:34404,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:34519,bank,all,1997-09-30,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:34519,bank,all,1997-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:34519,bank,all,1998-03-31,Q,0,fdic,2026-09-08T06:29:25Z
@@ -56432,6 +56599,7 @@ fdic_card_recoveries_q,CERT:34519,bank,all,2025-09-30,Q,0.034694,fdic,2026-09-08
 fdic_card_recoveries_q,CERT:34519,bank,all,2025-12-31,Q,0.03782,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:34519,bank,all,2026-03-31,Q,0.03702,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:34519,bank,all,2026-06-30,Q,0.041612,fdic,2026-09-08T06:29:25Z
+fdic_card_recoveries_q,CERT:34519,bank,all,2026-09-30,Q,0.05055,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:3510,bank,all,1984-03-31,Q,0.005,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:3510,bank,all,1984-06-30,Q,0.006,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:3510,bank,all,1984-09-30,Q,0.006,fdic,2026-09-08T04:58:22Z
@@ -56602,6 +56770,7 @@ fdic_card_recoveries_q,CERT:3510,bank,all,2025-09-30,Q,0.205,fdic,2026-09-08T04:
 fdic_card_recoveries_q,CERT:3510,bank,all,2025-12-31,Q,0.207,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:3510,bank,all,2026-03-31,Q,0.219,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:3510,bank,all,2026-06-30,Q,0.232,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:3510,bank,all,2026-09-30,Q,0.239,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:3511,bank,all,1984-03-31,Q,0.000733,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:3511,bank,all,1984-06-30,Q,0.000725,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:3511,bank,all,1984-09-30,Q,0.000753,fdic,2026-09-08T04:58:22Z
@@ -56772,6 +56941,7 @@ fdic_card_recoveries_q,CERT:3511,bank,all,2025-09-30,Q,0.139,fdic,2026-09-08T04:
 fdic_card_recoveries_q,CERT:3511,bank,all,2025-12-31,Q,0.151,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:3511,bank,all,2026-03-31,Q,0.159,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:3511,bank,all,2026-06-30,Q,0.173,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:3511,bank,all,2026-09-30,Q,0.175,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:35328,bank,all,2000-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:35328,bank,all,2001-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:35328,bank,all,2001-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -56946,6 +57116,7 @@ fdic_card_recoveries_q,CERT:35444,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:
 fdic_card_recoveries_q,CERT:35444,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:35444,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:35444,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:35444,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:4091,bank,all,1984-03-31,Q,8e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:4091,bank,all,1984-06-30,Q,4e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:4091,bank,all,1984-09-30,Q,2e-06,fdic,2026-09-08T06:29:25Z
@@ -57116,6 +57287,7 @@ fdic_card_recoveries_q,CERT:4091,bank,all,2025-09-30,Q,0,fdic,2026-09-08T06:29:2
 fdic_card_recoveries_q,CERT:4091,bank,all,2025-12-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:4091,bank,all,2026-03-31,Q,0,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:4091,bank,all,2026-06-30,Q,0,fdic,2026-09-08T06:29:25Z
+fdic_card_recoveries_q,CERT:4091,bank,all,2026-09-30,Q,0,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:4297,bank,all,1984-03-31,Q,4.1e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:4297,bank,all,1984-06-30,Q,-4.1e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:4297,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -57286,6 +57458,7 @@ fdic_card_recoveries_q,CERT:4297,bank,all,2025-09-30,Q,1.061426,fdic,2026-09-08T
 fdic_card_recoveries_q,CERT:4297,bank,all,2025-12-31,Q,1.046385,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:4297,bank,all,2026-03-31,Q,1.173,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:4297,bank,all,2026-06-30,Q,1.211,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:4297,bank,all,2026-09-30,Q,1.242,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:5452,bank,all,1984-03-31,Q,0.000121,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5452,bank,all,1984-06-30,Q,0.000156,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5452,bank,all,1984-09-30,Q,0.000131,fdic,2026-09-08T04:58:22Z
@@ -57456,6 +57629,7 @@ fdic_card_recoveries_q,CERT:5452,bank,all,2025-09-30,Q,0.025868,fdic,2026-09-08T
 fdic_card_recoveries_q,CERT:5452,bank,all,2025-12-31,Q,0.02489,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5452,bank,all,2026-03-31,Q,0.025638,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5452,bank,all,2026-06-30,Q,0.037949,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:5452,bank,all,2026-09-30,Q,0.029524,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:5649,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5649,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5649,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -57722,6 +57896,7 @@ fdic_card_recoveries_q,CERT:57203,bank,all,2025-09-30,Q,0.098,fdic,2026-09-08T04
 fdic_card_recoveries_q,CERT:57203,bank,all,2025-12-31,Q,0.104,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57203,bank,all,2026-03-31,Q,0.109,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57203,bank,all,2026-06-30,Q,0.115,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:57203,bank,all,2026-09-30,Q,0.12,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:57570,bank,all,2003-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57570,bank,all,2004-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57570,bank,all,2004-06-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -57813,6 +57988,7 @@ fdic_card_recoveries_q,CERT:57570,bank,all,2025-09-30,Q,0.05043,fdic,2026-09-08T
 fdic_card_recoveries_q,CERT:57570,bank,all,2025-12-31,Q,0.050049,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57570,bank,all,2026-03-31,Q,0.05574,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57570,bank,all,2026-06-30,Q,0.053435,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:57570,bank,all,2026-09-30,Q,0.050107,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:57957,bank,all,2005-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57957,bank,all,2005-09-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57957,bank,all,2005-12-31,Q,0,fdic,2026-09-08T04:58:22Z
@@ -57898,6 +58074,7 @@ fdic_card_recoveries_q,CERT:57957,bank,all,2025-09-30,Q,0.003102,fdic,2026-09-08
 fdic_card_recoveries_q,CERT:57957,bank,all,2025-12-31,Q,0.00326,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57957,bank,all,2026-03-31,Q,0.003453,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:57957,bank,all,2026-06-30,Q,0.003461,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:57957,bank,all,2026-09-30,Q,0.003392,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:5962,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5962,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5962,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -58068,6 +58245,7 @@ fdic_card_recoveries_q,CERT:5962,bank,all,2025-09-30,Q,0,fdic,2026-09-08T04:58:2
 fdic_card_recoveries_q,CERT:5962,bank,all,2025-12-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5962,bank,all,2026-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:5962,bank,all,2026-06-30,Q,0,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:5962,bank,all,2026-09-30,Q,6e-06,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:628,bank,all,1984-03-31,Q,0.000593,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:628,bank,all,1984-06-30,Q,0.001349,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:628,bank,all,1984-09-30,Q,0.001509,fdic,2026-09-08T04:58:22Z
@@ -58238,6 +58416,7 @@ fdic_card_recoveries_q,CERT:628,bank,all,2025-09-30,Q,0.366,fdic,2026-09-08T04:5
 fdic_card_recoveries_q,CERT:628,bank,all,2025-12-31,Q,0.382,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:628,bank,all,2026-03-31,Q,0.42,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:628,bank,all,2026-06-30,Q,0.442,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:628,bank,all,2026-09-30,Q,0.464,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:6384,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:6384,bank,all,1984-06-30,Q,1.6e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:6384,bank,all,1984-09-30,Q,4e-06,fdic,2026-09-08T04:58:22Z
@@ -58408,6 +58587,7 @@ fdic_card_recoveries_q,CERT:6384,bank,all,2025-09-30,Q,0.016009,fdic,2026-09-08T
 fdic_card_recoveries_q,CERT:6384,bank,all,2025-12-31,Q,0.013251,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:6384,bank,all,2026-03-31,Q,0.019243,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:6384,bank,all,2026-06-30,Q,0.017372,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:6384,bank,all,2026-09-30,Q,0.017338,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:6548,bank,all,1984-03-31,Q,3.5e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:6548,bank,all,1984-06-30,Q,3e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:6548,bank,all,1984-09-30,Q,3.6e-05,fdic,2026-09-08T04:58:22Z
@@ -58578,6 +58758,7 @@ fdic_card_recoveries_q,CERT:6548,bank,all,2025-09-30,Q,0.060193,fdic,2026-09-08T
 fdic_card_recoveries_q,CERT:6548,bank,all,2025-12-31,Q,0.060244,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:6548,bank,all,2026-03-31,Q,0.067442,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:6548,bank,all,2026-06-30,Q,0.072951,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:6548,bank,all,2026-09-30,Q,0.073978,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:6672,bank,all,1984-03-31,Q,2e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:6672,bank,all,1984-06-30,Q,2e-06,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:6672,bank,all,1984-09-30,Q,2e-06,fdic,2026-09-08T06:29:25Z
@@ -58748,6 +58929,7 @@ fdic_card_recoveries_q,CERT:6672,bank,all,2025-09-30,Q,0.004,fdic,2026-09-08T06:
 fdic_card_recoveries_q,CERT:6672,bank,all,2025-12-31,Q,0.006,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:6672,bank,all,2026-03-31,Q,0.005,fdic,2026-09-08T06:29:25Z
 fdic_card_recoveries_q,CERT:6672,bank,all,2026-06-30,Q,0.005,fdic,2026-09-08T06:29:25Z
+fdic_card_recoveries_q,CERT:6672,bank,all,2026-09-30,Q,0.005,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:7213,bank,all,1984-03-31,Q,0.003,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:7213,bank,all,1984-06-30,Q,-0.002,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:7213,bank,all,1984-09-30,Q,0.001,fdic,2026-09-08T04:58:22Z
@@ -58918,6 +59100,7 @@ fdic_card_recoveries_q,CERT:7213,bank,all,2025-09-30,Q,0.438,fdic,2026-09-08T04:
 fdic_card_recoveries_q,CERT:7213,bank,all,2025-12-31,Q,0.454,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:7213,bank,all,2026-03-31,Q,0.523,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:7213,bank,all,2026-06-30,Q,0.486,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:7213,bank,all,2026-09-30,Q,0.503,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:8283,bank,all,1984-03-31,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:8283,bank,all,1984-06-30,Q,0,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:8283,bank,all,1984-09-30,Q,0,fdic,2026-09-08T04:58:22Z
@@ -59088,6 +59271,7 @@ fdic_card_recoveries_q,CERT:8283,bank,all,2025-09-30,Q,2e-05,fdic,2026-09-08T04:
 fdic_card_recoveries_q,CERT:8283,bank,all,2025-12-31,Q,0.002106,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:8283,bank,all,2026-03-31,Q,0.000648,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:8283,bank,all,2026-06-30,Q,0.000419,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:8283,bank,all,2026-09-30,Q,0.000442,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,CERT:9846,bank,all,1984-03-31,Q,1.9e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:9846,bank,all,1984-06-30,Q,1.8e-05,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:9846,bank,all,1984-09-30,Q,1.3e-05,fdic,2026-09-08T04:58:22Z
@@ -59258,6 +59442,7 @@ fdic_card_recoveries_q,CERT:9846,bank,all,2025-09-30,Q,0.006,fdic,2026-09-08T04:
 fdic_card_recoveries_q,CERT:9846,bank,all,2025-12-31,Q,0.008,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:9846,bank,all,2026-03-31,Q,0.007,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,CERT:9846,bank,all,2026-06-30,Q,0.007,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,CERT:9846,bank,all,2026-09-30,Q,0.008,fdic,2026-11-25T04:54:29Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1984-03-31,Q,0.058126,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1984-06-30,Q,0.055394,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,1984-09-30,Q,0.061109,fdic,2026-09-08T04:58:22Z
@@ -59426,8 +59611,9 @@ fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2025-03-31,Q,2.961069,fdic
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2025-06-30,Q,2.968617,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2025-09-30,Q,3.265646,fdic,2026-09-08T04:58:22Z
 fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2025-12-31,Q,3.319096,fdic,2026-09-08T04:58:22Z
-fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,3.61323,fdic,2026-09-08T04:58:22Z
-fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,3.740347,fdic,2026-09-08T04:58:22Z
+fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2026-03-31,Q,3.613137,fdic,2026-11-25T04:54:29Z
+fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2026-06-30,Q,3.74044,fdic,2026-11-25T04:54:29Z
+fdic_card_recoveries_q,FDIC_ALL_INSURED,aggregate,all,2026-09-30,Q,3.774381,fdic,2026-11-25T04:54:29Z
 hh_interest_payments_saar,US_HOUSEHOLDS,aggregate,all,1959-01-31,M,5.054,bea,2026-09-11T02:52:47Z
 hh_interest_payments_saar,US_HOUSEHOLDS,aggregate,all,1959-02-28,M,5.109,bea,2026-09-11T02:52:47Z
 hh_interest_payments_saar,US_HOUSEHOLDS,aggregate,all,1959-03-31,M,5.169,bea,2026-09-11T02:52:47Z

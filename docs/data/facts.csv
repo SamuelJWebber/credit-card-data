@@ -3791,6 +3791,7 @@ card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-10-28,W,19.71,fred,2026-1
 card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-11-04,W,19.71,fred,2026-11-06T02:13:47Z
 card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-11-11,W,19.75,fred,2026-11-13T02:33:39Z
 card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-11-18,W,19.76,fred,2026-11-20T03:00:42Z
+card_apr_advertised,BANKRATE_SURVEY,aggregate,all,2026-11-25,W,19.78,fred,2026-11-27T04:04:43Z
 card_apr_all_accounts,COMBANKS_ALL,aggregate,all,1994-12-31,Q,15.69,fred,2026-09-07T17:34:59Z
 card_apr_all_accounts,COMBANKS_ALL,aggregate,all,1995-03-31,Q,16.1,fred,2026-09-07T17:34:59Z
 card_apr_all_accounts,COMBANKS_ALL,aggregate,all,1995-06-30,Q,16.14,fred,2026-09-07T17:34:59Z

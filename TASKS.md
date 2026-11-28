@@ -698,6 +698,10 @@ is still a scope call for the user.
 - Issuer 8-K monthly credit metrics (COF, SYF, BFC, AXP). 10-Q economics via SEC XBRL with a per-issuer tag map.
 - Post-drafting routine after each refresh (human posts).
 
+## Thesis watch with missing observations
+
+- **Done 2026-11-28.** Verified the HTML and text export on missing readings, mixed passes and gaps, a known break with other readings absent, and all three observed passes. November 28 still reports holds on both outputs.
+
 ## Open items and known gaps
 - Repo transfer User5017 -> SamuelJWebber: **done 2026-11-09** (references, remote, Pages and redirects; see CLAUDE.md, "GitHub account").
 - G.19 revisions move live goldens (seen 2026-09-08): the September release revised Q1 2026 revolving from 1338.0 to 1338.2 and the May/June levels by about 3.4bn, which turned the fred source amber (`golden_mismatch`) on two scheduled runs while the Actions job stayed 'success' (only red fails it; `checks/verify_releases.py` is what catches amber). The routine after each G.19 release (fifth business day): run `uv run python checks/verify_g19.py` (it now checks the by-holder rows too and skips metrics it cannot map instead of crashing); on a FAIL, re-base the golden on the new release page (say the old value and release date in `origin`), refresh the FRED fixtures with `curl "https://fred.stlouisfed.org/graph/fredgraph.csv?id=<sid>" -o tests/fixtures/fred/<sid>.csv`, and re-pin the reading strings in tests/test_fred.py and tests/test_render.py that quote the newest month. A quarter-end level inside the current year is not safe as a live golden; the year-end columns have held.

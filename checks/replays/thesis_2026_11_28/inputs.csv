@@ -1,0 +1,5 @@
+metric,entity,entity_type,tier,period_end,period_type,value,source,pulled_at
+card_apr_assessed_interest,COMBANKS_ALL,aggregate,all,2026-09-30,Q,22.36,fred,2026-10-08T01:46:47Z
+card_nco_rate_sa,COMBANKS_ALL,aggregate,all,2026-06-30,Q,3.82,fred,2026-09-07T17:34:59Z
+hhdc_card_transition_dq90,CCP_ALL,aggregate,all,2026-09-30,Q,6.87,nyfed_hhdc,2026-11-11T01:51:15Z
+prime_rate,COMBANKS_ALL,aggregate,all,2026-08-31,M,6.75,fred,2026-09-08T07:30:11Z

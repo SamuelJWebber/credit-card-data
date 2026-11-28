@@ -499,6 +499,27 @@ def test_thesis_watch_evaluates_every_falsification_test(page, session_paths, fi
     assert "Thesis of 2026-09-08 (holds)" in text and text.count("- [ok ]") == 3
 
 
+@pytest.mark.parametrize(
+    ("nco", "verdict", "status_class", "missing"),
+    [(None, "Insufficient data", "st-incomplete", 3), (3.82, "Insufficient data", "st-incomplete", 2),
+     (5.5, "Broken", "st-failed", 2)],
+)
+def test_thesis_watch_with_missing_readings(tmp_paths, fixture_facts, monkeypatch, nco, verdict, status_class, missing):
+    monkeypatch.setattr("carddash.render.PANELS", [])  # skip building unrelated charts
+    # Give the watch one observed charge-off rate, or no readings at all. The other two tests lack inputs.
+    nco_rows = fixture_facts[(fixture_facts["metric"] == "card_nco_rate_sa") & (fixture_facts["entity"] == "COMBANKS_ALL")]
+    facts = nco_rows.iloc[0:0] if nco is None else nco_rows.tail(1).assign(value=nco)
+    write_facts(coerce_facts(facts), tmp_paths.facts_csv)
+    html = render(tmp_paths, today=TODAY).read_text(encoding="utf-8")
+    watch = html.split("<h2>Thesis watch</h2>")[1].split("</ul>")[0]
+    assert f'class="status {status_class}"' in watch and f">{verdict}</span>" in watch
+    assert watch.count("no data") == missing
+    text = (tmp_paths.docs / "latest.txt").read_text(encoding="utf-8")
+    expected = "BROKEN" if verdict == "Broken" else "insufficient data"
+    assert f"Thesis of 2026-09-08 ({expected})" in text
+    assert text.count("- [no data]") == missing
+
+
 def test_a_broken_thesis_test_says_so(tmp_paths, fixture_facts):
     """Push the charge-off rate above its threshold: the page must report the test broken, not quietly pass."""
     facts = fixture_facts.copy()

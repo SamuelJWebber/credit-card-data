@@ -3,6 +3,10 @@
 One bounded task per session. Each has a pass condition written before work starts.
 Status: `todo` | `doing` | `done YYYY-MM-DD` | `blocked (why)`.
 
+## BEA live validation after the October 2026 release
+
+- **Done 2026-11-28.** January DPI grew $217.808bn in both vintages, matching the November 25 workbook ($217.8bn). April is fixture-only. The October refresh regression reproduces all 33 revisions, all 45 live checks pass on the November 28 facts, and a BEA-only refresh on a local copy reports `ok`.
+
 ## Handoff 2026-09-12 (tasks 45, 47 and 46: four issuers, and holes drawn as holes)
 
 Three tasks landed, each committed separately and pushed: 45 (Synchrony and Bread join issuer_8k), 47 (a missing

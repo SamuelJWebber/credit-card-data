@@ -20,8 +20,8 @@ import yaml
 # from (the checked-in fixture) before it may be checked live. A live entry that the next routine release revises
 # turns its source amber for no reason, and amber breaks the two-green-runs measure (REVIEW.md R1-4). Each number is
 # the revision window seen in data/revisions.csv from 2026-09 to 2026-11, not a guess:
-# - bea 4: every month of the newest quarter moves with the next releases (July 2026 moved on 2026-10-01 and
-#   again on 2026-10-30); a month of an earlier quarter holds until the annual update.
+# - bea 7: the October 2026 PIO release revised April through September when BEA incorporated the Q2 wage
+#   census. Exclude the six preceding months as well as the release month; annual revisions can reach further.
 # - census 1: the newest month is preliminary; the one before it is printed revised ('r') and then holds until the
 #   annual revision.
 # - fred, monthly G.19 levels 4: May and June 2026 moved by 0.15 and 3.4 within four months of being published.
@@ -30,7 +30,7 @@ import yaml
 # Sources not listed have shown no revision to a golden period (0). Age does not protect against a source that
 # restates its whole history (the Philly Fed's 26Q2 files restated 2012 onward); tolerance does that work there.
 MIN_LIVE_AGE_MONTHS: dict[tuple[str, str], int] = {
-    ("bea", "M"): 4,
+    ("bea", "M"): 7,
     ("census", "M"): 1,
     ("fred", "M"): 4,
     ("dfa", "Q"): 24,

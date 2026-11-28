@@ -157,8 +157,7 @@ def test_a_subset_that_does_not_parse_does_not_become_the_cache(meta, tmp_path):
 
 
 def test_bea_october_pio_nov25_release_updates_facts_and_keeps_live_goldens_green(meta, tmp_path):
-    """Edge case: BEA Oct PIO due Nov 25 adds 2026M10 and revises Q3 (Jul-Sep) without tripping live checks
-    (checks/golden.yaml keeps bea_dpi_change_2026_04 live while Jul-Sep are check_live: false)."""
+    """Replay the October release, including the six months of DPI revisions in BEA's November 25 notes."""
     import datetime as dt
 
     from carddash import loader
@@ -170,22 +169,11 @@ def test_bea_october_pio_nov25_release_updates_facts_and_keeps_live_goldens_gree
     server = _FakeBea(base_text, etag='"nov04:0"', modified="Wed, 04 Nov 2026 14:23:02 GMT")
     prev_facts = bea.fetch(mine, tmp_path, server, "2026-11-24T01:00:00Z")
 
-    # Simulate BEA Oct PIO release on Nov 25: add 2026M10 for all 10 BEA codes and revise 2026M07..M09 slightly
-    oct_lines = []
-    for line in base_text.splitlines():
-        if line.startswith("%SeriesCode") or line.startswith("A001RC"):
-            oct_lines.append(line)
-            continue
-        code, period, val = line.split(",", 2)
-        if period in ("2026M07", "2026M08", "2026M09"):
-            revised = bea.parse_value(val) + 100.0
-            oct_lines.append(f'{code},{period},"{revised:,.0f}"')
-        else:
-            oct_lines.append(line)
-        if period == "2026M09":
-            oct_val = bea.parse_value(val) + 150.0
-            oct_lines.append(f'{code},2026M10,"{oct_val:,.0f}"')
-    server.body = "\n".join(oct_lines) + "\n"
+    # The release slice is from data/raw/bea/latest/NipaDataM-subset.txt at 24185ef.
+    # The original September fixture supplies the unchanged months through March.
+    prior_lines = [line for line in base_text.splitlines()[1:] if line.split(",", 2)[1] < "2026M04"]
+    revised = BEA_FIXTURE.with_name("NipaDataM-2026-10-revised-months.txt").read_text(encoding="utf-8")
+    server.body = "\n".join([bea.HEADER, *prior_lines, *revised.splitlines()[1:]]) + "\n"
     server.etag = '"nov25:0"'
     server.modified = "Wed, 25 Nov 2026 13:30:00 GMT"
 
@@ -202,10 +190,14 @@ def test_bea_october_pio_nov25_release_updates_facts_and_keeps_live_goldens_gree
     )
     assert health.status == "ok", health.messages
     assert health.last_period_end == "2026-10-31"
-    assert len(revs) == 30  # 10 series x 3 revised Q3 months
+    assert len(revs) == 33  # all 10 series in Q3, plus the three Q2 DPI revisions
+    april = revs[(revs["metric"] == "disposable_income_monthly_saar") & (revs["period_end"] == "2026-04-30")]
+    assert april["old_value"].tolist() == pytest.approx([23822.664])
+    assert april["new_value"].tolist() == pytest.approx([23808.775])
     bea_goldens = [e for e in load_golden(REPO / "checks" / "golden.yaml") if e["source"] == "bea"]
     live_res = check_golden(facts, bea_goldens, live_only=True)
-    assert len(live_res) == 1 and live_res[0]["id"] == "bea_dpi_change_2026_04" and live_res[0]["ok"]
+    assert [(r["id"], r["ok"]) for r in live_res] == [("bea_dpi_change_2026_01", True)]
+    assert live_res[0]["actual"] == pytest.approx(217.808)
 
 
 def test_bea_nov25_malformed_and_lagged_responses_fail_closed(meta, tmp_path):

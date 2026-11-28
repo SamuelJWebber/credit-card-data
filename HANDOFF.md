@@ -1,6 +1,6 @@
 # carddash handoff
 
-Rewritten **2026-11-23**. Read `CLAUDE.md` first for the rules, then this for what is true now.
+Rewritten **2026-11-28**. Read `CLAUDE.md` first for the rules, then this for what is true now.
 **Rewrite this file at the end of every session, never append.** Under 150 lines.
 
 ## State
@@ -34,6 +34,10 @@ Rewritten **2026-11-23**. Read `CLAUDE.md` first for the rules, then this for wh
 ## Needs the user
 
 - `credit-A-1`: **decided 2026-11-22, no history rewrite** (commits since `2026-09-14` carry noreply; optional GitHub Settings -> Emails -> "Keep my email addresses private").
+
+## Reading the thesis watch
+
+The HTML and text export use the same verdict. Any observed threshold failure breaks the thesis. A missing reading makes the verdict “insufficient data” when every available reading passes. In the November 28 snapshot all three readings pass: 6.87% flow into serious delinquency, a 3.82% charge-off rate and a 15.61 percentage point APR margin.
 
 ## Traps that have already cost time
 

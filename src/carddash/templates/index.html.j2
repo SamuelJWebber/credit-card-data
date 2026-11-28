@@ -101,7 +101,7 @@ a { color: var(--series-1); }
 .status { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; }
 .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); display: inline-block; flex: none; }
 .st-ok .dot { background: var(--good); }
-.st-stale .dot, .st-restated .dot, .st-golden_mismatch .dot { background: var(--warning); }
+.st-incomplete .dot, .st-stale .dot, .st-restated .dot, .st-golden_mismatch .dot { background: var(--warning); }
 .st-failed .dot, .st-suspect .dot { background: var(--critical); }
 .readings { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 18px 12px 34px; margin: 0; }
 .readings li { margin: 4px 0; }
@@ -228,7 +228,7 @@ figure.card:target, #browse-detail:target { outline: 2px solid var(--series-1); 
 <p class="lede">A dated analysis note reads the whole page together and names the readings that would prove it wrong.
 They are checked here on every refresh.</p>
 <div class="changes">
-  <div><span class="status st-{{ 'ok' if thesis_holds else 'failed' }}"><span class="dot" aria-hidden="true"></span>{{ 'Holds' if thesis_holds else 'Broken' }}</span>
+  <div><span class="status st-{{ {'holds': 'ok', 'broken': 'failed', 'insufficient data': 'incomplete'}[thesis_verdict] }}"><span class="dot" aria-hidden="true"></span>{{ thesis_verdict|capitalize }}</span>
     &middot; <em>{{ thesis_claim }}</em> <span class="note">Stated {{ thesis_date }} in <a href="{{ thesis_href }}">{{ thesis_note }}</a>.</span></div>
   <ul>
   {% for t in thesis %}

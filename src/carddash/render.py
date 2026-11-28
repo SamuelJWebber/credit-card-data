@@ -2475,6 +2475,16 @@ def thesis_status(con, today: dt.date) -> list[dict]:
     return out
 
 
+def _thesis_verdict(tests: list[dict]) -> str:
+    """A single failed threshold breaks the thesis. Calling it intact requires every reading."""
+    outcomes = [test["holds"] for test in tests]
+    if False in outcomes:
+        return "broken"
+    if not outcomes or None in outcomes:
+        return "insufficient data"
+    return "holds"
+
+
 COUNT_KINDS = {"level", "millions", "thousands"}  # amounts: the change on the year is a percentage, no benchmark
 
 
@@ -2558,8 +2568,9 @@ def preview_description(items: list[dict], health_summary: dict) -> str:
 def headlines_text(items: list[dict], generated_at: str, thesis: list[dict] | None = None) -> str:
     lines = [f"US credit card data, latest readings ({generated_at})", ""]
     lines += [f"- {h['label']}: {h['text']}" for h in items]
-    if thesis:
-        state = "holds" if all(t["holds"] for t in thesis if t["holds"] is not None) else "BROKEN"
+    if thesis is not None:
+        verdict = _thesis_verdict(thesis)
+        state = "BROKEN" if verdict == "broken" else verdict
         lines += ["", f"Thesis of {THESIS_DATE} ({state}): {THESIS_CLAIM}"]
         for t in thesis:
             mark = "ok " if t["holds"] else ("BROKEN" if t["holds"] is False else "no data")
@@ -2847,7 +2858,6 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
     run = health_doc.get("generated_at")  # the stamp every row and revision of the latest refresh carries
     generated_at = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     latest = headlines(facts, today)
-    thesis_holds = all(t["holds"] for t in thesis if t["holds"] is not None)
     browse = browse_payload(facts, meta_idx, today)
     payload = {
         "generated_at": generated_at,
@@ -2898,7 +2908,7 @@ def render(paths: Paths, today: dt.date | None = None) -> Path:
         panels=panels,
         headlines=latest,
         thesis=thesis,
-        thesis_holds=thesis_holds,
+        thesis_verdict=_thesis_verdict(thesis),
         thesis_note=THESIS_NOTE,
         thesis_date=THESIS_DATE,
         thesis_claim=THESIS_CLAIM,

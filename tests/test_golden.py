@@ -26,10 +26,11 @@ def test_live_entries_sit_outside_their_sources_revision_window(fixture_facts):
     assert not too_young, "\n".join(too_young)
 
 
-def test_the_revision_window_rule_rejects_a_bea_month_of_the_newest_quarter():
-    assert MIN_LIVE_AGE_MONTHS[("bea", "M")] >= 4  # September newest: July and August are inside, April is not
-    assert months_between(pd.Timestamp("2026-07-31"), pd.Timestamp("2026-09-30")) == 2
-    assert months_between(pd.Timestamp("2026-04-30"), pd.Timestamp("2026-09-30")) == 5
+def test_bea_live_anchor_predates_the_observed_wage_census_revision_window():
+    newest = pd.Timestamp("2026-10-31")
+    required_age = MIN_LIVE_AGE_MONTHS[("bea", "M")]
+    assert months_between(pd.Timestamp("2026-04-30"), newest) < required_age
+    assert months_between(pd.Timestamp("2026-01-31"), newest) >= required_age
 
 
 def test_numbers_are_stated_to_the_decimals_they_were_copied_with():
